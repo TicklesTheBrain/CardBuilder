@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwpjbsqahisda"]
+
+[ext_resource type="Script" path="res://deckManager.gd" id="1_iq6s3"]
+
+[node name="DeckManager" type="Node"]
+script = ExtResource("1_iq6s3")
