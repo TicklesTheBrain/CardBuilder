@@ -1,11 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1lj52mw7mxay"]
+[gd_scene load_steps=6 format=3 uid="uid://d1lj52mw7mxay"]
 
-[ext_resource type="Script" path="res://cardDisplay.gd" id="1_lql06"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/cardDisplay.gd" id="1_lql06"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/cardDisplayBody.gd" id="2_b8cjq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tid8"]
+bg_color = Color(0.133333, 0.133333, 0.133333, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_csdnc"]
 
-[node name="Card" type="Node2D" node_paths=PackedStringArray("valueTypeLabel", "costLabel", "cardTextLabel", "attackLabel", "defenceLabel")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwt7q"]
+size = Vector2(141, 192)
+
+[node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "valueTypeLabel", "costLabel", "cardTextLabel", "attackLabel", "defenceLabel")]
 script = ExtResource("1_lql06")
+cardShape = NodePath("CardShape")
 valueTypeLabel = NodePath("PanelContainer/Info/TopInfo/ValueType")
 costLabel = NodePath("PanelContainer/Info/TopInfo/Cost")
 cardTextLabel = NodePath("PanelContainer/Info/MiddleArea/cardTExt")
@@ -13,8 +21,19 @@ attackLabel = NodePath("PanelContainer/Info/Bottom Info/Attack")
 defenceLabel = NodePath("PanelContainer/Info/Bottom Info/Defence")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-offset_right = 141.0
-offset_bottom = 191.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.5
+offset_top = -95.5
+offset_right = 70.5
+offset_bottom = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0tid8")
+script = ExtResource("2_b8cjq")
 
 [node name="Info" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -25,15 +44,18 @@ alignment = 1
 
 [node name="ValueType" type="Label" parent="PanelContainer/Info/TopInfo"]
 layout_mode = 2
+mouse_filter = 1
 text = "5 C"
 
 [node name="VSeparator" type="VSeparator" parent="PanelContainer/Info/TopInfo"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 theme_override_styles/separator = SubResource("StyleBoxEmpty_csdnc")
 
 [node name="Cost" type="Label" parent="PanelContainer/Info/TopInfo"]
 layout_mode = 2
+mouse_filter = 1
 text = "1E"
 
 [node name="MiddleArea" type="MarginContainer" parent="PanelContainer/Info"]
@@ -42,6 +64,7 @@ size_flags_vertical = 3
 
 [node name="cardTExt" type="RichTextLabel" parent="PanelContainer/Info/MiddleArea"]
 layout_mode = 2
+mouse_filter = 1
 text = "This is my card text"
 fit_content = true
 autowrap_mode = 2
@@ -52,13 +75,23 @@ alignment = 1
 
 [node name="Attack" type="Label" parent="PanelContainer/Info/Bottom Info"]
 layout_mode = 2
+mouse_filter = 1
 text = "1Att"
 
 [node name="VSeparator" type="VSeparator" parent="PanelContainer/Info/Bottom Info"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 theme_override_styles/separator = SubResource("StyleBoxEmpty_csdnc")
 
 [node name="Defence" type="Label" parent="PanelContainer/Info/Bottom Info"]
 layout_mode = 2
+mouse_filter = 1
 text = "0 Sh"
+
+[node name="CardShape" type="Area2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardShape"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_nwt7q")
