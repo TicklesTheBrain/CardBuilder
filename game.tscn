@@ -28,7 +28,7 @@ type = "T"
 cost = 1
 cardText = ""
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([SubResource("Resource_0hun0")])
-modifiers = Array[Resource("res://cardAbstractions/cardModifier.gd")]([])
+
 
 [sub_resource type="Resource" id="Resource_gyifl"]
 script = ExtResource("4_eueqm")
@@ -45,7 +45,7 @@ type = "T"
 cost = 1
 cardText = ""
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([SubResource("Resource_gyifl")])
-modifiers = Array[Resource("res://cardAbstractions/cardModifier.gd")]([])
+
 
 [sub_resource type="Resource" id="Resource_55yta"]
 script = ExtResource("4_eueqm")
@@ -62,7 +62,7 @@ type = "T"
 cost = 1
 cardText = ""
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([SubResource("Resource_55yta")])
-modifiers = Array[Resource("res://cardAbstractions/cardModifier.gd")]([])
+
 
 [sub_resource type="Resource" id="Resource_6qdfj"]
 script = ExtResource("4_eueqm")
@@ -79,7 +79,7 @@ type = "T"
 cost = 1
 cardText = ""
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([SubResource("Resource_6qdfj")])
-modifiers = Array[Resource("res://cardAbstractions/cardModifier.gd")]([])
+
 
 [sub_resource type="Resource" id="Resource_ientq"]
 script = ExtResource("4_eueqm")
@@ -96,7 +96,7 @@ type = "T"
 cost = 1
 cardText = ""
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([SubResource("Resource_ientq")])
-modifiers = Array[Resource("res://cardAbstractions/cardModifier.gd")]([])
+
 
 [sub_resource type="Resource" id="Resource_lv74b"]
 script = ExtResource("4_eueqm")
@@ -113,7 +113,7 @@ type = "T"
 cost = 1
 cardText = ""
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([SubResource("Resource_lv74b")])
-modifiers = Array[Resource("res://cardAbstractions/cardModifier.gd")]([])
+
 
 [sub_resource type="Resource" id="Resource_vh0jh"]
 script = ExtResource("5_fj00f")
@@ -124,7 +124,7 @@ type = "T"
 cost = 1
 cardText = ""
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
-modifiers = Array[Resource("res://cardAbstractions/cardModifier.gd")]([])
+
 
 [sub_resource type="Resource" id="Resource_3f51c"]
 script = ExtResource("5_fj00f")
@@ -135,7 +135,7 @@ type = "T"
 cost = 1
 cardText = ""
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
-modifiers = Array[Resource("res://cardAbstractions/cardModifier.gd")]([])
+
 
 [sub_resource type="Resource" id="Resource_o8fa0"]
 script = ExtResource("5_fj00f")
@@ -146,7 +146,7 @@ type = "T"
 cost = 1
 cardText = ""
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
-modifiers = Array[Resource("res://cardAbstractions/cardModifier.gd")]([])
+
 
 [sub_resource type="Resource" id="Resource_8srd1"]
 script = ExtResource("5_fj00f")
@@ -157,7 +157,7 @@ type = "T"
 cost = 1
 cardText = ""
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
-modifiers = Array[Resource("res://cardAbstractions/cardModifier.gd")]([])
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_625ey"]
 size = Vector2(947, 256.5)

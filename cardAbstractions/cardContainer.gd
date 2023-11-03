@@ -7,6 +7,7 @@ class_name CardContainer
 @export var feedContainer: CardContainer
 @export var cardsNeedDisplays: bool
 @export var addTriggerType: PlayEffect.triggerType
+@export var modifiers: Array[ContainerModifier]
 
 signal cardAdded(card: CardData)
 signal cardRemoved(card: CardData)
@@ -21,6 +22,7 @@ func removeCard(cardToRemove: CardData) -> bool:
 func addCard(cardToAdd: CardData) -> bool:
 	if not checkFull():
 		cards.push_back(cardToAdd)
+		cardToAdd.container = self
 		cardToAdd.triggerEffect(addTriggerType)
 		cardAdded.emit(cardToAdd)
 		return true
@@ -59,3 +61,11 @@ func drawCard():
 	var cardToDraw = getTop()
 	removeCard(cardToDraw)
 	return cardToDraw
+
+func applyModifiers(type: CardParam.ParamType, card: CardData, value: int, ctxt: GameStateContext):
+	var currValue = value
+	for modifier in modifiers:
+		if modifier.type == type:			
+			modifier.calculate(ctxt, currValue, card)
+	return currValue
+

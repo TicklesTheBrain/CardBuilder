@@ -1,8 +1,7 @@
-extends CostModifier
-class_name ModifierCostFixed
+extends ParamModifier
+class_name ModifierFixedChange
 
-@export var costShift: int = -1
+@export var shift: int = -1
 
-
-func calculateCost(ctxt: GameStateContext):
-    return ctxt.modifiableValue + costShift
+func calculateSpecific(_ctxt: GameStateContext, currValue: int, _card: CardData):
+    return currValue + shift

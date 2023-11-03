@@ -59,7 +59,7 @@ func _ready():
 
 func provideContext(requestingObject):
 	
-	var ctxt = GameStateContext.new() as GameStateContext
+	var ctxt = GameStateContext.new() as GameStateContext 
 	ctxt.drawDeck = activeActor.drawDeck
 	ctxt.discard = activeActor.discard
 	ctxt.hand = activeActor.hand
@@ -87,10 +87,10 @@ func addToPlayArea(card: CardData):
 	if playAreaManager.checkFull():
 		return
 
-	if card.cost > energy.amount:
+	if card.getCost() > energy.amount:
 		return
 
-	energy.amount -= card.cost	
+	energy.amount -= card.getCost()	
 	
 	playAreaManager.addCard(card)
 	handManager.removeCard(card)

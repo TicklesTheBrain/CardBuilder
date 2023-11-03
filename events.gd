@@ -1,5 +1,7 @@
 extends Node
 
 signal requestContext(requestingObject)
-signal cardMoved(from: CardContainer, to: CardContainer, card: CardData)
+signal cardAdded(to: CardContainer, card: CardData)
+signal playerTurnStart()
+signal playerTurnEnd()
 signal newCardDisplayRequested(card: CardData)
