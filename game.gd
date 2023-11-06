@@ -64,15 +64,17 @@ func _ready():
 
 	roundLoop()
 
-func provideContext(requestingObject):
-	
+func makeContext() -> GameStateContext:
 	var ctxt = GameStateContext.new() as GameStateContext 
 	ctxt.drawDeck = activeActor.drawDeck
 	ctxt.discard = activeActor.discard
 	ctxt.hand = activeActor.hand
 	ctxt.playArea = activeActor.playArea
 	ctxt.energyResource = energy
-	requestingObject.receiveContext(ctxt)
+	return ctxt
+
+func provideContext(requestingObject):		
+	requestingObject.receiveContext(makeContext())
 
 func drawFromDeckToHand():
 			
@@ -94,6 +96,9 @@ func addToPlayArea(card: CardData):
 		return
 
 	if card.getCost() > energy.amount:
+		return
+
+	if not card.checkPlayConditionals():
 		return
 
 	energy.amount -= card.getCost()	

@@ -6,6 +6,8 @@ enum triggerType {NONE, PLAY, DISCARD, END, DRAW}
 @export var effectName: String
 @export var staticText: String
 @export var conditionals: Array[Conditional]
+@export var followUpEffects: Array[PlayEffect] = []
+@export var includeFollowUpText: bool = false
 
 func trigger(ctxt: GameStateContext):
 	#print('trigger launched', conditionals)
@@ -15,20 +17,28 @@ func trigger(ctxt: GameStateContext):
 			#print("conditional failed")
 			return
 	await triggerSpecific(ctxt)
+	for eff in followUpEffects:
+		await eff.trigger(ctxt)
 
 func triggerSpecific(_effectContext: GameStateContext):
 	print('this was a default play effect trigger function that was not overriden. is this expected?')
 	#pass
 
 func getText() -> String:
+	var result = ''
+
 	if staticText:
-		return staticText
+		result += staticText
 	else:
-		var result = ''
 		for con in conditionals:
 			result += con.getText()
 		result += getTextSpecific()
-		return result
+	
+	if includeFollowUpText:
+		for eff in followUpEffects:
+			result += eff.getText()
+	
+	return result
 
 func getTextSpecific() -> String:
 	return "this was a not overriden generic getText, something wrong?"

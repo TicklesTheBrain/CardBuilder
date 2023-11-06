@@ -8,6 +8,7 @@ class_name CardData
 @export var stats: StatData
 
 @export var onPlayEffects: Array[PlayEffect] = []
+@export var playConditionals: Array[Conditional] = []
 
 var container: CardContainer 
 var context: GameStateContext
@@ -42,12 +43,21 @@ func getPlayEffectText() -> String:
 		result += effect.getText()
 	return result
 
-
 func getOtherText():
 	var result = ''
-	result += cost.getText() + value.getText() + stats.getText()
+	result += cost.getText() + value.getText() + stats.getText() + getPlayConditionalText()
 	return result
 
+func checkPlayConditionals() -> bool:
+	updateContext()
+	context.actingCard = self
+	for con in playConditionals:
+		if not con.check(context):
+			return false
+	return true
 
-
-
+func getPlayConditionalText():
+	var result = ''
+	for con in playConditionals:
+		result += con.getText()
+	return result

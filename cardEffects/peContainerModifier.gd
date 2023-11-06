@@ -13,16 +13,4 @@ func triggerSpecific(ctxt: GameStateContext):
 		for rule in timingRules:
 			var newTC = rule.createNewTC(ctxt)
 			newMod.addTC(newTC)
-		addModifier(purpose, newMod, ctxt)
-
-func addModifier(purpose: Game.ContainerPurposes, newMod: Modifier, ctxt: GameStateContext):
-	match purpose:
-		Game.ContainerPurposes.HAND:
-			ctxt.hand.addModifier(newMod)
-		Game.ContainerPurposes.DISCARD:
-			ctxt.discard.addModifier(newMod)
-		Game.ContainerPurposes.PLAY_AREA:
-			ctxt.playArea.addModifier(newMod)
-		Game.ContainerPurposes.DECK:
-			ctxt.drawDeck.addModifier(newMod)
-
+		ctxt.getContainerFromPurpose(purpose).addModifier(newMod)
