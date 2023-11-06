@@ -1,8 +1,8 @@
 extends Node
 
-enum EventType {TURN_START, TURN_END, CARD_ADD}
+enum EventType {TURN_START, TURN_END, CARD_PLAYED}
 
-func createTC(type: TimingCheck.CheckType, counter: int, event: EventType, card: CardData = null , container: CardContainer = null):
+func createTC(type: TimingCheck.CheckType, counter: int, event: EventType, ctxt: GameStateContext):
 	var newTC = TimingCheck.new()
 	newTC.type = type
 	newTC.counter = counter
@@ -11,10 +11,10 @@ func createTC(type: TimingCheck.CheckType, counter: int, event: EventType, card:
 			newTC.connectTurnStart()
 		EventType.TURN_END:
 			newTC.connectTurnEnd()
-		EventType.CARD_ADD:
+		EventType.CARD_PLAYED:
 			newTC.connectCardPlayed()
-			newTC.excludeCard = card
-			newTC.containerSubject = container
+			newTC.excludeCard = ctxt.actingCard
+			newTC.containerSubject = ctxt.playArea
 
 	return newTC
 		

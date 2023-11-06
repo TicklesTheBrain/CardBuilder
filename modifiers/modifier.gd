@@ -1,7 +1,8 @@
 extends Resource
-class_name ContainerModifier
+class_name Modifier
 
 @export var inEffect: bool = true
+@export var staticText: String
 
 var active: bool:
     get:
@@ -26,4 +27,10 @@ var cleanMeUp: bool:
 
 @export var timingChecks: Array[TimingCheck] = []
 
+func addTC(newTC: TimingCheck):
+    timingChecks.append(newTC)
 
+func getText():
+    if not staticText:
+        return "default text not overriden."
+    return staticText

@@ -11,14 +11,17 @@ bg_color = Color(0.133333, 0.133333, 0.133333, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwt7q"]
 size = Vector2(141, 192)
 
-[node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "valueTypeLabel", "costLabel", "cardTextLabel", "attackLabel", "defenceLabel")]
+[node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "valueTypeLabel", "costLabel", "playTextLabel", "otherTextLabel", "discardTextLabel", "attackLabel", "defenceLabel")]
 script = ExtResource("1_lql06")
 cardShape = NodePath("CardShape")
 valueTypeLabel = NodePath("PanelContainer/Info/TopInfo/ValueType")
 costLabel = NodePath("PanelContainer/Info/TopInfo/Cost")
-cardTextLabel = NodePath("PanelContainer/Info/MiddleArea/cardTExt")
+playTextLabel = NodePath("PanelContainer/Info/MiddleArea/Text aligner/Play_Text")
+otherTextLabel = NodePath("PanelContainer/Info/MiddleArea/Text aligner/Other_text")
+discardTextLabel = NodePath("PanelContainer/Info/MiddleArea/Text aligner/Discard text")
 attackLabel = NodePath("PanelContainer/Info/Bottom Info/Attack")
 defenceLabel = NodePath("PanelContainer/Info/Bottom Info/Defence")
+maxCounter = 1.0
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 8
@@ -62,10 +65,27 @@ text = "1E"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="cardTExt" type="RichTextLabel" parent="PanelContainer/Info/MiddleArea"]
+[node name="Text aligner" type="VBoxContainer" parent="PanelContainer/Info/MiddleArea"]
+layout_mode = 2
+
+[node name="Other_text" type="RichTextLabel" parent="PanelContainer/Info/MiddleArea/Text aligner"]
 layout_mode = 2
 mouse_filter = 1
-text = "This is my card text"
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 2
+
+[node name="Play_Text" type="RichTextLabel" parent="PanelContainer/Info/MiddleArea/Text aligner"]
+layout_mode = 2
+mouse_filter = 1
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 2
+
+[node name="Discard text" type="RichTextLabel" parent="PanelContainer/Info/MiddleArea/Text aligner"]
+layout_mode = 2
+mouse_filter = 1
+bbcode_enabled = true
 fit_content = true
 autowrap_mode = 2
 

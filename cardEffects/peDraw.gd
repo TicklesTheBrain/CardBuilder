@@ -14,3 +14,6 @@ func trigger(ctxt: GameStateContext):
 			ctxt.hand.addCard(newCard)
 		else:
 			return
+
+func getText() -> String:
+	return "Draw {num} card".format({"num": amountOfCardsToDraw})

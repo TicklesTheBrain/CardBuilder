@@ -1,4 +1,4 @@
-extends ContainerModifier
+extends Modifier
 class_name ParamModifier
 
 @export var type: CardParam.ParamType
@@ -8,6 +8,7 @@ func calculate(ctxt: GameStateContext, currValue: int, card: CardData) -> int:
     if not active:
         return currValue
     var cost = calculateSpecific(ctxt, currValue, card)
+    #print('cost', cost)
     if capAtZero:
         return max(cost, 0)
     else:

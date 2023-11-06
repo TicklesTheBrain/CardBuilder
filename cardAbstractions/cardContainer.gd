@@ -4,10 +4,10 @@ class_name CardContainer
 @export var maxCards: int = -1
 @export var cards: Array[CardData] = []
 @export var bustCounter: ContainerCounter
-@export var feedContainer: CardContainer
-@export var cardsNeedDisplays: bool
+@export var feedContainer: CardContainer # Container which is reshuffled if container is empty on drawCard function
+@export var disposeContainer: CardContainer # Container to which things are disposed to on disposeCards call
 @export var addTriggerType: PlayEffect.triggerType
-@export var modifiers: Array[ContainerModifier]
+@export var modifiers: Array[Modifier]
 
 signal cardAdded(card: CardData)
 signal cardRemoved(card: CardData)
@@ -24,6 +24,7 @@ func addCard(cardToAdd: CardData) -> bool:
 		cards.push_back(cardToAdd)
 		cardToAdd.container = self
 		cardToAdd.triggerEffect(addTriggerType)
+		Events.cardAdded.emit(self, cardToAdd)
 		cardAdded.emit(cardToAdd)
 		return true
 	return false
@@ -62,10 +63,29 @@ func drawCard():
 	removeCard(cardToDraw)
 	return cardToDraw
 
+func addModifier(mod: Modifier):
+	modifiers.append(mod)
+
 func applyModifiers(type: CardParam.ParamType, card: CardData, value: int, ctxt: GameStateContext):
 	var currValue = value
 	for modifier in modifiers:
 		if modifier.type == type:			
-			modifier.calculate(ctxt, currValue, card)
+			currValue = modifier.calculate(ctxt, currValue, card)
+	
 	return currValue
+
+func disposeAll(containerToDisposeTo: CardContainer = disposeContainer):
+	print('dispose triggered')
+	while (not checkEmpty()):
+		if containerToDisposeTo.checkFull():
+			print('dispose container full')
+			return
+		var card = getTop()
+		removeCard(card)
+		containerToDisposeTo.addCard(card)
+
+func getTotalValue():
+	return cards.reduce(func(acc, card): return acc+card.getValue(), 0)
+
+
 

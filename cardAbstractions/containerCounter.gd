@@ -10,6 +10,7 @@ enum countWhat {VALUE, AMOUNT}
 
 var count = -1
 var prevCount = count
+var savedCount: int
 
 signal countChanged(newValue)
 
@@ -28,7 +29,7 @@ func _ready():
 func recalculateValue(_discardedValue = null):
 	match countSubject:
 		countWhat.VALUE:
-			count = cardContainer.cards.reduce(func(acc, card): return acc+card.value, startingValue)
+			count = cardContainer.cards.reduce(func(acc, card): return acc+card.getValue(), startingValue)
 		countWhat.AMOUNT:
 			count = cardContainer.cards.size()
 
@@ -41,3 +42,6 @@ func updateLabel(newValue):
 
 func checkIsBusted() -> bool:
 	return bustValue > 0 and prevCount > bustValue
+
+func saveCount():
+	savedCount = prevCount

@@ -1,9 +1,14 @@
 extends Node2D
+class_name Game
+
+enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
 
 @export var deckManager: DeckManager
 @export var enemyDeckManager: DeckManager
+@export var enemyDiscard: CardContainer
 @export var handManager: CardContainer
 @export var playAreaManager: CardContainer
+@export var enemyPlayArea: CardContainer
 @export var discardManager: CardContainer
 
 @export var energy: GenericResource
@@ -18,7 +23,12 @@ extends Node2D
 @export var messageLabel: Label
 @export var cardDisplayPacked: PackedScene
 @export var newCardMarker: Marker2D
-@export var handPositionController: VariedPositionController
+
+@export var drawCardButton: Button
+@export var endHandButton: Button
+@export var okButton: Button
+
+@export var turnStartDrawCards: int = 3
 
 var player: Actor
 var enemy: Actor
@@ -44,18 +54,15 @@ func _ready():
 	enemy = Actor.new()
 	enemy.drawDeck = enemyDeckManager
 	enemyDeckManager.buildNewEmptyDeck()
-	enemy.playArea = playAreaManager
-	enemy.discard = CardContainer.new() as CardContainer
-	enemy.discard.maxCards = 0
+	enemy.playArea = enemyPlayArea
+	enemy.discard = enemyDiscard
 	enemy.hand = CardContainer.new() as CardContainer
 	enemy.hand.maxCards = 0
 
-	activeActor = player
-	passiveActor = enemy
-
-	energy.reset()
 	Events.requestContext.connect(provideContext)
 	Events.newCardDisplayRequested.connect(spawnNewCardDisplay)
+
+	roundLoop()
 
 func provideContext(requestingObject):
 	
@@ -66,7 +73,6 @@ func provideContext(requestingObject):
 	ctxt.playArea = activeActor.playArea
 	ctxt.energyResource = energy
 	requestingObject.receiveContext(ctxt)
-
 
 func drawFromDeckToHand():
 			
@@ -95,63 +101,94 @@ func addToPlayArea(card: CardData):
 	playAreaManager.addCard(card)
 	handManager.removeCard(card)
 
-func endHand():
+func enemySingleStep(valueToBeat: int) -> bool:
 
-	const waitInterval = 1.0
+	if enemyPlayArea.checkFull():
+		return false
+	if enemyPlayArea.bustCounter.checkIsBusted():
+		return false
+	print(enemyPlayArea.bustCounter.prevCount, 'valuetobeat', valueToBeat)
+	if enemyPlayArea.bustCounter.prevCount > valueToBeat:
+	
+		return false
+
+	var card = enemyDeckManager.drawCard()
+	enemyPlayArea.addCard(card)
+	return true
+
+func roundLoop():
+	
+	## PLAYER TURN SETUP
+	message = 'new round started'
+
+	energy.reset()
+	activeActor = player
+	passiveActor = enemy
+	Events.playerTurnStart.emit()
+
+	for i in range(turnStartDrawCards):
+		drawFromDeckToHand()
+
+	drawCardButton.disabled = false
+	endHandButton.disabled = false
+	okButton.disabled = true
+
+	await endHandButton.button_down
+
+	## CLEANUP AT THE END OF PLAYER TURN
 
 	var playedCards = playAreaManager.getAll()
 	var defence = playedCards.reduce(func(acc, card): return acc+card.stats.defence, 0)
 	var attack = playedCards.reduce(func(acc, card): return acc+card.stats.attack, 0)
-	var value = playedCards.reduce(func(acc, card): return acc+card.value, 0)
+	var value = playAreaManager.getTotalValue()
 	var busted = playAreaManager.bustCounter.checkIsBusted()
-	var enemyWin: bool = false
-
+	
 	if busted:
 		message = "You busted"
 	else:	
 		message = "Your Value: {value}, Att: {att}, Def: {def}".format({"value": value, 'att': attack, "def": defence})
-
-	playAreaManager.removeAll()
-	for card in playedCards:
-		discardManager.addCard(card)
-
-	await get_tree().create_timer(waitInterval).timeout
-
-	if not busted:
-		enemyDeckManager.shuffle()
-
-		while (not playAreaManager.checkFull() and not playAreaManager.bustCounter.checkIsBusted() and playAreaManager.bustCounter.prevCount < value):
-			var topCard = enemyDeckManager.getTop()
-			enemyDeckManager.removeCard(topCard)
-			playAreaManager.addCard(topCard)
-			await get_tree().create_timer(waitInterval).timeout
-
-		if playAreaManager.bustCounter.checkIsBusted():
-			message = "Enemy busted, you deal {dmg}".format({'dmg': attack})
-			damageDealt.amount += attack
-			
-
-		elif playAreaManager.bustCounter.prevCount == value:
-			message = "It's a draw, no damage dealt"
-
-		elif playAreaManager.bustCounter.prevCount > value:
-			message = "Enemy wins with value of {their} against your {val}".format({"their": playAreaManager.bustCounter.prevCount, "val": value})
-			enemyWin = true
-			
-		await get_tree().create_timer(waitInterval).timeout
+		
 	
-	if enemyWin or busted:
-		var randomDamage = randi_range(1,5)
-		damageSuffered.amount += randomDamage
-		message = "enemy deals you {dmg} damage".format({"dmg": randomDamage})
+	playAreaManager.disposeAll()
+	#handManager.disposeAll()
 
-	var enemyPlayedCards = playAreaManager.getAll()
-	playAreaManager.removeAll()
-	var cds = get_tree().get_nodes_in_group("cd") as Array[CardDisplay]
-	for card in enemyPlayedCards:
-		enemyDeckManager.addCard(card)
-		var cd = cds.filter(func(display): return display.cardData == card)[0]
-		cd.queue_free()
+	drawCardButton.disabled = true
+	endHandButton.disabled = true
 
-	energy.reset()
+	Events.playerTurnEnd.emit(value, busted)
+	
 
+	##ENEMY ACTIONS
+
+	activeActor = enemy
+	passiveActor = player
+
+	while (enemySingleStep(value)):
+		await get_tree().create_timer(0.75).timeout
+
+	okButton.disabled = false
+
+	await okButton.button_down
+
+	##ROUND RESOLUTION
+
+	if enemyPlayArea.bustCounter.checkIsBusted():
+		message = "Enemy busted, you deal {dmg}".format({'dmg': attack})
+		damageDealt.amount += attack
+
+	elif enemyPlayArea.bustCounter.prevCount == value:
+		message = "It's a draw, no damage dealt"
+
+	elif enemyPlayArea.bustCounter.prevCount > value or busted:
+		var enemyAttack = enemyPlayArea.getAll().reduce(func(acc, card): return acc+card.stats.attack, 0)
+		message = "Enemy wins with value of {their} against your {val}. You suffer {dmg} damage".format({"their": enemyPlayArea.bustCounter.prevCount, "val": value, "dmg": enemyAttack})
+		damageSuffered.amount += enemyAttack
+
+
+	okButton.disabled = false
+
+	await okButton.button_down
+
+	enemyPlayArea.disposeAll()
+
+	roundLoop()
