@@ -13,6 +13,8 @@ class_name CardDisplay
 @export var defenceLabel: Label
 @export var maxCounter: float
 
+@export var selection: ColorRect
+
 var counter: float = 0
 var cardData: CardData
 var mouseOver: bool
@@ -21,6 +23,13 @@ var mouseOffset = Vector2()
 var previousPosition = Vector2()
 var inPlayArea = null
 var positionController: VariedPositionController
+var selected = false:
+	set(value):
+		if value == true:
+			selection.visible = true
+		else:
+			selection.visible = false
+		selected = value
 
 func _ready():
 	Events.updateAllDisplays.connect(updateCardDisplay)
@@ -36,7 +45,7 @@ func updateCardDisplay():
 	var playText = cardData.getPlayEffectText()
 	if playText != "":
 		playTextLabel.text = "[b]Play:[/b] " + playText
-		
+
 	var otherText = cardData.getOtherText()
 	if otherText != "":
 		otherTextLabel.text = otherText
@@ -61,6 +70,17 @@ func _process(delta):
 		position = get_viewport().get_mouse_position() - mouseOffset
 
 func onClick():
+
+	if Selector.selecting:
+		if Selector.subjectContainer == cardData.container:
+			if selected:
+				selected = false
+				Selector.removeFromSelection(cardData)
+			else:
+				selected = true
+				Selector.addToSelection(cardData)
+		return
+
 	if not dragged and not inPlayArea:
 		previousPosition = position
 		dragged = true

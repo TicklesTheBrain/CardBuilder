@@ -3,7 +3,7 @@ class_name DrawCards
 
 @export var amountOfCardsToDraw: int = 1
 
-func trigger(ctxt: GameStateContext):
+func triggerSpecific(ctxt: GameStateContext):
 	print('card draw triggered')
 
 	for i in range(amountOfCardsToDraw):
@@ -15,5 +15,5 @@ func trigger(ctxt: GameStateContext):
 		else:
 			return
 
-func getText() -> String:
+func getTextSpecific() -> String:
 	return "Draw {num} card".format({"num": amountOfCardsToDraw})

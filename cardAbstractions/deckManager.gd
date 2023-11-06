@@ -1,10 +1,13 @@
 extends CardContainer
 class_name DeckManager
 
+@export var debug: bool = true
 @export var emptyCardArray: Array[EmptyCardData]
 
 func buildNewEmptyDeck():	
 	for empty in emptyCardArray:
+		if debug and not empty.debug:
+			continue
 		for i in range(empty.amount):
 			var newCard = CardData.new()
 			newCard.value = empty.value.duplicate()

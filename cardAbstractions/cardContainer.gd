@@ -81,8 +81,15 @@ func disposeAll(containerToDisposeTo: CardContainer = disposeContainer):
 			print('dispose container full')
 			return
 		var card = getTop()
-		removeCard(card)
-		containerToDisposeTo.addCard(card)
+		disposeCard(card, containerToDisposeTo)
+
+func disposeCard(cardToDispose: CardData, containerToDisposeTo: CardContainer = disposeContainer):
+	if containerToDisposeTo.checkFull():
+		print('dispose container full')
+		return
+	removeCard(cardToDispose)
+	containerToDisposeTo.addCard(cardToDispose)
+
 
 func getTotalValue():
 	return cards.reduce(func(acc, card): return acc+card.getValue(), 0)

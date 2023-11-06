@@ -32,7 +32,7 @@ func triggerEffect(typeToTrigger: PlayEffect.triggerType):
 			for ef in onPlayEffects:
 				updateContext()
 				context.actingCard = self
-				ef.trigger(context)
+				await ef.trigger(context)
 
 func getPlayEffectText() -> String:
 	var result = ''

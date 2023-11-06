@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Events="*res://events.gd"
 TcFactory="*res://tc_factory.gd"
+Selector="*res://Selector.gd"
 
 [rendering]
 

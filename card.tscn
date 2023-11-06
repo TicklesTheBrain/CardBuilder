@@ -11,7 +11,7 @@ bg_color = Color(0.133333, 0.133333, 0.133333, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwt7q"]
 size = Vector2(141, 192)
 
-[node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "valueTypeLabel", "costLabel", "playTextLabel", "otherTextLabel", "discardTextLabel", "attackLabel", "defenceLabel")]
+[node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "valueTypeLabel", "costLabel", "playTextLabel", "otherTextLabel", "discardTextLabel", "attackLabel", "defenceLabel", "selection")]
 script = ExtResource("1_lql06")
 cardShape = NodePath("CardShape")
 valueTypeLabel = NodePath("PanelContainer/Info/TopInfo/ValueType")
@@ -22,6 +22,7 @@ discardTextLabel = NodePath("PanelContainer/Info/MiddleArea/Text aligner/Discard
 attackLabel = NodePath("PanelContainer/Info/Bottom Info/Attack")
 defenceLabel = NodePath("PanelContainer/Info/Bottom Info/Defence")
 maxCounter = 1.0
+selection = NodePath("PanelContainer/Selection")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 8
@@ -37,6 +38,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0tid8")
 script = ExtResource("2_b8cjq")
+
+[node name="Selection" type="ColorRect" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+color = Color(0.0823529, 0.101961, 0.321569, 1)
 
 [node name="Info" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2

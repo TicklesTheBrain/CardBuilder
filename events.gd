@@ -7,6 +7,8 @@ signal playerTurnEnd(playerValue: int, buster: bool)
 signal newCardDisplayRequested(card: CardData)
 signal updateAllDisplays()
 
+
+
 func _ready():
 	cardAdded.connect(displayUpdateWrapper)
 	playerTurnStart.connect(displayUpdateWrapper)

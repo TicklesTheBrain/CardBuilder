@@ -5,7 +5,7 @@ class_name AddModifier
 @export var modifier: Modifier
 @export var timingRules: Array[TC_Rule] = []
 
-func trigger(ctxt: GameStateContext):
+func triggerSpecific(ctxt: GameStateContext):
 	print('card apply modifier triggered ')
 
 	for purpose in containersToApply:
