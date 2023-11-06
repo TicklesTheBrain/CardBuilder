@@ -189,6 +189,10 @@ func roundLoop():
 		message = "Enemy wins with value of {their} against your {val}. You suffer {dmg} damage".format({"their": enemyPlayArea.bustCounter.prevCount, "val": value, "dmg": enemyAttack})
 		damageSuffered.amount += enemyAttack
 
+	else:
+		message = "You win with value of {val} against their {their}. They suffer {dmg} damage".format({"their": enemyPlayArea.bustCounter.prevCount, "val": value, "dmg": attack})
+		damageDealt.amount += attack
+
 
 	okButton.disabled = false
 
