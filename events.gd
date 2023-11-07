@@ -6,6 +6,9 @@ signal playerTurnStart()
 signal playerTurnEnd(playerValue: int, buster: bool)
 signal newCardDisplayRequested(card: CardData)
 signal updateAllDisplays()
+signal requestShowPocket(pocketText: String)
+signal requestHidePocket()
+signal orphanedCardDisplay(cd: CardDisplay)
 
 
 

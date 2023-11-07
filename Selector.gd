@@ -28,6 +28,7 @@ func addToSelection(card: CardData):
 
 func setupEndSelection(receivingMethod: Callable):
 	await cardSelectionComplete
+	selecting = false
 	receivingMethod.call(selected)
 
 func removeFromSelection(card: CardData):

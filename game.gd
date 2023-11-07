@@ -11,7 +11,12 @@ enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
 @export var enemyPlayArea: CardContainer
 @export var discardManager: CardContainer
 
+@export var pocketAnimation: AnimationPlayer
+@export var pocketContainer: CardContainer
+@export var pocketLabel: Label
+
 @export var energy: GenericResource
+@export var startTurnCardDraw: GenericResource
 @export var damageDealt: GenericResource
 @export var damageSuffered: GenericResource
 
@@ -28,7 +33,6 @@ enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
 @export var endHandButton: Button
 @export var okButton: Button
 
-@export var turnStartDrawCards: int = 3
 
 var player: Actor
 var enemy: Actor
@@ -61,6 +65,9 @@ func _ready():
 
 	Events.requestContext.connect(provideContext)
 	Events.newCardDisplayRequested.connect(spawnNewCardDisplay)
+	Events.requestShowPocket.connect(showPocket)
+	Events.requestHidePocket.connect(hidePocket)
+	Events.orphanedCardDisplay.connect(reparentCardDisplay)
 
 	roundLoop()
 
@@ -71,10 +78,24 @@ func makeContext() -> GameStateContext:
 	ctxt.hand = activeActor.hand
 	ctxt.playArea = activeActor.playArea
 	ctxt.energyResource = energy
+	ctxt.cardDraw = startTurnCardDraw
+	ctxt.pocket = pocketContainer
 	return ctxt
 
 func provideContext(requestingObject):		
 	requestingObject.receiveContext(makeContext())
+
+func showPocket(pocketText: String):
+
+	pocketLabel.text = pocketText
+	pocketAnimation.play("show")
+
+func hidePocket():
+	pocketAnimation.play("hide")
+
+func reparentCardDisplay(cd: CardDisplay):
+	cd.get_parent().remove_child(cd)
+	add_child(cd)
 
 func drawFromDeckToHand():
 			
@@ -127,11 +148,13 @@ func roundLoop():
 	message = 'new round started'
 
 	energy.reset()
+	startTurnCardDraw.reset()
+
 	activeActor = player
 	passiveActor = enemy
 	Events.playerTurnStart.emit()
 
-	for i in range(turnStartDrawCards):
+	for i in range(startTurnCardDraw.amount):
 		drawFromDeckToHand()
 
 	drawCardButton.disabled = false

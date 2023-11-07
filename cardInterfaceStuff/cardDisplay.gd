@@ -33,6 +33,7 @@ var selected = false:
 
 func _ready():
 	Events.updateAllDisplays.connect(updateCardDisplay)
+	Selector.cardSelectionComplete.connect(unselect)
 
 func setupCardDisplay(data: CardData):
 	cardData = data
@@ -85,6 +86,10 @@ func onClick():
 		previousPosition = position
 		dragged = true
 		mouseOffset = get_viewport().get_mouse_position() - position
+
+func unselect():
+	if selected:
+		selected = false
 
 func onRelease():
 	if dragged:

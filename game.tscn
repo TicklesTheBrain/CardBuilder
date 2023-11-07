@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=68 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -21,6 +21,73 @@
 [ext_resource type="Script" path="res://cardAbstractions/tcRules.gd" id="13_b755p"]
 [ext_resource type="Script" path="res://cardEffects/peResourceModify.gd" id="14_jpla0"]
 [ext_resource type="Script" path="res://modifiers/paramModifierChooseBest.gd" id="15_3oxiy"]
+[ext_resource type="Script" path="res://cardEffects/peChooseFrom.gd" id="17_ncn3a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2gfwq"]
+bg_color = Color(0.0313726, 0.247059, 0.109804, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 12
+
+[sub_resource type="Animation" id="Animation_i0qxd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(283, -308)]
+}
+
+[sub_resource type="Animation" id="Animation_j2xvq"]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.517632, 0.267943),
+"update": 0,
+"values": [Vector2(272, 179), Vector2(300, -306)]
+}
+
+[sub_resource type="Animation" id="Animation_q5f7u"]
+resource_name = "show"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 4.43828),
+"update": 0,
+"values": [Vector2(302, -311), Vector2(272, 179)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_emsn4"]
+_data = {
+"RESET": SubResource("Animation_i0qxd"),
+"hide": SubResource("Animation_j2xvq"),
+"show": SubResource("Animation_q5f7u")
+}
 
 [sub_resource type="Resource" id="Resource_stxwd"]
 script = ExtResource("4_kj13h")
@@ -118,6 +185,8 @@ staticText = ""
 
 [sub_resource type="Resource" id="Resource_bu1ka"]
 script = ExtResource("11_ukhr8")
+source = 0
+destination = 1
 amountOfCardsToDraw = 1
 effectName = ""
 staticText = ""
@@ -159,6 +228,8 @@ staticText = ""
 
 [sub_resource type="Resource" id="Resource_ha2ot"]
 script = ExtResource("11_ukhr8")
+source = 0
+destination = 1
 amountOfCardsToDraw = 1
 effectName = ""
 staticText = ""
@@ -204,6 +275,8 @@ includeFollowUpText = false
 
 [sub_resource type="Resource" id="Resource_0pcgq"]
 script = ExtResource("11_ukhr8")
+source = 0
+destination = 1
 amountOfCardsToDraw = 1
 effectName = ""
 staticText = ""
@@ -239,6 +312,8 @@ staticText = ""
 
 [sub_resource type="Resource" id="Resource_1yklq"]
 script = ExtResource("14_jpla0")
+modifiedResource = 0
+modificationSubject = 0
 amountToModify = 1
 effectName = ""
 staticText = ""
@@ -303,6 +378,46 @@ cost = SubResource("Resource_8i7ff")
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 
+[sub_resource type="Resource" id="Resource_8yej1"]
+script = ExtResource("4_kj13h")
+baseValue = 0
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+
+[sub_resource type="Resource" id="Resource_nm6pv"]
+script = ExtResource("17_ncn3a")
+amountOfCardsToChoose = 1
+amountOfCardsToChooseFrom = 2
+sourceOfCards = 0
+destinationOfCards = 2
+destinationOfUnchosenCards = 3
+reshuffleDeckAfterwards = false
+effectName = ""
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
+includeFollowUpText = false
+
+[sub_resource type="Resource" id="Resource_5jkyj"]
+script = ExtResource("4_kj13h")
+baseValue = 0
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+
+[sub_resource type="Resource" id="Resource_p32kq"]
+resource_name = "choose 2 from deck"
+script = ExtResource("5_fj00f")
+amount = 6
+debug = true
+cardTitle = ""
+value = SubResource("Resource_5jkyj")
+type = ""
+cost = SubResource("Resource_8yej1")
+onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([SubResource("Resource_nm6pv")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+
 [sub_resource type="Resource" id="Resource_lab7m"]
 script = ExtResource("4_kj13h")
 baseValue = 0
@@ -331,7 +446,7 @@ playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_625ey"]
 size = Vector2(947, 256.5)
 
-[node name="game" type="Node2D" node_paths=PackedStringArray("deckManager", "enemyDeckManager", "enemyDiscard", "handManager", "playAreaManager", "enemyPlayArea", "discardManager", "energy", "damageDealt", "damageSuffered", "messageLabel", "newCardMarker", "drawCardButton", "endHandButton", "okButton")]
+[node name="game" type="Node2D" node_paths=PackedStringArray("deckManager", "enemyDeckManager", "enemyDiscard", "handManager", "playAreaManager", "enemyPlayArea", "discardManager", "pocketAnimation", "pocketContainer", "pocketLabel", "energy", "startTurnCardDraw", "damageDealt", "damageSuffered", "messageLabel", "newCardMarker", "drawCardButton", "endHandButton", "okButton")]
 script = ExtResource("1_hbkeb")
 deckManager = NodePath("Logic/Player/DeckManager")
 enemyDeckManager = NodePath("Logic/Enemy/EnemyDeck")
@@ -340,7 +455,11 @@ handManager = NodePath("Logic/Player/HandManager")
 playAreaManager = NodePath("Logic/Player/PlayAreaManager")
 enemyPlayArea = NodePath("Logic/Enemy/EnemyPlayArea")
 discardManager = NodePath("Logic/Player/DiscardManager")
-energy = NodePath("Logic/Energy")
+pocketAnimation = NodePath("PocketLayer/Pocket/PocketAnimation")
+pocketContainer = NodePath("Logic/PocketContainer")
+pocketLabel = NodePath("PocketLayer/Pocket/Panel/Label")
+energy = NodePath("Logic/Player/Energy")
+startTurnCardDraw = NodePath("Logic/Player/StartTurnCardDraw")
 damageDealt = NodePath("Logic/DamageDealt")
 damageSuffered = NodePath("Logic/Damage Suffered")
 messageLabel = NodePath("MessageContent")
@@ -349,6 +468,85 @@ newCardMarker = NodePath("NewCardOrigin")
 drawCardButton = NodePath("DrawButton")
 endHandButton = NodePath("EndButton")
 okButton = NodePath("OkBUtton")
+
+[node name="PocketLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="PocketPositionController" type="Node2D" parent="PocketLayer" node_paths=PackedStringArray("posCollections", "canvasLayer", "logicalContainer")]
+script = ExtResource("4_u0guh")
+posCollections = [NodePath("1Pos"), NodePath("2Pos"), NodePath("3Pos"), NodePath("4Pos")]
+canvasLayer = NodePath("..")
+logicalContainer = NodePath("../../Logic/PocketContainer")
+
+[node name="1Pos" type="Node2D" parent="PocketLayer/PocketPositionController"]
+
+[node name="1_1" type="Marker2D" parent="PocketLayer/PocketPositionController/1Pos"]
+position = Vector2(476, 341)
+metadata/_edit_group_ = true
+
+[node name="2Pos" type="Node2D" parent="PocketLayer/PocketPositionController"]
+
+[node name="1_2" type="Marker2D" parent="PocketLayer/PocketPositionController/2Pos"]
+position = Vector2(399, 339)
+metadata/_edit_group_ = true
+
+[node name="2_2" type="Marker2D" parent="PocketLayer/PocketPositionController/2Pos"]
+position = Vector2(557, 340)
+metadata/_edit_group_ = true
+
+[node name="3Pos" type="Node2D" parent="PocketLayer/PocketPositionController"]
+
+[node name="1_3" type="Marker2D" parent="PocketLayer/PocketPositionController/3Pos"]
+position = Vector2(354, 337)
+metadata/_edit_group_ = true
+
+[node name="2_3" type="Marker2D" parent="PocketLayer/PocketPositionController/3Pos"]
+position = Vector2(512, 338)
+metadata/_edit_group_ = true
+
+[node name="3_3" type="Marker2D" parent="PocketLayer/PocketPositionController/3Pos"]
+position = Vector2(669, 338)
+metadata/_edit_group_ = true
+
+[node name="4Pos" type="Node2D" parent="PocketLayer/PocketPositionController"]
+
+[node name="1_4" type="Marker2D" parent="PocketLayer/PocketPositionController/4Pos"]
+position = Vector2(296, 338)
+metadata/_edit_group_ = true
+
+[node name="2_4" type="Marker2D" parent="PocketLayer/PocketPositionController/4Pos"]
+position = Vector2(454, 339)
+metadata/_edit_group_ = true
+
+[node name="3_4" type="Marker2D" parent="PocketLayer/PocketPositionController/4Pos"]
+position = Vector2(611, 339)
+metadata/_edit_group_ = true
+
+[node name="4_4" type="Marker2D" parent="PocketLayer/PocketPositionController/4Pos"]
+position = Vector2(766, 339)
+metadata/_edit_group_ = true
+
+[node name="Pocket" type="Node2D" parent="PocketLayer"]
+position = Vector2(283, -308)
+metadata/_edit_group_ = true
+
+[node name="Panel" type="Panel" parent="PocketLayer/Pocket"]
+offset_right = 527.0
+offset_bottom = 280.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2gfwq")
+
+[node name="Label" type="Label" parent="PocketLayer/Pocket/Panel"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 12.0
+offset_right = 449.0
+offset_bottom = 35.0
+text = "This is the message that is seen on the pocket"
+
+[node name="PocketAnimation" type="AnimationPlayer" parent="PocketLayer/Pocket"]
+libraries = {
+"": SubResource("AnimationLibrary_emsn4")
+}
 
 [node name="Logic" type="Node" parent="."]
 
@@ -362,17 +560,18 @@ script = ExtResource("3_c142g")
 resourceName = "suffered"
 debugLabel = NodePath("../../InfoStuff/SufferedCounter")
 
-[node name="Energy" type="Node" parent="Logic" node_paths=PackedStringArray("debugLabel")]
+[node name="Player" type="Node" parent="Logic"]
+
+[node name="Energy" type="Node" parent="Logic/Player" node_paths=PackedStringArray("debugLabel")]
 script = ExtResource("3_c142g")
 resourceName = "Energy"
-resetAmount = 3
-debugLabel = NodePath("../../InfoStuff/EnergyCounter")
-
-[node name="Player" type="Node" parent="Logic"]
+baseline = 3
+capAtZero = true
+debugLabel = NodePath("../../../InfoStuff/EnergyCounter")
 
 [node name="DeckManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("3_8edax")
-emptyCardArray = Array[ExtResource("5_fj00f")]([SubResource("Resource_m4wcd"), SubResource("Resource_chvy2"), SubResource("Resource_xeq1j"), SubResource("Resource_o77ee"), SubResource("Resource_p1bhp"), SubResource("Resource_vwdiw"), SubResource("Resource_iben3")])
+emptyCardArray = Array[ExtResource("5_fj00f")]([SubResource("Resource_m4wcd"), SubResource("Resource_chvy2"), SubResource("Resource_xeq1j"), SubResource("Resource_o77ee"), SubResource("Resource_p1bhp"), SubResource("Resource_vwdiw"), SubResource("Resource_iben3"), SubResource("Resource_p32kq")])
 feedContainer = NodePath("../DiscardManager")
 disposeContainer = NodePath("../DiscardManager")
 
@@ -407,6 +606,12 @@ bustValue = -1
 label = NodePath("../../../../InfoStuff/DiscardCounter")
 countSubject = 1
 
+[node name="StartTurnCardDraw" type="Node" parent="Logic/Player"]
+script = ExtResource("3_c142g")
+resourceName = "StartTurnCardDraw"
+baseline = 3
+capAtZero = true
+
 [node name="Enemy" type="Node" parent="Logic"]
 
 [node name="EnemyPlayArea" type="Node" parent="Logic/Enemy" node_paths=PackedStringArray("bustCounter", "disposeContainer")]
@@ -428,6 +633,9 @@ script = ExtResource("3_8edax")
 debug = false
 emptyCardArray = Array[ExtResource("5_fj00f")]([SubResource("Resource_bl2ga")])
 feedContainer = NodePath("../EnemyDiscard")
+
+[node name="PocketContainer" type="Node" parent="Logic"]
+script = ExtResource("12_q8pst")
 
 [node name="DrawButton" type="Button" parent="."]
 offset_left = 988.0
@@ -746,6 +954,7 @@ positionController = NodePath("PlayAreaPositionController")
 shape = NodePath("Shape")
 
 [node name="PlayAreaPositionController" type="Node2D" parent="PlayArea" node_paths=PackedStringArray("posCollections", "logicalContainer")]
+visible = false
 script = ExtResource("4_u0guh")
 posCollections = [NodePath("1Pos"), NodePath("2Pos"), NodePath("3Pos"), NodePath("4Pos"), NodePath("5Pos"), NodePath("6Pos"), NodePath("7Pos")]
 logicalContainer = NodePath("../../Logic/Player/PlayAreaManager")

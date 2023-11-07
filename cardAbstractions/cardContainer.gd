@@ -99,5 +99,9 @@ func disposeCard(cardToDispose: CardData, containerToDisposeTo: CardContainer = 
 func getTotalValue():
 	return cards.reduce(func(acc, card): return acc+card.getValue(), 0)
 
+func getModifiedBustValue(bustValue: int):
+	for mod in modifiers:
+		if mod is CounterModifier and mod.type == ContainerCounter.countWhat.VALUE:
+			bustValue = mod.calculate(self, bustValue)
 
-
+	return bustValue
