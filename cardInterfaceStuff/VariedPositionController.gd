@@ -6,13 +6,15 @@ class_name VariedPositionController
 @export var canvasLayer: CanvasLayer
 
 var cards: Array[CardDisplay] = []
+var setupDone: bool = false
 @export var logicalContainer: CardContainer
 
 func _ready():
-	logicalContainer.cardAdded.connect(addedToHand)
-	logicalContainer.cardRemoved.connect(removedFromHand)
+	if logicalContainer and not setupDone:
+		setupNewLogicalContainer()
+	
 
-func addedToHand(cardData: CardData):
+func addCardData(cardData: CardData):
 	var cardDisplays = get_tree().get_nodes_in_group("cd")
 	var matchingCD = cardDisplays.filter(func(cd): return cd.cardData == cardData)
 	if matchingCD.size() == 0:
@@ -25,7 +27,7 @@ func addedToHand(cardData: CardData):
 		cardDisplay.get_parent().remove_child(cardDisplay)
 		canvasLayer.add_child(cardDisplay)
 
-func removedFromHand(cardData: CardData):
+func removeCardData(cardData: CardData):
 	var cardDisplays = get_tree().get_nodes_in_group("cd")
 	var cardDisplay = cardDisplays.filter(func(cd): return cd.cardData == cardData)[0]
 	removeCardDisplay(cardDisplay)
@@ -63,5 +65,16 @@ func scuttleCards():
 		i +=1
 		tween.tween_property(card,"position", newMarker.position, cardMoveTime)
 
+func setupNewLogicalContainer(newContainer = null):
+	if newContainer:
+		logicalContainer = newContainer
+	
+	#for cases when controller is initiated later than the logical container
+	for card in logicalContainer.getAll():
+		addCardData(card)
 
+	logicalContainer.cardAdded.connect(addCardData)
+	logicalContainer.cardRemoved.connect(removeCardData)
+
+	setupDone = true
 

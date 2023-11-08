@@ -9,39 +9,46 @@ class_name ChooseFrom
 @export var reshuffleDeckAfterwards: bool = false
 
 var selectedCards: Array[CardData] = []
+var pocketContainer: CardContainer
+
 signal cardSelectionDone
 
 func triggerSpecific(ctxt: GameStateContext):
 
 	var source = ctxt.getContainerFromPurpose(sourceOfCards) as CardContainer
-	var destination = ctxt.getContainerFromPurpose(destinationOfCards)
-	var unchosenDestination = ctxt.getContainerFromPurpose(destinationOfUnchosenCards)
+	var destination = ctxt.getContainerFromPurpose(destinationOfCards) as CardContainer
+	var unchosenDestination = ctxt.getContainerFromPurpose(destinationOfUnchosenCards) as CardContainer
 
-	Events.requestShowPocket.emit(getPocketText())
+	if destination.getFreeSpace() != -1:
+		amountOfCardsToChoose = min (destination.getFreeSpace(), amountOfCardsToChoose)
+
+	Events.requestNewPocket.emit(getPocketText(), receivePocket)
 
 	var counter = 0
 	while (not source.checkEmpty() and not destination.checkFull() and counter < amountOfCardsToChooseFrom):
 		var card = source.drawCard()
-		ctxt.pocket.addCard(card)
+		pocketContainer.addCard(card)
 		counter+=1
 
-	Selector.cardSelectionRequested.emit(ctxt.pocket, amountOfCardsToChoose, receiveSelection)
-
+	Selector.cardSelectionRequested.emit(pocketContainer, amountOfCardsToChoose, receiveSelection)
+	
 	await cardSelectionDone
-
-	Events.requestHidePocket.emit()
-
+	
 	for card in selectedCards:
-		ctxt.pocket.removeCard(card)
+		pocketContainer.removeCard(card)
 		if not destination.checkFull():
 			destination.addCard(card)
 		else:
 			unchosenDestination.addCard(card)
-	
-	ctxt.pocket.disposeAll(ctxt.getContainerFromPurpose(destinationOfUnchosenCards))
-
+			
+	pocketContainer.disposeAll(ctxt.getContainerFromPurpose(destinationOfUnchosenCards))
+	Events.requestClosePocket.emit(pocketContainer)
+			
 	if reshuffleDeckAfterwards:
 		ctxt.drawDeck.shuffle()
+
+func receivePocket(pocket: CardContainer):
+	pocketContainer = pocket
 
 func getPocketText() -> String:
 	

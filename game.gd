@@ -3,6 +3,7 @@ class_name Game
 
 enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
 
+@export var loggerLevel: int = 5
 @export var deckManager: DeckManager
 @export var enemyDeckManager: DeckManager
 @export var enemyDiscard: CardContainer
@@ -11,9 +12,9 @@ enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
 @export var enemyPlayArea: CardContainer
 @export var discardManager: CardContainer
 
-@export var pocketAnimation: AnimationPlayer
-@export var pocketContainer: CardContainer
-@export var pocketLabel: Label
+
+@export var pocketPacked: PackedScene
+var pocketRefs = {}
 
 @export var energy: GenericResource
 @export var startTurnCardDraw: GenericResource
@@ -34,6 +35,7 @@ enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
 @export var okButton: Button
 
 
+
 var player: Actor
 var enemy: Actor
 var activeActor: Actor
@@ -46,6 +48,8 @@ class Actor:
 	var playArea: CardContainer
 
 func _ready():
+	
+	Logger.printLevel = loggerLevel
 
 	player = Actor.new()
 	player.drawDeck = deckManager
@@ -65,8 +69,8 @@ func _ready():
 
 	Events.requestContext.connect(provideContext)
 	Events.newCardDisplayRequested.connect(spawnNewCardDisplay)
-	Events.requestShowPocket.connect(showPocket)
-	Events.requestHidePocket.connect(hidePocket)
+	Events.requestNewPocket.connect(makeNewPocket)
+	Events.requestClosePocket.connect(cleanUpPocket)
 	Events.orphanedCardDisplay.connect(reparentCardDisplay)
 
 	roundLoop()
@@ -79,19 +83,31 @@ func makeContext() -> GameStateContext:
 	ctxt.playArea = activeActor.playArea
 	ctxt.energyResource = energy
 	ctxt.cardDraw = startTurnCardDraw
-	ctxt.pocket = pocketContainer
 	return ctxt
 
 func provideContext(requestingObject):		
 	requestingObject.receiveContext(makeContext())
 
-func showPocket(pocketText: String):
+func makeNewPocket(pocketText: String, receivingMethod: Callable):
 
-	pocketLabel.text = pocketText
-	pocketAnimation.play("show")
+	var newPocket = pocketPacked.instantiate() as PocketDisplay
+	var pocketContainer = CardContainer.new()
+	add_child(pocketContainer)
+	newPocket.setupPositionController(pocketContainer)
+	newPocket.setupText(pocketText)
+	add_child(newPocket)
 
-func hidePocket():
-	pocketAnimation.play("hide")
+	pocketRefs[pocketContainer] = newPocket
+	newPocket.showPocket()
+	receivingMethod.call(pocketContainer)
+
+func cleanUpPocket(cardContainer: CardContainer):
+	
+	Logger.log(['cleanup pocket started', cardContainer], 3)
+	var pocket = pocketRefs[cardContainer]
+	pocket.hidePocket()
+	cardContainer.queue_free()
+	pocketRefs.erase(cardContainer)
 
 func reparentCardDisplay(cd: CardDisplay):
 	cd.get_parent().remove_child(cd)

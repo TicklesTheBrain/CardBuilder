@@ -11,6 +11,7 @@ func _ready():
 	cardSelectionRequested.connect(initNewSelection)
 
 func initNewSelection(container: CardContainer, needAmount: int, receivingMethod: Callable):
+	print('init new selection', container)
 	selecting = true
 	selected = []
 	subjectContainer = container
@@ -29,6 +30,7 @@ func addToSelection(card: CardData):
 func setupEndSelection(receivingMethod: Callable):
 	await cardSelectionComplete
 	selecting = false
+	print('end selection triggered')
 	receivingMethod.call(selected)
 
 func removeFromSelection(card: CardData):

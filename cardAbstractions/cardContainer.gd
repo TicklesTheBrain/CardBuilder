@@ -19,6 +19,12 @@ func removeCard(cardToRemove: CardData) -> bool:
 		return true
 	return false
 
+func getFreeSpace():
+	if maxCards == -1:
+		return maxCards
+	else:
+		return maxCards - cards.size()
+
 func addCard(cardToAdd: CardData) -> bool:
 	if not checkFull():
 		cards.push_back(cardToAdd)

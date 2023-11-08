@@ -1,0 +1,152 @@
+[gd_scene load_steps=8 format=3 uid="uid://o20e5thwdy3j"]
+
+[ext_resource type="Script" path="res://pocketDisplay.gd" id="1_q2qv6"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/VariedPositionController.gd" id="2_87o7k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2gfwq"]
+bg_color = Color(0.0313726, 0.247059, 0.109804, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 12
+
+[sub_resource type="Animation" id="Animation_i0qxd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(283, -308)]
+}
+
+[sub_resource type="Animation" id="Animation_j2xvq"]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.517632, 0.267943),
+"update": 0,
+"values": [Vector2(272, 179), Vector2(300, -306)]
+}
+
+[sub_resource type="Animation" id="Animation_q5f7u"]
+resource_name = "show"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 4.43828),
+"update": 0,
+"values": [Vector2(302, -311), Vector2(272, 179)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_emsn4"]
+_data = {
+"RESET": SubResource("Animation_i0qxd"),
+"hide": SubResource("Animation_j2xvq"),
+"show": SubResource("Animation_q5f7u")
+}
+
+[node name="PocketLayer" type="CanvasLayer" node_paths=PackedStringArray("animation", "positionController", "infoLabel")]
+layer = 2
+script = ExtResource("1_q2qv6")
+animation = NodePath("Pocket/PocketAnimation")
+positionController = NodePath("PocketPositionController")
+infoLabel = NodePath("Pocket/Panel/Label")
+
+[node name="PocketPositionController" type="Node2D" parent="." node_paths=PackedStringArray("posCollections", "canvasLayer")]
+script = ExtResource("2_87o7k")
+posCollections = [NodePath("1Pos"), NodePath("2Pos"), NodePath("3Pos"), NodePath("4Pos")]
+canvasLayer = NodePath("..")
+
+[node name="1Pos" type="Node2D" parent="PocketPositionController"]
+
+[node name="1_1" type="Marker2D" parent="PocketPositionController/1Pos"]
+position = Vector2(476, 341)
+metadata/_edit_group_ = true
+
+[node name="2Pos" type="Node2D" parent="PocketPositionController"]
+
+[node name="1_2" type="Marker2D" parent="PocketPositionController/2Pos"]
+position = Vector2(399, 339)
+metadata/_edit_group_ = true
+
+[node name="2_2" type="Marker2D" parent="PocketPositionController/2Pos"]
+position = Vector2(557, 340)
+metadata/_edit_group_ = true
+
+[node name="3Pos" type="Node2D" parent="PocketPositionController"]
+
+[node name="1_3" type="Marker2D" parent="PocketPositionController/3Pos"]
+position = Vector2(354, 337)
+metadata/_edit_group_ = true
+
+[node name="2_3" type="Marker2D" parent="PocketPositionController/3Pos"]
+position = Vector2(512, 338)
+metadata/_edit_group_ = true
+
+[node name="3_3" type="Marker2D" parent="PocketPositionController/3Pos"]
+position = Vector2(669, 338)
+metadata/_edit_group_ = true
+
+[node name="4Pos" type="Node2D" parent="PocketPositionController"]
+
+[node name="1_4" type="Marker2D" parent="PocketPositionController/4Pos"]
+position = Vector2(296, 338)
+metadata/_edit_group_ = true
+
+[node name="2_4" type="Marker2D" parent="PocketPositionController/4Pos"]
+position = Vector2(454, 339)
+metadata/_edit_group_ = true
+
+[node name="3_4" type="Marker2D" parent="PocketPositionController/4Pos"]
+position = Vector2(611, 339)
+metadata/_edit_group_ = true
+
+[node name="4_4" type="Marker2D" parent="PocketPositionController/4Pos"]
+position = Vector2(766, 339)
+metadata/_edit_group_ = true
+
+[node name="Pocket" type="Node2D" parent="."]
+position = Vector2(283, -308)
+metadata/_edit_group_ = true
+
+[node name="Panel" type="Panel" parent="Pocket"]
+offset_right = 527.0
+offset_bottom = 280.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2gfwq")
+
+[node name="Label" type="Label" parent="Pocket/Panel"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 12.0
+offset_right = 449.0
+offset_bottom = 35.0
+text = "This is the message that is seen on the pocket"
+
+[node name="PocketAnimation" type="AnimationPlayer" parent="Pocket"]
+libraries = {
+"": SubResource("AnimationLibrary_emsn4")
+}
