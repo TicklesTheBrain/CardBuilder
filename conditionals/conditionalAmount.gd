@@ -13,7 +13,7 @@ func getText():
 
 func check(ctxt: GameStateContext):
     print('check amount triggered')
-    var currAmount = ctxt.playArea.getAll().size()
+    var currAmount = ctxt.getContainerFromPurpose(containerToCheck).getAll().size()
     if not disabledOnMatchOrExceed and currAmount >= amountToMatchOrExceed:
         return true
     if disabledOnMatchOrExceed and currAmount < amountToMatchOrExceed:

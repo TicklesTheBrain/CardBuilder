@@ -140,11 +140,12 @@ func addToPlayArea(card: CardData):
 
 	energy.amount -= card.getCost()	
 	
-	playAreaManager.addCard(card)
 	handManager.removeCard(card)
+	playAreaManager.addCard(card)
 
 func enemySingleStep(valueToBeat: int) -> bool:
 
+	#TODO: Drawing too many cards when player busted 
 	if enemyPlayArea.checkFull():
 		return false
 	if enemyPlayArea.bustCounter.checkIsBusted():

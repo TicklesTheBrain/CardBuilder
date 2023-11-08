@@ -11,7 +11,7 @@ var counter: int = -1
 var excludeCard: CardData
 var containerSubject: CardContainer
 
-func decreaseCounter():
+func decreaseCounter(_discardValue = null, _discardValue2 = null):
 	counter -= 1
 	if counter == 0:
 		match type:

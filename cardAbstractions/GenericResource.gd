@@ -6,6 +6,7 @@ signal amountChanged(newAmount: int)
 @export var resourceName: String
 @export var baseline: int
 @export var resetAdjust: int = 0
+@export var resetBaseline: int = 0
 @export var capAtZero: bool
 
 @export var debugLabel: Label
@@ -19,6 +20,7 @@ signal amountChanged(newAmount: int)
 
 func reset():
 	amount = baseline + resetAdjust
+	resetAdjust = resetBaseline
 
 func updateLabel(newAmount):
 	debugLabel.text = str(newAmount)

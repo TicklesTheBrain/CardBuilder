@@ -80,7 +80,7 @@ func addModifier(mod: Modifier):
 func applyModifiers(type: CardParam.ParamType, card: CardData, value: int, ctxt: GameStateContext):
 	var currValue = value
 	for modifier in modifiers:
-		if modifier.type == type:			
+		if modifier is ParamModifier and modifier.type == type:			
 			currValue = modifier.calculate(ctxt, currValue, card)
 	
 	return currValue
