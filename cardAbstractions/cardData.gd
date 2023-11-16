@@ -89,3 +89,48 @@ func getPlayConditionalText():
 	for con in playConditionals:
 		result += con.getText()
 	return result
+
+func applyCardGraft():
+	pass
+
+func duplicateSelf() -> CardData:
+	var newCard = CardData.new()
+	newCard.value = value.duplicate()
+	newCard.type = type
+	newCard.cost = cost.duplicate()
+	newCard.stats = stats
+	
+	newCard.onPlayEffects = [] as Array[CardEffect]
+	for pe in onPlayEffects:
+		newCard.onPlayEffects.append(pe.duplicate(true))
+
+	newCard.onLoseEffects = [] as Array[CardEffect]
+	for le in onLoseEffects:
+		newCard.onLoseEffects.append(le.duplicate(true))
+
+	newCard.onWinEffects = [] as Array[CardEffect]
+	for we in onWinEffects:
+		newCard.onWinEffects.append(we.duplicate(true))
+
+	newCard.onBustEffects = [] as Array[CardEffect]
+	for be in onBustEffects:
+		newCard.onBustEffects.append(be.duplicate(true))
+
+	newCard.endRoundEffects = [] as Array[CardEffect]
+	for ere in endRoundEffects:
+		newCard.endRoundEffects.append(ere.duplicate(true))
+
+	newCard.drawEffects = [] as Array[CardEffect]
+	for de in drawEffects:
+		newCard.drawEffects.append(de.duplicate(true))
+
+	newCard.startMatchEffects = [] as Array[CardEffect]
+	for sme in startMatchEffects:
+		newCard.startMatchEffects.append(sme.duplicate(true))
+
+	newCard.playConditionals = [] as Array[Conditional]
+	for pc in playConditionals:
+		newCard.playConditionals.append(pc.duplicate(true))
+
+	return newCard
+
