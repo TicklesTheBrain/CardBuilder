@@ -26,6 +26,10 @@ func getFreeSpace():
 		return maxCards - cards.size()
 
 func addCard(cardToAdd: CardData) -> bool:
+
+	#TODO: need to cleanup this order so it is bulletproof here. since trigger effect can sometimes add more cards with their own effects, the order on card added events is important for order
+	#of the cards, which is a cosmetic incosistency, but might cause further fuckyness later on.
+
 	if not checkFull():
 		cards.push_back(cardToAdd)
 		cardToAdd.container = self

@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var positionController: VariedPositionController
+@export var positionController: CardPositionController
 @export var shape: CollisionShape2D
 
 func _on_area_exited(area:Area2D):

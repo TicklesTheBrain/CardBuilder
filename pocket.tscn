@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://o20e5thwdy3j"]
 
 [ext_resource type="Script" path="res://pocketDisplay.gd" id="1_q2qv6"]
-[ext_resource type="Script" path="res://cardInterfaceStuff/VariedPositionController.gd" id="2_87o7k"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/FixedPositionController.gd" id="2_87o7k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2gfwq"]
 bg_color = Color(0.0313726, 0.247059, 0.109804, 1)
@@ -79,6 +79,7 @@ infoLabel = NodePath("Pocket/Panel/Label")
 [node name="PocketPositionController" type="Node2D" parent="." node_paths=PackedStringArray("posCollections", "canvasLayer")]
 script = ExtResource("2_87o7k")
 posCollections = [NodePath("1Pos"), NodePath("2Pos"), NodePath("3Pos"), NodePath("4Pos")]
+cardMoveTime = null
 canvasLayer = NodePath("..")
 
 [node name="1Pos" type="Node2D" parent="PocketPositionController"]

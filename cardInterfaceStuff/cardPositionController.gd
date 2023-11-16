@@ -1,18 +1,16 @@
-extends Node2D
-class_name VariedPositionController
+extends Node
+class_name CardPositionController
 
-@export var posCollections: Array[Node2D]
 @export var cardMoveTime: float = 0.5
+@export var logicalContainer: CardContainer
 @export var canvasLayer: CanvasLayer
 
 var cards: Array[CardDisplay] = []
 var setupDone: bool = false
-@export var logicalContainer: CardContainer
 
 func _ready():
 	if logicalContainer and not setupDone:
 		setupNewLogicalContainer()
-	
 
 func addCardData(cardData: CardData):
 	var cardDisplays = get_tree().get_nodes_in_group("cd")
@@ -36,9 +34,6 @@ func removeCardData(cardData: CardData):
 
 
 func addCardDisplay(newCard: CardDisplay):
-
-	if cards.size() >= posCollections.size():
-		return
 	
 	newCard.positionController = self
 	cards.push_back(newCard)
@@ -50,20 +45,6 @@ func removeCardDisplay(cardToRemove: CardDisplay):
 	
 	cards.erase(cardToRemove)
 	scuttleCards()
-
-func scuttleCards():
-
-	if cards.size() < 1:
-		return
-
-	var i = 0
-	var currentCollection = posCollections[cards.size()-1].get_children()
-	var tween = get_tree().create_tween().set_parallel()
-
-	for card: CardDisplay in cards:
-		var newMarker = currentCollection[i]
-		i +=1
-		tween.tween_property(card,"position", newMarker.position, cardMoveTime)
 
 func setupNewLogicalContainer(newContainer = null):
 	if newContainer:
@@ -77,4 +58,8 @@ func setupNewLogicalContainer(newContainer = null):
 	logicalContainer.cardRemoved.connect(removeCardData)
 
 	setupDone = true
+	
 
+func scuttleCards():
+	print("generic scuttle cards for position controller not overrriden")
+	pass

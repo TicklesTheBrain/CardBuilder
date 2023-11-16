@@ -22,7 +22,7 @@ var dragged: bool
 var mouseOffset = Vector2()
 var previousPosition = Vector2()
 var inPlayArea = null
-var positionController: VariedPositionController
+var positionController: CardPositionController
 var selected = false:
 	set(value):
 		if value == true:

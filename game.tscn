@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=117 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="PackedScene" uid="uid://o20e5thwdy3j" path="res://pocket.tscn" id="2_cx0xa"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://cardInterfaceStuff/CardDisplaySink.gd" id="3_lpmun"]
 [ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="4_kj13h"]
 [ext_resource type="Script" path="res://modifiers/paramModifierFixedChange.gd" id="4_kraob"]
-[ext_resource type="Script" path="res://cardInterfaceStuff/VariedPositionController.gd" id="4_u0guh"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/FixedPositionController.gd" id="4_u0guh"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/PlayAreaController.gd" id="5_fctuw"]
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="5_fj00f"]
 [ext_resource type="Script" path="res://cardEffects/peContainerModifier.gd" id="5_y0qb8"]
@@ -28,6 +28,7 @@
 [ext_resource type="Script" path="res://modifiers/paramModifierFlat.gd" id="20_10cho"]
 [ext_resource type="Script" path="res://cardEffects/peSetValueToPrevious.gd" id="20_l4gj5"]
 [ext_resource type="Script" path="res://conditionals/conditionalAmount.gd" id="22_0ivmw"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="27_mupmx"]
 
 [sub_resource type="Resource" id="Resource_stxwd"]
 script = ExtResource("4_kj13h")
@@ -800,6 +801,9 @@ cost = SubResource("Resource_lab7m")
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c17rp"]
+size = Vector2(959, 204)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_625ey"]
 size = Vector2(947, 256.5)
 
@@ -859,7 +863,6 @@ countSubject = 1
 
 [node name="HandManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("12_q8pst")
-maxCards = 7
 feedContainer = NodePath("../DiscardManager")
 disposeContainer = NodePath("../DiscardManager")
 
@@ -941,6 +944,7 @@ text = "OK
 visible = false
 script = ExtResource("4_u0guh")
 posCollections = [NodePath("../PlayArea/PlayAreaPositionController/1Pos"), NodePath("../PlayArea/PlayAreaPositionController/2Pos"), NodePath("../PlayArea/PlayAreaPositionController/3Pos"), NodePath("../PlayArea/PlayAreaPositionController/4Pos"), NodePath("../PlayArea/PlayAreaPositionController/5Pos"), NodePath("../PlayArea/PlayAreaPositionController/6Pos"), NodePath("../PlayArea/PlayAreaPositionController/7Pos")]
+cardMoveTime = null
 logicalContainer = NodePath("../Logic/Enemy/EnemyPlayArea")
 
 [node name="1Pos" type="Node2D" parent="EnemyPlayAreaController"]
@@ -1087,143 +1091,16 @@ positionMarker = NodePath("Marker2D")
 [node name="Marker2D" type="Marker2D" parent="DiscardDisplayController"]
 position = Vector2(1091, 319)
 
-[node name="HandCardDisplayController" type="Node2D" parent="." node_paths=PackedStringArray("posCollections", "logicalContainer")]
-script = ExtResource("4_u0guh")
-posCollections = [NodePath("1Pos"), NodePath("2Pos"), NodePath("3Pos"), NodePath("4Pos"), NodePath("5Pos"), NodePath("6Pos"), NodePath("7Pos")]
+[node name="HandCardDisplayController" type="Node2D" parent="." node_paths=PackedStringArray("cardArea", "logicalContainer")]
+script = ExtResource("27_mupmx")
+cardArea = NodePath("CollisionShape2D")
+minCardCenterDistance = 25.0
+maxCardGap = 25.0
 logicalContainer = NodePath("../Logic/Player/HandManager")
 
-[node name="1Pos" type="Node2D" parent="HandCardDisplayController"]
-visible = false
-
-[node name="1_1" type="Marker2D" parent="HandCardDisplayController/1Pos"]
-position = Vector2(588, 509)
-metadata/_edit_group_ = true
-
-[node name="2Pos" type="Node2D" parent="HandCardDisplayController"]
-visible = false
-
-[node name="1_2" type="Marker2D" parent="HandCardDisplayController/2Pos"]
-position = Vector2(511, 507)
-metadata/_edit_group_ = true
-
-[node name="2_2" type="Marker2D" parent="HandCardDisplayController/2Pos"]
-position = Vector2(669, 508)
-metadata/_edit_group_ = true
-
-[node name="3Pos" type="Node2D" parent="HandCardDisplayController"]
-visible = false
-
-[node name="1_3" type="Marker2D" parent="HandCardDisplayController/3Pos"]
-position = Vector2(466, 505)
-metadata/_edit_group_ = true
-
-[node name="2_3" type="Marker2D" parent="HandCardDisplayController/3Pos"]
-position = Vector2(624, 506)
-metadata/_edit_group_ = true
-
-[node name="3_3" type="Marker2D" parent="HandCardDisplayController/3Pos"]
-position = Vector2(781, 506)
-metadata/_edit_group_ = true
-
-[node name="4Pos" type="Node2D" parent="HandCardDisplayController"]
-visible = false
-
-[node name="1_4" type="Marker2D" parent="HandCardDisplayController/4Pos"]
-position = Vector2(408, 506)
-metadata/_edit_group_ = true
-
-[node name="2_4" type="Marker2D" parent="HandCardDisplayController/4Pos"]
-position = Vector2(566, 507)
-metadata/_edit_group_ = true
-
-[node name="3_4" type="Marker2D" parent="HandCardDisplayController/4Pos"]
-position = Vector2(723, 507)
-metadata/_edit_group_ = true
-
-[node name="4_4" type="Marker2D" parent="HandCardDisplayController/4Pos"]
-position = Vector2(878, 507)
-metadata/_edit_group_ = true
-
-[node name="5Pos" type="Node2D" parent="HandCardDisplayController"]
-visible = false
-
-[node name="1_5" type="Marker2D" parent="HandCardDisplayController/5Pos"]
-position = Vector2(311, 505)
-metadata/_edit_group_ = true
-
-[node name="2_5" type="Marker2D" parent="HandCardDisplayController/5Pos"]
-position = Vector2(469, 506)
-metadata/_edit_group_ = true
-
-[node name="3_5" type="Marker2D" parent="HandCardDisplayController/5Pos"]
-position = Vector2(626, 506)
-metadata/_edit_group_ = true
-
-[node name="4_5" type="Marker2D" parent="HandCardDisplayController/5Pos"]
-position = Vector2(781, 506)
-metadata/_edit_group_ = true
-
-[node name="5_5" type="Marker2D" parent="HandCardDisplayController/5Pos"]
-position = Vector2(938, 507)
-metadata/_edit_group_ = true
-
-[node name="6Pos" type="Node2D" parent="HandCardDisplayController"]
-visible = false
-
-[node name="1_6" type="Marker2D" parent="HandCardDisplayController/6Pos"]
-position = Vector2(191, 505)
-metadata/_edit_group_ = true
-
-[node name="2_6" type="Marker2D" parent="HandCardDisplayController/6Pos"]
-position = Vector2(349, 506)
-metadata/_edit_group_ = true
-
-[node name="3_6" type="Marker2D" parent="HandCardDisplayController/6Pos"]
-position = Vector2(506, 506)
-metadata/_edit_group_ = true
-
-[node name="4_6" type="Marker2D" parent="HandCardDisplayController/6Pos"]
-position = Vector2(661, 506)
-metadata/_edit_group_ = true
-
-[node name="5_6" type="Marker2D" parent="HandCardDisplayController/6Pos"]
-position = Vector2(818, 507)
-metadata/_edit_group_ = true
-
-[node name="6_6" type="Marker2D" parent="HandCardDisplayController/6Pos"]
-position = Vector2(973, 508)
-metadata/_edit_group_ = true
-
-[node name="7Pos" type="Node2D" parent="HandCardDisplayController"]
-visible = false
-
-[node name="1_7" type="Marker2D" parent="HandCardDisplayController/7Pos"]
-position = Vector2(121, 509)
-metadata/_edit_group_ = true
-
-[node name="2_7" type="Marker2D" parent="HandCardDisplayController/7Pos"]
-position = Vector2(279, 510)
-metadata/_edit_group_ = true
-
-[node name="3_7" type="Marker2D" parent="HandCardDisplayController/7Pos"]
-position = Vector2(436, 510)
-metadata/_edit_group_ = true
-
-[node name="4_7" type="Marker2D" parent="HandCardDisplayController/7Pos"]
-position = Vector2(591, 510)
-metadata/_edit_group_ = true
-
-[node name="5_7" type="Marker2D" parent="HandCardDisplayController/7Pos"]
-position = Vector2(748, 511)
-metadata/_edit_group_ = true
-
-[node name="6_7" type="Marker2D" parent="HandCardDisplayController/7Pos"]
-position = Vector2(903, 512)
-metadata/_edit_group_ = true
-
-[node name="7_7" type="Marker2D" parent="HandCardDisplayController/7Pos"]
-position = Vector2(1059, 513)
-metadata/_edit_group_ = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HandCardDisplayController"]
+position = Vector2(509, 487)
+shape = SubResource("RectangleShape2D_c17rp")
 
 [node name="PlayArea" type="Area2D" parent="." node_paths=PackedStringArray("positionController", "shape")]
 script = ExtResource("5_fctuw")
@@ -1234,6 +1111,7 @@ shape = NodePath("Shape")
 visible = false
 script = ExtResource("4_u0guh")
 posCollections = [NodePath("1Pos"), NodePath("2Pos"), NodePath("3Pos"), NodePath("4Pos"), NodePath("5Pos"), NodePath("6Pos"), NodePath("7Pos")]
+cardMoveTime = null
 logicalContainer = NodePath("../../Logic/Player/PlayAreaManager")
 
 [node name="1Pos" type="Node2D" parent="PlayArea/PlayAreaPositionController"]

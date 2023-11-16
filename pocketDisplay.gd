@@ -2,7 +2,7 @@ extends CanvasLayer
 class_name PocketDisplay
 
 @export var animation: AnimationPlayer
-@export var positionController: VariedPositionController
+@export var positionController: CardPositionController
 @export var infoLabel: Label
 
 func setupPositionController(container: CardContainer):
