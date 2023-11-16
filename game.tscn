@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=123 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="PackedScene" uid="uid://o20e5thwdy3j" path="res://pocket.tscn" id="2_cx0xa"]
@@ -585,7 +585,7 @@ containersToApply = Array[int]([2, 1])
 modifier = SubResource("Resource_nnnrf")
 timingRules = Array[ExtResource("11_o0re3")]([SubResource("Resource_qvhbc")])
 effectName = ""
-staticText = ""
+staticText = "Cards with value 1-4 don't count"
 conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
 includeFollowUpText = false
@@ -769,7 +769,7 @@ staticText = ""
 script = ExtResource("13_modrn")
 valueToMatchOrExceed = 10
 disabledOnMatchOrExceed = false
-staticText = ""
+staticText = "Can only play if already played at least 10 value"
 containerToCheck = 2
 
 [sub_resource type="Resource" id="Resource_o147x"]
@@ -843,7 +843,7 @@ staticText = ""
 resource_name = "If<2,draw+discard"
 script = ExtResource("5_fj00f")
 amount = 2
-debug = false
+debug = true
 cardTitle = ""
 value = SubResource("Resource_uiya3")
 type = ""
@@ -910,12 +910,28 @@ endRoundEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
 drawEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
 startMatchEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
 
+[sub_resource type="Resource" id="Resource_rogld"]
+script = ExtResource("6_wbupb")
+baseValue = 0
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+
+[sub_resource type="Resource" id="Resource_hkfmi"]
+script = ExtResource("6_wbupb")
+baseValue = 3
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+
 [sub_resource type="Resource" id="Resource_bl2ga"]
 script = ExtResource("5_fj00f")
 amount = 10
 debug = false
 cardTitle = ""
+value = SubResource("Resource_hkfmi")
 type = ""
+cost = SubResource("Resource_rogld")
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
@@ -925,19 +941,22 @@ endRoundEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
 drawEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
 startMatchEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2v7eo"]
+size = Vector2(852, 259)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7o7mm"]
-size = Vector2(664, 259)
+size = Vector2(184, 259)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c17rp"]
-size = Vector2(959, 204)
+size = Vector2(1106.5, 204)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnh12"]
 size = Vector2(271.5, 256.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_625ey"]
-size = Vector2(947, 256.5)
+size = Vector2(961.5, 256.5)
 
-[node name="game" type="Node2D" node_paths=PackedStringArray("deckManager", "enemyDeckManager", "enemyDiscard", "handManager", "playAreaManager", "enemyPlayArea", "discardManager", "playAreaPositionController", "energy", "startTurnCardDraw", "damageDealt", "damageSuffered", "messageLabel", "newCardMarker", "drawCardButton", "endHandButton", "okButton")]
+[node name="game" type="Node2D" node_paths=PackedStringArray("deckManager", "enemyDeckManager", "enemyDiscard", "handManager", "playAreaManager", "enemyPlayArea", "discardManager", "playAreaPositionController", "enemyPlayAreaPositionController", "energy", "startTurnCardDraw", "damageDealt", "damageSuffered", "messageLabel", "newCardMarker", "drawCardButton", "endHandButton", "okButton")]
 script = ExtResource("1_hbkeb")
 deckManager = NodePath("Logic/Player/DeckManager")
 enemyDeckManager = NodePath("Logic/Enemy/EnemyDeck")
@@ -947,6 +966,7 @@ playAreaManager = NodePath("Logic/Player/PlayAreaManager")
 enemyPlayArea = NodePath("Logic/Enemy/EnemyPlayArea")
 discardManager = NodePath("Logic/Player/DiscardManager")
 playAreaPositionController = NodePath("PlayArea/PlayAreaPositionController")
+enemyPlayAreaPositionController = NodePath("EnemyPlayAreaController")
 pocketPacked = ExtResource("2_cx0xa")
 energy = NodePath("Logic/Player/Energy")
 startTurnCardDraw = NodePath("Logic/Player/StartTurnCardDraw")
@@ -1050,37 +1070,41 @@ feedContainer = NodePath("../EnemyDiscard")
 script = ExtResource("12_q8pst")
 
 [node name="DrawButton" type="Button" parent="."]
-offset_left = 988.0
-offset_top = 22.0
-offset_right = 1078.0
-offset_bottom = 53.0
+offset_left = 1177.0
+offset_top = 11.0
+offset_right = 1267.0
+offset_bottom = 42.0
 text = "Draw Card"
 
 [node name="EndButton" type="Button" parent="."]
-offset_left = 989.0
-offset_top = 66.0
-offset_right = 1072.0
-offset_bottom = 97.0
+offset_left = 1178.0
+offset_top = 57.0
+offset_right = 1261.0
+offset_bottom = 88.0
 text = "End Hand
 "
 
 [node name="OkBUtton" type="Button" parent="."]
-offset_left = 992.0
-offset_top = 244.0
-offset_right = 1075.0
-offset_bottom = 275.0
+offset_left = 1178.0
+offset_top = 245.0
+offset_right = 1261.0
+offset_bottom = 276.0
 text = "OK
 "
 
 [node name="EnemyPlayAreaController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer")]
 script = ExtResource("27_mupmx")
-cardAreas = [NodePath("EnemyPlayAreaShape")]
+cardAreas = [NodePath("EnemyPlayAreaSmall"), NodePath("EnemyPlayAreaFull")]
 minCardCenterDistance = 25.0
 maxCardGap = 25.0
 logicalContainer = NodePath("../Logic/Enemy/EnemyPlayArea")
 
-[node name="EnemyPlayAreaShape" type="CollisionShape2D" parent="EnemyPlayAreaController"]
-position = Vector2(641, 148.5)
+[node name="EnemyPlayAreaFull" type="CollisionShape2D" parent="EnemyPlayAreaController"]
+position = Vector2(739, 148.5)
+shape = SubResource("RectangleShape2D_2v7eo")
+
+[node name="EnemyPlayAreaSmall" type="CollisionShape2D" parent="EnemyPlayAreaController"]
+position = Vector2(1075, 148.5)
 shape = SubResource("RectangleShape2D_7o7mm")
 
 [node name="EnemyDiscardController" type="Node2D" parent="." node_paths=PackedStringArray("container", "positionMarker")]
@@ -1109,7 +1133,7 @@ maxCardGap = 25.0
 logicalContainer = NodePath("../Logic/Player/HandManager")
 
 [node name="HandCardArea" type="CollisionShape2D" parent="HandCardDisplayController"]
-position = Vector2(509, 487)
+position = Vector2(565, 605)
 shape = SubResource("RectangleShape2D_c17rp")
 
 [node name="PlayArea" type="Area2D" parent="." node_paths=PackedStringArray("positionController", "shape")]
@@ -1129,7 +1153,7 @@ position = Vector2(154.25, 149)
 shape = SubResource("RectangleShape2D_qnh12")
 
 [node name="FullLengthShape" type="CollisionShape2D" parent="PlayArea"]
-position = Vector2(492, 149)
+position = Vector2(499.25, 149)
 shape = SubResource("RectangleShape2D_625ey")
 script = ExtResource("6_53o6h")
 
@@ -1137,17 +1161,17 @@ script = ExtResource("6_53o6h")
 position = Vector2(585, 880)
 
 [node name="MessageContent" type="Label" parent="."]
-offset_left = 17.0
-offset_top = 610.0
-offset_right = 151.0
-offset_bottom = 633.0
+offset_left = 29.0
+offset_top = 320.0
+offset_right = 163.0
+offset_bottom = 343.0
 text = "Message Content"
 
 [node name="InfoStuff" type="GridContainer" parent="."]
-offset_left = 1006.0
-offset_top = 481.0
-offset_right = 1160.0
-offset_bottom = 639.0
+offset_left = 1150.0
+offset_top = 548.0
+offset_right = 1304.0
+offset_bottom = 706.0
 columns = 2
 metadata/_edit_group_ = true
 

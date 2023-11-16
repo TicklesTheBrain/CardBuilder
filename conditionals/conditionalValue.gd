@@ -4,7 +4,7 @@ class_name ConditionalValue
 @export var valueToMatchOrExceed: int
 @export var disabledOnMatchOrExceed: bool = false
 
-func getText():
+func getTextSpecific():
 	var text = "If value {verb} equal or more than {number}, "
 	var verb = 'is'
 	if disabledOnMatchOrExceed:

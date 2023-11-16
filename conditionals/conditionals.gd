@@ -8,8 +8,11 @@ func getText():
     if staticText:
         return staticText
     else:
-        return "conditional text not overriden"
+        return getTextSpecific()
 
 func check(_ctxt: GameStateContext):
     print('default conditional function not overriden')
     return true
+
+func getTextSpecific():
+    return "conditional text not overriden"

@@ -13,6 +13,7 @@ enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
 @export var discardManager: CardContainer
 
 @export var playAreaPositionController: DynamicPositionController
+@export var enemyPlayAreaPositionController: DynamicPositionController
 
 @export var pocketPacked: PackedScene
 var pocketRefs = {}
@@ -156,9 +157,13 @@ func enemySingleStep(valueToBeat: int) -> bool:
 	
 		return false
 
+	enemyPlayTopCard()
+	return true
+
+func enemyPlayTopCard():
 	var card = enemyDeckManager.drawCard()
 	enemyPlayArea.addCard(card)
-	return true
+
 
 func roundLoop():
 	
@@ -168,9 +173,11 @@ func roundLoop():
 	energy.reset()
 	startTurnCardDraw.reset()
 	playAreaPositionController.resetCardArea()
+	enemyPlayAreaPositionController.resetCardArea()
 
 	activeActor = player
 	passiveActor = enemy
+	enemyPlayTopCard()
 	Events.playerTurnStart.emit()
 
 	for i in range(startTurnCardDraw.amount):
@@ -197,6 +204,7 @@ func roundLoop():
 		
 	
 	playAreaPositionController.switchCardArea(1)
+	enemyPlayAreaPositionController.switchCardArea(1)
 	#handManager.disposeAll()
 
 	drawCardButton.disabled = true
