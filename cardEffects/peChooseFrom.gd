@@ -1,4 +1,4 @@
-extends PlayEffect
+extends CardEffect
 class_name ChooseFrom
 
 @export var amountOfCardsToChoose: int = 1

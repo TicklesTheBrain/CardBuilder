@@ -1,4 +1,4 @@
-extends PlayEffect
+extends CardEffect
 class_name DiscardCards
 
 @export var amountOfCardsToDiscard: int = 1

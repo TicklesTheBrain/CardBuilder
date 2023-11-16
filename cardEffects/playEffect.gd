@@ -1,12 +1,12 @@
 extends Resource
-class_name PlayEffect
+class_name CardEffect
 
 enum triggerType {NONE, PLAY, DISCARD, END_ROUND, DRAW, START_MATCH, WIN, LOSE, BUST}
 
 @export var effectName: String
 @export var staticText: String
 @export var conditionals: Array[Conditional]
-@export var followUpEffects: Array[PlayEffect] = []
+@export var followUpEffects: Array[CardEffect] = []
 @export var includeFollowUpText: bool = false
 
 func trigger(ctxt: GameStateContext):

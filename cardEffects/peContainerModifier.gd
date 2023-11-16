@@ -1,4 +1,4 @@
-extends PlayEffect
+extends CardEffect
 class_name AddModifier
 
 @export var containersToApply: Array[Game.ContainerPurposes] = []

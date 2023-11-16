@@ -1,4 +1,4 @@
-extends PlayEffect
+extends CardEffect
 class_name ResourceModify
 
 #TODO: currently only supports energy, need to add other types as well, like damage and so on.

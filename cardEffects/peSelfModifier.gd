@@ -1,4 +1,4 @@
-extends PlayEffect
+extends CardEffect
 class_name SelfModifier
 
 @export var modifier: ParamModifier

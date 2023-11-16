@@ -6,7 +6,7 @@ class_name CardContainer
 @export var bustCounter: ContainerCounter
 @export var feedContainer: CardContainer # Container which is reshuffled if container is empty on drawCard function
 @export var disposeContainer: CardContainer # Container to which things are disposed to on disposeCards call
-@export var addTriggerType: PlayEffect.triggerType
+@export var addTriggerType: CardEffect.triggerType
 @export var modifiers: Array[Modifier]
 
 signal cardAdded(card: CardData)
@@ -25,7 +25,7 @@ func getFreeSpace():
 	else:
 		return maxCards - cards.size()
 
-func triggerAll(triggerType: PlayEffect.triggerType):
+func triggerAll(triggerType: CardEffect.triggerType):
 	for card in cards:
 		await card.triggerEffect(triggerType)
 

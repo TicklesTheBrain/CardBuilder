@@ -7,14 +7,14 @@ class_name CardData
 @export var cost: CardParam
 @export var stats: StatData
 
-@export var onPlayEffects: Array[PlayEffect] = []
+@export var onPlayEffects: Array[CardEffect] = []
 @export var playConditionals: Array[Conditional] = []
-@export var onLoseEffects: Array[PlayEffect] = []
-@export var onWinEffects: Array[PlayEffect] = []
-@export var onBustEffects: Array[PlayEffect] = []
-@export var endRoundEffects: Array[PlayEffect] = []
-@export var drawEffects: Array[PlayEffect] = []
-@export var startMatchEffects: Array[PlayEffect] = []
+@export var onLoseEffects: Array[CardEffect] = []
+@export var onWinEffects: Array[CardEffect] = []
+@export var onBustEffects: Array[CardEffect] = []
+@export var endRoundEffects: Array[CardEffect] = []
+@export var drawEffects: Array[CardEffect] = []
+@export var startMatchEffects: Array[CardEffect] = []
 
 var container: CardContainer:
 	set (new):
@@ -38,29 +38,29 @@ func receiveContext(ctxt: GameStateContext):
 func updateContext():
 	Events.requestContext.emit(self)
 
-func triggerEffectBucket(bucketToTrigger: Array[PlayEffect]):
+func triggerEffectBucket(bucketToTrigger: Array[CardEffect]):
 	for eff in bucketToTrigger:
 		updateContext()
 		context.actingCard = self
 		await eff.trigger(context)
 
-func triggerEffect(typeToTrigger: PlayEffect.triggerType):
+func triggerEffect(typeToTrigger: CardEffect.triggerType):
 	
 	match typeToTrigger:
-		PlayEffect.triggerType.PLAY:
+		CardEffect.triggerType.PLAY:
 			await triggerEffectBucket(onPlayEffects)
-		PlayEffect.triggerType.LOSE:
+		CardEffect.triggerType.LOSE:
 			await triggerEffectBucket(onLoseEffects)
-		PlayEffect.triggerType.WIN:
+		CardEffect.triggerType.WIN:
 			await triggerEffectBucket(onWinEffects)
-		PlayEffect.triggerType.BUST:
+		CardEffect.triggerType.BUST:
 			await triggerEffectBucket(onBustEffects)
 			await triggerEffectBucket(onLoseEffects)
-		PlayEffect.triggerType.END_ROUND:
+		CardEffect.triggerType.END_ROUND:
 			await triggerEffectBucket(endRoundEffects)
-		PlayEffect.triggerType.DRAW:
+		CardEffect.triggerType.DRAW:
 			await triggerEffectBucket(drawEffects)
-		PlayEffect.triggerType.START_MATCH:
+		CardEffect.triggerType.START_MATCH:
 			await triggerEffectBucket(startMatchEffects)
 		
 func getPlayEffectText() -> String:

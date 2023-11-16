@@ -14,7 +14,6 @@ enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
 
 @export var playAreaPositionController: DynamicPositionController
 
-
 @export var pocketPacked: PackedScene
 var pocketRefs = {}
 
@@ -35,8 +34,6 @@ var pocketRefs = {}
 @export var drawCardButton: Button
 @export var endHandButton: Button
 @export var okButton: Button
-
-
 
 var player: Actor
 var enemy: Actor
@@ -75,7 +72,7 @@ func _ready():
 	Events.requestClosePocket.connect(cleanUpPocket)
 	Events.orphanedCardDisplay.connect(reparentCardDisplay)
 
-	deckManager.triggerAll(PlayEffect.triggerType.START_MATCH)
+	deckManager.triggerAll(CardEffect.triggerType.START_MATCH)
 
 	roundLoop()
 
@@ -225,7 +222,7 @@ func roundLoop():
 
 	if enemyPlayArea.bustCounter.checkIsBusted():
 		message = "Enemy busted, you deal {dmg}".format({'dmg': attack})
-		await playAreaManager.triggerAll(PlayEffect.triggerType.WIN)
+		await playAreaManager.triggerAll(CardEffect.triggerType.WIN)
 		damageDealt.amount += attack
 
 	elif enemyPlayArea.bustCounter.prevCount == value:
@@ -235,17 +232,17 @@ func roundLoop():
 		var enemyAttack = enemyPlayArea.getAll().reduce(func(acc, card): return acc+card.stats.attack, 0)
 		message = "Enemy wins with value of {their} against your {val}. You suffer {dmg} damage".format({"their": enemyPlayArea.bustCounter.prevCount, "val": value, "dmg": enemyAttack})
 		if busted:
-			await playAreaManager.triggerAll(PlayEffect.triggerType.BUST)
+			await playAreaManager.triggerAll(CardEffect.triggerType.BUST)
 		else:
-			await playAreaManager.triggerAll(PlayEffect.triggerType.LOSE)
+			await playAreaManager.triggerAll(CardEffect.triggerType.LOSE)
 		damageSuffered.amount += enemyAttack
 
 	else:
 		message = "You win with value of {val} against their {their}. They suffer {dmg} damage".format({"their": enemyPlayArea.bustCounter.prevCount, "val": value, "dmg": attack})
-		await playAreaManager.triggerAll(PlayEffect.triggerType.WIN)
+		await playAreaManager.triggerAll(CardEffect.triggerType.WIN)
 		damageDealt.amount += attack
 
-	await playAreaManager.triggerAll(PlayEffect.triggerType.END_ROUND)
+	await playAreaManager.triggerAll(CardEffect.triggerType.END_ROUND)
 
 	okButton.disabled = false
 

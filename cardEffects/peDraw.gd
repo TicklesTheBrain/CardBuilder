@@ -1,4 +1,4 @@
-extends PlayEffect
+extends CardEffect
 class_name DrawCards
 
 @export var source: Game.ContainerPurposes = Game.ContainerPurposes.DECK

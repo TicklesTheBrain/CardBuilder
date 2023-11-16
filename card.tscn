@@ -5,6 +5,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tid8"]
 bg_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_csdnc"]
 
@@ -14,13 +18,13 @@ size = Vector2(141, 192)
 [node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "valueTypeLabel", "costLabel", "playTextLabel", "otherTextLabel", "discardTextLabel", "attackLabel", "defenceLabel", "selection")]
 script = ExtResource("1_lql06")
 cardShape = NodePath("CardShape")
-valueTypeLabel = NodePath("PanelContainer/Info/TopInfo/ValueType")
-costLabel = NodePath("PanelContainer/Info/TopInfo/Cost")
+valueTypeLabel = NodePath("PanelContainer/Info/TopInfo/MarginContainer/ValueType")
+costLabel = NodePath("PanelContainer/Info/TopInfo/MarginContainer2/Cost")
 playTextLabel = NodePath("PanelContainer/Info/MiddleArea/Text aligner/Play_Text")
 otherTextLabel = NodePath("PanelContainer/Info/MiddleArea/Text aligner/Other_text")
 discardTextLabel = NodePath("PanelContainer/Info/MiddleArea/Text aligner/Discard text")
-attackLabel = NodePath("PanelContainer/Info/Bottom Info/Attack")
-defenceLabel = NodePath("PanelContainer/Info/Bottom Info/Defence")
+attackLabel = NodePath("PanelContainer/Info/Bottom Info/MarginContainer2/Attack")
+defenceLabel = NodePath("PanelContainer/Info/Bottom Info/MarginContainer/Defence")
 maxCounter = 1.0
 selection = NodePath("PanelContainer/Selection")
 
@@ -51,7 +55,11 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 
-[node name="ValueType" type="Label" parent="PanelContainer/Info/TopInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Info/TopInfo"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="ValueType" type="Label" parent="PanelContainer/Info/TopInfo/MarginContainer"]
 layout_mode = 2
 mouse_filter = 1
 text = "5 C"
@@ -62,7 +70,11 @@ size_flags_horizontal = 3
 mouse_filter = 1
 theme_override_styles/separator = SubResource("StyleBoxEmpty_csdnc")
 
-[node name="Cost" type="Label" parent="PanelContainer/Info/TopInfo"]
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/Info/TopInfo"]
+layout_mode = 2
+theme_override_constants/margin_right = 5
+
+[node name="Cost" type="Label" parent="PanelContainer/Info/TopInfo/MarginContainer2"]
 layout_mode = 2
 mouse_filter = 1
 text = "1E"
@@ -99,7 +111,11 @@ autowrap_mode = 2
 layout_mode = 2
 alignment = 1
 
-[node name="Attack" type="Label" parent="PanelContainer/Info/Bottom Info"]
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/Info/Bottom Info"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="Attack" type="Label" parent="PanelContainer/Info/Bottom Info/MarginContainer2"]
 layout_mode = 2
 mouse_filter = 1
 text = "1Att"
@@ -110,7 +126,11 @@ size_flags_horizontal = 3
 mouse_filter = 1
 theme_override_styles/separator = SubResource("StyleBoxEmpty_csdnc")
 
-[node name="Defence" type="Label" parent="PanelContainer/Info/Bottom Info"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Info/Bottom Info"]
+layout_mode = 2
+theme_override_constants/margin_right = 5
+
+[node name="Defence" type="Label" parent="PanelContainer/Info/Bottom Info/MarginContainer"]
 layout_mode = 2
 mouse_filter = 1
 text = "0 Sh"
