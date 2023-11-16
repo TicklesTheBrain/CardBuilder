@@ -31,14 +31,14 @@ func addModifier(newMod: ParamModifier):
 
 func checkIsNonStatic():
 	for mod in modifiers:
-		if mod.active and mod.nonStatic:
+		if mod.active and "nonStatic" in mod and mod.nonStatic:
 			return true
 	return false
 
 func getNonStaticOptions():
 	if checkIsNonStatic():
 		for mod in modifiers:
-			if mod.active and mod.nonStatic:
+			if mod.active and "nonStatic" in mod and mod.nonStatic:
 				return mod.options
 	else:
 		return []

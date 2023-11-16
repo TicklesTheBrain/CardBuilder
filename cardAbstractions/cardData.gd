@@ -9,8 +9,19 @@ class_name CardData
 
 @export var onPlayEffects: Array[PlayEffect] = []
 @export var playConditionals: Array[Conditional] = []
+@export var onLoseEffects: Array[PlayEffect] = []
+@export var onWinEffects: Array[PlayEffect] = []
+@export var onBustEffects: Array[PlayEffect] = []
+@export var endRoundEffects: Array[PlayEffect] = []
+@export var drawEffects: Array[PlayEffect] = []
+@export var startMatchEffects: Array[PlayEffect] = []
 
-var container: CardContainer 
+var container: CardContainer:
+	set (new):
+		if container:
+			prevContainer = container
+		container = new
+var prevContainer: CardContainer 
 var context: GameStateContext
 
 func getValue():
@@ -27,14 +38,31 @@ func receiveContext(ctxt: GameStateContext):
 func updateContext():
 	Events.requestContext.emit(self)
 
+func triggerEffectBucket(bucketToTrigger: Array[PlayEffect]):
+	for eff in bucketToTrigger:
+		updateContext()
+		context.actingCard = self
+		await eff.trigger(context)
+
 func triggerEffect(typeToTrigger: PlayEffect.triggerType):
+	
 	match typeToTrigger:
 		PlayEffect.triggerType.PLAY:
-			for ef in onPlayEffects:
-				updateContext()
-				context.actingCard = self
-				await ef.trigger(context)
-
+			await triggerEffectBucket(onPlayEffects)
+		PlayEffect.triggerType.LOSE:
+			await triggerEffectBucket(onLoseEffects)
+		PlayEffect.triggerType.WIN:
+			await triggerEffectBucket(onWinEffects)
+		PlayEffect.triggerType.BUST:
+			await triggerEffectBucket(onBustEffects)
+			await triggerEffectBucket(onLoseEffects)
+		PlayEffect.triggerType.END_ROUND:
+			await triggerEffectBucket(endRoundEffects)
+		PlayEffect.triggerType.DRAW:
+			await triggerEffectBucket(drawEffects)
+		PlayEffect.triggerType.START_MATCH:
+			await triggerEffectBucket(startMatchEffects)
+		
 func getPlayEffectText() -> String:
 	var result = ''
 	for effect in onPlayEffects:	

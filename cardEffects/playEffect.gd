@@ -1,7 +1,7 @@
 extends Resource
 class_name PlayEffect
 
-enum triggerType {NONE, PLAY, DISCARD, END, DRAW}
+enum triggerType {NONE, PLAY, DISCARD, END_ROUND, DRAW, START_MATCH, WIN, LOSE, BUST}
 
 @export var effectName: String
 @export var staticText: String

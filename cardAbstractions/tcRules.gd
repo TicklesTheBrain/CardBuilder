@@ -6,4 +6,4 @@ class_name TC_Rule
 @export var counter: int = -1
 
 func createNewTC(ctxt: GameStateContext):
-    return TcFactory.createTC(actOrDeact, counter, event,ctxt)
+    return TcFactory.createTC(actOrDeact, counter, event, ctxt)

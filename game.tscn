@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=118 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="PackedScene" uid="uid://o20e5thwdy3j" path="res://pocket.tscn" id="2_cx0xa"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://cardInterfaceStuff/CardDisplaySink.gd" id="3_lpmun"]
 [ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="4_kj13h"]
 [ext_resource type="Script" path="res://modifiers/paramModifierFixedChange.gd" id="4_kraob"]
-[ext_resource type="Script" path="res://cardInterfaceStuff/FixedPositionController.gd" id="4_u0guh"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/PlayAreaController.gd" id="5_fctuw"]
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="5_fj00f"]
 [ext_resource type="Script" path="res://cardEffects/peContainerModifier.gd" id="5_y0qb8"]
@@ -801,13 +800,19 @@ cost = SubResource("Resource_lab7m")
 onPlayEffects = Array[Resource("res://cardEffects/playEffect.gd")]([])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7o7mm"]
+size = Vector2(664, 259)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c17rp"]
 size = Vector2(959, 204)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnh12"]
+size = Vector2(271.5, 256.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_625ey"]
 size = Vector2(947, 256.5)
 
-[node name="game" type="Node2D" node_paths=PackedStringArray("deckManager", "enemyDeckManager", "enemyDiscard", "handManager", "playAreaManager", "enemyPlayArea", "discardManager", "energy", "startTurnCardDraw", "damageDealt", "damageSuffered", "messageLabel", "newCardMarker", "drawCardButton", "endHandButton", "okButton")]
+[node name="game" type="Node2D" node_paths=PackedStringArray("deckManager", "enemyDeckManager", "enemyDiscard", "handManager", "playAreaManager", "enemyPlayArea", "discardManager", "playAreaPositionController", "energy", "startTurnCardDraw", "damageDealt", "damageSuffered", "messageLabel", "newCardMarker", "drawCardButton", "endHandButton", "okButton")]
 script = ExtResource("1_hbkeb")
 deckManager = NodePath("Logic/Player/DeckManager")
 enemyDeckManager = NodePath("Logic/Enemy/EnemyDeck")
@@ -816,6 +821,7 @@ handManager = NodePath("Logic/Player/HandManager")
 playAreaManager = NodePath("Logic/Player/PlayAreaManager")
 enemyPlayArea = NodePath("Logic/Enemy/EnemyPlayArea")
 discardManager = NodePath("Logic/Player/DiscardManager")
+playAreaPositionController = NodePath("PlayArea/PlayAreaPositionController")
 pocketPacked = ExtResource("2_cx0xa")
 energy = NodePath("Logic/Player/Energy")
 startTurnCardDraw = NodePath("Logic/Player/StartTurnCardDraw")
@@ -940,138 +946,16 @@ offset_bottom = 275.0
 text = "OK
 "
 
-[node name="EnemyPlayAreaController" type="Node2D" parent="." node_paths=PackedStringArray("posCollections", "logicalContainer")]
-visible = false
-script = ExtResource("4_u0guh")
-posCollections = [NodePath("../PlayArea/PlayAreaPositionController/1Pos"), NodePath("../PlayArea/PlayAreaPositionController/2Pos"), NodePath("../PlayArea/PlayAreaPositionController/3Pos"), NodePath("../PlayArea/PlayAreaPositionController/4Pos"), NodePath("../PlayArea/PlayAreaPositionController/5Pos"), NodePath("../PlayArea/PlayAreaPositionController/6Pos"), NodePath("../PlayArea/PlayAreaPositionController/7Pos")]
-cardMoveTime = null
+[node name="EnemyPlayAreaController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer")]
+script = ExtResource("27_mupmx")
+cardAreas = [NodePath("EnemyPlayAreaShape")]
+minCardCenterDistance = 25.0
+maxCardGap = 25.0
 logicalContainer = NodePath("../Logic/Enemy/EnemyPlayArea")
 
-[node name="1Pos" type="Node2D" parent="EnemyPlayAreaController"]
-
-[node name="1_1" type="Marker2D" parent="EnemyPlayAreaController/1Pos"]
-position = Vector2(483, 156)
-metadata/_edit_group_ = true
-
-[node name="2Pos" type="Node2D" parent="EnemyPlayAreaController"]
-
-[node name="1_2" type="Marker2D" parent="EnemyPlayAreaController/2Pos"]
-position = Vector2(406, 154)
-metadata/_edit_group_ = true
-
-[node name="2_2" type="Marker2D" parent="EnemyPlayAreaController/2Pos"]
-position = Vector2(564, 155)
-metadata/_edit_group_ = true
-
-[node name="3Pos" type="Node2D" parent="EnemyPlayAreaController"]
-
-[node name="1_3" type="Marker2D" parent="EnemyPlayAreaController/3Pos"]
-position = Vector2(361, 152)
-metadata/_edit_group_ = true
-
-[node name="2_3" type="Marker2D" parent="EnemyPlayAreaController/3Pos"]
-position = Vector2(519, 153)
-metadata/_edit_group_ = true
-
-[node name="3_3" type="Marker2D" parent="EnemyPlayAreaController/3Pos"]
-position = Vector2(676, 153)
-metadata/_edit_group_ = true
-
-[node name="4Pos" type="Node2D" parent="EnemyPlayAreaController"]
-
-[node name="1_4" type="Marker2D" parent="EnemyPlayAreaController/4Pos"]
-position = Vector2(303, 153)
-metadata/_edit_group_ = true
-
-[node name="2_4" type="Marker2D" parent="EnemyPlayAreaController/4Pos"]
-position = Vector2(461, 154)
-metadata/_edit_group_ = true
-
-[node name="3_4" type="Marker2D" parent="EnemyPlayAreaController/4Pos"]
-position = Vector2(618, 154)
-metadata/_edit_group_ = true
-
-[node name="4_4" type="Marker2D" parent="EnemyPlayAreaController/4Pos"]
-position = Vector2(773, 154)
-metadata/_edit_group_ = true
-
-[node name="5Pos" type="Node2D" parent="EnemyPlayAreaController"]
-
-[node name="1_5" type="Marker2D" parent="EnemyPlayAreaController/5Pos"]
-position = Vector2(206, 152)
-metadata/_edit_group_ = true
-
-[node name="2_5" type="Marker2D" parent="EnemyPlayAreaController/5Pos"]
-position = Vector2(364, 153)
-metadata/_edit_group_ = true
-
-[node name="3_5" type="Marker2D" parent="EnemyPlayAreaController/5Pos"]
-position = Vector2(521, 153)
-metadata/_edit_group_ = true
-
-[node name="4_5" type="Marker2D" parent="EnemyPlayAreaController/5Pos"]
-position = Vector2(676, 153)
-metadata/_edit_group_ = true
-
-[node name="5_5" type="Marker2D" parent="EnemyPlayAreaController/5Pos"]
-position = Vector2(833, 154)
-metadata/_edit_group_ = true
-
-[node name="6Pos" type="Node2D" parent="EnemyPlayAreaController"]
-
-[node name="1_6" type="Marker2D" parent="EnemyPlayAreaController/6Pos"]
-position = Vector2(86, 152)
-metadata/_edit_group_ = true
-
-[node name="2_6" type="Marker2D" parent="EnemyPlayAreaController/6Pos"]
-position = Vector2(244, 153)
-metadata/_edit_group_ = true
-
-[node name="3_6" type="Marker2D" parent="EnemyPlayAreaController/6Pos"]
-position = Vector2(401, 153)
-metadata/_edit_group_ = true
-
-[node name="4_6" type="Marker2D" parent="EnemyPlayAreaController/6Pos"]
-position = Vector2(556, 153)
-metadata/_edit_group_ = true
-
-[node name="5_6" type="Marker2D" parent="EnemyPlayAreaController/6Pos"]
-position = Vector2(713, 154)
-metadata/_edit_group_ = true
-
-[node name="6_6" type="Marker2D" parent="EnemyPlayAreaController/6Pos"]
-position = Vector2(868, 155)
-metadata/_edit_group_ = true
-
-[node name="7Pos" type="Node2D" parent="EnemyPlayAreaController"]
-
-[node name="1_7" type="Marker2D" parent="EnemyPlayAreaController/7Pos"]
-position = Vector2(16, 156)
-metadata/_edit_group_ = true
-
-[node name="2_7" type="Marker2D" parent="EnemyPlayAreaController/7Pos"]
-position = Vector2(174, 157)
-metadata/_edit_group_ = true
-
-[node name="3_7" type="Marker2D" parent="EnemyPlayAreaController/7Pos"]
-position = Vector2(331, 157)
-metadata/_edit_group_ = true
-
-[node name="4_7" type="Marker2D" parent="EnemyPlayAreaController/7Pos"]
-position = Vector2(486, 157)
-metadata/_edit_group_ = true
-
-[node name="5_7" type="Marker2D" parent="EnemyPlayAreaController/7Pos"]
-position = Vector2(643, 158)
-metadata/_edit_group_ = true
-
-[node name="6_7" type="Marker2D" parent="EnemyPlayAreaController/7Pos"]
-position = Vector2(798, 159)
-metadata/_edit_group_ = true
-
-[node name="7_7" type="Marker2D" parent="EnemyPlayAreaController/7Pos"]
-position = Vector2(954, 160)
-metadata/_edit_group_ = true
+[node name="EnemyPlayAreaShape" type="CollisionShape2D" parent="EnemyPlayAreaController"]
+position = Vector2(641, 148.5)
+shape = SubResource("RectangleShape2D_7o7mm")
 
 [node name="EnemyDiscardController" type="Node2D" parent="." node_paths=PackedStringArray("container", "positionMarker")]
 script = ExtResource("3_lpmun")
@@ -1091,156 +975,34 @@ positionMarker = NodePath("Marker2D")
 [node name="Marker2D" type="Marker2D" parent="DiscardDisplayController"]
 position = Vector2(1091, 319)
 
-[node name="HandCardDisplayController" type="Node2D" parent="." node_paths=PackedStringArray("cardArea", "logicalContainer")]
+[node name="HandCardDisplayController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer")]
 script = ExtResource("27_mupmx")
-cardArea = NodePath("CollisionShape2D")
+cardAreas = [NodePath("HandCardArea")]
 minCardCenterDistance = 25.0
 maxCardGap = 25.0
 logicalContainer = NodePath("../Logic/Player/HandManager")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HandCardDisplayController"]
+[node name="HandCardArea" type="CollisionShape2D" parent="HandCardDisplayController"]
 position = Vector2(509, 487)
 shape = SubResource("RectangleShape2D_c17rp")
 
 [node name="PlayArea" type="Area2D" parent="." node_paths=PackedStringArray("positionController", "shape")]
 script = ExtResource("5_fctuw")
 positionController = NodePath("PlayAreaPositionController")
-shape = NodePath("Shape")
+shape = NodePath("FullLengthShape")
 
-[node name="PlayAreaPositionController" type="Node2D" parent="PlayArea" node_paths=PackedStringArray("posCollections", "logicalContainer")]
-visible = false
-script = ExtResource("4_u0guh")
-posCollections = [NodePath("1Pos"), NodePath("2Pos"), NodePath("3Pos"), NodePath("4Pos"), NodePath("5Pos"), NodePath("6Pos"), NodePath("7Pos")]
-cardMoveTime = null
+[node name="PlayAreaPositionController" type="Node2D" parent="PlayArea" node_paths=PackedStringArray("cardAreas", "logicalContainer")]
+script = ExtResource("27_mupmx")
+cardAreas = [NodePath("../FullLengthShape"), NodePath("DecreasedShape")]
+minCardCenterDistance = 40.0
+maxCardGap = 30.0
 logicalContainer = NodePath("../../Logic/Player/PlayAreaManager")
 
-[node name="1Pos" type="Node2D" parent="PlayArea/PlayAreaPositionController"]
+[node name="DecreasedShape" type="CollisionShape2D" parent="PlayArea/PlayAreaPositionController"]
+position = Vector2(154.25, 149)
+shape = SubResource("RectangleShape2D_qnh12")
 
-[node name="1_1" type="Marker2D" parent="PlayArea/PlayAreaPositionController/1Pos"]
-position = Vector2(483, 156)
-metadata/_edit_group_ = true
-
-[node name="2Pos" type="Node2D" parent="PlayArea/PlayAreaPositionController"]
-
-[node name="1_2" type="Marker2D" parent="PlayArea/PlayAreaPositionController/2Pos"]
-position = Vector2(406, 154)
-metadata/_edit_group_ = true
-
-[node name="2_2" type="Marker2D" parent="PlayArea/PlayAreaPositionController/2Pos"]
-position = Vector2(564, 155)
-metadata/_edit_group_ = true
-
-[node name="3Pos" type="Node2D" parent="PlayArea/PlayAreaPositionController"]
-
-[node name="1_3" type="Marker2D" parent="PlayArea/PlayAreaPositionController/3Pos"]
-position = Vector2(361, 152)
-metadata/_edit_group_ = true
-
-[node name="2_3" type="Marker2D" parent="PlayArea/PlayAreaPositionController/3Pos"]
-position = Vector2(519, 153)
-metadata/_edit_group_ = true
-
-[node name="3_3" type="Marker2D" parent="PlayArea/PlayAreaPositionController/3Pos"]
-position = Vector2(676, 153)
-metadata/_edit_group_ = true
-
-[node name="4Pos" type="Node2D" parent="PlayArea/PlayAreaPositionController"]
-
-[node name="1_4" type="Marker2D" parent="PlayArea/PlayAreaPositionController/4Pos"]
-position = Vector2(303, 153)
-metadata/_edit_group_ = true
-
-[node name="2_4" type="Marker2D" parent="PlayArea/PlayAreaPositionController/4Pos"]
-position = Vector2(461, 154)
-metadata/_edit_group_ = true
-
-[node name="3_4" type="Marker2D" parent="PlayArea/PlayAreaPositionController/4Pos"]
-position = Vector2(618, 154)
-metadata/_edit_group_ = true
-
-[node name="4_4" type="Marker2D" parent="PlayArea/PlayAreaPositionController/4Pos"]
-position = Vector2(773, 154)
-metadata/_edit_group_ = true
-
-[node name="5Pos" type="Node2D" parent="PlayArea/PlayAreaPositionController"]
-
-[node name="1_5" type="Marker2D" parent="PlayArea/PlayAreaPositionController/5Pos"]
-position = Vector2(206, 152)
-metadata/_edit_group_ = true
-
-[node name="2_5" type="Marker2D" parent="PlayArea/PlayAreaPositionController/5Pos"]
-position = Vector2(364, 153)
-metadata/_edit_group_ = true
-
-[node name="3_5" type="Marker2D" parent="PlayArea/PlayAreaPositionController/5Pos"]
-position = Vector2(521, 153)
-metadata/_edit_group_ = true
-
-[node name="4_5" type="Marker2D" parent="PlayArea/PlayAreaPositionController/5Pos"]
-position = Vector2(676, 153)
-metadata/_edit_group_ = true
-
-[node name="5_5" type="Marker2D" parent="PlayArea/PlayAreaPositionController/5Pos"]
-position = Vector2(833, 154)
-metadata/_edit_group_ = true
-
-[node name="6Pos" type="Node2D" parent="PlayArea/PlayAreaPositionController"]
-
-[node name="1_6" type="Marker2D" parent="PlayArea/PlayAreaPositionController/6Pos"]
-position = Vector2(86, 152)
-metadata/_edit_group_ = true
-
-[node name="2_6" type="Marker2D" parent="PlayArea/PlayAreaPositionController/6Pos"]
-position = Vector2(244, 153)
-metadata/_edit_group_ = true
-
-[node name="3_6" type="Marker2D" parent="PlayArea/PlayAreaPositionController/6Pos"]
-position = Vector2(401, 153)
-metadata/_edit_group_ = true
-
-[node name="4_6" type="Marker2D" parent="PlayArea/PlayAreaPositionController/6Pos"]
-position = Vector2(556, 153)
-metadata/_edit_group_ = true
-
-[node name="5_6" type="Marker2D" parent="PlayArea/PlayAreaPositionController/6Pos"]
-position = Vector2(713, 154)
-metadata/_edit_group_ = true
-
-[node name="6_6" type="Marker2D" parent="PlayArea/PlayAreaPositionController/6Pos"]
-position = Vector2(868, 155)
-metadata/_edit_group_ = true
-
-[node name="7Pos" type="Node2D" parent="PlayArea/PlayAreaPositionController"]
-
-[node name="1_7" type="Marker2D" parent="PlayArea/PlayAreaPositionController/7Pos"]
-position = Vector2(16, 156)
-metadata/_edit_group_ = true
-
-[node name="2_7" type="Marker2D" parent="PlayArea/PlayAreaPositionController/7Pos"]
-position = Vector2(174, 157)
-metadata/_edit_group_ = true
-
-[node name="3_7" type="Marker2D" parent="PlayArea/PlayAreaPositionController/7Pos"]
-position = Vector2(331, 157)
-metadata/_edit_group_ = true
-
-[node name="4_7" type="Marker2D" parent="PlayArea/PlayAreaPositionController/7Pos"]
-position = Vector2(486, 157)
-metadata/_edit_group_ = true
-
-[node name="5_7" type="Marker2D" parent="PlayArea/PlayAreaPositionController/7Pos"]
-position = Vector2(643, 158)
-metadata/_edit_group_ = true
-
-[node name="6_7" type="Marker2D" parent="PlayArea/PlayAreaPositionController/7Pos"]
-position = Vector2(798, 159)
-metadata/_edit_group_ = true
-
-[node name="7_7" type="Marker2D" parent="PlayArea/PlayAreaPositionController/7Pos"]
-position = Vector2(954, 160)
-metadata/_edit_group_ = true
-
-[node name="Shape" type="CollisionShape2D" parent="PlayArea"]
+[node name="FullLengthShape" type="CollisionShape2D" parent="PlayArea"]
 position = Vector2(492, 149)
 shape = SubResource("RectangleShape2D_625ey")
 script = ExtResource("6_53o6h")

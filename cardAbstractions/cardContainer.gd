@@ -25,6 +25,10 @@ func getFreeSpace():
 	else:
 		return maxCards - cards.size()
 
+func triggerAll(triggerType: PlayEffect.triggerType):
+	for card in cards:
+		await card.triggerEffect(triggerType)
+
 func addCard(cardToAdd: CardData) -> bool:
 
 	#TODO: need to cleanup this order so it is bulletproof here. since trigger effect can sometimes add more cards with their own effects, the order on card added events is important for order

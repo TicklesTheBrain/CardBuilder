@@ -12,6 +12,8 @@ enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
 @export var enemyPlayArea: CardContainer
 @export var discardManager: CardContainer
 
+@export var playAreaPositionController: DynamicPositionController
+
 
 @export var pocketPacked: PackedScene
 var pocketRefs = {}
@@ -72,6 +74,8 @@ func _ready():
 	Events.requestNewPocket.connect(makeNewPocket)
 	Events.requestClosePocket.connect(cleanUpPocket)
 	Events.orphanedCardDisplay.connect(reparentCardDisplay)
+
+	deckManager.triggerAll(PlayEffect.triggerType.START_MATCH)
 
 	roundLoop()
 
@@ -166,6 +170,7 @@ func roundLoop():
 
 	energy.reset()
 	startTurnCardDraw.reset()
+	playAreaPositionController.resetCardArea()
 
 	activeActor = player
 	passiveActor = enemy
@@ -194,7 +199,7 @@ func roundLoop():
 		message = "Your Value: {value}, Att: {att}, Def: {def}".format({"value": value, 'att': attack, "def": defence})
 		
 	
-	playAreaManager.disposeAll()
+	playAreaPositionController.switchCardArea(1)
 	#handManager.disposeAll()
 
 	drawCardButton.disabled = true
@@ -214,11 +219,13 @@ func roundLoop():
 	okButton.disabled = false
 
 	await okButton.button_down
+	playAreaManager.disposeAll()
 
 	##ROUND RESOLUTION
 
 	if enemyPlayArea.bustCounter.checkIsBusted():
 		message = "Enemy busted, you deal {dmg}".format({'dmg': attack})
+		await playAreaManager.triggerAll(PlayEffect.triggerType.WIN)
 		damageDealt.amount += attack
 
 	elif enemyPlayArea.bustCounter.prevCount == value:
@@ -227,12 +234,18 @@ func roundLoop():
 	elif enemyPlayArea.bustCounter.prevCount > value or busted:
 		var enemyAttack = enemyPlayArea.getAll().reduce(func(acc, card): return acc+card.stats.attack, 0)
 		message = "Enemy wins with value of {their} against your {val}. You suffer {dmg} damage".format({"their": enemyPlayArea.bustCounter.prevCount, "val": value, "dmg": enemyAttack})
+		if busted:
+			await playAreaManager.triggerAll(PlayEffect.triggerType.BUST)
+		else:
+			await playAreaManager.triggerAll(PlayEffect.triggerType.LOSE)
 		damageSuffered.amount += enemyAttack
 
 	else:
 		message = "You win with value of {val} against their {their}. They suffer {dmg} damage".format({"their": enemyPlayArea.bustCounter.prevCount, "val": value, "dmg": attack})
+		await playAreaManager.triggerAll(PlayEffect.triggerType.WIN)
 		damageDealt.amount += attack
 
+	await playAreaManager.triggerAll(PlayEffect.triggerType.END_ROUND)
 
 	okButton.disabled = false
 
