@@ -27,10 +27,14 @@ var context: GameStateContext
 
 func getValue():
 	updateContext()
+	if not context:
+		return value.getBaseValue()
 	return value.getValue(context, self)
 
 func getCost():
 	updateContext()
+	if not context:
+		return cost.getBaseValue()
 	return cost.getValue(context, self)
 
 func receiveContext(ctxt: GameStateContext):

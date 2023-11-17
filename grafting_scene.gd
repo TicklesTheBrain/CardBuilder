@@ -9,11 +9,11 @@ extends Node2D
 @export var newCardMarker: Marker2D
 
 func _ready():
-	graftDeck.buildCardsFromTemplate()
-	#playerDeck.buildCardsFromTemplate()
 	Events.newCardDisplayRequested.connect(spawnNewCardDisplay)
-	for i in range(graftOptionsAmount):
-		addNewOption()
+	graftDeck.buildCardsFromTemplate()
+	playerDeck.buildCardsFromTemplate()
+	#for i in range(graftOptionsAmount):
+	#	addNewOption()
 
 func addNewOption():
 	var topCard = graftDeck.drawCard()

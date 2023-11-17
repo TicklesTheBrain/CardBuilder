@@ -79,7 +79,6 @@ infoLabel = NodePath("Pocket/Panel/Label")
 [node name="PocketPositionController" type="Node2D" parent="." node_paths=PackedStringArray("posCollections", "canvasLayer")]
 script = ExtResource("2_87o7k")
 posCollections = [NodePath("1Pos"), NodePath("2Pos"), NodePath("3Pos"), NodePath("4Pos")]
-cardMoveTime = null
 canvasLayer = NodePath("..")
 
 [node name="1Pos" type="Node2D" parent="PocketPositionController"]
