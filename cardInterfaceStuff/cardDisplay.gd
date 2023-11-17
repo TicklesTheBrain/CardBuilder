@@ -11,7 +11,7 @@ class_name CardDisplay
 
 @export var attackLabel: Label
 @export var defenceLabel: Label
-@export var maxCounter: float
+@export var forceUpdateSeconds: float
 
 @export var selection: ColorRect
 
@@ -65,7 +65,7 @@ func _process(delta):
 	counter -= delta
 	if counter <= 0:
 		updateCardDisplay()
-		counter = maxCounter
+		counter = forceUpdateSeconds
 
 	if dragged:
 		position = get_viewport().get_mouse_position() - mouseOffset

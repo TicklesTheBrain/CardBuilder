@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://ceavuthes855u"]
+
+[ext_resource type="PackedScene" uid="uid://dsfqrofqt0xs4" path="res://card_graft.tscn" id="1_w2i3f"]
+[ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_lygcp"]
+[ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="4_eldwq"]
+
+[node name="GraftingScene" type="Node2D"]
+
+[node name="CardGraft" parent="." instance=ExtResource("1_w2i3f")]
+
+[node name="GraftDeck" type="Node" parent="."]
+script = ExtResource("3_lygcp")
+
+[node name="GraftOptions" type="Node" parent="."]
+script = ExtResource("4_eldwq")
