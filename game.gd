@@ -53,7 +53,7 @@ func _ready():
 
 	player = Actor.new()
 	player.drawDeck = deckManager
-	deckManager.buildNewEmptyDeck()
+	deckManager.buildCardsFromTemplate()
 	deckManager.shuffle()
 	player.discard = discardManager
 	player.hand = handManager
@@ -61,7 +61,7 @@ func _ready():
 
 	enemy = Actor.new()
 	enemy.drawDeck = enemyDeckManager
-	enemyDeckManager.buildNewEmptyDeck()
+	enemyDeckManager.buildCardsFromTemplate()
 	enemy.playArea = enemyPlayArea
 	enemy.discard = enemyDiscard
 	enemy.hand = CardContainer.new() as CardContainer

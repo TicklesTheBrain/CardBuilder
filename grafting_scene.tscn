@@ -1,15 +1,94 @@
-[gd_scene load_steps=4 format=3 uid="uid://ceavuthes855u"]
+[gd_scene load_steps=17 format=3 uid="uid://ceavuthes855u"]
 
+[ext_resource type="Script" path="res://grafting_scene.gd" id="1_aty88"]
 [ext_resource type="PackedScene" uid="uid://dsfqrofqt0xs4" path="res://card_graft.tscn" id="1_w2i3f"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_lygcp"]
+[ext_resource type="PackedScene" uid="uid://d1lj52mw7mxay" path="res://card.tscn" id="3_sw0ic"]
+[ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="3_yne2b"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="4_eldwq"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="4_sdbnn"]
+[ext_resource type="Script" path="res://cardEffects/peDraw.gd" id="4_tmet7"]
+[ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="5_sdwpe"]
+[ext_resource type="Script" path="res://cardAbstractions/statData.gd" id="6_dpyu6"]
 
-[node name="GraftingScene" type="Node2D"]
+[sub_resource type="Resource" id="Resource_ua3i3"]
+script = ExtResource("3_yne2b")
+baseValue = -1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
 
-[node name="CardGraft" parent="." instance=ExtResource("1_w2i3f")]
+[sub_resource type="Resource" id="Resource_tik3x"]
+script = ExtResource("4_tmet7")
+source = 0
+destination = 1
+amountOfCardsToDraw = 1
+effectName = ""
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+
+[sub_resource type="Resource" id="Resource_kevhl"]
+script = ExtResource("6_dpyu6")
+attack = -1
+defence = 2
+
+[sub_resource type="Resource" id="Resource_t4c1y"]
+script = ExtResource("3_yne2b")
+baseValue = 1
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+
+[sub_resource type="Resource" id="Resource_w4bec"]
+script = ExtResource("5_sdwpe")
+amount = 3
+debug = false
+cardTitle = ""
+graft = true
+value = SubResource("Resource_t4c1y")
+type = ""
+cost = SubResource("Resource_ua3i3")
+stats = SubResource("Resource_kevhl")
+onPlayEffects = [SubResource("Resource_tik3x")]
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = []
+onWinEffects = []
+onBustEffects = []
+endRoundEffects = []
+drawEffects = []
+startMatchEffects = []
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kxqi"]
+size = Vector2(1151.5, 319)
+
+[node name="GraftingScene" type="Node2D" node_paths=PackedStringArray("graftDeck", "graftOptions", "newCardMarker")]
+script = ExtResource("1_aty88")
+graftDeck = NodePath("GraftDeck")
+graftOptions = NodePath("GraftOptions")
+cardGraftDisplay = ExtResource("1_w2i3f")
+cardDisplay = ExtResource("3_sw0ic")
+newCardMarker = NodePath("CardOrigin")
 
 [node name="GraftDeck" type="Node" parent="."]
 script = ExtResource("3_lygcp")
+debug = false
+templateDeck = Array[ExtResource("5_sdwpe")]([SubResource("Resource_w4bec")])
 
 [node name="GraftOptions" type="Node" parent="."]
 script = ExtResource("4_eldwq")
+
+[node name="GraftOptions2" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer")]
+script = ExtResource("4_sdbnn")
+cardAreas = [NodePath("GraftOptionsArea")]
+minCardCenterDistance = 50.0
+maxCardGap = 25.0
+logicalContainer = NodePath("../GraftOptions")
+
+[node name="GraftOptionsArea" type="CollisionShape2D" parent="GraftOptions2"]
+position = Vector2(641.25, 181)
+shape = SubResource("RectangleShape2D_0kxqi")
+
+[node name="CardOrigin" type="Marker2D" parent="."]
+position = Vector2(670, 578)

@@ -35,6 +35,8 @@ func updateCardDisplay():
 			attackLabel.set("theme_override_colors/font_color", increaseColor)
 		else:
 			attackLabel.set("theme_override_colors/font_color", decreaseColor)
+	else:
+		attackLabel.text = ""
 
 	var defenceValue = cardData.stats.defence
 	if defenceValue != 0:
@@ -44,3 +46,5 @@ func updateCardDisplay():
 			defenceLabel.set("theme_override_colors/font_color", increaseColor)
 		else:
 			defenceLabel.set("theme_override_colors/font_color", decreaseColor)
+	else:
+		defenceLabel.text = ""

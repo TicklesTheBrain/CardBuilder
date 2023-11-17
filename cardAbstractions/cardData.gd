@@ -2,6 +2,7 @@ extends Resource
 class_name CardData
 
 @export var cardTitle: String
+@export var graft: bool
 @export var value: CardParam
 @export var type: String
 @export var cost: CardParam
@@ -97,6 +98,7 @@ func duplicateSelf() -> CardData:
 	var newCard = CardData.new()
 	newCard.value = value.duplicate()
 	newCard.type = type
+	newCard.graft = graft
 	newCard.cost = cost.duplicate()
 	newCard.stats = stats
 	
