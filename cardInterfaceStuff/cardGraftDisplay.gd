@@ -4,7 +4,7 @@ class_name CardGraftDisplay
 @export var increaseColor: Color
 @export var decreaseColor: Color
 
-func updateCardDisplay():
+func updateCardDisplay(_dataToShow: CardData = cardData):
 
 	var baseValue = cardData.value.getBaseValue()
 	if baseValue != 0:

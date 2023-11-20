@@ -15,6 +15,7 @@ class_name CardDisplay
 
 @export var selection: ColorRect
 
+var graftToShow: CardData
 var counter: float = 0
 var cardData: CardData
 var mouseOver: bool
@@ -39,24 +40,28 @@ func setupCardDisplay(data: CardData):
 	cardData = data
 	updateCardDisplay()
 
-func updateCardDisplay():	
-	valueTypeLabel.text = str(cardData.getValue()) + cardData.type
-	costLabel.text = str(cardData.getCost()) + 'E'
+func updateCardDisplay(dataToShow: CardData = cardData):
 
-	var playText = cardData.getPlayEffectText()
+	if graftToShow:
+		dataToShow = graftToShow
+
+	valueTypeLabel.text = str(dataToShow.getValue()) + dataToShow.type
+	costLabel.text = str(dataToShow.getCost()) + 'E'
+
+	var playText = dataToShow.getPlayEffectText()
 	if playText != "":
 		playTextLabel.text = "[b]Play:[/b] " + playText
 
-	var otherText = cardData.getOtherText()
+	var otherText = dataToShow.getOtherText()
 	if otherText != "":
 		otherTextLabel.text = otherText
 	
-	if cardData.stats.attack > 0:
-		attackLabel.text = str(cardData.stats.attack) + 'Att'
+	if dataToShow.stats.attack > 0:
+		attackLabel.text = str(dataToShow.stats.attack) + 'Att'
 	else:
 		attackLabel.text = ""
-	if cardData.stats.defence >0:
-		defenceLabel.text = str(cardData.stats.defence) + 'Def'
+	if dataToShow.stats.defence >0:
+		defenceLabel.text = str(dataToShow.stats.defence) + 'Def'
 	else:
 		defenceLabel.text = ""
 
@@ -72,6 +77,12 @@ func _process(delta):
 
 func onClick():
 	InputLord.cardClicked.emit(self)
+
+func onMouseEnterCard():
+	InputLord.cardMouseOver.emit(self)
+
+func onMouseLeaveCard():
+	InputLord.cardMouseOverExit.emit(self)
 
 func unselect():	
 	selected = false
@@ -90,3 +101,10 @@ func endDrag():
 
 func select():
 	selected = true
+
+func showGraft(graft: CardData):
+	graftToShow = cardData.duplicateSelf().addCardGraft(graft)
+	print('new graft', graftToShow)
+
+func hideGraft():
+	graftToShow = null

@@ -25,7 +25,7 @@ otherTextLabel = NodePath("PanelContainer/Info/MiddleArea/Text aligner/Other_tex
 discardTextLabel = NodePath("PanelContainer/Info/MiddleArea/Text aligner/Discard text")
 attackLabel = NodePath("PanelContainer/Info/Bottom Info/MarginContainer2/Attack")
 defenceLabel = NodePath("PanelContainer/Info/Bottom Info/MarginContainer/Defence")
-forceUpdateSeconds = 1.1
+forceUpdateSeconds = 0.1
 selection = NodePath("PanelContainer/Selection")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -40,6 +40,7 @@ offset_right = 70.5
 offset_bottom = 95.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_0tid8")
 script = ExtResource("2_b8cjq")
 
@@ -141,3 +142,6 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CardShape"]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_nwt7q")
+
+[connection signal="mouse_entered" from="PanelContainer" to="." method="onMouseEnterCard"]
+[connection signal="mouse_exited" from="PanelContainer" to="." method="onMouseLeaveCard"]

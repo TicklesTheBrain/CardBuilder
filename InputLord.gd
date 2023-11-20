@@ -4,6 +4,8 @@ signal cardSelectionRequested(container: CardContainer, amount: int, receivingMe
 signal cardSelectionComplete
 signal cardClicked(display: CardDisplay)
 signal cardDragReleased(display: CardDisplay)
+signal cardMouseOver(display: CardDisplay)
+signal cardMouseOverExit(display: CardDisplay)
 
 var selecting = false
 var amount = -1
@@ -12,12 +14,15 @@ var selected: Array[CardData] = []
 var dragging: bool = true
 var dragContainers: Array[CardContainer] = []
 var mouseOverDelegates: Dictionary
+var mouseOverExitDelegates: Dictionary
 var mouseOvers: bool = true
 
 func _ready():
 	cardSelectionRequested.connect(initNewSelection)
 	cardClicked.connect(_onCardClicked)
 	cardDragReleased.connect(_onCardDragReleased)
+	cardMouseOver.connect(_onCardMouseOver)
+	cardMouseOverExit.connect(_onCardMouseOverExit)
 
 func initNewSelection(container: CardContainer, needAmount: int, receivingMethod: Callable):
 	print('init new selection', container)
@@ -75,6 +80,27 @@ func _onCardClicked(display: CardDisplay):
 
 func _onCardDragReleased(display: CardDisplay):
 	display.endDrag()
+
+func _onCardMouseOver(display: CardDisplay):
+	#print('card mouse entered', display)
+
+	if not mouseOvers:
+		return
+	
+	if mouseOverDelegates.has(display.cardData.container):
+		mouseOverDelegates[display.cardData.container].call(display)
+
+func _onCardMouseOverExit(display: CardDisplay):
+	#print('card mouse left', display)
+	if mouseOverExitDelegates.has(display):
+		mouseOverExitDelegates[display].call()
+		mouseOverDelegates.erase(display) #NOT SURE IF THIS IS NEEDED
+
+func addMouseOverDelegate(cont: CardContainer, delegate: Callable):
+	mouseOverDelegates[cont] = delegate.bind(addMouseOverExitDelegate)
+
+func addMouseOverExitDelegate(card: CardDisplay, delegate: Callable):
+	mouseOverExitDelegates[card] = delegate
 
 
 
