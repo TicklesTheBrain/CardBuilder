@@ -1,7 +1,6 @@
-[gd_scene load_steps=123 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=122 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
-[ext_resource type="PackedScene" uid="uid://o20e5thwdy3j" path="res://pocket.tscn" id="2_cx0xa"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
 [ext_resource type="Script" path="res://cardAbstractions/GenericResource.gd" id="3_c142g"]
 [ext_resource type="PackedScene" uid="uid://d1lj52mw7mxay" path="res://card.tscn" id="3_kxrxo"]
@@ -388,8 +387,8 @@ staticText = ""
 [sub_resource type="Resource" id="Resource_p32kq"]
 resource_name = "choose 2 from deck"
 script = ExtResource("5_fj00f")
-amount = 2
-debug = false
+amount = 10
+debug = true
 cardTitle = ""
 graft = false
 value = SubResource("Resource_ckas6")
@@ -489,7 +488,7 @@ containersToApply = Array[int]([2])
 modifier = SubResource("Resource_xqmxe")
 timingRules = Array[ExtResource("11_o0re3")]([SubResource("Resource_ep2sd")])
 effectName = ""
-staticText = ""
+staticText = "Decrease bust value by 2"
 conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
@@ -986,7 +985,6 @@ enemyPlayArea = NodePath("Logic/Enemy/EnemyPlayArea")
 discardManager = NodePath("Logic/Player/DiscardManager")
 playAreaPositionController = NodePath("PlayArea/PlayAreaPositionController")
 enemyPlayAreaPositionController = NodePath("EnemyPlayAreaController")
-pocketPacked = ExtResource("2_cx0xa")
 energy = NodePath("Logic/Player/Energy")
 startTurnCardDraw = NodePath("Logic/Player/StartTurnCardDraw")
 damageDealt = NodePath("Logic/DamageDealt")
@@ -1021,7 +1019,6 @@ debugLabel = NodePath("../../../InfoStuff/EnergyCounter")
 
 [node name="DeckManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("3_8edax")
-debug = false
 debugRandomiseStats = true
 templateDeck = Array[ExtResource("5_fj00f")]([SubResource("Resource_m4wcd"), SubResource("Resource_chvy2"), SubResource("Resource_xeq1j"), SubResource("Resource_o77ee"), SubResource("Resource_p1bhp"), SubResource("Resource_vwdiw"), SubResource("Resource_iben3"), SubResource("Resource_p32kq"), SubResource("Resource_f3ql2"), SubResource("Resource_5treu"), SubResource("Resource_2rgny"), SubResource("Resource_l6ab6"), SubResource("Resource_wb21s"), SubResource("Resource_86kyf"), SubResource("Resource_ghq3l"), SubResource("Resource_4nafk"), SubResource("Resource_d2adi"), SubResource("Resource_nny05")])
 feedContainer = NodePath("../DiscardManager")

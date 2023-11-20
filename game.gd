@@ -15,9 +15,6 @@ enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
 @export var playAreaPositionController: DynamicPositionController
 @export var enemyPlayAreaPositionController: DynamicPositionController
 
-@export var pocketPacked: PackedScene
-var pocketRefs = {}
-
 @export var energy: GenericResource
 @export var startTurnCardDraw: GenericResource
 @export var damageDealt: GenericResource
@@ -69,8 +66,6 @@ func _ready():
 
 	Events.requestContext.connect(provideContext)
 	Events.newCardDisplayRequested.connect(spawnNewCardDisplay)
-	Events.requestNewPocket.connect(makeNewPocket)
-	Events.requestClosePocket.connect(cleanUpPocket)
 	Events.orphanedCardDisplay.connect(reparentCardDisplay)
 
 	deckManager.triggerAll(CardEffect.triggerType.START_MATCH)
@@ -91,27 +86,6 @@ func makeContext() -> GameStateContext:
 
 func provideContext(requestingObject):		
 	requestingObject.receiveContext(makeContext())
-
-func makeNewPocket(pocketText: String, receivingMethod: Callable):
-
-	var newPocket = pocketPacked.instantiate() as PocketDisplay
-	var pocketContainer = CardContainer.new()
-	add_child(pocketContainer)
-	newPocket.setupPositionController(pocketContainer)
-	newPocket.setupText(pocketText)
-	add_child(newPocket)
-
-	pocketRefs[pocketContainer] = newPocket
-	newPocket.showPocket()
-	receivingMethod.call(pocketContainer)
-
-func cleanUpPocket(cardContainer: CardContainer):
-	
-	Logger.log(['cleanup pocket started', cardContainer], 3)
-	var pocket = pocketRefs[cardContainer]
-	pocket.hidePocket()
-	cardContainer.queue_free()
-	pocketRefs.erase(cardContainer)
 
 func reparentCardDisplay(cd: CardDisplay):
 	cd.get_parent().remove_child(cd)

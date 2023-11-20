@@ -21,6 +21,7 @@ Events="*res://events.gd"
 TcFactory="*res://tc_factory.gd"
 InputLord="*res://InputLord.gd"
 Logger="*res://logger.gd"
+PocketLord="*res://pocket_lord.tscn"
 
 [display]
 
