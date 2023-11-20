@@ -3,6 +3,7 @@ class_name Modifier
 
 @export var inEffect: bool = true
 @export var staticText: String
+@export var modifierName: String
 
 var active: bool:
     get:
@@ -34,3 +35,9 @@ func getText():
     if not staticText:
         return "default text not overriden."
     return staticText
+
+func mergeModifier(newModifier: Modifier):
+    mergeModifierSpecific(newModifier)
+
+func mergeModifierSpecific(_newModifier: Modifier):
+    print ("if this is not overriden, modifer merge has no effect")

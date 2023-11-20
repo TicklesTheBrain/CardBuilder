@@ -22,4 +22,23 @@ func calculateSpecific(_ctxt: GameStateContext, currValue: int, card: CardData):
 	if not cutoffBelow and criteria >= amountForCutOff:
 		return onCutOffReturn
 	return currValue
+
+func mergeModifierSpecific(newModifier: Modifier):
+	assert(cutoffBelow == newModifier.cutoffBellow)
+	assert(onCutOffReturn == newModifier.onCutOffReturn)
+	assert(cutoffBasedOnParamItself == newModifier.cutoffBasedOnParamItself)
+	if not cutoffBasedOnParamItself:
+		assert(cutoffCriteriaParam == newModifier.cutoffCriteriaParam)
+	
+	if amountForCutOff == newModifier.amountForCutOff:
+		if cutoffBelow:
+			amountForCutOff = max(0, amountForCutOff-1)
+		else:
+			amountForCutOff += 1
+	else:
+		if cutoffBelow:
+			amountForCutOff = min(amountForCutOff, newModifier.amountForCutOff)
+		else:
+			amountForCutOff = max(amountForCutOff, newModifier.amountForCutOff)
+
 	

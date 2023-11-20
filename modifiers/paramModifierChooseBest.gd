@@ -11,11 +11,7 @@ var options:
 		if fixedOptions:
 			return fixedOptions
 		else:
-			var newOptions = []
-			for i in range(optionRangeStart, optionRangeEnd+1):
-				newOptions.append(i)
-			return newOptions
-
+			return range(optionRangeStart, optionRangeEnd+1)
 
 func getText():
 	var text = ""
@@ -85,9 +81,14 @@ func calculateSpecific(ctxt: GameStateContext, _currValue: int, card: CardData):
 	var chosenPermutation = nonBustingPermutations[0]
 	return chosenPermutation.chosen.filter(func(p): return p.card == card)[0].option
 
-	
-
-
-
-
-		
+func mergeModifierSpecific(newModifier: Modifier):
+	assert(type == newModifier.type)
+	if not fixedOptions and not newModifier.fixedOptions:
+		optionRangeStart = min(optionRangeStart, newModifier.optionRangeStart)
+		optionRangeEnd = max(optionRangeEnd, newModifier.optionRangeEnd)
+	else:
+		var newOptions = options.append_array(newModifier.options)		
+		var seenValues = {}
+		for op in newOptions:
+			seenValues[op] = ""
+		fixedOptions = seenValues.keys()

@@ -6,3 +6,7 @@ class_name ModifierFixedChange
 func calculateSpecific(_ctxt: GameStateContext, currValue: int, _card: CardData):
     #print('calculate specific called', currValue, shift)
     return currValue + shift
+
+func mergeModifierSpecific(newModifier: Modifier):
+    assert(type == newModifier.type)
+    shift += newModifier.shift
