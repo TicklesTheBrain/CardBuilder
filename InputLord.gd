@@ -94,7 +94,7 @@ func _onCardMouseOverExit(display: CardDisplay):
 	#print('card mouse left', display)
 	if mouseOverExitDelegates.has(display):
 		mouseOverExitDelegates[display].call()
-		mouseOverDelegates.erase(display) #NOT SURE IF THIS IS NEEDED
+		mouseOverExitDelegates.erase(display) #NOT SURE IF THIS IS NEEDED
 
 func addMouseOverDelegate(cont: CardContainer, delegate: Callable):
 	mouseOverDelegates[cont] = delegate.bind(addMouseOverExitDelegate)
