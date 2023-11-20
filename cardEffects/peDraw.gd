@@ -23,7 +23,7 @@ func triggerSpecific(ctxt: GameStateContext):
 func getTextSpecific() -> String:
 	return "Draw {num} card".format({"num": amountOfCardsToDraw})
 
-func mergeEffecSpecific(newEffect: CardEffect):
+func mergeEffectSepecific(newEffect: CardEffect):
 	assert(source == newEffect.source and destination == newEffect.destination)
 	amountOfCardsToDraw += newEffect.amountOfCardsToDraw
 	

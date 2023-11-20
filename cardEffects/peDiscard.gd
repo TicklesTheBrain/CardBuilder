@@ -30,7 +30,7 @@ func receiveSelection(cards: Array[CardData]):
 	selectedCards = cards
 	cardSelectionDone.emit()
 
-func mergeEffecSpecific(newEffect: CardEffect):
+func mergeEffectSepecific(newEffect: CardEffect):
 	assert(discardFrom == newEffect.discardFrom)
 	if amountOfCardsToDiscard == -1 or newEffect.amountOfCardsToDiscard == -1:
 		print('already discarding all no merging needed')
