@@ -16,6 +16,7 @@ var selectedDeckCard: CardData
 signal cardSelectionDone
 
 func _ready():
+	
 	Events.newCardDisplayRequested.connect(spawnNewCardDisplay)
 	graftDeck.buildCardsFromTemplate()
 	playerDeck.buildCardsFromTemplate()
@@ -39,6 +40,8 @@ func _ready():
 	InputLord.addMouseOverDelegate(deckPocket, askToShowGraft.bind(selectedGraft))
 
 	await cardSelectionDone
+
+	selectedDeckCard.addCardGraft(selectedGraft)
 
 func receiveSelection(cards: Array[CardData]):
 	selectedGraft = cards[0]

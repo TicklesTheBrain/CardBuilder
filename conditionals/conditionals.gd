@@ -3,6 +3,7 @@ class_name Conditional
 
 @export var staticText: String
 @export var containerToCheck: Game.ContainerPurposes
+@export var conditionalName: String
 
 func getText():
     if staticText:
@@ -16,3 +17,6 @@ func check(_ctxt: GameStateContext):
 
 func getTextSpecific():
     return "conditional text not overriden"
+
+func mergeConditional(_newCondiitional: Conditional):
+    print ("if this is not overriden, conditional merge has no effect")

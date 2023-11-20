@@ -23,8 +23,12 @@ func triggerSpecific(ctxt: GameStateContext):
 		resource.resetAdjust += amountToModify
 	elif modificationSubject == modifyWhat.BASELINE:
 		resource.baseline += amountToModify
-	
-
 
 func getTextSpecific():
 	return "Get {num} energy.".format({"num": amountToModify})
+
+
+func mergeEffectSepecific(newEffect: CardEffect):
+	assert(modifiedResource == newEffect.modifiedResource and modificationSubject == newEffect.modificationSubject)
+	amountToModify += newEffect.amountToModify
+	#TODO: should think about modifying to zero and effect no longer being needed. Maybe just text modification? Like overriding inherited getText()

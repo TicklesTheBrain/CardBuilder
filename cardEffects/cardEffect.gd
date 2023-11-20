@@ -5,7 +5,7 @@ enum triggerType {NONE, PLAY, DISCARD, END_ROUND, DRAW, START_MATCH, WIN, LOSE, 
 
 @export var effectName: String
 @export var staticText: String
-@export var conditionals: Array[Conditional]
+@export var conditionals: Array[Conditional] = []
 @export var followUpEffects: Array[CardEffect] = []
 @export var includeFollowUpText: bool = false
 
@@ -42,3 +42,11 @@ func getText() -> String:
 
 func getTextSpecific() -> String:
 	return "this was a not overriden generic getText, something wrong?"
+
+func mergeEffect(newEffect: CardEffect):
+	CardData.mergeConditionalsBuckets(conditionals, newEffect.conditionals)
+	mergeEffectSepecific(newEffect)
+	CardData.mergeEffectsBuckets(followUpEffects, newEffect.followUpEffects)
+
+func mergeEffectSepecific(_newEffect: CardEffect):
+	return "if this is not overriden, the merging will have no effect"

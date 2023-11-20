@@ -87,3 +87,8 @@ func convertContainerPurposeTo(purp: Game.ContainerPurposes, verb: bool = false)
 			if verb: return "discard"
 			else: return "your discard"
 
+func mergeEffectSepecific(newEffect: CardEffect):
+	assert(sourceOfCards == newEffect.sourceOfCards and destinationOfCards == newEffect.destinationOfCards and destinationOfUnchosenCards == newEffect.destinationOfUnchosenCards)
+	amountOfCardsToChoose += newEffect.amountOfCardsToChoose
+	amountOfCardsToChooseFrom += newEffect.amountOfCardsToChooseFrom
+

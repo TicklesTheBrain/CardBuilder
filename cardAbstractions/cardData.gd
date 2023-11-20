@@ -106,17 +106,15 @@ func duplicateSelf() -> CardData:
 	newCard.cost = cost.duplicate()
 	newCard.stats = stats.duplicate()
 
-	mergeEffectsBuckets(newCard.onPlayEffects, onPlayEffects)
-	mergeEffectsBuckets(newCard.onLoseEffects, onLoseEffects)
-	mergeEffectsBuckets(newCard.onWinEffects, onWinEffects)
-	mergeEffectsBuckets(newCard.onBustEffects, onBustEffects)
-	mergeEffectsBuckets(newCard.endRoundEffects, endRoundEffects)
-	mergeEffectsBuckets(newCard.drawEffects, drawEffects)
-	mergeEffectsBuckets(newCard.startMatchEffects, startMatchEffects)
-		
-	newCard.playConditionals = [] as Array[Conditional]
-	for pc in playConditionals:
-		newCard.playConditionals.append(pc.duplicate(true))
+	CardData.mergeEffectsBuckets(newCard.onPlayEffects, onPlayEffects)
+	CardData.mergeEffectsBuckets(newCard.onLoseEffects, onLoseEffects)
+	CardData.mergeEffectsBuckets(newCard.onWinEffects, onWinEffects)
+	CardData.mergeEffectsBuckets(newCard.onBustEffects, onBustEffects)
+	CardData.mergeEffectsBuckets(newCard.endRoundEffects, endRoundEffects)
+	CardData.mergeEffectsBuckets(newCard.drawEffects, drawEffects)
+	CardData.mergeEffectsBuckets(newCard.startMatchEffects, startMatchEffects)
+
+	CardData.mergeConditionalsBuckets(newCard.playConditionals, playConditionals)
 
 	return newCard
 
@@ -127,21 +125,19 @@ func addCardGraft(newGraft: CardData):
 	stats.attack += newGraft.stats.attack
 	stats.defence += newGraft.stats.defence
 
-	mergeEffectsBuckets(onPlayEffects, newGraft.onPlayEffects)
-	mergeEffectsBuckets(onLoseEffects, newGraft.onLoseEffects)
-	mergeEffectsBuckets(onWinEffects, newGraft.onWinEffects)
-	mergeEffectsBuckets(onBustEffects, newGraft.onBustEffects)
-	mergeEffectsBuckets(endRoundEffects, newGraft.endRoundEffects)
-	mergeEffectsBuckets(drawEffects, newGraft.drawEffects)
-	mergeEffectsBuckets(startMatchEffects, newGraft.startMatchEffects)
+	CardData.mergeEffectsBuckets(onPlayEffects, newGraft.onPlayEffects)
+	CardData.mergeEffectsBuckets(onLoseEffects, newGraft.onLoseEffects)
+	CardData.mergeEffectsBuckets(onWinEffects, newGraft.onWinEffects)
+	CardData.mergeEffectsBuckets(onBustEffects, newGraft.onBustEffects)
+	CardData.mergeEffectsBuckets(endRoundEffects, newGraft.endRoundEffects)
+	CardData.mergeEffectsBuckets(drawEffects, newGraft.drawEffects)
+	CardData.mergeEffectsBuckets(startMatchEffects, newGraft.startMatchEffects)
 
-	#TODO: Add support for merged conditionals
-	for pc in newGraft.playConditionals:
-		playConditionals.append(pc.duplicate(true))
+	CardData.mergeConditionalsBuckets(playConditionals, newGraft.playConditionals)
 
 	return self
 
-func mergeEffectsBuckets(ownBucket: Array[CardEffect], graftBucket: Array[CardEffect]):
+static func mergeEffectsBuckets(ownBucket: Array[CardEffect], graftBucket: Array[CardEffect]):
 	var effectsToAppend = []
 	for ef in graftBucket:
 		var sameNameEffects = ownBucket.filter(func(e): return ef.effectName and ef.effectName == e.effectName)
@@ -152,5 +148,17 @@ func mergeEffectsBuckets(ownBucket: Array[CardEffect], graftBucket: Array[CardEf
 			effectsToAppend.push_back(ef)
 	effectsToAppend = effectsToAppend.map(func(e): return e.duplicate(true)) as Array[CardEffect]
 	ownBucket.append_array(effectsToAppend)
+
+static func mergeConditionalsBuckets(bucketToGraft: Array[Conditional], donorBucket: Array[Conditional]):
+	var conditionalsToAppend = []
+	for con in donorBucket:
+		var sameNameConditionals = bucketToGraft.filter(func(c): return con.conditionalName and c.conditionalName == con.conditionalName)
+		if sameNameConditionals.size() > 0:
+			for snc in sameNameConditionals:
+				snc.mergeConditional(con)
+		else:
+			conditionalsToAppend.push_back(con)
+	conditionalsToAppend = conditionalsToAppend.map(func(c): return c.duplicate(true) as Array[Conditional])
+	bucketToGraft.append_array(conditionalsToAppend)
 
 
