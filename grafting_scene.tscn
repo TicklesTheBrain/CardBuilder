@@ -1011,12 +1011,10 @@ shape = SubResource("RectangleShape2D_0kxqi")
 [node name="CardOrigin" type="Marker2D" parent="."]
 position = Vector2(670, 578)
 
-[node name="DeckManager" type="Node" parent="." node_paths=PackedStringArray("feedContainer", "disposeContainer")]
+[node name="DeckManager" type="Node" parent="."]
 script = ExtResource("3_lygcp")
 debugRandomiseStats = true
 templateDeck = Array[ExtResource("5_sdwpe")]([SubResource("Resource_m4wcd"), SubResource("Resource_chvy2"), SubResource("Resource_xeq1j"), SubResource("Resource_o77ee"), SubResource("Resource_p1bhp"), SubResource("Resource_vwdiw"), SubResource("Resource_iben3"), SubResource("Resource_p32kq"), SubResource("Resource_f3ql2"), SubResource("Resource_5treu"), SubResource("Resource_2rgny"), SubResource("Resource_l6ab6"), SubResource("Resource_wb21s"), SubResource("Resource_86kyf"), SubResource("Resource_ghq3l"), SubResource("Resource_4nafk"), SubResource("Resource_d2adi"), SubResource("Resource_nny05")])
-feedContainer = NodePath("")
-disposeContainer = NodePath("")
 
 [node name="DeckDisplayController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer")]
 script = ExtResource("4_sdbnn")

@@ -75,6 +75,8 @@ func _ready():
 
 	deckManager.triggerAll(CardEffect.triggerType.START_MATCH)
 
+	InputLord.addDragContainers(handManager)
+
 	roundLoop()
 
 func makeContext() -> GameStateContext:

@@ -30,7 +30,7 @@ func triggerSpecific(ctxt: GameStateContext):
 		pocketContainer.addCard(card)
 		counter+=1
 
-	Selector.cardSelectionRequested.emit(pocketContainer, amountOfCardsToChoose, receiveSelection)
+	InputLord.cardSelectionRequested.emit(pocketContainer, amountOfCardsToChoose, receiveSelection)
 	
 	await cardSelectionDone
 	

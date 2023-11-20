@@ -11,6 +11,7 @@ var setupDone: bool = false
 func _ready():
 	if logicalContainer and not setupDone:
 		setupNewLogicalContainer()
+	InputLord.cardDragReleased.connect(_onCardDragReleased)
 
 func addCardData(cardData: CardData):
 	var cardDisplays = get_tree().get_nodes_in_group("cd")
@@ -31,7 +32,6 @@ func removeCardData(cardData: CardData):
 	removeCardDisplay(cardDisplay)
 	if canvasLayer:
 		Events.orphanedCardDisplay.emit(cardDisplay)
-
 
 func addCardDisplay(newCard: CardDisplay):
 	
@@ -57,9 +57,12 @@ func setupNewLogicalContainer(newContainer = null):
 	logicalContainer.cardAdded.connect(addCardData)
 	logicalContainer.cardRemoved.connect(removeCardData)
 
-	setupDone = true
-	
+	setupDone = true	
 
 func scuttleCards():
 	print("generic scuttle cards for position controller not overrriden")
 	pass
+
+func _onCardDragReleased(cardDisplay: CardDisplay):
+	if cards.has(cardDisplay):
+		scuttleCards()

@@ -57,7 +57,7 @@ func getTop() -> CardData:
 
 func getLast(toLast: int = 1) -> CardData:
 	var ind = cards.size() - toLast
-	assert(ind > 0 and ind < cards.size())
+	assert(ind >= 0 and ind < cards.size())
 	return cards[ind]
 
 func getAll() -> Array[CardData]:

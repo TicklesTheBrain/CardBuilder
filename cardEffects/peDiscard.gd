@@ -15,7 +15,7 @@ func triggerSpecific(ctxt: GameStateContext):
 	if amountOfCardsToDiscard == -1:
 		cont.disposeAll()
 	else:
-		Selector.cardSelectionRequested.emit(ctxt.hand, amountOfCardsToDiscard, receiveSelection)
+		InputLord.cardSelectionRequested.emit(ctxt.hand, amountOfCardsToDiscard, receiveSelection)
 		await cardSelectionDone
 		for card in selectedCards:
 			cont.disposeCard(card)

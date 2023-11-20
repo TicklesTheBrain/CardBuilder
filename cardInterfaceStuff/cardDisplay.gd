@@ -33,7 +33,7 @@ var selected = false:
 
 func _ready():
 	Events.updateAllDisplays.connect(updateCardDisplay)
-	Selector.cardSelectionComplete.connect(unselect)
+	InputLord.cardSelectionComplete.connect(unselect)
 
 func setupCardDisplay(data: CardData):
 	cardData = data
@@ -71,32 +71,22 @@ func _process(delta):
 		position = get_viewport().get_mouse_position() - mouseOffset
 
 func onClick():
+	InputLord.cardClicked.emit(self)
 
-	if Selector.selecting:
-		if Selector.subjectContainer == cardData.container:
-			if selected:
-				selected = false
-				Selector.removeFromSelection(cardData)
-			else:
-				selected = true
-				Selector.addToSelection(cardData)
-		return
-
-	if not dragged and not inPlayArea:
-		previousPosition = position
-		dragged = true
-		mouseOffset = get_viewport().get_mouse_position() - position
-
-func unselect():
-	if selected:
-		selected = false
+func unselect():	
+	selected = false
 
 func onRelease():
 	if dragged:
-		dragged = false
-		positionController.scuttleCards()
+		InputLord.cardDragReleased.emit(self)
 
-		if inPlayArea != null:			
-			inPlayArea.addCard(self)
-		else:
-			positionController.scuttleCards()
+func startDrag():
+	previousPosition = position
+	dragged = true
+	mouseOffset = get_viewport().get_mouse_position() - position
+
+func endDrag():
+	dragged = false
+
+func select():
+	selected = true
