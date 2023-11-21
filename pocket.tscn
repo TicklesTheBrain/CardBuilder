@@ -1,7 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://o20e5thwdy3j"]
+[gd_scene load_steps=13 format=3 uid="uid://o20e5thwdy3j"]
 
 [ext_resource type="Script" path="res://pocketDisplay.gd" id="1_q2qv6"]
-[ext_resource type="Script" path="res://cardInterfaceStuff/FixedPositionController.gd" id="2_87o7k"]
+[ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="2_1vbvx"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="2_sxrrm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuy27"]
+size = Vector2(1248, 688)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8l4i"]
+size = Vector2(1224, 468)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lydsy"]
+size = Vector2(983, 428)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvlis"]
+size = Vector2(575, 290)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2gfwq"]
 bg_color = Color(0.0313726, 0.247059, 0.109804, 1)
@@ -28,7 +41,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(283, -308)]
+"values": [Vector2(0, -720)]
 }
 
 [sub_resource type="Animation" id="Animation_j2xvq"]
@@ -43,7 +56,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(0.517632, 0.267943),
 "update": 0,
-"values": [Vector2(272, 179), Vector2(300, -306)]
+"values": [Vector2(0, 0), Vector2(0, -720)]
 }
 
 [sub_resource type="Animation" id="Animation_q5f7u"]
@@ -59,7 +72,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.7),
 "transitions": PackedFloat32Array(0.25, 4.43828),
 "update": 0,
-"values": [Vector2(302, -311), Vector2(272, 179)]
+"values": [Vector2(0, -720), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_emsn4"]
@@ -69,73 +82,55 @@ _data = {
 "show": SubResource("Animation_q5f7u")
 }
 
-[node name="PocketLayer" type="CanvasLayer" node_paths=PackedStringArray("animation", "positionController", "infoLabel")]
+[node name="PocketLayer" type="CanvasLayer" node_paths=PackedStringArray("animation", "positionController", "backGroundPanel", "infoLabel", "pocketContainer")]
 layer = 2
 script = ExtResource("1_q2qv6")
 animation = NodePath("Pocket/PocketAnimation")
-positionController = NodePath("PocketPositionController")
+positionController = NodePath("PocketDynamicPosition")
+backGroundPanel = NodePath("Pocket/Panel")
 infoLabel = NodePath("Pocket/Panel/Label")
+sizesMinCenterDistance = Array[float]([35.0, 35.0, 30.0, 25.0])
+sizesMaxCardGaps = Array[float]([40.0, 40.0, 35.0, 30.0])
+sizesMultipleRows = Array[bool]([false, false, true, true])
+sizesRowGaps = Array[float]([10.0, 10.0, 35.0, 25.0])
+pocketContainer = NodePath("PocketContainer")
 
-[node name="PocketPositionController" type="Node2D" parent="." node_paths=PackedStringArray("posCollections", "canvasLayer")]
-script = ExtResource("2_87o7k")
-posCollections = [NodePath("1Pos"), NodePath("2Pos"), NodePath("3Pos"), NodePath("4Pos")]
+[node name="PocketContainer" type="Node" parent="."]
+script = ExtResource("2_1vbvx")
+
+[node name="PocketDynamicPosition" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer", "canvasLayer")]
+script = ExtResource("2_sxrrm")
+cardAreas = [NodePath("ShapeSmall"), NodePath("ShapeMid"), NodePath("ShapeBig"), NodePath("ShapeFull")]
+logicalContainer = NodePath("../PocketContainer")
 canvasLayer = NodePath("..")
 
-[node name="1Pos" type="Node2D" parent="PocketPositionController"]
+[node name="ShapeFull" type="CollisionShape2D" parent="PocketDynamicPosition"]
+visible = false
+position = Vector2(643, 360)
+shape = SubResource("RectangleShape2D_xuy27")
 
-[node name="1_1" type="Marker2D" parent="PocketPositionController/1Pos"]
-position = Vector2(476, 341)
-metadata/_edit_group_ = true
+[node name="ShapeBig" type="CollisionShape2D" parent="PocketDynamicPosition"]
+visible = false
+position = Vector2(639, 263)
+shape = SubResource("RectangleShape2D_p8l4i")
 
-[node name="2Pos" type="Node2D" parent="PocketPositionController"]
+[node name="ShapeMid" type="CollisionShape2D" parent="PocketDynamicPosition"]
+visible = false
+position = Vector2(646.5, 218)
+shape = SubResource("RectangleShape2D_lydsy")
 
-[node name="1_2" type="Marker2D" parent="PocketPositionController/2Pos"]
-position = Vector2(399, 339)
-metadata/_edit_group_ = true
-
-[node name="2_2" type="Marker2D" parent="PocketPositionController/2Pos"]
-position = Vector2(557, 340)
-metadata/_edit_group_ = true
-
-[node name="3Pos" type="Node2D" parent="PocketPositionController"]
-
-[node name="1_3" type="Marker2D" parent="PocketPositionController/3Pos"]
-position = Vector2(354, 337)
-metadata/_edit_group_ = true
-
-[node name="2_3" type="Marker2D" parent="PocketPositionController/3Pos"]
-position = Vector2(512, 338)
-metadata/_edit_group_ = true
-
-[node name="3_3" type="Marker2D" parent="PocketPositionController/3Pos"]
-position = Vector2(669, 338)
-metadata/_edit_group_ = true
-
-[node name="4Pos" type="Node2D" parent="PocketPositionController"]
-
-[node name="1_4" type="Marker2D" parent="PocketPositionController/4Pos"]
-position = Vector2(296, 338)
-metadata/_edit_group_ = true
-
-[node name="2_4" type="Marker2D" parent="PocketPositionController/4Pos"]
-position = Vector2(454, 339)
-metadata/_edit_group_ = true
-
-[node name="3_4" type="Marker2D" parent="PocketPositionController/4Pos"]
-position = Vector2(611, 339)
-metadata/_edit_group_ = true
-
-[node name="4_4" type="Marker2D" parent="PocketPositionController/4Pos"]
-position = Vector2(766, 339)
-metadata/_edit_group_ = true
+[node name="ShapeSmall" type="CollisionShape2D" parent="PocketDynamicPosition"]
+visible = false
+position = Vector2(626.5, 171)
+shape = SubResource("RectangleShape2D_hvlis")
 
 [node name="Pocket" type="Node2D" parent="."]
-position = Vector2(283, -308)
+position = Vector2(0, -720)
 metadata/_edit_group_ = true
 
 [node name="Panel" type="Panel" parent="Pocket"]
-offset_right = 527.0
-offset_bottom = 280.0
+offset_right = 300.0
+offset_bottom = 600.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_2gfwq")
 
 [node name="Label" type="Label" parent="Pocket/Panel"]

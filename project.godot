@@ -23,6 +23,10 @@ InputLord="*res://InputLord.gd"
 Logger="*res://logger.gd"
 PocketLord="*res://pocket_lord.tscn"
 
+[debug]
+
+gdscript/warnings/onready_with_export=1
+
 [display]
 
 window/size/viewport_width=1280

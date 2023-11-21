@@ -29,7 +29,7 @@ func addCardData(cardData: CardData):
 func removeCardData(cardData: CardData):
 	var cardDisplays = get_tree().get_nodes_in_group("cd")
 	var cardDisplay = cardDisplays.filter(func(cd): return cd.cardData == cardData)[0]
-	removeCardDisplay(cardDisplay)
+	removeCardDisplay(cardDisplay) #TODO: this is kinda ugly
 	if canvasLayer:
 		Events.orphanedCardDisplay.emit(cardDisplay)
 

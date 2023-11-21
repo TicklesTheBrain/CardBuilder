@@ -22,7 +22,7 @@ func triggerSpecific(ctxt: GameStateContext):
 	if destination.getFreeSpace() != -1:
 		amountOfCardsToChoose = min (destination.getFreeSpace(), amountOfCardsToChoose)
 
-	PocketLord.requestNewPocket.emit(getPocketText(), receivePocket)
+	PocketLord.requestNewPocket.emit(getPocketText(), receivePocket, amountOfCardsToChooseFrom)
 
 	var counter = 0
 	while (not source.checkEmpty() and not destination.checkFull() and counter < amountOfCardsToChooseFrom):

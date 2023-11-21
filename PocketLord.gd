@@ -1,9 +1,10 @@
 extends Node
 
 @export var pocketPacked: PackedScene
+
 var pocketRefs = {}
 
-signal requestNewPocket(pocketText: String, receivingMethod: Callable)
+signal requestNewPocket(pocketText: String, receivingMethod: Callable, expectedCards: int)
 signal requestClosePocket(pocketID: CardContainer)
 signal pocketClosed(cont: CardContainer)
 
@@ -11,14 +12,15 @@ func _ready():
 	requestNewPocket.connect(makeNewPocket)
 	requestClosePocket.connect(cleanUpPocket)
 
-func makeNewPocket(pocketText: String, receivingMethod: Callable):
+func makeNewPocket(pocketText: String, receivingMethod: Callable, expectedCards: int):	
 
 	var newPocket = pocketPacked.instantiate() as PocketDisplay
-	var pocketContainer = CardContainer.new()
-	add_child(pocketContainer)
-	newPocket.setupPositionController(pocketContainer)
+	newPocket.setSize(expectedCards)
+	var pocketContainer = newPocket.pocketContainer
 	newPocket.setupText(pocketText)
 	add_child(newPocket)
+
+	newPocket.layer += pocketRefs.keys().size() #new pockets always open on top
 
 	pocketRefs[pocketContainer] = newPocket
 	newPocket.showPocket()

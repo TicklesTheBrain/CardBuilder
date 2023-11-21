@@ -29,7 +29,7 @@ func _ready():
 	for g in range(amountOfGraftsTodo):
 
 
-		PocketLord.requestNewPocket.emit("Choose 1 card graft", receivePocket)
+		PocketLord.requestNewPocket.emit("Choose 1 card graft", receivePocket, graftOptionsAmount)
 
 		for i in range(graftOptionsAmount):
 			addNewOption()
@@ -40,7 +40,7 @@ func _ready():
 
 		graftChoicePocket.removeCard(selectedGraft)
 
-		PocketLord.requestNewPocket.emit("Choose 1 to add graft to", receiveDeckPocket)
+		PocketLord.requestNewPocket.emit("Choose 1 to add graft to", receiveDeckPocket, playerDeck.getAll().size())
 
 		playerDeck.disposeAll(deckPocket)
 

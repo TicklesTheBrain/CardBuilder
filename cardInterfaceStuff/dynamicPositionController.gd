@@ -2,11 +2,16 @@ extends CardPositionController
 class_name DynamicPositionController
 
 @export var cardAreas: Array[CollisionShape2D]
-@export var cardAreaId: int = 0
+@export var cardAreaId: int = 0:
+	set (newVal):
+		relevantShape = cardAreas[newVal]
+		cardAreaId = newVal
 @export var minCardCenterDistance: float
 @export var maxCardGap: float
 @export var multipleRows: bool = false
 @export var rowGap: float = 25
+
+var relevantShape: CollisionShape2D
 
 func scuttleCards():
 
@@ -14,9 +19,9 @@ func scuttleCards():
 		return
 
 	var numberOfRows
-	var areaHeight = cardAreas[cardAreaId].shape.get_rect().size.y
-	var areaWidth = cardAreas[cardAreaId].shape.get_rect().size.x
-	var cardHeight = cards[0].cardShape.get_children()[0].shape.get_rect().size.y
+	var areaHeight = relevantShape.shape.get_rect().size.y
+	var areaWidth = relevantShape.shape.get_rect().size.x
+	var cardHeight = cards[0].cardShape.get_children()[0].shape.get_rect().size.y #TODO: this is fucking ugly
 	var cardsInRows = [cards]
 	
 	if multipleRows:
@@ -34,7 +39,7 @@ func scuttleCards():
 				c+=1
 			cardsInRows.push_back(newRow)
 
-	var centerPos = cardAreas[cardAreaId].position
+	var centerPos = relevantShape.position
 	var totalHeight = (cardsInRows.size()-1)*(cardHeight+rowGap)+cardHeight
 	var firstRowCenter = centerPos-Vector2(0,totalHeight/2-cardHeight/2)
 	var r = 0
