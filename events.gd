@@ -6,11 +6,7 @@ signal playerTurnStart()
 signal playerTurnEnd(playerValue: int, buster: bool)
 signal newCardDisplayRequested(card: CardData)
 signal updateAllDisplays()
-signal requestNewPocket(pocketText: String, receivingMethod: Callable)
-signal requestClosePocket(pocketID: CardContainer)
 signal orphanedCardDisplay(cd: CardDisplay)
-
-
 
 func _ready():
 	cardAdded.connect(displayUpdateWrapper)

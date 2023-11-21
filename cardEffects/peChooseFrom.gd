@@ -22,7 +22,7 @@ func triggerSpecific(ctxt: GameStateContext):
 	if destination.getFreeSpace() != -1:
 		amountOfCardsToChoose = min (destination.getFreeSpace(), amountOfCardsToChoose)
 
-	Events.requestNewPocket.emit(getPocketText(), receivePocket)
+	PocketLord.requestNewPocket.emit(getPocketText(), receivePocket)
 
 	var counter = 0
 	while (not source.checkEmpty() and not destination.checkFull() and counter < amountOfCardsToChooseFrom):
@@ -42,7 +42,7 @@ func triggerSpecific(ctxt: GameStateContext):
 			unchosenDestination.addCard(card)
 			
 	pocketContainer.disposeAll(ctxt.getContainerFromPurpose(destinationOfUnchosenCards))
-	Events.requestClosePocket.emit(pocketContainer)
+	PocketLord.requestClosePocket.emit(pocketContainer)
 			
 	if reshuffleDeckAfterwards:
 		ctxt.drawDeck.shuffle()
@@ -92,3 +92,4 @@ func mergeEffectSepecific(newEffect: CardEffect):
 	amountOfCardsToChoose += newEffect.amountOfCardsToChoose
 	amountOfCardsToChooseFrom += newEffect.amountOfCardsToChooseFrom
 
+	

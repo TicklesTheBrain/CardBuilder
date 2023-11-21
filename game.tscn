@@ -42,6 +42,7 @@ type = 1
 capAtZero = true
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_6i1e2"]
@@ -84,6 +85,7 @@ type = 0
 capAtZero = true
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_vc84x"]
@@ -186,6 +188,7 @@ valueToMatchOrExceed = 10
 disabledOnMatchOrExceed = true
 staticText = ""
 containerToCheck = 2
+conditionalName = ""
 
 [sub_resource type="Resource" id="Resource_xo3i5"]
 script = ExtResource("12_p8cui")
@@ -328,6 +331,7 @@ type = 1
 capAtZero = true
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_oqfhl"]
@@ -416,6 +420,7 @@ shift = 2
 type = 0
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_nl27r"]
@@ -474,6 +479,7 @@ shift = -2
 type = 0
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_ep2sd"]
@@ -581,6 +587,7 @@ type = 1
 capAtZero = true
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_qvhbc"]
@@ -724,10 +731,12 @@ staticText = ""
 [sub_resource type="Resource" id="Resource_l00fn"]
 script = ExtResource("20_cxkqq")
 flatChange = -1
+increaseOnMerge = false
 type = 0
 capAtZero = true
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_b671k"]
@@ -785,6 +794,7 @@ valueToMatchOrExceed = 10
 disabledOnMatchOrExceed = false
 staticText = "Can only play if already played at least 10 value"
 containerToCheck = 2
+conditionalName = ""
 
 [sub_resource type="Resource" id="Resource_o147x"]
 script = ExtResource("6_wbupb")
@@ -825,6 +835,7 @@ amountToMatchOrExceed = 2
 disabledOnMatchOrExceed = true
 staticText = "If less than 2 cards in hand"
 containerToCheck = 1
+conditionalName = ""
 
 [sub_resource type="Resource" id="Resource_nmgbw"]
 script = ExtResource("14_66573")

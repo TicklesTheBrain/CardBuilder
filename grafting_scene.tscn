@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=3 uid="uid://ceavuthes855u"]
+[gd_scene load_steps=122 format=3 uid="uid://ceavuthes855u"]
 
 [ext_resource type="Script" path="res://grafting_scene.gd" id="1_aty88"]
 [ext_resource type="PackedScene" uid="uid://dsfqrofqt0xs4" path="res://card_graft.tscn" id="1_w2i3f"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://cardEffects/peDraw.gd" id="4_tmet7"]
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="5_sdwpe"]
 [ext_resource type="Script" path="res://cardAbstractions/statData.gd" id="6_dpyu6"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/CardDisplaySink.gd" id="9_yg58f"]
 [ext_resource type="Script" path="res://modifiers/paramModifierLowestHighestPlayed.gd" id="11_kksuw"]
 [ext_resource type="Script" path="res://modifiers/paramModifierFixedChange.gd" id="12_snyw0"]
 [ext_resource type="Script" path="res://cardEffects/peContainerModifier.gd" id="13_k3de3"]
@@ -38,7 +39,7 @@ script = ExtResource("4_tmet7")
 source = 0
 destination = 1
 amountOfCardsToDraw = 1
-effectName = ""
+effectName = "Draw1"
 staticText = ""
 conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -58,7 +59,7 @@ staticText = ""
 
 [sub_resource type="Resource" id="Resource_w4bec"]
 script = ExtResource("5_sdwpe")
-amount = 3
+amount = 20
 debug = false
 cardTitle = ""
 graft = true
@@ -92,6 +93,7 @@ type = 1
 capAtZero = true
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_6i1e2"]
@@ -134,6 +136,7 @@ type = 0
 capAtZero = true
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_vc84x"]
@@ -248,6 +251,7 @@ valueToMatchOrExceed = 6
 disabledOnMatchOrExceed = false
 staticText = ""
 containerToCheck = 2
+conditionalName = ""
 
 [sub_resource type="Resource" id="Resource_xo3i5"]
 script = ExtResource("4_tmet7")
@@ -390,6 +394,7 @@ type = 1
 capAtZero = true
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_oqfhl"]
@@ -478,6 +483,7 @@ shift = 2
 type = 0
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_nl27r"]
@@ -536,6 +542,7 @@ shift = -2
 type = 0
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_ep2sd"]
@@ -643,6 +650,7 @@ type = 1
 capAtZero = true
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_qvhbc"]
@@ -786,10 +794,12 @@ staticText = ""
 [sub_resource type="Resource" id="Resource_l00fn"]
 script = ExtResource("22_qhn3g")
 flatChange = -1
+increaseOnMerge = false
 type = 0
 capAtZero = true
 inEffect = true
 staticText = ""
+modifierName = ""
 timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
 
 [sub_resource type="Resource" id="Resource_b671k"]
@@ -847,6 +857,7 @@ valueToMatchOrExceed = 10
 disabledOnMatchOrExceed = false
 staticText = "Can only play if already played at least 10 value"
 containerToCheck = 2
+conditionalName = ""
 
 [sub_resource type="Resource" id="Resource_o147x"]
 script = ExtResource("3_yne2b")
@@ -887,6 +898,7 @@ amountToMatchOrExceed = 2
 disabledOnMatchOrExceed = true
 staticText = "If less than 2 cards in hand"
 containerToCheck = 1
+conditionalName = ""
 
 [sub_resource type="Resource" id="Resource_nmgbw"]
 script = ExtResource("16_qrraa")
@@ -992,29 +1004,37 @@ startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6bfs"]
 size = Vector2(1200, 700)
 
-[node name="GraftingScene" type="Node2D" node_paths=PackedStringArray("graftDeck", "playerDeck", "graftOptions", "newCardMarker")]
+[node name="GraftingScene" type="Node2D" node_paths=PackedStringArray("graftDeck", "playerDeck", "graftOptions", "graftDiscard", "newCardMarker")]
 script = ExtResource("1_aty88")
 graftDeck = NodePath("GraftDeck")
 playerDeck = NodePath("DeckManager")
-graftOptions = NodePath("GraftOptions")
+graftOptions = NodePath("")
+graftDiscard = NodePath("GraftDiscard")
 cardGraftDisplay = ExtResource("1_w2i3f")
 cardDisplay = ExtResource("3_sw0ic")
 newCardMarker = NodePath("CardOrigin")
 
-[node name="GraftDeck" type="Node" parent="."]
+[node name="CardDisplaySink" type="Node2D" parent="." node_paths=PackedStringArray("container", "positionMarker")]
+script = ExtResource("9_yg58f")
+container = NodePath("../DeckManager")
+animationTime = 0.5
+positionMarker = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="CardDisplaySink"]
+position = Vector2(79, 648)
+
+[node name="GraftDeck" type="Node" parent="." node_paths=PackedStringArray("feedContainer")]
 script = ExtResource("3_lygcp")
 debug = false
 templateDeck = Array[ExtResource("5_sdwpe")]([SubResource("Resource_w4bec")])
-
-[node name="GraftOptions" type="Node" parent="."]
-script = ExtResource("4_eldwq")
+feedContainer = NodePath("../GraftDiscard")
 
 [node name="GraftOptionsController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer")]
 script = ExtResource("4_sdbnn")
 cardAreas = [NodePath("GraftOptionsArea")]
 minCardCenterDistance = 50.0
 maxCardGap = 25.0
-logicalContainer = NodePath("../GraftOptions")
+logicalContainer = NodePath("")
 
 [node name="GraftOptionsArea" type="CollisionShape2D" parent="GraftOptionsController"]
 position = Vector2(641.25, 181)
@@ -1036,6 +1056,19 @@ maxCardGap = 30.0
 multipleRows = true
 
 [node name="DeckDisplayShape" type="CollisionShape2D" parent="DeckDisplayController"]
+visible = false
 position = Vector2(622, 357)
 shape = SubResource("RectangleShape2D_t6bfs")
 script = ExtResource("25_0eao4")
+
+[node name="GraftDiscard" type="Node" parent="."]
+script = ExtResource("4_eldwq")
+
+[node name="CardDisplaySink" type="Node2D" parent="GraftDiscard" node_paths=PackedStringArray("container", "positionMarker")]
+script = ExtResource("9_yg58f")
+container = NodePath("..")
+animationTime = 0.5
+positionMarker = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="GraftDiscard/CardDisplaySink"]
+position = Vector2(1170, 622)

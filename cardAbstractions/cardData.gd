@@ -17,6 +17,8 @@ class_name CardData
 @export var drawEffects: Array[CardEffect] = []
 @export var startMatchEffects: Array[CardEffect] = []
 
+signal announceDestroy()
+
 var container: CardContainer:
 	set (new):
 		if container:

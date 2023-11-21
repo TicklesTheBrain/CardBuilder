@@ -38,6 +38,7 @@ func _ready():
 
 func setupCardDisplay(data: CardData):
 	cardData = data
+	cardData.announceDestroy.connect(queue_free)
 	updateCardDisplay()
 
 func updateCardDisplay(dataToShow: CardData = cardData):

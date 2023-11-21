@@ -3,9 +3,13 @@ extends Node
 @export var pocketPacked: PackedScene
 var pocketRefs = {}
 
+signal requestNewPocket(pocketText: String, receivingMethod: Callable)
+signal requestClosePocket(pocketID: CardContainer)
+signal pocketClosed(cont: CardContainer)
+
 func _ready():
-	Events.requestNewPocket.connect(makeNewPocket)
-	Events.requestClosePocket.connect(cleanUpPocket)
+	requestNewPocket.connect(makeNewPocket)
+	requestClosePocket.connect(cleanUpPocket)
 
 func makeNewPocket(pocketText: String, receivingMethod: Callable):
 
@@ -25,5 +29,7 @@ func cleanUpPocket(cardContainer: CardContainer):
 	Logger.log(['cleanup pocket started', cardContainer], 3)
 	var pocket = pocketRefs[cardContainer]
 	pocket.hidePocket()
+	await pocket.pocketClosed
+	pocketClosed.emit(cardContainer)
 	cardContainer.queue_free()
 	pocketRefs.erase(cardContainer)
