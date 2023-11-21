@@ -15,5 +15,5 @@ func calculate(ctxt: GameStateContext, currValue: int, card: CardData) -> int:
         return cost
 
 func calculateSpecific(_ctxt: GameStateContext, currValue: int, _card: CardData) -> int:
-    print("this is a generic calculate cost function that was not overriden")
+    print("this is a generic calculate cost function that was not overriden", modifierName)
     return currValue

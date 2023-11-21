@@ -3,6 +3,7 @@ class_name AddModifier
 
 @export var containersToApply: Array[Game.ContainerPurposes] = []
 @export var modifier: Modifier
+#TODO: Think about merging timingRules, could be fun
 @export var timingRules: Array[TC_Rule] = []
 
 func triggerSpecific(ctxt: GameStateContext):
@@ -14,3 +15,7 @@ func triggerSpecific(ctxt: GameStateContext):
 			var newTC = rule.createNewTC(ctxt)
 			newMod.addTC(newTC)
 		ctxt.getContainerFromPurpose(purpose).addModifier(newMod)
+
+func mergeEffectSpecific(newEffect: CardEffect):
+	assert(containersToApply.hash() == newEffect.containersToApply.hash())
+	modifier.mergeModifier(newEffect.modifier)

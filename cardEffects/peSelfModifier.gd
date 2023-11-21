@@ -16,3 +16,6 @@ func triggerSpecific(ctxt: GameStateContext):
 			ctxt.actingCard.cost.addModifier(newMod)
 		CardParam.ParamType.VALUE:
 			ctxt.actingCard.value.addModifier(newMod)
+
+func mergeEffectSpecific(newEffect: CardEffect):
+	modifier.mergeModifier(newEffect.modifier)

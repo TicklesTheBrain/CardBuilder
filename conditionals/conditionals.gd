@@ -18,5 +18,9 @@ func check(_ctxt: GameStateContext):
 func getTextSpecific():
     return "conditional text not overriden"
 
-func mergeConditional(_newCondiitional: Conditional):
-    print ("if this is not overriden, conditional merge has no effect")
+func mergeConditional(newConditional: Conditional):
+    assert(containerToCheck == newConditional.containerToCheck)
+    mergeConditionalSpecific(newConditional)
+
+func mergeConditionalSpecific(_newConditiona: Conditional):
+    print ("if this is not overriden, conditional merge has no effect", conditionalName)

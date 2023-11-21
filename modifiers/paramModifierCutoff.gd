@@ -24,6 +24,8 @@ func calculateSpecific(_ctxt: GameStateContext, currValue: int, card: CardData):
 	return currValue
 
 func mergeModifierSpecific(newModifier: Modifier):
+
+	#TODO: this could need another look to see if there is a good way to merge different cutoffs
 	assert(cutoffBelow == newModifier.cutoffBellow)
 	assert(onCutOffReturn == newModifier.onCutOffReturn)
 	assert(cutoffBasedOnParamItself == newModifier.cutoffBasedOnParamItself)

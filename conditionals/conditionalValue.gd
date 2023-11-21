@@ -4,6 +4,8 @@ class_name ConditionalValue
 @export var valueToMatchOrExceed: int
 @export var disabledOnMatchOrExceed: bool = false
 
+#TODO: value and amount should just be flags rather than separate classes
+
 func getTextSpecific():
 	var text = "If value {verb} equal or more than {number}, "
 	var verb = 'is'
@@ -19,3 +21,17 @@ func check(ctxt: GameStateContext):
 	if disabledOnMatchOrExceed and currValue < valueToMatchOrExceed:
 		return true
 	return false
+
+func mergeConditionalSpecific(newConditional: Conditional):
+	assert(disabledOnMatchOrExceed == newConditional.disabledOnMatchOrExceed)
+	if disabledOnMatchOrExceed:
+		if valueToMatchOrExceed == newConditional.valueToMatchOrExceed:
+			valueToMatchOrExceed -= 1
+		else:
+			valueToMatchOrExceed += 1
+
+	else:
+		if disabledOnMatchOrExceed:
+			valueToMatchOrExceed =  min(valueToMatchOrExceed, newConditional.valueToMatchOrExceed)
+		else:
+			valueToMatchOrExceed =  max(valueToMatchOrExceed, newConditional.valueToMatchOrExceed)
