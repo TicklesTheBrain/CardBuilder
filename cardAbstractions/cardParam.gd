@@ -9,7 +9,11 @@ enum ParamType {COST, VALUE}
 @export var staticText: String
 
 func getValue(ctxt: GameStateContext, card: CardData):
-	var value = card.container.applyModifiers(type, card, baseValue, ctxt)
+	var value: int
+	if not card.container:
+		value = baseValue 
+	else:
+		value = card.container.applyModifiers(type, card, baseValue, ctxt)
 	for mod in modifiers:
 		value = mod.calculate(ctxt, value, card)
 	return value

@@ -8,7 +8,7 @@ var turnOn: bool = false
 var turnOff: bool = false
 var counter: int = -1
 
-var cardSubject: CardData
+var subjectCard: CardData
 var containerSubject: CardContainer
 
 func decreaseCounter(_discardValue = null, _discardValue2 = null):
@@ -23,12 +23,12 @@ func decreaseCounter(_discardValue = null, _discardValue2 = null):
 func counterDecreaseOnCardPlayed(container: CardContainer, card: CardData):
 	if container != containerSubject:
 		return
-	if cardSubject and card == cardSubject:
+	if subjectCard and card == subjectCard:
 		return
 	decreaseCounter()
 
 func counterDecreaseOnCardRemoved(_container: CardContainer, card: CardData):
-	if cardSubject != card:
+	if subjectCard != card:
 		return
 	if card.prevContainer and card.prevContainer == containerSubject:
 		decreaseCounter()

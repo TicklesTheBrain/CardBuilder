@@ -61,12 +61,16 @@ func triggerSpecific(ctxt: GameStateContext):
 		for graft in unchosenGrafts:
 			graft.announceDestroy.emit()
 
+		InputLord.removeMouseOverDelegate(grafOptionsPocket)
+
 		PocketLord.requestClosePocket.emit(graftChoicePocket)
 		PocketLord.requestClosePocket.emit(grafOptionsPocket)
 
 		#TODO: simplify destroying card displays when moving them to a container without a controller
 
 		await deckPocketClosed
+
+
 
 func processPocketClosed(cont: CardContainer):
 	if cont == grafOptionsPocket:

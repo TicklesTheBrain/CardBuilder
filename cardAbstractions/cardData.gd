@@ -108,6 +108,10 @@ func duplicateSelf() -> CardData:
 	newCard.cost = cost.duplicate()
 	newCard.stats = stats.duplicate()
 
+	#TODO: Is this correct? Do we always want to pass on this info to the duplicate?
+	newCard.container = container
+	newCard.prevContainer = prevContainer
+
 	CardData.mergeEffectsBuckets(newCard.onPlayEffects, onPlayEffects)
 	CardData.mergeEffectsBuckets(newCard.onLoseEffects, onLoseEffects)
 	CardData.mergeEffectsBuckets(newCard.onWinEffects, onWinEffects)

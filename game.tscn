@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=153 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" path="res://modifiers/paramModifierFlat.gd" id="20_cxkqq"]
 [ext_resource type="Script" path="res://cardEffects/ceSetValueToPrevious.gd" id="21_edulk"]
 [ext_resource type="Script" path="res://conditionals/conditionalAmount.gd" id="22_20aq1"]
+[ext_resource type="Script" path="res://cardEffects/ceGraft.gd" id="23_sjp2n"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="27_mupmx"]
 
 [sub_resource type="Resource" id="Resource_11ma0"]
@@ -236,7 +237,7 @@ staticText = ""
 resource_name = "Draw if value 6"
 script = ExtResource("5_fj00f")
 amount = 2
-debug = false
+debug = true
 cardTitle = ""
 graft = false
 value = SubResource("Resource_2jh3x")
@@ -1047,6 +1048,108 @@ endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 
+[sub_resource type="Resource" id="Resource_h57qx"]
+script = ExtResource("6_wbupb")
+baseValue = 0
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+
+[sub_resource type="Resource" id="Resource_lsr0e"]
+script = ExtResource("6_wbupb")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+
+[sub_resource type="Resource" id="Resource_e08e7"]
+script = ExtResource("12_p8cui")
+source = 0
+destination = 1
+amountOfCardsToDraw = 1
+effectName = ""
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+
+[sub_resource type="Resource" id="Resource_tsrmm"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = -1
+
+[sub_resource type="Resource" id="Resource_v7stm"]
+script = ExtResource("6_wbupb")
+baseValue = 1
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+
+[sub_resource type="Resource" id="Resource_wexbj"]
+script = ExtResource("5_fj00f")
+amount = 3
+debug = false
+cardTitle = ""
+graft = true
+value = SubResource("Resource_v7stm")
+type = ""
+cost = SubResource("Resource_lsr0e")
+stats = SubResource("Resource_tsrmm")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_e08e7")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_dhyph"]
+script = ExtResource("23_sjp2n")
+graftDeckTemplate = Array[ExtResource("5_fj00f")]([SubResource("Resource_wexbj")])
+graftOptionsNo = 3
+cardOptions = 3
+graftOptionsSource = 0
+numberOfGrafts = 1
+debugOnly = false
+effectName = ""
+staticText = "Add graft to top 3 cards of your deck"
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+
+[sub_resource type="Resource" id="Resource_gtmle"]
+script = ExtResource("7_j6ar4")
+attack = 0
+defence = 0
+
+[sub_resource type="Resource" id="Resource_qweo3"]
+script = ExtResource("6_wbupb")
+baseValue = 1
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+
+[sub_resource type="Resource" id="Resource_u76s7"]
+resource_name = "Graft1"
+script = ExtResource("5_fj00f")
+amount = 2
+debug = true
+cardTitle = ""
+graft = false
+value = SubResource("Resource_qweo3")
+type = ""
+cost = SubResource("Resource_h57qx")
+stats = SubResource("Resource_gtmle")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_dhyph")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
 [sub_resource type="Resource" id="Resource_rogld"]
 script = ExtResource("6_wbupb")
 baseValue = 0
@@ -1145,7 +1248,7 @@ debugLabel = NodePath("../../../InfoStuff/EnergyCounter")
 [node name="DeckManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("3_8edax")
 debugRandomiseStats = true
-templateDeck = Array[ExtResource("5_fj00f")]([SubResource("Resource_m4wcd"), SubResource("Resource_chvy2"), SubResource("Resource_xeq1j"), SubResource("Resource_o77ee"), SubResource("Resource_p1bhp"), SubResource("Resource_vwdiw"), SubResource("Resource_iben3"), SubResource("Resource_p32kq"), SubResource("Resource_f3ql2"), SubResource("Resource_5treu"), SubResource("Resource_2rgny"), SubResource("Resource_l6ab6"), SubResource("Resource_wb21s"), SubResource("Resource_86kyf"), SubResource("Resource_ghq3l"), SubResource("Resource_4nafk"), SubResource("Resource_d2adi"), SubResource("Resource_nny05")])
+templateDeck = Array[ExtResource("5_fj00f")]([SubResource("Resource_m4wcd"), SubResource("Resource_chvy2"), SubResource("Resource_xeq1j"), SubResource("Resource_o77ee"), SubResource("Resource_p1bhp"), SubResource("Resource_vwdiw"), SubResource("Resource_iben3"), SubResource("Resource_p32kq"), SubResource("Resource_f3ql2"), SubResource("Resource_5treu"), SubResource("Resource_2rgny"), SubResource("Resource_l6ab6"), SubResource("Resource_wb21s"), SubResource("Resource_86kyf"), SubResource("Resource_ghq3l"), SubResource("Resource_4nafk"), SubResource("Resource_d2adi"), SubResource("Resource_nny05"), SubResource("Resource_u76s7")])
 feedContainer = NodePath("../DiscardManager")
 disposeContainer = NodePath("../DiscardManager")
 
@@ -1250,12 +1353,13 @@ shape = SubResource("RectangleShape2D_2v7eo")
 position = Vector2(1075, 148.5)
 shape = SubResource("RectangleShape2D_7o7mm")
 
-[node name="EnemyDiscardController" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker")]
+[node name="EnemyDiscardController" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
 script = ExtResource("3_lpmun")
-positionMarker = NodePath("../DiscardDisplaySink/DiscardOrigin")
+positionMarker = NodePath("EnemyDiscard")
+logicalContainer = NodePath("../Logic/Enemy/EnemyDiscard")
 
-[node name="Marker2D" type="Marker2D" parent="EnemyDiscardController"]
-position = Vector2(1091, 319)
+[node name="EnemyDiscard" type="Marker2D" parent="EnemyDiscardController"]
+position = Vector2(1216, 164)
 
 [node name="DiscardDisplaySink" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
 script = ExtResource("3_lpmun")
