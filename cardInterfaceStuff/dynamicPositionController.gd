@@ -19,6 +19,10 @@ func scuttleCards():
 		return
 
 	var numberOfRows
+
+	if not relevantShape:
+		cardAreaId = cardAreaId #This is hacky as all fuck
+
 	var areaHeight = relevantShape.shape.get_rect().size.y
 	var areaWidth = relevantShape.shape.get_rect().size.x
 	var cardHeight = cards[0].cardShape.get_children()[0].shape.get_rect().size.y #TODO: this is fucking ugly

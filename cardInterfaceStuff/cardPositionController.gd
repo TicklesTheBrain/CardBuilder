@@ -4,6 +4,7 @@ class_name CardPositionController
 @export var cardMoveTime: float = 0.5
 @export var logicalContainer: CardContainer
 @export var canvasLayer: CanvasLayer
+@export var canCreateNewDisplays: bool  = true
 
 var cards: Array[CardDisplay] = []
 var setupDone: bool = false
@@ -17,7 +18,10 @@ func addCardData(cardData: CardData):
 	var cardDisplays = get_tree().get_nodes_in_group("cd")
 	var matchingCD = cardDisplays.filter(func(cd): return cd.cardData == cardData)
 	if matchingCD.size() == 0:
-		Events.newCardDisplayRequested.emit(cardData)
+		if canCreateNewDisplays:
+			CardDisplayLord.newCardDisplayRequested.emit(cardData)
+		else:
+			return
 	cardDisplays = get_tree().get_nodes_in_group("cd")
 	var cardDisplay = cardDisplays.filter(func(cd): return cd.cardData == cardData)[0]
 	addCardDisplay(cardDisplay)
@@ -28,10 +32,14 @@ func addCardData(cardData: CardData):
 
 func removeCardData(cardData: CardData):
 	var cardDisplays = get_tree().get_nodes_in_group("cd")
-	var cardDisplay = cardDisplays.filter(func(cd): return cd.cardData == cardData)[0]
-	removeCardDisplay(cardDisplay) #TODO: this is kinda ugly
+	var matchingDisplays = cardDisplays.filter(func(cd): return cd.cardData == cardData)
+	
+	if matchingDisplays.size() == 0:
+		return
+
+	removeCardDisplay(matchingDisplays[0]) #TODO: this is kinda ugly
 	if canvasLayer:
-		Events.orphanedCardDisplay.emit(cardDisplay)
+		CardDisplayLord.orphanedCardDisplay.emit(matchingDisplays[0])
 
 func addCardDisplay(newCard: CardDisplay):
 	
@@ -57,6 +65,8 @@ func setupNewLogicalContainer(newContainer = null):
 	logicalContainer.cardAdded.connect(addCardData)
 	logicalContainer.cardRemoved.connect(removeCardData)
 
+	setupContainerSpecific()
+
 	setupDone = true	
 
 func scuttleCards():
@@ -66,3 +76,6 @@ func scuttleCards():
 func _onCardDragReleased(cardDisplay: CardDisplay):
 	if cards.has(cardDisplay):
 		scuttleCards()
+
+func setupContainerSpecific():
+	print("setup container specific not overriden, might be alright")

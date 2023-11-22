@@ -22,6 +22,7 @@ TcFactory="*res://tc_factory.gd"
 InputLord="*res://InputLord.gd"
 Logger="*res://logger.gd"
 PocketLord="*res://pocket_lord.tscn"
+CardDisplayLord="*res://card_display_lord.tscn"
 
 [debug]
 

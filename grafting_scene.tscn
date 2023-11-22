@@ -7,23 +7,23 @@
 [ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="3_yne2b"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="4_eldwq"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="4_sdbnn"]
-[ext_resource type="Script" path="res://cardEffects/peDraw.gd" id="4_tmet7"]
+[ext_resource type="Script" path="res://cardEffects/ceDraw.gd" id="4_tmet7"]
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="5_sdwpe"]
 [ext_resource type="Script" path="res://cardAbstractions/statData.gd" id="6_dpyu6"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/CardDisplaySink.gd" id="9_yg58f"]
 [ext_resource type="Script" path="res://modifiers/paramModifierLowestHighestPlayed.gd" id="11_kksuw"]
 [ext_resource type="Script" path="res://modifiers/paramModifierFixedChange.gd" id="12_snyw0"]
-[ext_resource type="Script" path="res://cardEffects/peContainerModifier.gd" id="13_k3de3"]
+[ext_resource type="Script" path="res://cardEffects/ceContainerModifier.gd" id="13_k3de3"]
 [ext_resource type="Script" path="res://cardAbstractions/tcRules.gd" id="14_mv22v"]
 [ext_resource type="Script" path="res://conditionals/conditionalValue.gd" id="15_im4ms"]
-[ext_resource type="Script" path="res://cardEffects/peDiscard.gd" id="16_qrraa"]
-[ext_resource type="Script" path="res://cardEffects/peResourceModify.gd" id="17_6gasn"]
+[ext_resource type="Script" path="res://cardEffects/ceDiscard.gd" id="16_qrraa"]
+[ext_resource type="Script" path="res://cardEffects/ceResourceModify.gd" id="17_6gasn"]
 [ext_resource type="Script" path="res://modifiers/paramModifierChooseBest.gd" id="18_1cwha"]
-[ext_resource type="Script" path="res://cardEffects/peChooseFrom.gd" id="19_abyis"]
+[ext_resource type="Script" path="res://cardEffects/ceChooseFrom.gd" id="19_abyis"]
 [ext_resource type="Script" path="res://modifiers/counterModifierFixedChange.gd" id="20_vg52f"]
 [ext_resource type="Script" path="res://modifiers/paramModifierCutoff.gd" id="21_63phl"]
 [ext_resource type="Script" path="res://modifiers/paramModifierFlat.gd" id="22_qhn3g"]
-[ext_resource type="Script" path="res://cardEffects/peSetValueToPrevious.gd" id="23_2s31b"]
+[ext_resource type="Script" path="res://cardEffects/ceSetValueToPrevious.gd" id="23_2s31b"]
 [ext_resource type="Script" path="res://conditionals/conditionalAmount.gd" id="24_4kk4y"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/drawnCollisionShape.gd" id="25_0eao4"]
 
@@ -1004,20 +1004,17 @@ startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6bfs"]
 size = Vector2(1200, 700)
 
-[node name="GraftingScene" type="Node2D" node_paths=PackedStringArray("graftDeck", "playerDeck", "graftOptions", "graftDiscard", "newCardMarker")]
+[node name="GraftingScene" type="Node2D" node_paths=PackedStringArray("graftDeck", "playerDeck", "graftDiscard", "newCardMarker")]
 script = ExtResource("1_aty88")
 graftDeck = NodePath("GraftDeck")
 playerDeck = NodePath("DeckManager")
-graftOptions = NodePath("")
 graftDiscard = NodePath("GraftDiscard")
 cardGraftDisplay = ExtResource("1_w2i3f")
 cardDisplay = ExtResource("3_sw0ic")
 newCardMarker = NodePath("CardOrigin")
 
-[node name="CardDisplaySink" type="Node2D" parent="." node_paths=PackedStringArray("container", "positionMarker")]
+[node name="CardDisplaySink" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker")]
 script = ExtResource("9_yg58f")
-container = NodePath("../DeckManager")
-animationTime = 0.5
 positionMarker = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="CardDisplaySink"]
@@ -1029,12 +1026,11 @@ debug = false
 templateDeck = Array[ExtResource("5_sdwpe")]([SubResource("Resource_w4bec")])
 feedContainer = NodePath("../GraftDiscard")
 
-[node name="GraftOptionsController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer")]
+[node name="GraftOptionsController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas")]
 script = ExtResource("4_sdbnn")
 cardAreas = [NodePath("GraftOptionsArea")]
 minCardCenterDistance = 50.0
 maxCardGap = 25.0
-logicalContainer = NodePath("")
 
 [node name="GraftOptionsArea" type="CollisionShape2D" parent="GraftOptionsController"]
 position = Vector2(641.25, 181)
@@ -1064,10 +1060,8 @@ script = ExtResource("25_0eao4")
 [node name="GraftDiscard" type="Node" parent="."]
 script = ExtResource("4_eldwq")
 
-[node name="CardDisplaySink" type="Node2D" parent="GraftDiscard" node_paths=PackedStringArray("container", "positionMarker")]
+[node name="CardDisplaySink" type="Node2D" parent="GraftDiscard" node_paths=PackedStringArray("positionMarker")]
 script = ExtResource("9_yg58f")
-container = NodePath("..")
-animationTime = 0.5
 positionMarker = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="GraftDiscard/CardDisplaySink"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=142 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -9,22 +9,23 @@
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="5_fj00f"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/drawnCollisionShape.gd" id="6_53o6h"]
 [ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="6_wbupb"]
+[ext_resource type="Script" path="res://cardAbstractions/statData.gd" id="7_j6ar4"]
 [ext_resource type="Script" path="res://modifiers/paramModifierLowestHighestPlayed.gd" id="8_hl8tg"]
-[ext_resource type="Script" path="res://cardEffects/peContainerModifier.gd" id="9_fjep2"]
+[ext_resource type="Script" path="res://cardEffects/ceContainerModifier.gd" id="9_fjep2"]
 [ext_resource type="Script" path="res://modifiers/paramModifierFixedChange.gd" id="9_v3lkx"]
 [ext_resource type="Script" path="res://cardAbstractions/tcRules.gd" id="11_o0re3"]
 [ext_resource type="Script" path="res://cardAbstractions/containerCounter.gd" id="11_rgdhd"]
-[ext_resource type="Script" path="res://cardEffects/peDraw.gd" id="12_p8cui"]
+[ext_resource type="Script" path="res://cardEffects/ceDraw.gd" id="12_p8cui"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="12_q8pst"]
 [ext_resource type="Script" path="res://conditionals/conditionalValue.gd" id="13_modrn"]
-[ext_resource type="Script" path="res://cardEffects/peDiscard.gd" id="14_66573"]
-[ext_resource type="Script" path="res://cardEffects/peResourceModify.gd" id="15_d04ce"]
+[ext_resource type="Script" path="res://cardEffects/ceDiscard.gd" id="14_66573"]
+[ext_resource type="Script" path="res://cardEffects/ceResourceModify.gd" id="15_d04ce"]
 [ext_resource type="Script" path="res://modifiers/paramModifierChooseBest.gd" id="16_06t2a"]
-[ext_resource type="Script" path="res://cardEffects/peChooseFrom.gd" id="17_mqexg"]
+[ext_resource type="Script" path="res://cardEffects/ceChooseFrom.gd" id="17_mqexg"]
 [ext_resource type="Script" path="res://modifiers/counterModifierFixedChange.gd" id="18_uv7hk"]
 [ext_resource type="Script" path="res://modifiers/paramModifierCutoff.gd" id="19_tv73m"]
 [ext_resource type="Script" path="res://modifiers/paramModifierFlat.gd" id="20_cxkqq"]
-[ext_resource type="Script" path="res://cardEffects/peSetValueToPrevious.gd" id="21_edulk"]
+[ext_resource type="Script" path="res://cardEffects/ceSetValueToPrevious.gd" id="21_edulk"]
 [ext_resource type="Script" path="res://conditionals/conditionalAmount.gd" id="22_20aq1"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="27_mupmx"]
 
@@ -34,6 +35,11 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+
+[sub_resource type="Resource" id="Resource_xwmbw"]
+script = ExtResource("7_j6ar4")
+attack = 0
+defence = 0
 
 [sub_resource type="Resource" id="Resource_msetp"]
 script = ExtResource("8_hl8tg")
@@ -62,6 +68,7 @@ graft = false
 value = SubResource("Resource_6i1e2")
 type = ""
 cost = SubResource("Resource_11ma0")
+stats = SubResource("Resource_xwmbw")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -105,6 +112,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_m1rnc"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 1
+
 [sub_resource type="Resource" id="Resource_7tbb5"]
 script = ExtResource("6_wbupb")
 baseValue = 6
@@ -122,6 +134,7 @@ graft = false
 value = SubResource("Resource_7tbb5")
 type = ""
 cost = SubResource("Resource_kjsah")
+stats = SubResource("Resource_m1rnc")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_br0xt")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -149,6 +162,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_iboah"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 1
+
 [sub_resource type="Resource" id="Resource_3eetc"]
 script = ExtResource("6_wbupb")
 baseValue = 4
@@ -166,6 +184,7 @@ graft = false
 value = SubResource("Resource_3eetc")
 type = ""
 cost = SubResource("Resource_632de")
+stats = SubResource("Resource_iboah")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_vvds3")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -201,6 +220,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResourc
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_d8fm7"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 1
+
 [sub_resource type="Resource" id="Resource_2jh3x"]
 script = ExtResource("6_wbupb")
 baseValue = 6
@@ -218,6 +242,7 @@ graft = false
 value = SubResource("Resource_2jh3x")
 type = ""
 cost = SubResource("Resource_k4edt")
+stats = SubResource("Resource_d8fm7")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_xo3i5")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -244,6 +269,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_fysm6"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 1
+
 [sub_resource type="Resource" id="Resource_fw581"]
 script = ExtResource("6_wbupb")
 baseValue = 9
@@ -261,6 +291,7 @@ graft = false
 value = SubResource("Resource_fw581")
 type = ""
 cost = SubResource("Resource_y1j2r")
+stats = SubResource("Resource_fysm6")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_ol227")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -288,6 +319,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_3hb6q"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 1
+
 [sub_resource type="Resource" id="Resource_f8qxx"]
 script = ExtResource("6_wbupb")
 baseValue = 8
@@ -305,6 +341,7 @@ graft = false
 value = SubResource("Resource_f8qxx")
 type = ""
 cost = SubResource("Resource_hwvit")
+stats = SubResource("Resource_3hb6q")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_dntep")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -320,6 +357,11 @@ baseValue = 2
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+
+[sub_resource type="Resource" id="Resource_53lat"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 1
 
 [sub_resource type="Resource" id="Resource_51q2f"]
 script = ExtResource("16_06t2a")
@@ -351,6 +393,7 @@ graft = false
 value = SubResource("Resource_oqfhl")
 type = ""
 cost = SubResource("Resource_5mig6")
+stats = SubResource("Resource_53lat")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -381,6 +424,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_abexx"]
+script = ExtResource("7_j6ar4")
+attack = 2
+defence = 1
+
 [sub_resource type="Resource" id="Resource_ckas6"]
 script = ExtResource("6_wbupb")
 baseValue = 4
@@ -398,6 +446,7 @@ graft = false
 value = SubResource("Resource_ckas6")
 type = ""
 cost = SubResource("Resource_qnemv")
+stats = SubResource("Resource_abexx")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_dy2rx")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -440,6 +489,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_akh7h"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 2
+
 [sub_resource type="Resource" id="Resource_5qdqp"]
 script = ExtResource("6_wbupb")
 baseValue = 11
@@ -457,6 +511,7 @@ graft = false
 value = SubResource("Resource_5qdqp")
 type = ""
 cost = SubResource("Resource_vk4fm")
+stats = SubResource("Resource_akh7h")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_sv0tt")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -499,6 +554,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_djyiw"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 0
+
 [sub_resource type="Resource" id="Resource_qjkxp"]
 script = ExtResource("6_wbupb")
 baseValue = 11
@@ -516,6 +576,7 @@ graft = false
 value = SubResource("Resource_qjkxp")
 type = ""
 cost = SubResource("Resource_ir1ws")
+stats = SubResource("Resource_djyiw")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_in0gx")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -543,6 +604,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_dkyb1"]
+script = ExtResource("7_j6ar4")
+attack = 2
+defence = 2
+
 [sub_resource type="Resource" id="Resource_ahwtl"]
 script = ExtResource("6_wbupb")
 baseValue = 6
@@ -560,6 +626,7 @@ graft = false
 value = SubResource("Resource_ahwtl")
 type = ""
 cost = SubResource("Resource_2pq31")
+stats = SubResource("Resource_dkyb1")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_1kjy6")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -607,6 +674,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_sjh8j"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 0
+
 [sub_resource type="Resource" id="Resource_pg3u1"]
 script = ExtResource("6_wbupb")
 baseValue = 8
@@ -624,6 +696,7 @@ graft = false
 value = SubResource("Resource_pg3u1")
 type = ""
 cost = SubResource("Resource_7way0")
+stats = SubResource("Resource_sjh8j")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_0wfns")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -651,6 +724,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_1f5lk"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 0
+
 [sub_resource type="Resource" id="Resource_jakqc"]
 script = ExtResource("6_wbupb")
 baseValue = 3
@@ -668,6 +746,7 @@ graft = false
 value = SubResource("Resource_jakqc")
 type = ""
 cost = SubResource("Resource_vn7sp")
+stats = SubResource("Resource_1f5lk")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_sxorf")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -695,6 +774,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_bca7b"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 1
+
 [sub_resource type="Resource" id="Resource_nc2sc"]
 script = ExtResource("6_wbupb")
 baseValue = 10
@@ -712,6 +796,7 @@ graft = false
 value = SubResource("Resource_nc2sc")
 type = ""
 cost = SubResource("Resource_ao7xi")
+stats = SubResource("Resource_bca7b")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_tiwt3")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -755,6 +840,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_yg2r8"]
+script = ExtResource("7_j6ar4")
+attack = 0
+defence = 0
+
 [sub_resource type="Resource" id="Resource_hldkx"]
 script = ExtResource("6_wbupb")
 baseValue = 7
@@ -772,6 +862,7 @@ graft = false
 value = SubResource("Resource_hldkx")
 type = ""
 cost = SubResource("Resource_55s0b")
+stats = SubResource("Resource_yg2r8")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_577wv")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -796,6 +887,11 @@ staticText = "Can only play if already played at least 10 value"
 containerToCheck = 2
 conditionalName = ""
 
+[sub_resource type="Resource" id="Resource_ykakp"]
+script = ExtResource("7_j6ar4")
+attack = 3
+defence = 1
+
 [sub_resource type="Resource" id="Resource_o147x"]
 script = ExtResource("6_wbupb")
 baseValue = 9
@@ -813,6 +909,7 @@ graft = false
 value = SubResource("Resource_o147x")
 type = ""
 cost = SubResource("Resource_gavr1")
+stats = SubResource("Resource_ykakp")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResource("Resource_kt07k")])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -858,6 +955,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResourc
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_nmgbw")])
 includeFollowUpText = true
 
+[sub_resource type="Resource" id="Resource_m7hrl"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 3
+
 [sub_resource type="Resource" id="Resource_uiya3"]
 script = ExtResource("6_wbupb")
 baseValue = 7
@@ -875,6 +977,7 @@ graft = false
 value = SubResource("Resource_uiya3")
 type = ""
 cost = SubResource("Resource_oi6y0")
+stats = SubResource("Resource_m7hrl")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_81elk")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -912,6 +1015,11 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
+[sub_resource type="Resource" id="Resource_dvtpt"]
+script = ExtResource("7_j6ar4")
+attack = 1
+defence = 1
+
 [sub_resource type="Resource" id="Resource_1aerb"]
 script = ExtResource("6_wbupb")
 baseValue = 10
@@ -929,6 +1037,7 @@ graft = false
 value = SubResource("Resource_1aerb")
 type = ""
 cost = SubResource("Resource_kky0e")
+stats = SubResource("Resource_dvtpt")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_w8skv"), SubResource("Resource_ucj0k")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -944,6 +1053,11 @@ baseValue = 0
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+
+[sub_resource type="Resource" id="Resource_ih0hd"]
+script = ExtResource("7_j6ar4")
+attack = 2
+defence = 1
 
 [sub_resource type="Resource" id="Resource_hkfmi"]
 script = ExtResource("6_wbupb")
@@ -961,6 +1075,7 @@ graft = false
 value = SubResource("Resource_hkfmi")
 type = ""
 cost = SubResource("Resource_rogld")
+stats = SubResource("Resource_ih0hd")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -985,7 +1100,7 @@ size = Vector2(271.5, 256.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_625ey"]
 size = Vector2(961.5, 256.5)
 
-[node name="game" type="Node2D" node_paths=PackedStringArray("deckManager", "enemyDeckManager", "enemyDiscard", "handManager", "playAreaManager", "enemyPlayArea", "discardManager", "playAreaPositionController", "enemyPlayAreaPositionController", "energy", "startTurnCardDraw", "damageDealt", "damageSuffered", "messageLabel", "newCardMarker", "drawCardButton", "endHandButton", "okButton")]
+[node name="game" type="Node2D" node_paths=PackedStringArray("deckManager", "enemyDeckManager", "enemyDiscard", "handManager", "playAreaManager", "enemyPlayArea", "discardManager", "playAreaPositionController", "enemyPlayAreaPositionController", "energy", "startTurnCardDraw", "damageDealt", "damageSuffered", "messageLabel", "drawCardButton", "endHandButton", "okButton")]
 script = ExtResource("1_hbkeb")
 deckManager = NodePath("Logic/Player/DeckManager")
 enemyDeckManager = NodePath("Logic/Enemy/EnemyDeck")
@@ -1002,7 +1117,6 @@ damageDealt = NodePath("Logic/DamageDealt")
 damageSuffered = NodePath("Logic/Damage Suffered")
 messageLabel = NodePath("MessageContent")
 cardDisplayPacked = ExtResource("3_kxrxo")
-newCardMarker = NodePath("NewCardOrigin")
 drawCardButton = NodePath("DrawButton")
 endHandButton = NodePath("EndButton")
 okButton = NodePath("OkBUtton")
@@ -1136,23 +1250,30 @@ shape = SubResource("RectangleShape2D_2v7eo")
 position = Vector2(1075, 148.5)
 shape = SubResource("RectangleShape2D_7o7mm")
 
-[node name="EnemyDiscardController" type="Node2D" parent="." node_paths=PackedStringArray("container", "positionMarker")]
+[node name="EnemyDiscardController" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker")]
 script = ExtResource("3_lpmun")
-container = NodePath("../Logic/Enemy/EnemyDiscard")
-animationTime = 0.5
-positionMarker = NodePath("../DiscardDisplayController/Marker2D")
+positionMarker = NodePath("../DiscardDisplaySink/DiscardOrigin")
 
 [node name="Marker2D" type="Marker2D" parent="EnemyDiscardController"]
 position = Vector2(1091, 319)
 
-[node name="DiscardDisplayController" type="Node2D" parent="." node_paths=PackedStringArray("container", "positionMarker")]
+[node name="DiscardDisplaySink" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
 script = ExtResource("3_lpmun")
-container = NodePath("../Logic/Player/DiscardManager")
-animationTime = 0.5
-positionMarker = NodePath("Marker2D")
+positionMarker = NodePath("DiscardOrigin")
+logicalContainer = NodePath("../Logic/Player/DiscardManager")
+canCreateNewDisplays = false
 
-[node name="Marker2D" type="Marker2D" parent="DiscardDisplayController"]
-position = Vector2(1091, 319)
+[node name="DiscardOrigin" type="Marker2D" parent="DiscardDisplaySink"]
+position = Vector2(1207, 381)
+
+[node name="DeckDisplaySink" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
+script = ExtResource("3_lpmun")
+positionMarker = NodePath("DeckOrigin")
+logicalContainer = NodePath("../Logic/Player/DeckManager")
+canCreateNewDisplays = false
+
+[node name="DeckOrigin" type="Marker2D" parent="DeckDisplaySink"]
+position = Vector2(38, 406)
 
 [node name="HandCardDisplayController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer")]
 script = ExtResource("27_mupmx")
@@ -1185,9 +1306,6 @@ shape = SubResource("RectangleShape2D_qnh12")
 position = Vector2(499.25, 149)
 shape = SubResource("RectangleShape2D_625ey")
 script = ExtResource("6_53o6h")
-
-[node name="NewCardOrigin" type="Marker2D" parent="."]
-position = Vector2(585, 880)
 
 [node name="MessageContent" type="Label" parent="."]
 offset_left = 29.0

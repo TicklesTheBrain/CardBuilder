@@ -102,6 +102,9 @@ func addMouseOverDelegate(cont: CardContainer, delegate: Callable):
 func addMouseOverExitDelegate(card: CardDisplay, delegate: Callable):
 	mouseOverExitDelegates[card] = delegate
 
+func removeMouseOverDelate(cont: CardContainer):
+	mouseOverDelegates.erase(cont)
+
 
 
 

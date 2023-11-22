@@ -5,15 +5,19 @@ class_name DeckManager
 @export var debugRandomiseStats: bool
 @export var templateDeck: Array[EmptyCardData]
 
-func buildCardsFromTemplate():
-	for empty in templateDeck:
-		if debug and not empty.debug:
+func populateContainerFromTemplate():
+	var newCards = DeckManager.makeCardArrayFromTemplate(templateDeck, debug)
+	for card in newCards:
+		addCard(card)
+
+static func makeCardArrayFromTemplate(template: Array[EmptyCardData], onlyDebug: bool = false):
+
+	var cardArray = [] as Array[CardData]
+	for empty in template:
+		if onlyDebug and not empty.debug:
 			continue
 		for i in range(empty.amount):
 			var newCard = empty.duplicateSelf()
-			if debugRandomiseStats:
-				newCard.stats = StatData.new()
-				newCard.stats.attack = randi_range(1,2)
-				newCard.stats.defence = randi_range(0,1)
+			cardArray.push_back(newCard)
 
-			addCard(newCard)
+	return cardArray

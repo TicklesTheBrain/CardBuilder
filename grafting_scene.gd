@@ -21,10 +21,10 @@ signal graftChoicePocketClosed
 
 func _ready():
 	
-	Events.newCardDisplayRequested.connect(spawnNewCardDisplay)
+	CardDisplayLord.newCardDisplayRequested.connect(spawnNewCardDisplay)
 	PocketLord.pocketClosed.connect(processPocketClosed)
-	graftDeck.buildCardsFromTemplate()
-	playerDeck.buildCardsFromTemplate()
+	graftDeck.populateContainerFromTemplate()
+	playerDeck.populateContainerFromTemplate()
 
 	for g in range(amountOfGraftsTodo):
 

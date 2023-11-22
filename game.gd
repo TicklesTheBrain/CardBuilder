@@ -27,7 +27,7 @@ enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
 
 @export var messageLabel: Label
 @export var cardDisplayPacked: PackedScene
-@export var newCardMarker: Marker2D
+@export var cardGraftDisplayPacked: PackedScene
 
 @export var drawCardButton: Button
 @export var endHandButton: Button
@@ -46,11 +46,12 @@ class Actor:
 
 func _ready():
 	
+	#TODO: FInish logger
 	Logger.printLevel = loggerLevel
 
 	player = Actor.new()
 	player.drawDeck = deckManager
-	deckManager.buildCardsFromTemplate()
+	deckManager.populateContainerFromTemplate()
 	deckManager.shuffle()
 	player.discard = discardManager
 	player.hand = handManager
@@ -58,15 +59,13 @@ func _ready():
 
 	enemy = Actor.new()
 	enemy.drawDeck = enemyDeckManager
-	enemyDeckManager.buildCardsFromTemplate()
+	enemyDeckManager.populateContainerFromTemplate()
 	enemy.playArea = enemyPlayArea
 	enemy.discard = enemyDiscard
 	enemy.hand = CardContainer.new() as CardContainer
 	enemy.hand.maxCards = 0
 
 	Events.requestContext.connect(provideContext)
-	Events.newCardDisplayRequested.connect(spawnNewCardDisplay)
-	Events.orphanedCardDisplay.connect(reparentCardDisplay)
 
 	deckManager.triggerAll(CardEffect.triggerType.START_MATCH)
 
@@ -87,23 +86,11 @@ func makeContext() -> GameStateContext:
 func provideContext(requestingObject):		
 	requestingObject.receiveContext(makeContext())
 
-func reparentCardDisplay(cd: CardDisplay):
-	cd.get_parent().remove_child(cd)
-	add_child(cd)
-
 func drawFromDeckToHand():
 			
 	var topCard = deckManager.drawCard()
 	if topCard:		
 		handManager.addCard(topCard)
-
-func spawnNewCardDisplay(card: CardData):
-
-	var newCardDisplay = cardDisplayPacked.instantiate() as CardDisplay
-	newCardDisplay.setupCardDisplay(card)
-	add_child(newCardDisplay)
-	newCardDisplay.position = newCardMarker.position
-	newCardDisplay.add_to_group("cd")
 
 func addToPlayArea(card: CardData):
 

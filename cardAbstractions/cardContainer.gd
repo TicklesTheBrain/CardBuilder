@@ -9,6 +9,8 @@ class_name CardContainer
 @export var addTriggerType: CardEffect.triggerType
 @export var modifiers: Array[Modifier]
 
+var originMarker: Marker2D #TODO: THIS IS UGLY, need to fix this somehow
+
 signal cardAdded(card: CardData)
 signal cardRemoved(card: CardData)
 
