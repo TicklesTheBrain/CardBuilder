@@ -1,5 +1,5 @@
 extends Node
-class_name GenericResource
+class_name GameResource
 
 signal amountChanged(newAmount: int)
 
@@ -8,7 +8,6 @@ signal amountChanged(newAmount: int)
 @export var resetAdjust: int = 0
 @export var resetBaseline: int = 0
 @export var capAtZero: bool
-
 @export var debugLabel: Label
 @export var amount: int = baseline:
 	set(value):

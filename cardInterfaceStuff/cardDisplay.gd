@@ -46,7 +46,7 @@ func updateCardDisplay(dataToShow: CardData = cardData):
 	if graftToShow:
 		dataToShow = graftToShow
 
-	valueTypeLabel.text = str(dataToShow.getValue()) + dataToShow.type
+	valueTypeLabel.text = str(dataToShow.getValue()) + dataToShow.type.getStringType()
 	costLabel.text = str(dataToShow.getCost()) + 'E'
 
 	var playText = dataToShow.getPlayEffectText()

@@ -2,7 +2,7 @@ extends CardEffect
 class_name DiscardCards
 
 @export var amountOfCardsToDiscard: int = 1
-@export var discardFrom: Game.ContainerPurposes
+@export var discardFrom: Actor.ContainerPurposes
 
 var selectedCards: Array[CardData] = []
 signal cardSelectionDone

@@ -2,7 +2,7 @@ extends Resource
 class_name Conditional
 
 @export var staticText: String
-@export var containerToCheck: Game.ContainerPurposes
+@export var containerToCheck: Actor.ContainerPurposes
 @export var conditionalName: String
 
 func getText():

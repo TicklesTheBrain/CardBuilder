@@ -1,12 +1,18 @@
 extends Resource
 class_name CardParam
 
-enum ParamType {COST, VALUE}
+enum ParamType {COST, VALUE, ATTACK, DEFENCE}
 
-@export var baseValue: int = 0
+@export var baseValue: int = 0:
+	set(val):
+		if capAtZero:
+			baseValue = max(0, val)
+		else:
+			baseValue = val
 @export var type: ParamType
 @export var modifiers: Array[ParamModifier]
 @export var staticText: String
+@export var capAtZero: bool = false
 
 func getValue(ctxt: GameStateContext, card: CardData):
 	var value: int
@@ -16,7 +22,7 @@ func getValue(ctxt: GameStateContext, card: CardData):
 		value = card.container.applyModifiers(type, card, baseValue, ctxt)
 	for mod in modifiers:
 		value = mod.calculate(ctxt, value, card)
-	return value
+	return value if not capAtZero else max(value, 0)
 
 func getBaseValue():
 	#print('base value', baseValue)
@@ -34,10 +40,7 @@ func addModifier(newMod: ParamModifier):
 	modifiers.append(newMod)
 
 func checkIsNonStatic():
-	for mod in modifiers:
-		if mod.active and "nonStatic" in mod and mod.nonStatic:
-			return true
-	return false
+	return modifiers.any(func(m): return m.active and "nonStatic" in m and m.nonStatic)
 
 func getNonStaticOptions():
 	if checkIsNonStatic():

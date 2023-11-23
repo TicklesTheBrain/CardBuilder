@@ -6,6 +6,10 @@ class_name ChooseBest
 @export var optionRangeEnd: int
 @export var nonStatic: bool = true
 
+#TODO: we need to display base value here on card displays?
+#TODO: need to work out the interaction with highest_lowest played
+#TODO: work out which modifiers/effects/conditionals cannot go in the same bucket
+
 var options:
 	get:
 		if fixedOptions:

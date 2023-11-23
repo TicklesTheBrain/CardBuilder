@@ -1,7 +1,7 @@
 extends CardEffect
 class_name DiscardSelf
 
-@export var discardDesitnation: Game.ContainerPurposes = Game.ContainerPurposes.DISCARD
+@export var discardDesitnation: Actor.ContainerPurposes = Actor.ContainerPurposes.DISCARD
 
 func triggerSpecific(ctxt: GameStateContext):
 

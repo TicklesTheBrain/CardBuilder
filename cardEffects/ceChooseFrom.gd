@@ -3,9 +3,9 @@ class_name ChooseFrom
 
 @export var amountOfCardsToChoose: int = 1
 @export var amountOfCardsToChooseFrom: int = 2
-@export var sourceOfCards: Game.ContainerPurposes
-@export var destinationOfCards: Game.ContainerPurposes
-@export var destinationOfUnchosenCards: Game.ContainerPurposes
+@export var sourceOfCards: Actor.ContainerPurposes
+@export var destinationOfCards: Actor.ContainerPurposes
+@export var destinationOfUnchosenCards: Actor.ContainerPurposes
 @export var reshuffleDeckAfterwards: bool = false
 
 var selectedCards: Array[CardData] = []
@@ -71,19 +71,19 @@ func receiveSelection(cards: Array[CardData]):
 	selectedCards = cards
 	cardSelectionDone.emit()
 
-func convertContainerPurposeTo(purp: Game.ContainerPurposes, verb: bool = false):
+func convertContainerPurposeTo(purp: Actor.ContainerPurposes, verb: bool = false):
 
 	match purp:
-		Game.ContainerPurposes.DECK:
+		Actor.ContainerPurposes.DECK:
 			if verb: return "return to your deck"
 			else: return "deck"
-		Game.ContainerPurposes.HAND:
+		Actor.ContainerPurposes.HAND:
 			if verb: return "add to your hand"
 			else: return "hand"
-		Game.ContainerPurposes.PLAY_AREA:
+		Actor.ContainerPurposes.PLAY_AREA:
 			if verb: return "play"
 			else: return "played cards"
-		Game.ContainerPurposes.DISCARD:
+		Actor.ContainerPurposes.DISCARD:
 			if verb: return "discard"
 			else: return "your discard"
 

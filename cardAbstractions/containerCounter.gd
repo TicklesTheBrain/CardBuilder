@@ -6,7 +6,7 @@ class_name ContainerCounter
 @export var bustValue: int = 21
 @export var label: Label
 
-enum countWhat {VALUE, AMOUNT}
+enum countWhat {VALUE, AMOUNT, ATTACK, DEFENCE}
 @export var countSubject: countWhat
 
 var count = -1

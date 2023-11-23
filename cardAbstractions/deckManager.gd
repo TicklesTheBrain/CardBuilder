@@ -2,7 +2,6 @@ extends CardContainer
 class_name DeckManager
 
 @export var debug: bool = true
-@export var debugRandomiseStats: bool
 @export var templateDeck: Array[EmptyCardData]
 
 func populateContainerFromTemplate():

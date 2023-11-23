@@ -4,7 +4,7 @@ class_name GraftCard
 @export var graftDeckTemplate: Array[EmptyCardData]
 @export var graftOptionsNo: int
 @export var cardOptions: int
-@export var graftOptionsSource: Game.ContainerPurposes
+@export var graftOptionsSource: Actor.ContainerPurposes
 @export var numberOfGrafts: int = 1
 @export var debugOnly: bool
 

@@ -1,8 +1,8 @@
 extends CardEffect
 class_name DrawCards
 
-@export var source: Game.ContainerPurposes = Game.ContainerPurposes.DECK
-@export var destination: Game.ContainerPurposes = Game.ContainerPurposes.HAND
+@export var source: Actor.ContainerPurposes = Actor.ContainerPurposes.DECK
+@export var destination: Actor.ContainerPurposes = Actor.ContainerPurposes.HAND
 @export var amountOfCardsToDraw: int = 1
 
 func triggerSpecific(ctxt: GameStateContext):

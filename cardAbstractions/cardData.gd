@@ -4,9 +4,10 @@ class_name CardData
 @export var cardTitle: String
 @export var graft: bool
 @export var value: CardParam
-@export var type: String
+@export var type: CardType
 @export var cost: CardParam
-@export var stats: StatData
+@export var attack: CardParam
+@export var defence: CardParam
 
 @export var onPlayEffects: Array[CardEffect] = []
 @export var playConditionals: Array[Conditional] = []
@@ -62,7 +63,6 @@ func triggerEffect(typeToTrigger: CardEffect.triggerType):
 			await triggerEffectBucket(onWinEffects)
 		CardEffect.triggerType.BUST:
 			await triggerEffectBucket(onBustEffects)
-			await triggerEffectBucket(onLoseEffects)
 		CardEffect.triggerType.END_ROUND:
 			await triggerEffectBucket(endRoundEffects)
 		CardEffect.triggerType.DRAW:
@@ -80,7 +80,7 @@ func getPlayEffectText() -> String:
 
 func getOtherText():
 	var result = ''
-	result += cost.getText() + value.getText() + stats.getText() + getPlayConditionalText()
+	result += cost.getText() + value.getText() + attack.getText() + defence.getText() + getPlayConditionalText()
 	return result
 
 func checkPlayConditionals() -> bool:
@@ -102,11 +102,12 @@ func applyCardGraft():
 
 func duplicateSelf() -> CardData:
 	var newCard = CardData.new()
-	newCard.value = value.duplicate()
-	newCard.type = type
+	newCard.value = value.duplicate(true)
+	newCard.type = type.duplicate(true)
 	newCard.graft = graft
-	newCard.cost = cost.duplicate()
-	newCard.stats = stats.duplicate()
+	newCard.cost = cost.duplicate(true)
+	newCard.attack = attack.duplicate(true)
+	newCard.defence = defence.duplicate(true)
 
 	#TODO: Is this correct? Do we always want to pass on this info to the duplicate?
 	newCard.container = container
@@ -126,10 +127,10 @@ func duplicateSelf() -> CardData:
 
 func addCardGraft(newGraft: CardData):
 	value.baseValue += newGraft.value.baseValue
-	type = newGraft.type
+	type = newGraft.type.duplicate()
 	cost.baseValue += newGraft.cost.baseValue
-	stats.attack += newGraft.stats.attack
-	stats.defence += newGraft.stats.defence
+	attack.baseValue += newGraft.attack.baseValue
+	defence.baseValue += newGraft.defence.baseValue
 
 	CardData.mergeEffectsBuckets(onPlayEffects, newGraft.onPlayEffects)
 	CardData.mergeEffectsBuckets(onLoseEffects, newGraft.onLoseEffects)

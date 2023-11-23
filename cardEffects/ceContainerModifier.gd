@@ -1,7 +1,7 @@
 extends CardEffect
 class_name AddModifier
 
-@export var containersToApply: Array[Game.ContainerPurposes] = []
+@export var containersToApply: Array[Actor.ContainerPurposes] = []
 @export var modifier: Modifier
 #TODO: Think about merging timingRules, could be fun
 @export var timingRules: Array[TC_Rule] = []

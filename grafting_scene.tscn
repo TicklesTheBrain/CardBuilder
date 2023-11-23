@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=3 uid="uid://ceavuthes855u"]
+[gd_scene load_steps=118 format=3 uid="uid://ceavuthes855u"]
 
 [ext_resource type="Script" path="res://grafting_scene.gd" id="1_aty88"]
 [ext_resource type="PackedScene" uid="uid://dsfqrofqt0xs4" path="res://card_graft.tscn" id="1_w2i3f"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="4_sdbnn"]
 [ext_resource type="Script" path="res://cardEffects/ceDraw.gd" id="4_tmet7"]
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="5_sdwpe"]
-[ext_resource type="Script" path="res://cardAbstractions/statData.gd" id="6_dpyu6"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/CardDisplaySink.gd" id="9_yg58f"]
 [ext_resource type="Script" path="res://modifiers/paramModifierLowestHighestPlayed.gd" id="11_kksuw"]
 [ext_resource type="Script" path="res://modifiers/paramModifierFixedChange.gd" id="12_snyw0"]
@@ -33,6 +32,7 @@ baseValue = -1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_tik3x"]
 script = ExtResource("4_tmet7")
@@ -45,17 +45,13 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
-[sub_resource type="Resource" id="Resource_kevhl"]
-script = ExtResource("6_dpyu6")
-attack = -1
-defence = 2
-
 [sub_resource type="Resource" id="Resource_t4c1y"]
 script = ExtResource("3_yne2b")
 baseValue = 1
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_w4bec"]
 script = ExtResource("5_sdwpe")
@@ -64,9 +60,7 @@ debug = false
 cardTitle = ""
 graft = true
 value = SubResource("Resource_t4c1y")
-type = ""
 cost = SubResource("Resource_ua3i3")
-stats = SubResource("Resource_kevhl")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_tik3x")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -85,6 +79,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_msetp"]
 script = ExtResource("11_kksuw")
@@ -102,6 +97,7 @@ baseValue = 0
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([SubResource("Resource_msetp")])
 staticText = "Value is equal to highest value card played."
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_m4wcd"]
 resource_name = "SetToHigh"
@@ -111,7 +107,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_6i1e2")
-type = ""
 cost = SubResource("Resource_11ma0")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -128,6 +123,7 @@ baseValue = 2
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_gmkxj"]
 script = ExtResource("12_snyw0")
@@ -156,17 +152,13 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
-[sub_resource type="Resource" id="Resource_3xju8"]
-script = ExtResource("6_dpyu6")
-attack = 1
-defence = 1
-
 [sub_resource type="Resource" id="Resource_7tbb5"]
 script = ExtResource("3_yne2b")
 baseValue = 6
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_chvy2"]
 resource_name = "Next Costs 1 less"
@@ -176,9 +168,7 @@ debug = true
 cardTitle = ""
 graft = false
 value = SubResource("Resource_7tbb5")
-type = ""
 cost = SubResource("Resource_kjsah")
-stats = SubResource("Resource_3xju8")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_br0xt")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -194,6 +184,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_vvds3"]
 script = ExtResource("4_tmet7")
@@ -206,17 +197,13 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 
-[sub_resource type="Resource" id="Resource_j05af"]
-script = ExtResource("6_dpyu6")
-attack = 1
-defence = 1
-
 [sub_resource type="Resource" id="Resource_3eetc"]
 script = ExtResource("3_yne2b")
 baseValue = 4
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_xeq1j"]
 resource_name = "Draw 1"
@@ -226,9 +213,7 @@ debug = true
 cardTitle = ""
 graft = false
 value = SubResource("Resource_3eetc")
-type = ""
 cost = SubResource("Resource_632de")
-stats = SubResource("Resource_j05af")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_vvds3")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -244,6 +229,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_kcane"]
 script = ExtResource("15_im4ms")
@@ -270,6 +256,7 @@ baseValue = 6
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_o77ee"]
 resource_name = "Draw if value 6"
@@ -279,7 +266,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_2jh3x")
-type = ""
 cost = SubResource("Resource_k4edt")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_xo3i5")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -296,6 +282,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_ol227"]
 script = ExtResource("16_qrraa")
@@ -313,6 +300,7 @@ baseValue = 9
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_p1bhp"]
 resource_name = "Discard 2"
@@ -322,7 +310,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_fw581")
-type = ""
 cost = SubResource("Resource_y1j2r")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_ol227")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -339,6 +326,7 @@ baseValue = 2
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_dntep"]
 script = ExtResource("17_6gasn")
@@ -357,6 +345,7 @@ baseValue = 8
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_vwdiw"]
 resource_name = "Add energy"
@@ -366,7 +355,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_f8qxx")
-type = ""
 cost = SubResource("Resource_hwvit")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_dntep")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -383,6 +371,7 @@ baseValue = 2
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_51q2f"]
 script = ExtResource("18_1cwha")
@@ -403,6 +392,7 @@ baseValue = 0
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([SubResource("Resource_51q2f")])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_iben3"]
 resource_name = "non-static test"
@@ -412,7 +402,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_oqfhl")
-type = ""
 cost = SubResource("Resource_5mig6")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -429,6 +418,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_dy2rx"]
 script = ExtResource("19_abyis")
@@ -450,6 +440,7 @@ baseValue = 4
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_p32kq"]
 resource_name = "choose 2 from deck"
@@ -459,7 +450,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_ckas6")
-type = ""
 cost = SubResource("Resource_qnemv")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_dy2rx")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -476,6 +466,7 @@ baseValue = 2
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_7m7yn"]
 script = ExtResource("20_vg52f")
@@ -509,6 +500,7 @@ baseValue = 11
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_f3ql2"]
 resource_name = "Bust increase by 2"
@@ -518,7 +510,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_5qdqp")
-type = ""
 cost = SubResource("Resource_vk4fm")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_sv0tt")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -535,6 +526,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_xqmxe"]
 script = ExtResource("20_vg52f")
@@ -568,6 +560,7 @@ baseValue = 11
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_5treu"]
 resource_name = "Decrease bust by 2"
@@ -577,7 +570,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_qjkxp")
-type = ""
 cost = SubResource("Resource_ir1ws")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_in0gx")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -594,6 +586,7 @@ baseValue = 0
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_1kjy6"]
 script = ExtResource("4_tmet7")
@@ -612,6 +605,7 @@ baseValue = 6
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_2rgny"]
 resource_name = "Add card from top"
@@ -621,7 +615,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_ahwtl")
-type = ""
 cost = SubResource("Resource_2pq31")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_1kjy6")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -638,6 +631,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_nnnrf"]
 script = ExtResource("21_63phl")
@@ -676,6 +670,7 @@ baseValue = 8
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_l6ab6"]
 resource_name = "1-4 dont count"
@@ -685,7 +680,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_pg3u1")
-type = ""
 cost = SubResource("Resource_7way0")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_0wfns")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -702,6 +696,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_sxorf"]
 script = ExtResource("17_6gasn")
@@ -720,6 +715,7 @@ baseValue = 3
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_wb21s"]
 resource_name = "extra 3 cards next turn"
@@ -729,7 +725,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_jakqc")
-type = ""
 cost = SubResource("Resource_vn7sp")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_sxorf")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -746,6 +741,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_tiwt3"]
 script = ExtResource("17_6gasn")
@@ -764,6 +760,7 @@ baseValue = 10
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_86kyf"]
 resource_name = "1 less energy next turn"
@@ -773,7 +770,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_nc2sc")
-type = ""
 cost = SubResource("Resource_ao7xi")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_tiwt3")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -790,6 +786,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_l00fn"]
 script = ExtResource("22_qhn3g")
@@ -824,6 +821,7 @@ baseValue = 7
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_ghq3l"]
 resource_name = "Set Value to previous"
@@ -833,7 +831,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_hldkx")
-type = ""
 cost = SubResource("Resource_55s0b")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_577wv")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -850,6 +847,7 @@ baseValue = 0
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_kt07k"]
 script = ExtResource("15_im4ms")
@@ -865,6 +863,7 @@ baseValue = 9
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_4nafk"]
 resource_name = "OnlyPlayOn10+"
@@ -874,7 +873,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_o147x")
-type = ""
 cost = SubResource("Resource_gavr1")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResource("Resource_kt07k")])
@@ -891,6 +889,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_t70pn"]
 script = ExtResource("24_4kk4y")
@@ -927,6 +926,7 @@ baseValue = 7
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_d2adi"]
 resource_name = "If<2,draw+discard"
@@ -936,7 +936,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_uiya3")
-type = ""
 cost = SubResource("Resource_oi6y0")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_81elk")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -953,6 +952,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_w8skv"]
 script = ExtResource("16_qrraa")
@@ -981,6 +981,7 @@ baseValue = 10
 type = 1
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_nny05"]
 resource_name = "DiscardAll,Draw2"
@@ -990,7 +991,6 @@ debug = false
 cardTitle = ""
 graft = false
 value = SubResource("Resource_1aerb")
-type = ""
 cost = SubResource("Resource_kky0e")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_w8skv"), SubResource("Resource_ucj0k")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -1041,7 +1041,6 @@ position = Vector2(670, 578)
 
 [node name="DeckManager" type="Node" parent="."]
 script = ExtResource("3_lygcp")
-debugRandomiseStats = true
 templateDeck = Array[ExtResource("5_sdwpe")]([SubResource("Resource_m4wcd"), SubResource("Resource_chvy2"), SubResource("Resource_xeq1j"), SubResource("Resource_o77ee"), SubResource("Resource_p1bhp"), SubResource("Resource_vwdiw"), SubResource("Resource_iben3"), SubResource("Resource_p32kq"), SubResource("Resource_f3ql2"), SubResource("Resource_5treu"), SubResource("Resource_2rgny"), SubResource("Resource_l6ab6"), SubResource("Resource_wb21s"), SubResource("Resource_86kyf"), SubResource("Resource_ghq3l"), SubResource("Resource_4nafk"), SubResource("Resource_d2adi"), SubResource("Resource_nny05")])
 
 [node name="DeckDisplayController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas")]

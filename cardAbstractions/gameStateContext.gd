@@ -1,27 +1,27 @@
 extends Resource
 class_name GameStateContext
 
-var drawDeck: DeckManager
-var playArea: CardContainer
-var discard: CardContainer
-var hand: CardContainer
-var pocket: CardContainer
-var energyResource: GenericResource
-var cardDraw: GenericResource
+enum ActorType {PLAYER, ENEMY, ACTIVE, PASSIVE}
+
+var player: Actor
+var enemy: Actor
+var activeActor: Actor
+var passiveActor: Actor
+
 var actingCard: CardData
 var subjectCard: CardData
 var modifiableValue: Variant
 
-enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
+func getActorFromType(type: ActorType) -> Actor:
+    match type:
+        ActorType.PLAYER:
+            return player
+        ActorType.ENEMY:
+            return enemy
+        ActorType.ACTIVE:
+            return activeActor
+        ActorType.PASSIVE:
+            return passiveActor
 
-func getContainerFromPurpose(purpose: Game.ContainerPurposes) -> CardContainer:
-    match purpose:
-        Game.ContainerPurposes.PLAY_AREA:
-            return playArea
-        Game.ContainerPurposes.HAND:
-            return hand
-        Game.ContainerPurposes.DISCARD:
-            return discard
-        Game.ContainerPurposes.DECK:
-            return drawDeck
-    return pocket
+    return null
+
