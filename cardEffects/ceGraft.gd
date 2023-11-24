@@ -1,7 +1,7 @@
 extends CardEffect
 class_name GraftCard
 
-@export var graftDeckTemplate: Array[EmptyCardData]
+@export var graftCardPackage: CardTemplatePackage
 @export var graftOptionsNo: int
 @export var cardOptions: int
 @export var graftOptionsSource: Actor.ContainerPurposes
@@ -21,7 +21,7 @@ func triggerSpecific(ctxt: GameStateContext):
 
 	var actor = ctxt.getActorFromType(subjectActor)	 
 
-	var graftCardArray = DeckManager.makeCardArrayFromTemplate(graftDeckTemplate, debugOnly) as Array[CardData]
+	var graftCardArray = DeckManager.makeCardArrayFromTemplate(graftCardPackage.cards, debugOnly) as Array[CardData]
 	graftCardArray.shuffle()
 	PocketLord.pocketClosed.connect(processPocketClosed)
 	

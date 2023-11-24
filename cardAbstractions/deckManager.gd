@@ -2,10 +2,10 @@ extends CardContainer
 class_name DeckManager
 
 @export var debug: bool = true
-@export var templateDeck: Array[EmptyCardData]
+@export var templatePackage: CardTemplatePackage
 
 func populateContainerFromTemplate():
-	var newCards = DeckManager.makeCardArrayFromTemplate(templateDeck, debug)
+	var newCards = DeckManager.makeCardArrayFromTemplate(templatePackage.cards, debug)
 	for card in newCards:
 		addCard(card)
 

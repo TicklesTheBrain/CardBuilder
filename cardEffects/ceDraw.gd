@@ -7,8 +7,7 @@ class_name DrawCards
 
 func triggerSpecific(ctxt: GameStateContext):
 	print('card draw triggered')
-	var actor = ctxt.getActorFromType(subjectActor)
-	
+	var actor = ctxt.getActorFromType(subjectActor)	
 
 	var s = actor.getContainerFromPurpose(source)
 	var d = actor.getContainerFromPurpose(destination)

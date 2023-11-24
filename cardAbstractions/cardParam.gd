@@ -50,3 +50,10 @@ func getNonStaticOptions():
 	else:
 		return []
 
+func mergeCardParam(newCardParam: CardParam):
+	assert (type == newCardParam.type)
+	capAtZero = capAtZero or newCardParam.capAtZero
+	baseValue += newCardParam.baseValue
+	CardData.mergeModifiersBuckets(modifiers as Array[Modifier], newCardParam.modifiers as Array[Modifier]) #TODO: this is ugly
+
+

@@ -1,0 +1,67 @@
+[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=11 format=3 uid="uid://b2ru52u3aw843"]
+
+[ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="1_24qbb"]
+[ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="2_8rh7d"]
+[ext_resource type="Script" path="res://cardAbstractions/cardType.gd" id="3_33q2o"]
+[ext_resource type="Script" path="res://cardAbstractions/cardTemplatePackage.gd" id="4_0bx4a"]
+
+[sub_resource type="Resource" id="Resource_x1ix6"]
+script = ExtResource("1_24qbb")
+baseValue = 1
+type = 2
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_onch2"]
+script = ExtResource("1_24qbb")
+baseValue = 0
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_aefqy"]
+script = ExtResource("1_24qbb")
+baseValue = 1
+type = 3
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_hisbt"]
+script = ExtResource("3_33q2o")
+type = 0
+
+[sub_resource type="Resource" id="Resource_nj6hy"]
+script = ExtResource("1_24qbb")
+baseValue = 3
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_mqqc6"]
+resource_name = "3_vanilla"
+script = ExtResource("2_8rh7d")
+amount = 10
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_nj6hy")
+type = SubResource("Resource_hisbt")
+cost = SubResource("Resource_onch2")
+attack = SubResource("Resource_x1ix6")
+defence = SubResource("Resource_aefqy")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[resource]
+script = ExtResource("4_0bx4a")
+cards = Array[ExtResource("2_8rh7d")]([SubResource("Resource_mqqc6")])

@@ -1,0 +1,1088 @@
+[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=116 format=3 uid="uid://dc1pbwqrsnd4m"]
+
+[ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="1_5jvcn"]
+[ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="2_j5dh7"]
+[ext_resource type="Script" path="res://modifiers/paramModifierLowestHighestPlayed.gd" id="3_qmpx4"]
+[ext_resource type="Script" path="res://modifiers/paramModifierFixedChange.gd" id="4_ye8h6"]
+[ext_resource type="Script" path="res://cardEffects/ceContainerModifier.gd" id="5_sj401"]
+[ext_resource type="Script" path="res://cardAbstractions/tcRules.gd" id="6_8v3to"]
+[ext_resource type="Script" path="res://cardEffects/ceDraw.gd" id="7_uut4y"]
+[ext_resource type="Script" path="res://conditionals/conditionalValue.gd" id="8_bx840"]
+[ext_resource type="Script" path="res://cardEffects/ceDiscard.gd" id="9_5yqjs"]
+[ext_resource type="Script" path="res://cardEffects/ceResourceModify.gd" id="10_n13vk"]
+[ext_resource type="Script" path="res://modifiers/paramModifierChooseBest.gd" id="11_h5yit"]
+[ext_resource type="Script" path="res://cardEffects/ceChooseFrom.gd" id="12_ym1ng"]
+[ext_resource type="Script" path="res://modifiers/counterModifierFixedChange.gd" id="13_yuvb8"]
+[ext_resource type="Script" path="res://modifiers/paramModifierCutoff.gd" id="14_gdku7"]
+[ext_resource type="Script" path="res://modifiers/paramModifierFlat.gd" id="15_ywb4c"]
+[ext_resource type="Script" path="res://cardEffects/ceSetValueToPrevious.gd" id="16_7u532"]
+[ext_resource type="Script" path="res://conditionals/conditionalAmount.gd" id="17_703uu"]
+[ext_resource type="Script" path="res://cardEffects/ceGraft.gd" id="18_8vled"]
+[ext_resource type="Script" path="res://cardAbstractions/cardTemplatePackage.gd" id="19_47fy2"]
+
+[sub_resource type="Resource" id="Resource_11ma0"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_msetp"]
+script = ExtResource("3_qmpx4")
+setTo = 0
+type = 1
+capAtZero = true
+inEffect = true
+staticText = ""
+modifierName = ""
+timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
+
+[sub_resource type="Resource" id="Resource_6i1e2"]
+script = ExtResource("1_5jvcn")
+baseValue = 0
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([SubResource("Resource_msetp")])
+staticText = "Value is equal to highest value card played."
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_m4wcd"]
+resource_name = "SetToHigh"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = true
+cardTitle = ""
+graft = false
+value = SubResource("Resource_6i1e2")
+cost = SubResource("Resource_11ma0")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_kjsah"]
+script = ExtResource("1_5jvcn")
+baseValue = 2
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_gmkxj"]
+script = ExtResource("4_ye8h6")
+shift = -1
+type = 0
+capAtZero = true
+inEffect = true
+staticText = ""
+modifierName = ""
+timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
+
+[sub_resource type="Resource" id="Resource_vc84x"]
+script = ExtResource("6_8v3to")
+event = 2
+actOrDeact = 1
+counter = 1
+
+[sub_resource type="Resource" id="Resource_br0xt"]
+script = ExtResource("5_sj401")
+containersToApply = Array[int]([1])
+modifier = SubResource("Resource_gmkxj")
+timingRules = Array[ExtResource("6_8v3to")]([SubResource("Resource_vc84x")])
+effectName = ""
+staticText = "Next card costs 1 less."
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_7tbb5"]
+script = ExtResource("1_5jvcn")
+baseValue = 6
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_chvy2"]
+resource_name = "Next Costs 1 less"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = true
+cardTitle = ""
+graft = false
+value = SubResource("Resource_7tbb5")
+cost = SubResource("Resource_kjsah")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_br0xt")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_632de"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_vvds3"]
+script = ExtResource("7_uut4y")
+source = 0
+destination = 1
+amountOfCardsToDraw = 1
+effectName = ""
+staticText = "Draw 1 card."
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_3eetc"]
+script = ExtResource("1_5jvcn")
+baseValue = 4
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_xeq1j"]
+resource_name = "Draw 1"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = true
+cardTitle = ""
+graft = false
+value = SubResource("Resource_3eetc")
+cost = SubResource("Resource_632de")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_vvds3")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_k4edt"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_kcane"]
+script = ExtResource("8_bx840")
+valueToMatchOrExceed = 10
+disabledOnMatchOrExceed = true
+staticText = ""
+containerToCheck = 2
+conditionalName = ""
+
+[sub_resource type="Resource" id="Resource_xo3i5"]
+script = ExtResource("7_uut4y")
+source = 0
+destination = 1
+amountOfCardsToDraw = 1
+effectName = ""
+staticText = "If played value 10 or less, draw 1."
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResource("Resource_kcane")])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_2jh3x"]
+script = ExtResource("1_5jvcn")
+baseValue = 6
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_o77ee"]
+resource_name = "Draw if value 6"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = true
+cardTitle = ""
+graft = false
+value = SubResource("Resource_2jh3x")
+cost = SubResource("Resource_k4edt")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_xo3i5")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_y1j2r"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_ol227"]
+script = ExtResource("9_5yqjs")
+amountOfCardsToDiscard = 1
+discardFrom = 1
+effectName = ""
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_fw581"]
+script = ExtResource("1_5jvcn")
+baseValue = 9
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_p1bhp"]
+resource_name = "Discard 2"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_fw581")
+cost = SubResource("Resource_y1j2r")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_ol227")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_hwvit"]
+script = ExtResource("1_5jvcn")
+baseValue = 2
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_dntep"]
+script = ExtResource("10_n13vk")
+modifiedResource = 0
+resourcePropety = 0
+amountToModify = 1
+effectName = ""
+staticText = "Get +1 Energy."
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_f8qxx"]
+script = ExtResource("1_5jvcn")
+baseValue = 8
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_vwdiw"]
+resource_name = "Add energy"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_f8qxx")
+cost = SubResource("Resource_hwvit")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_dntep")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_5mig6"]
+script = ExtResource("1_5jvcn")
+baseValue = 2
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_51q2f"]
+script = ExtResource("11_h5yit")
+fixedOptions = Array[int]([])
+optionRangeStart = 5
+optionRangeEnd = 10
+nonStatic = true
+type = 1
+capAtZero = true
+inEffect = true
+staticText = ""
+modifierName = ""
+timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
+
+[sub_resource type="Resource" id="Resource_oqfhl"]
+script = ExtResource("1_5jvcn")
+baseValue = 0
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([SubResource("Resource_51q2f")])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_iben3"]
+resource_name = "non-static test"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_oqfhl")
+cost = SubResource("Resource_5mig6")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_qnemv"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_dy2rx"]
+script = ExtResource("12_ym1ng")
+amountOfCardsToChoose = 1
+amountOfCardsToChooseFrom = 2
+sourceOfCards = 0
+destinationOfCards = 2
+destinationOfUnchosenCards = 3
+reshuffleSourceAfterwards = false
+reshuffleDestinationAfterwards = false
+effectName = ""
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_ckas6"]
+script = ExtResource("1_5jvcn")
+baseValue = 4
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_p32kq"]
+resource_name = "choose 2 from deck"
+script = ExtResource("2_j5dh7")
+amount = 10
+debug = true
+cardTitle = ""
+graft = false
+value = SubResource("Resource_ckas6")
+cost = SubResource("Resource_qnemv")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_dy2rx")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_vk4fm"]
+script = ExtResource("1_5jvcn")
+baseValue = 2
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_7m7yn"]
+script = ExtResource("13_yuvb8")
+shift = 2
+type = 0
+inEffect = true
+staticText = ""
+modifierName = ""
+timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
+
+[sub_resource type="Resource" id="Resource_nl27r"]
+script = ExtResource("6_8v3to")
+event = 1
+actOrDeact = 1
+counter = 1
+
+[sub_resource type="Resource" id="Resource_sv0tt"]
+script = ExtResource("5_sj401")
+containersToApply = Array[int]([2])
+modifier = SubResource("Resource_7m7yn")
+timingRules = Array[ExtResource("6_8v3to")]([SubResource("Resource_nl27r")])
+effectName = ""
+staticText = "Increase Bust Value by 2."
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_5qdqp"]
+script = ExtResource("1_5jvcn")
+baseValue = 11
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_f3ql2"]
+resource_name = "Bust increase by 2"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_5qdqp")
+cost = SubResource("Resource_vk4fm")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_sv0tt")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_ir1ws"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_xqmxe"]
+script = ExtResource("13_yuvb8")
+shift = -2
+type = 0
+inEffect = true
+staticText = ""
+modifierName = ""
+timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
+
+[sub_resource type="Resource" id="Resource_ep2sd"]
+script = ExtResource("6_8v3to")
+event = 1
+actOrDeact = 1
+counter = 1
+
+[sub_resource type="Resource" id="Resource_in0gx"]
+script = ExtResource("5_sj401")
+containersToApply = Array[int]([2])
+modifier = SubResource("Resource_xqmxe")
+timingRules = Array[ExtResource("6_8v3to")]([SubResource("Resource_ep2sd")])
+effectName = ""
+staticText = "Decrease bust value by 2"
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_qjkxp"]
+script = ExtResource("1_5jvcn")
+baseValue = 11
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_5treu"]
+resource_name = "Decrease bust by 2"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_qjkxp")
+cost = SubResource("Resource_ir1ws")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_in0gx")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_2pq31"]
+script = ExtResource("1_5jvcn")
+baseValue = 0
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_1kjy6"]
+script = ExtResource("7_uut4y")
+source = 0
+destination = 2
+amountOfCardsToDraw = 1
+effectName = ""
+staticText = "Add 1 card from top of deck immediately."
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_ahwtl"]
+script = ExtResource("1_5jvcn")
+baseValue = 6
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_2rgny"]
+resource_name = "Add card from top"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_ahwtl")
+cost = SubResource("Resource_2pq31")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_1kjy6")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_7way0"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_nnnrf"]
+script = ExtResource("14_gdku7")
+amountForCutOff = 4
+cutoffBelow = true
+onCutOffReturn = 0
+cutoffBasedOnParamItself = true
+cutoffCriteriaParam = 1
+type = 1
+capAtZero = true
+inEffect = true
+staticText = ""
+modifierName = ""
+timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
+
+[sub_resource type="Resource" id="Resource_qvhbc"]
+script = ExtResource("6_8v3to")
+event = 1
+actOrDeact = 1
+counter = 1
+
+[sub_resource type="Resource" id="Resource_0wfns"]
+script = ExtResource("5_sj401")
+containersToApply = Array[int]([2, 1])
+modifier = SubResource("Resource_nnnrf")
+timingRules = Array[ExtResource("6_8v3to")]([SubResource("Resource_qvhbc")])
+effectName = ""
+staticText = "Cards with value 1-4 don't count"
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_pg3u1"]
+script = ExtResource("1_5jvcn")
+baseValue = 8
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_l6ab6"]
+resource_name = "1-4 dont count"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_pg3u1")
+cost = SubResource("Resource_7way0")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_0wfns")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_vn7sp"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_sxorf"]
+script = ExtResource("10_n13vk")
+modifiedResource = 1
+resourcePropety = 0
+amountToModify = 3
+effectName = "Draw 3 extrra cards next turn"
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_jakqc"]
+script = ExtResource("1_5jvcn")
+baseValue = 3
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_wb21s"]
+resource_name = "extra 3 cards next turn"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_jakqc")
+cost = SubResource("Resource_vn7sp")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_sxorf")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_ao7xi"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_tiwt3"]
+script = ExtResource("10_n13vk")
+modifiedResource = 0
+resourcePropety = 0
+amountToModify = -1
+effectName = ""
+staticText = "One less energy next turn."
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_nc2sc"]
+script = ExtResource("1_5jvcn")
+baseValue = 10
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_86kyf"]
+resource_name = "1 less energy next turn"
+script = ExtResource("2_j5dh7")
+amount = 3
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_nc2sc")
+cost = SubResource("Resource_ao7xi")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_tiwt3")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_55s0b"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_l00fn"]
+script = ExtResource("15_ywb4c")
+flatChange = -1
+increaseOnMerge = false
+type = 0
+capAtZero = true
+inEffect = true
+staticText = ""
+modifierName = ""
+timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
+
+[sub_resource type="Resource" id="Resource_b671k"]
+script = ExtResource("6_8v3to")
+event = 1
+actOrDeact = 1
+counter = 1
+
+[sub_resource type="Resource" id="Resource_577wv"]
+script = ExtResource("16_7u532")
+modifier = SubResource("Resource_l00fn")
+timingRules = Array[ExtResource("6_8v3to")]([SubResource("Resource_b671k")])
+effectName = ""
+staticText = "If not first card played, set value to previous card."
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_hldkx"]
+script = ExtResource("1_5jvcn")
+baseValue = 7
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_ghq3l"]
+resource_name = "Set Value to previous"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_hldkx")
+cost = SubResource("Resource_55s0b")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_577wv")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_gavr1"]
+script = ExtResource("1_5jvcn")
+baseValue = 0
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_kt07k"]
+script = ExtResource("8_bx840")
+valueToMatchOrExceed = 10
+disabledOnMatchOrExceed = false
+staticText = "Can only play if already played at least 10 value"
+containerToCheck = 2
+conditionalName = ""
+
+[sub_resource type="Resource" id="Resource_o147x"]
+script = ExtResource("1_5jvcn")
+baseValue = 9
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_4nafk"]
+resource_name = "OnlyPlayOn10+"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_o147x")
+cost = SubResource("Resource_gavr1")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResource("Resource_kt07k")])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_oi6y0"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_t70pn"]
+script = ExtResource("17_703uu")
+amountToMatchOrExceed = 2
+disabledOnMatchOrExceed = true
+staticText = "If less than 2 cards in hand"
+containerToCheck = 1
+conditionalName = ""
+
+[sub_resource type="Resource" id="Resource_nmgbw"]
+script = ExtResource("9_5yqjs")
+amountOfCardsToDiscard = 1
+discardFrom = 1
+effectName = ""
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_81elk"]
+script = ExtResource("7_uut4y")
+source = 0
+destination = 1
+amountOfCardsToDraw = 2
+effectName = ""
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResource("Resource_t70pn")])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_nmgbw")])
+includeFollowUpText = true
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_uiya3"]
+script = ExtResource("1_5jvcn")
+baseValue = 7
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_d2adi"]
+resource_name = "If<2,draw+discard"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_uiya3")
+cost = SubResource("Resource_oi6y0")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_81elk")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_kky0e"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_w8skv"]
+script = ExtResource("9_5yqjs")
+amountOfCardsToDiscard = -1
+discardFrom = 1
+effectName = ""
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_ucj0k"]
+script = ExtResource("7_uut4y")
+source = 0
+destination = 1
+amountOfCardsToDraw = 2
+effectName = ""
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_1aerb"]
+script = ExtResource("1_5jvcn")
+baseValue = 10
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_nny05"]
+resource_name = "DiscardAll,Draw2"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = false
+cardTitle = ""
+graft = false
+value = SubResource("Resource_1aerb")
+cost = SubResource("Resource_kky0e")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_w8skv"), SubResource("Resource_ucj0k")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_h57qx"]
+script = ExtResource("1_5jvcn")
+baseValue = 0
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_lsr0e"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_e08e7"]
+script = ExtResource("7_uut4y")
+source = 0
+destination = 1
+amountOfCardsToDraw = 1
+effectName = ""
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_v7stm"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_dtg8m"]
+resource_name = "debug_simple_graft"
+script = ExtResource("2_j5dh7")
+amount = 3
+debug = false
+cardTitle = ""
+graft = true
+value = SubResource("Resource_v7stm")
+cost = SubResource("Resource_lsr0e")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_e08e7")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_ihm3r"]
+script = ExtResource("19_47fy2")
+cards = Array[ExtResource("2_j5dh7")]([SubResource("Resource_dtg8m")])
+
+[sub_resource type="Resource" id="Resource_wexbj"]
+script = ExtResource("2_j5dh7")
+amount = 3
+debug = false
+cardTitle = ""
+graft = true
+value = SubResource("Resource_v7stm")
+cost = SubResource("Resource_lsr0e")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_e08e7")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_dhyph"]
+script = ExtResource("18_8vled")
+graftDeckTemplate = Array[ExtResource("2_j5dh7")]([SubResource("Resource_wexbj")])
+graftCardPackage = SubResource("Resource_ihm3r")
+graftOptionsNo = 3
+cardOptions = 3
+graftOptionsSource = 0
+numberOfGrafts = 1
+debugOnly = false
+effectName = ""
+staticText = "Add graft to top 3 cards of your deck"
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_qweo3"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 1
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_u76s7"]
+resource_name = "Graft1"
+script = ExtResource("2_j5dh7")
+amount = 2
+debug = true
+cardTitle = ""
+graft = false
+value = SubResource("Resource_qweo3")
+cost = SubResource("Resource_h57qx")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_dhyph")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[resource]
+script = ExtResource("19_47fy2")
+cards = Array[ExtResource("2_j5dh7")]([SubResource("Resource_m4wcd"), SubResource("Resource_chvy2"), SubResource("Resource_xeq1j"), SubResource("Resource_o77ee"), SubResource("Resource_p1bhp"), SubResource("Resource_vwdiw"), SubResource("Resource_iben3"), SubResource("Resource_p32kq"), SubResource("Resource_f3ql2"), SubResource("Resource_5treu"), SubResource("Resource_2rgny"), SubResource("Resource_l6ab6"), SubResource("Resource_wb21s"), SubResource("Resource_86kyf"), SubResource("Resource_ghq3l"), SubResource("Resource_4nafk"), SubResource("Resource_d2adi"), SubResource("Resource_nny05"), SubResource("Resource_u76s7")])

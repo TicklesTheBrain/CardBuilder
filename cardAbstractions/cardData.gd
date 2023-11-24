@@ -126,11 +126,11 @@ func duplicateSelf() -> CardData:
 	return newCard
 
 func addCardGraft(newGraft: CardData):
-	value.baseValue += newGraft.value.baseValue
+	value.mergeCardParam(newGraft.value)
 	type = newGraft.type.duplicate()
-	cost.baseValue += newGraft.cost.baseValue
-	attack.baseValue += newGraft.attack.baseValue
-	defence.baseValue += newGraft.defence.baseValue
+	cost.mergeCardParam(newGraft.cost)
+	attack.mergeCardParam(newGraft.attack)
+	defence.mergeCardParam(newGraft.defence)
 
 	CardData.mergeEffectsBuckets(onPlayEffects, newGraft.onPlayEffects)
 	CardData.mergeEffectsBuckets(onLoseEffects, newGraft.onLoseEffects)
@@ -165,7 +165,19 @@ static func mergeConditionalsBuckets(bucketToGraft: Array[Conditional], donorBuc
 				snc.mergeConditional(con)
 		else:
 			conditionalsToAppend.push_back(con)
-	conditionalsToAppend = conditionalsToAppend.map(func(c): return c.duplicate(true) as Array[Conditional])
+	conditionalsToAppend = conditionalsToAppend.map(func(c): return c.duplicate(true)) as Array[Conditional]
 	bucketToGraft.append_array(conditionalsToAppend)
+
+static func mergeModifiersBuckets(bucketToGraft: Array[Modifier], donorBucket: Array[Modifier]):
+	var modifiersToAppend = []
+	for mod in donorBucket:
+		var sameNameModifiers = bucketToGraft.filter(func(m): return mod.modifierName and m.modifierName == mod.modifierName)
+		if sameNameModifiers.size() > 0:
+			for snm in sameNameModifiers:
+				snm.mergeModifier(mod)
+		else:
+			modifiersToAppend.push_back(mod)
+	modifiersToAppend = modifiersToAppend.map(func(m): return m.duplicate(true)) as Array[Modifier]
+	bucketToGraft.append_array(modifiersToAppend)
 
 
