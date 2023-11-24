@@ -9,12 +9,14 @@ class_name AddModifier
 func triggerSpecific(ctxt: GameStateContext):
 	print('card apply modifier triggered ')
 
+	var actor = ctxt.getActorFromType(subjectActor)
+
 	for purpose in containersToApply:
 		var newMod = modifier.duplicate()
 		for rule in timingRules:
 			var newTC = rule.createNewTC(ctxt)
 			newMod.addTC(newTC)
-		ctxt.getContainerFromPurpose(purpose).addModifier(newMod)
+		actor.getContainerFromPurpose(purpose).addModifier(newMod)
 
 func mergeEffectSpecific(newEffect: CardEffect):
 	assert(containersToApply.hash() == newEffect.containersToApply.hash())

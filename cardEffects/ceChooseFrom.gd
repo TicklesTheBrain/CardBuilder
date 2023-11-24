@@ -6,7 +6,8 @@ class_name ChooseFrom
 @export var sourceOfCards: Actor.ContainerPurposes
 @export var destinationOfCards: Actor.ContainerPurposes
 @export var destinationOfUnchosenCards: Actor.ContainerPurposes
-@export var reshuffleDeckAfterwards: bool = false
+@export var reshuffleSourceAfterwards: bool = false
+@export var reshuffleDestinationAfterwards: bool = false
 
 var selectedCards: Array[CardData] = []
 var pocketContainer: CardContainer
@@ -15,9 +16,11 @@ signal cardSelectionDone
 
 func triggerSpecific(ctxt: GameStateContext):
 
-	var source = ctxt.getContainerFromPurpose(sourceOfCards) as CardContainer
-	var destination = ctxt.getContainerFromPurpose(destinationOfCards) as CardContainer
-	var unchosenDestination = ctxt.getContainerFromPurpose(destinationOfUnchosenCards) as CardContainer
+	var actor = ctxt.getActorFromType(subjectActor)
+
+	var source = actor.getContainerFromPurpose(sourceOfCards) as CardContainer
+	var destination = actor.getContainerFromPurpose(destinationOfCards) as CardContainer
+	var unchosenDestination = actor.getContainerFromPurpose(destinationOfUnchosenCards) as CardContainer
 
 	if destination.getFreeSpace() != -1:
 		amountOfCardsToChoose = min (destination.getFreeSpace(), amountOfCardsToChoose)
@@ -41,11 +44,14 @@ func triggerSpecific(ctxt: GameStateContext):
 		else:
 			unchosenDestination.addCard(card)
 			
-	pocketContainer.disposeAll(ctxt.getContainerFromPurpose(destinationOfUnchosenCards))
+	pocketContainer.disposeAll(unchosenDestination)
 	PocketLord.requestClosePocket.emit(pocketContainer)
 			
-	if reshuffleDeckAfterwards:
-		ctxt.drawDeck.shuffle()
+	if reshuffleSourceAfterwards:
+		source.shuffle()
+
+	if reshuffleDestinationAfterwards:
+		destination.shuffle()
 
 func receivePocket(pocket: CardContainer):
 	pocketContainer = pocket

@@ -10,12 +10,14 @@ signal cardSelectionDone
 func triggerSpecific(ctxt: GameStateContext):
 
 	print('card discard triggered')
-	var cont = ctxt.getContainerFromPurpose(discardFrom)
+
+	var actor = ctxt.getActorFromType(subjectActor)
+	var cont = actor.getContainerFromPurpose(discardFrom)
 
 	if amountOfCardsToDiscard == -1:
 		cont.disposeAll()
 	else:
-		InputLord.cardSelectionRequested.emit(ctxt.hand, amountOfCardsToDiscard, receiveSelection)
+		InputLord.cardSelectionRequested.emit(actor.hand, amountOfCardsToDiscard, receiveSelection)
 		await cardSelectionDone
 		for card in selectedCards:
 			cont.disposeCard(card)

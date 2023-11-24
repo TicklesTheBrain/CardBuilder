@@ -19,6 +19,8 @@ signal graftChoicePocketClosed
 
 func triggerSpecific(ctxt: GameStateContext):
 
+	var actor = ctxt.getActorFromType(subjectActor)	 
+
 	var graftCardArray = DeckManager.makeCardArrayFromTemplate(graftDeckTemplate, debugOnly) as Array[CardData]
 	graftCardArray.shuffle()
 	PocketLord.pocketClosed.connect(processPocketClosed)
@@ -40,8 +42,8 @@ func triggerSpecific(ctxt: GameStateContext):
 		selectedGraft.announceDestroy.emit()
 
 		PocketLord.requestNewPocket.emit("Choose 1 to add graft to", receiveGraftOptionsPocket, cardOptions)
-
-		var sourceCont = ctxt.getContainerFromPurpose(graftOptionsSource)
+		
+		var sourceCont = actor.getContainerFromPurpose(graftOptionsSource)
 		for o in range(cardOptions):
 			var newOption = sourceCont.drawCard()
 			grafOptionsPocket.addCard(newOption)

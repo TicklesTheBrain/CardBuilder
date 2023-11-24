@@ -7,9 +7,11 @@ class_name DrawCards
 
 func triggerSpecific(ctxt: GameStateContext):
 	print('card draw triggered')
+	var actor = ctxt.getActorFromType(subjectActor)
+	
 
-	var s = ctxt.getContainerFromPurpose(source)
-	var d = ctxt.getContainerFromPurpose(destination)
+	var s = actor.getContainerFromPurpose(source)
+	var d = actor.getContainerFromPurpose(destination)
 
 	for i in range(amountOfCardsToDraw):
 		if d.checkFull():

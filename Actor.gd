@@ -1,6 +1,8 @@
 extends Node
 class_name Actor
 
+@export var actorName: String
+
 @export_group("Game Resources")
 @export var energy: GameResource  
 @export var cardsPerTurn: GameResource

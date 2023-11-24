@@ -1,6 +1,8 @@
 extends Node
 class_name GameResource
 
+enum Properties {BASELINE, RESET_ADJUST, RESET_BASELINE, AMOUNT}
+
 signal amountChanged(newAmount: int)
 
 @export var resourceName: String
@@ -28,4 +30,25 @@ func _ready():
 	if debugLabel:
 		amountChanged.connect(updateLabel)
 
+func setProperty(property: Properties, newValue: int):
+	match property:
+		Properties.BASELINE:
+			baseline = newValue
+		Properties.RESET_ADJUST:
+			resetAdjust = newValue
+		Properties.RESET_BASELINE:
+			resetBaseline = newValue
+		Properties.AMOUNT:
+			amount = newValue
+
+func shiftProperty(property: Properties, shiftAmount: int):
+	match property:
+		Properties.BASELINE:
+			baseline += shiftAmount
+		Properties.RESET_ADJUST:
+			resetAdjust += shiftAmount
+		Properties.RESET_BASELINE:
+			resetBaseline += shiftAmount
+		Properties.AMOUNT:
+			amount += shiftAmount
 
