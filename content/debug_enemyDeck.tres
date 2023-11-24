@@ -9,7 +9,7 @@
 script = ExtResource("1_24qbb")
 baseValue = 1
 type = 2
-modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
 capAtZero = false
 
@@ -17,7 +17,7 @@ capAtZero = false
 script = ExtResource("1_24qbb")
 baseValue = 0
 type = 0
-modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
 capAtZero = false
 
@@ -25,7 +25,7 @@ capAtZero = false
 script = ExtResource("1_24qbb")
 baseValue = 1
 type = 3
-modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
 capAtZero = false
 
@@ -37,7 +37,7 @@ type = 0
 script = ExtResource("1_24qbb")
 baseValue = 3
 type = 1
-modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
 capAtZero = false
 

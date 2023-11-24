@@ -1,0 +1,253 @@
+[gd_scene load_steps=13 format=3 uid="uid://ceyxukwff6y10"]
+
+[ext_resource type="Script" path="res://cardDisplayTemp.gd" id="1_yd72a"]
+[ext_resource type="Texture2D" uid="uid://borasnacb7ps2" path="res://assets/symbolS.png" id="2_36v7k"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/typeDisplay.gd" id="3_hcxe8"]
+[ext_resource type="Texture2D" uid="uid://ccghpll8o6r4g" path="res://assets/symbolD.png" id="4_q4tes"]
+[ext_resource type="Texture2D" uid="uid://chj8mjmxg322o" path="res://assets/symbolT.png" id="5_e11x6"]
+[ext_resource type="Texture2D" uid="uid://b2t5os3i8osfs" path="res://assets/symbolQ.png" id="6_psfa3"]
+[ext_resource type="Texture2D" uid="uid://yjm7ihicna6h" path="res://assets/cardFrontBackground.png" id="7_mdevn"]
+[ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="8_04g4f"]
+
+[sub_resource type="Resource" id="Resource_q45l2"]
+script = ExtResource("3_hcxe8")
+cardType = 0
+cardSymbolSprite = ExtResource("2_36v7k")
+typeColor = Color(0.592157, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_vph0m"]
+script = ExtResource("3_hcxe8")
+cardType = 1
+cardSymbolSprite = ExtResource("4_q4tes")
+typeColor = Color(0, 0, 0.447059, 1)
+
+[sub_resource type="Resource" id="Resource_ogwbp"]
+script = ExtResource("3_hcxe8")
+cardType = 2
+cardSymbolSprite = ExtResource("5_e11x6")
+typeColor = Color(0.0823529, 0.462745, 0.054902, 1)
+
+[sub_resource type="Resource" id="Resource_ruoui"]
+script = ExtResource("3_hcxe8")
+cardType = 3
+cardSymbolSprite = ExtResource("6_psfa3")
+typeColor = Color(0.415686, 0.0392157, 0.45098, 1)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("numberLabel", "cornerSymbol", "symbolPositions", "coloredGroup", "subviewPort", "renderSprite")]
+script = ExtResource("1_yd72a")
+typeProperties = Array[ExtResource("3_hcxe8")]([SubResource("Resource_q45l2"), SubResource("Resource_vph0m"), SubResource("Resource_ogwbp"), SubResource("Resource_ruoui")])
+numberLabel = NodePath("SubViewport/ColoredGroup/NumberLabel")
+cornerSymbol = NodePath("SubViewport/ColoredGroup/CornerSymbol")
+symbolPositions = NodePath("SymbolPositions")
+coloredGroup = NodePath("SubViewport/ColoredGroup")
+subviewPort = NodePath("SubViewport")
+renderSprite = NodePath("RenderingSprite")
+testType = 3
+testNumber = 5
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="Background" type="Sprite2D" parent="SubViewport"]
+texture = ExtResource("7_mdevn")
+
+[node name="ColoredGroup" type="CanvasGroup" parent="SubViewport"]
+
+[node name="CornerSymbol" type="Sprite2D" parent="SubViewport/ColoredGroup"]
+position = Vector2(-116, -281)
+texture = ExtResource("2_36v7k")
+
+[node name="NumberLabel" type="Label" parent="SubViewport/ColoredGroup"]
+offset_left = -228.0
+offset_top = -342.0
+offset_right = -167.0
+offset_bottom = -241.0
+theme_override_fonts/font = ExtResource("8_04g4f")
+theme_override_font_sizes/font_size = 75
+text = "10"
+
+[node name="SymbolPositions" type="Node2D" parent="."]
+visible = false
+
+[node name="1" type="Node2D" parent="SymbolPositions"]
+
+[node name="Marker2D" type="Marker2D" parent="SymbolPositions/1"]
+
+[node name="2" type="Node2D" parent="SymbolPositions"]
+
+[node name="Marker2D" type="Marker2D" parent="SymbolPositions/2"]
+position = Vector2(0, -200)
+
+[node name="Marker2D2" type="Marker2D" parent="SymbolPositions/2"]
+position = Vector2(0, 200)
+
+[node name="3" type="Node2D" parent="SymbolPositions"]
+
+[node name="Marker2D" type="Marker2D" parent="SymbolPositions/3"]
+position = Vector2(0, -200)
+
+[node name="Marker2D2" type="Marker2D" parent="SymbolPositions/3"]
+position = Vector2(0, 200)
+
+[node name="Marker2D3" type="Marker2D" parent="SymbolPositions/3"]
+
+[node name="4" type="Node2D" parent="SymbolPositions"]
+
+[node name="Marker2D" type="Marker2D" parent="SymbolPositions/4"]
+position = Vector2(-150, -200)
+
+[node name="Marker2D2" type="Marker2D" parent="SymbolPositions/4"]
+position = Vector2(-150, 200)
+
+[node name="Marker2D3" type="Marker2D" parent="SymbolPositions/4"]
+position = Vector2(150, -200)
+
+[node name="Marker2D4" type="Marker2D" parent="SymbolPositions/4"]
+position = Vector2(150, 200)
+
+[node name="5" type="Node2D" parent="SymbolPositions"]
+
+[node name="Marker2D" type="Marker2D" parent="SymbolPositions/5"]
+position = Vector2(-150, -200)
+
+[node name="Marker2D2" type="Marker2D" parent="SymbolPositions/5"]
+position = Vector2(-150, 200)
+
+[node name="Marker2D3" type="Marker2D" parent="SymbolPositions/5"]
+position = Vector2(150, -200)
+
+[node name="Marker2D4" type="Marker2D" parent="SymbolPositions/5"]
+position = Vector2(150, 200)
+
+[node name="Marker2D5" type="Marker2D" parent="SymbolPositions/5"]
+
+[node name="6" type="Node2D" parent="SymbolPositions"]
+
+[node name="Marker2D" type="Marker2D" parent="SymbolPositions/6"]
+position = Vector2(-150, -200)
+
+[node name="Marker2D2" type="Marker2D" parent="SymbolPositions/6"]
+position = Vector2(-150, 200)
+
+[node name="Marker2D3" type="Marker2D" parent="SymbolPositions/6"]
+position = Vector2(150, -200)
+
+[node name="Marker2D4" type="Marker2D" parent="SymbolPositions/6"]
+position = Vector2(150, 200)
+
+[node name="Marker2D5" type="Marker2D" parent="SymbolPositions/6"]
+position = Vector2(-150, 0)
+
+[node name="Marker2D6" type="Marker2D" parent="SymbolPositions/6"]
+position = Vector2(150, 0)
+
+[node name="7" type="Node2D" parent="SymbolPositions"]
+
+[node name="Marker2D" type="Marker2D" parent="SymbolPositions/7"]
+position = Vector2(-150, -200)
+
+[node name="Marker2D2" type="Marker2D" parent="SymbolPositions/7"]
+position = Vector2(-150, 200)
+
+[node name="Marker2D3" type="Marker2D" parent="SymbolPositions/7"]
+position = Vector2(150, -200)
+
+[node name="Marker2D4" type="Marker2D" parent="SymbolPositions/7"]
+position = Vector2(150, 200)
+
+[node name="Marker2D5" type="Marker2D" parent="SymbolPositions/7"]
+position = Vector2(-150, 0)
+
+[node name="Marker2D6" type="Marker2D" parent="SymbolPositions/7"]
+position = Vector2(150, 0)
+
+[node name="Marker2D7" type="Marker2D" parent="SymbolPositions/7"]
+position = Vector2(0, -100)
+
+[node name="8" type="Node2D" parent="SymbolPositions"]
+
+[node name="Marker2D" type="Marker2D" parent="SymbolPositions/8"]
+position = Vector2(-150, -200)
+
+[node name="Marker2D2" type="Marker2D" parent="SymbolPositions/8"]
+position = Vector2(-150, 200)
+
+[node name="Marker2D3" type="Marker2D" parent="SymbolPositions/8"]
+position = Vector2(150, -200)
+
+[node name="Marker2D4" type="Marker2D" parent="SymbolPositions/8"]
+position = Vector2(150, 200)
+
+[node name="Marker2D5" type="Marker2D" parent="SymbolPositions/8"]
+position = Vector2(-150, 0)
+
+[node name="Marker2D6" type="Marker2D" parent="SymbolPositions/8"]
+position = Vector2(150, 0)
+
+[node name="Marker2D7" type="Marker2D" parent="SymbolPositions/8"]
+position = Vector2(0, -100)
+
+[node name="Marker2D8" type="Marker2D" parent="SymbolPositions/8"]
+position = Vector2(0, 100)
+
+[node name="9" type="Node2D" parent="SymbolPositions"]
+
+[node name="Marker2D" type="Marker2D" parent="SymbolPositions/9"]
+position = Vector2(-150, -200)
+
+[node name="Marker2D2" type="Marker2D" parent="SymbolPositions/9"]
+position = Vector2(-150, 200)
+
+[node name="Marker2D3" type="Marker2D" parent="SymbolPositions/9"]
+position = Vector2(150, -200)
+
+[node name="Marker2D4" type="Marker2D" parent="SymbolPositions/9"]
+position = Vector2(150, 200)
+
+[node name="Marker2D5" type="Marker2D" parent="SymbolPositions/9"]
+position = Vector2(-150, -67)
+
+[node name="Marker2D6" type="Marker2D" parent="SymbolPositions/9"]
+position = Vector2(150, -67)
+
+[node name="Marker2D7" type="Marker2D" parent="SymbolPositions/9"]
+position = Vector2(-150, 67)
+
+[node name="Marker2D8" type="Marker2D" parent="SymbolPositions/9"]
+position = Vector2(150, 67)
+
+[node name="Marker2D9" type="Marker2D" parent="SymbolPositions/9"]
+
+[node name="10" type="Node2D" parent="SymbolPositions"]
+
+[node name="Marker2D" type="Marker2D" parent="SymbolPositions/10"]
+position = Vector2(-150, -200)
+
+[node name="Marker2D2" type="Marker2D" parent="SymbolPositions/10"]
+position = Vector2(-150, 200)
+
+[node name="Marker2D3" type="Marker2D" parent="SymbolPositions/10"]
+position = Vector2(150, -200)
+
+[node name="Marker2D4" type="Marker2D" parent="SymbolPositions/10"]
+position = Vector2(150, 200)
+
+[node name="Marker2D5" type="Marker2D" parent="SymbolPositions/10"]
+position = Vector2(-150, -67)
+
+[node name="Marker2D6" type="Marker2D" parent="SymbolPositions/10"]
+position = Vector2(150, -67)
+
+[node name="Marker2D7" type="Marker2D" parent="SymbolPositions/10"]
+position = Vector2(-150, 67)
+
+[node name="Marker2D8" type="Marker2D" parent="SymbolPositions/10"]
+position = Vector2(150, 67)
+
+[node name="Marker2D9" type="Marker2D" parent="SymbolPositions/10"]
+position = Vector2(0, -134)
+
+[node name="Marker2D10" type="Marker2D" parent="SymbolPositions/10"]
+position = Vector2(0, 134)
+
+[node name="RenderingSprite" type="Sprite2D" parent="."]
+position = Vector2(100, 100)
