@@ -13,12 +13,12 @@ func createTC(type: TimingCheck.CheckType, counter: int, event: EventType, ctxt:
 			newTC.connectTurnEnd()
 		EventType.CARD_PLAYED:
 			newTC.connectCardPlayed()
-			newTC.subjectCard = ctxt.actingCard
-			newTC.containerSubject = ctxt.playArea
+			newTC.cardSubject = ctxt.actingCard
+			newTC.containerSubject = ctxt.actingCard.getOwner().playArea
 		EventType.CARD_REMOVED_FROM_HAND:
 			newTC.connectCardRemoved()
-			newTC.subjectCard = ctxt.actingCard
-			newTC.containerSubject = ctxt.hand
+			newTC.cardSubject = ctxt.actingCard
+			newTC.containerSubject = ctxt.actingCard.getOwner().hand
 
 	return newTC
 		

@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=20 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
 [ext_resource type="Script" path="res://cardAbstractions/GameResource.gd" id="3_c142g"]
+[ext_resource type="PackedScene" uid="uid://dsfqrofqt0xs4" path="res://card_graft.tscn" id="3_ieoty"]
 [ext_resource type="PackedScene" uid="uid://d1lj52mw7mxay" path="res://card.tscn" id="3_kxrxo"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/CardDisplaySink.gd" id="3_lpmun"]
 [ext_resource type="Script" path="res://Actor.gd" id="4_8gay1"]
@@ -29,9 +30,18 @@ size = Vector2(271.5, 256.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_625ey"]
 size = Vector2(961.5, 256.5)
 
-[node name="game" type="Node2D"]
+[node name="game" type="Node2D" node_paths=PackedStringArray("playAreaPositionController", "enemyPlayAreaPositionController", "messageLabel", "drawCardButton", "endHandButton", "okButton", "player", "enemy")]
 script = ExtResource("1_hbkeb")
+playAreaPositionController = NodePath("PlayArea/PlayAreaPositionController")
+enemyPlayAreaPositionController = NodePath("EnemyPlayAreaController")
+messageLabel = NodePath("MessageContent")
 cardDisplayPacked = ExtResource("3_kxrxo")
+cardGraftDisplayPacked = ExtResource("3_ieoty")
+drawCardButton = NodePath("DrawButton")
+endHandButton = NodePath("EndButton")
+okButton = NodePath("OkBUtton")
+player = NodePath("Logic/Player")
+enemy = NodePath("Logic/Enemy")
 
 [node name="Logic" type="Node" parent="."]
 
@@ -53,7 +63,7 @@ deck = NodePath("DeckManager")
 script = ExtResource("3_c142g")
 resourceName = "hp"
 baseline = 25
-debugLabel = NodePath("../../../InfoStuff/SufferedCounter")
+debugLabel = NodePath("../../../InfoStuff/myhpCounter")
 
 [node name="BonusAttack" type="Node" parent="Logic/Player"]
 script = ExtResource("3_c142g")
@@ -92,6 +102,7 @@ capAtZero = true
 
 [node name="DeckManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("3_8edax")
+debug = false
 templatePackage = ExtResource("24_wh5ls")
 feedContainer = NodePath("../DiscardManager")
 disposeContainer = NodePath("../DiscardManager")
@@ -122,6 +133,10 @@ label = NodePath("../../../../InfoStuff/PlayAreaCounter")
 script = ExtResource("11_rgdhd")
 countSubject = 2
 
+[node name="DefenceCounter" type="Node" parent="Logic/Player/PlayAreaManager"]
+script = ExtResource("11_rgdhd")
+countSubject = 3
+
 [node name="DiscardManager" type="Node" parent="Logic/Player"]
 script = ExtResource("12_q8pst")
 
@@ -138,16 +153,17 @@ bonusAttack = NodePath("EnemyBonusAttack")
 bonusDefence = NodePath("EnemyBonusDefence")
 multiplierAttack = NodePath("EnemyMultiplierAttack")
 multiplierDefence = NodePath("EnemyMultiplierDefence")
-hp = NodePath("hp")
+hp = NodePath("enemyHp")
 hand = NodePath("EnemyHand")
 discard = NodePath("EnemyDiscard")
 playArea = NodePath("EnemyPlayArea")
 deck = NodePath("EnemyDeck")
 
-[node name="hp" type="Node" parent="Logic/Enemy" node_paths=PackedStringArray("debugLabel")]
+[node name="enemyHp" type="Node" parent="Logic/Enemy" node_paths=PackedStringArray("debugLabel")]
 script = ExtResource("3_c142g")
 resourceName = "hp"
-debugLabel = NodePath("../../../InfoStuff/DealtCounter")
+baseline = 20
+debugLabel = NodePath("../../../InfoStuff/theirHpCounter")
 
 [node name="EnemyHand" type="Node" parent="Logic/Enemy"]
 script = ExtResource("12_q8pst")
@@ -167,6 +183,10 @@ label = NodePath("../../../../InfoStuff/PlayAreaCounter")
 [node name="AttackCounter" type="Node" parent="Logic/Enemy/EnemyPlayArea"]
 script = ExtResource("11_rgdhd")
 countSubject = 2
+
+[node name="DefenceCounter" type="Node" parent="Logic/Enemy/EnemyPlayArea"]
+script = ExtResource("11_rgdhd")
+countSubject = 3
 
 [node name="EnemyDiscard" type="Node" parent="Logic/Enemy"]
 script = ExtResource("12_q8pst")
@@ -350,19 +370,20 @@ text = "Discard"
 layout_mode = 2
 text = "0"
 
-[node name="Dealt" type="Label" parent="InfoStuff"]
+[node name="myhp" type="Label" parent="InfoStuff"]
 layout_mode = 2
-text = "Dealt"
+text = "Your HP"
 
-[node name="DealtCounter" type="Label" parent="InfoStuff"]
+[node name="myhpCounter" type="Label" parent="InfoStuff"]
 layout_mode = 2
 text = "0"
 
-[node name="Suffered" type="Label" parent="InfoStuff"]
+[node name="theirHp" type="Label" parent="InfoStuff"]
 layout_mode = 2
-text = "Suffered"
+text = "Enemy HP
+"
 
-[node name="SufferedCounter" type="Label" parent="InfoStuff"]
+[node name="theirHpCounter" type="Label" parent="InfoStuff"]
 layout_mode = 2
 text = "0"
 

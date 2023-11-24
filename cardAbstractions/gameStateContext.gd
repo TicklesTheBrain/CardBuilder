@@ -1,7 +1,7 @@
 extends Resource
 class_name GameStateContext
 
-enum ActorType {PLAYER, ENEMY, ACTIVE, PASSIVE}
+enum ActorType {PLAYER, ENEMY, ACTIVE, PASSIVE, OWNER, OPPONENT}
 
 var player: Actor
 var enemy: Actor
@@ -22,6 +22,14 @@ func getActorFromType(type: ActorType) -> Actor:
             return activeActor
         ActorType.PASSIVE:
             return passiveActor
+        ActorType.OWNER:
+            return actingCard.getOwner()
+        ActorType.OPPONENT:
+            if actingCard.getOwner() != player:
+                return player
+            else:
+                return enemy
+
 
     return null
 

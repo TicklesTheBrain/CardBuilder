@@ -57,12 +57,12 @@ func updateCardDisplay(dataToShow: CardData = cardData):
 	if otherText != "":
 		otherTextLabel.text = otherText
 	
-	if dataToShow.stats.attack > 0:
-		attackLabel.text = str(dataToShow.stats.attack) + 'Att'
+	if dataToShow.getAttack() > 0:
+		attackLabel.text = str(dataToShow.getAttack()) + 'Att'
 	else:
 		attackLabel.text = ""
-	if dataToShow.stats.defence >0:
-		defenceLabel.text = str(dataToShow.stats.defence) + 'Def'
+	if dataToShow.getDefence() >0:
+		defenceLabel.text = str(dataToShow.getDefence()) + 'Def'
 	else:
 		defenceLabel.text = ""
 

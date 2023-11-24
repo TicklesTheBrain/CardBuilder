@@ -9,10 +9,16 @@ class_name CardContainer
 @export var addTriggerType: CardEffect.triggerType
 @export var modifiers: Array[Modifier]
 
+var ownerActor: Actor
 var originMarker: Marker2D #TODO: THIS IS UGLY, need to fix this somehow
 
 signal cardAdded(card: CardData)
 signal cardRemoved(card: CardData)
+
+func _ready():
+	var parent = get_parent()
+	if parent is Actor:
+		ownerActor = parent
 
 func removeCard(cardToRemove: CardData) -> bool:
 	if cards.has(cardToRemove):

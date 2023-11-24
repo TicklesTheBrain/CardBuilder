@@ -27,7 +27,7 @@ func updateCardDisplay(_dataToShow: CardData = cardData):
 	if otherText != "":
 		otherTextLabel.text = otherText
 	
-	var attackValue = cardData.stats.attack
+	var attackValue = cardData.attack.getBaseValue()
 	if attackValue != 0:
 		var increaseAttack = attackValue > 0
 		attackLabel.text = "{symbol}{amount}".format({"symbol": "+" if increaseAttack else "-", "amount": attackValue})
@@ -38,7 +38,7 @@ func updateCardDisplay(_dataToShow: CardData = cardData):
 	else:
 		attackLabel.text = ""
 
-	var defenceValue = cardData.stats.defence
+	var defenceValue = cardData.defence.getBaseValue()
 	if defenceValue != 0:
 		var increaseDefence = defenceValue > 0
 		defenceLabel.text = "{symbol}{amount}".format({"symbol": "+" if increaseDefence else "-", "amount": defenceValue})

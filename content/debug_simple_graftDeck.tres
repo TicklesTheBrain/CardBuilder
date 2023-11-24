@@ -1,14 +1,31 @@
-[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=9 format=3 uid="uid://c4nt0nc0bnkvy"]
+[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=13 format=3 uid="uid://c4nt0nc0bnkvy"]
 
 [ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="1_ut3cu"]
 [ext_resource type="Script" path="res://cardEffects/ceDraw.gd" id="2_7j6k5"]
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="3_2rx2g"]
+[ext_resource type="Script" path="res://cardAbstractions/cardType.gd" id="4_cihnm"]
 [ext_resource type="Script" path="res://cardAbstractions/cardTemplatePackage.gd" id="4_rnuba"]
+
+[sub_resource type="Resource" id="Resource_sis6c"]
+script = ExtResource("1_ut3cu")
+baseValue = 1
+type = 2
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
 
 [sub_resource type="Resource" id="Resource_lsr0e"]
 script = ExtResource("1_ut3cu")
 baseValue = 1
 type = 0
+modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_sgyva"]
+script = ExtResource("1_ut3cu")
+baseValue = -1
+type = 3
 modifiers = Array[Resource("res://modifiers/paramModifier.gd")]([])
 staticText = ""
 capAtZero = false
@@ -24,6 +41,10 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
+
+[sub_resource type="Resource" id="Resource_4q0oj"]
+script = ExtResource("4_cihnm")
+type = 0
 
 [sub_resource type="Resource" id="Resource_v7stm"]
 script = ExtResource("1_ut3cu")
@@ -41,7 +62,10 @@ debug = false
 cardTitle = ""
 graft = true
 value = SubResource("Resource_v7stm")
+type = SubResource("Resource_4q0oj")
 cost = SubResource("Resource_lsr0e")
+attack = SubResource("Resource_sis6c")
+defence = SubResource("Resource_sgyva")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_e08e7")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])

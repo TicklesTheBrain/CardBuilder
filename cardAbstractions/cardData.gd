@@ -28,6 +28,11 @@ var container: CardContainer:
 var prevContainer: CardContainer 
 var context: GameStateContext
 
+func getOwner() -> Actor:
+	if not container:
+		return null
+	return container.ownerActor
+
 func getValue():
 	updateContext()
 	if not context:
@@ -39,6 +44,18 @@ func getCost():
 	if not context:
 		return cost.getBaseValue()
 	return cost.getValue(context, self)
+
+func getAttack():
+	updateContext()
+	if not context:
+		return attack.getBaseValue()
+	return attack.getValue(context, self)
+
+func getDefence():
+	updateContext()
+	if not context:
+		return defence.getBaseValue()
+	return defence.getValue(context, self)
 
 func receiveContext(ctxt: GameStateContext):
 	context = ctxt

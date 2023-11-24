@@ -4,6 +4,7 @@ class_name Conditional
 @export var staticText: String
 @export var containerToCheck: Actor.ContainerPurposes
 @export var conditionalName: String
+@export var subjectActor: GameStateContext.ActorType
 
 func getText():
     if staticText:

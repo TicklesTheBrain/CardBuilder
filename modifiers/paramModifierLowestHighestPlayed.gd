@@ -5,7 +5,7 @@ enum setToType {HIGHEST, LOWEST}
 @export var setTo: setToType
 
 func calculateSpecific(ctxt: GameStateContext, _currValue: int, _card: CardData):
-	var playedCards = ctxt.playArea.getAll()
+	var playedCards = ctxt.player.playArea.getAll() #TODO: This breaks on application to enemy
 	if playedCards.size() == 0:
 		return 0
 	var allBaseValues = []

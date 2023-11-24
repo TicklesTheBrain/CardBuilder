@@ -10,7 +10,7 @@ func triggerSpecific(ctxt: GameStateContext):
 	var actor = ctxt.getActorFromType(subjectActor)	 
 	
 	var resource = actor.getResourceFromEnum(modifiedResource)
-	resource.shifProperty(resourcePropety, amountToModify)
+	resource.shiftProperty(resourcePropety, amountToModify)
 	
 
 func getTextSpecific():

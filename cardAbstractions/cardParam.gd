@@ -10,7 +10,7 @@ enum ParamType {COST, VALUE, ATTACK, DEFENCE}
 		else:
 			baseValue = val
 @export var type: ParamType
-@export var modifiers: Array[ParamModifier]
+@export var modifiers: Array[Modifier]
 @export var staticText: String
 @export var capAtZero: bool = false
 
@@ -54,6 +54,6 @@ func mergeCardParam(newCardParam: CardParam):
 	assert (type == newCardParam.type)
 	capAtZero = capAtZero or newCardParam.capAtZero
 	baseValue += newCardParam.baseValue
-	CardData.mergeModifiersBuckets(modifiers as Array[Modifier], newCardParam.modifiers as Array[Modifier]) #TODO: this is ugly
+	CardData.mergeModifiersBuckets(modifiers, newCardParam.modifiers) #TODO: this is ugly
 
 

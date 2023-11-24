@@ -124,7 +124,7 @@ func roundLoop():
 	endHandButton.disabled = true
 
 	var playerValue = player.playArea.bustCounter.count
-	var playerBusted = player.playerArea.bustCounter.checkIsBusted()
+	var playerBusted = player.playArea.bustCounter.checkIsBusted()
 
 	Events.playerTurnEnd.emit(playerValue, playerBusted)	
 
@@ -188,20 +188,20 @@ func roundLoop():
 		
 		#Determine attack and defence
 		var damageCounter = winner.playArea.get_children().filter(func(c): return c is ContainerCounter and c.countSubject == ContainerCounter.countWhat.ATTACK)[0]
-		var damage = (damageCounter.count + winner.bonusAttack) * winner.multiplierAttack
+		var damage = (damageCounter.count + winner.bonusAttack.amount) * winner.multiplierAttack.amount
 		var shieldCounter = loser.playArea.get_children().filter(func(c): return c is ContainerCounter and c.countSubject == ContainerCounter.countWhat.DEFENCE)[0]
-		var shields = (shieldCounter.count + loser.bonusDefence) * loser.multiplierDefence
+		var shields = (shieldCounter.count + loser.bonusDefence.amount) * loser.multiplierDefence.amount
 
-		var dealtDamage = min(0, damage - shields)
+		var dealtDamage = max(0, damage - shields)
 
 		loser.hp.amount -= dealtDamage
 
 		#Display a message about the outcome
-		var winnerString = "You have {attackAmount}, they defend with {shieldsAmount} defence. Total of {dealtDamage} is dealt. Enemy now at {newHP}."
+		var winnerString = "You have {attackAmount} attack, they defend with {shieldAmount} defence. Total of {dealtDamage} is dealt. Enemy now at {newHP}."
 		if winner != player:
-			winnerString = "They have {attackAmount}, you defend with {shieldAmount} defence. Total  of {dealtDamage} is dealt. You're now at {newHP}"
+			winnerString = "They have {attackAmount} attack, you defend with {shieldAmount} defence. Total  of {dealtDamage} is dealt. You're now at {newHP}"
 
-		message = winnerString.formart({"attackAmount" = damage, "shieldAmount" = shields, "dealtDamage" =  dealtDamage, "newHP" =  loser.hp.amount})
+		message = winnerString.format({"attackAmount" = damage, "shieldAmount" = shields, "dealtDamage" =  dealtDamage, "newHP" =  loser.hp.amount})
 
 
 	else:

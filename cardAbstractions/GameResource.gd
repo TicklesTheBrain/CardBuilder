@@ -11,7 +11,7 @@ signal amountChanged(newAmount: int)
 @export var resetBaseline: int = 0
 @export var capAtZero: bool
 @export var debugLabel: Label
-@export var amount: int = baseline:
+@export var amount: int:
 	set(value):
 		if capAtZero:
 			amount = max(value, 0)
@@ -29,6 +29,7 @@ func updateLabel(newAmount):
 func _ready():
 	if debugLabel:
 		amountChanged.connect(updateLabel)
+	amount = baseline
 
 func setProperty(property: Properties, newValue: int):
 	match property:

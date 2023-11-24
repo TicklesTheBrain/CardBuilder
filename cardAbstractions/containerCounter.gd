@@ -32,6 +32,10 @@ func recalculateValue(_discardedValue = null):
 			count = cardContainer.cards.reduce(func(acc, card): return acc+card.getValue(), startingValue)
 		countWhat.AMOUNT:
 			count = cardContainer.cards.size()
+		countWhat.ATTACK:
+			count = cardContainer.cards.reduce(func(acc, card): return acc+card.getAttack(), startingValue)
+		countWhat.DEFENCE:
+			count = cardContainer.cards.reduce(func(acc, card): return acc+card.getDefence(), startingValue)
 
 	if count != prevCount:
 		countChanged.emit(count)

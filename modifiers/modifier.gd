@@ -4,6 +4,7 @@ class_name Modifier
 @export var inEffect: bool = true
 @export var staticText: String
 @export var modifierName: String
+@export var generateText: bool = true
 
 var active: bool:
     get:

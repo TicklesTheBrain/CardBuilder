@@ -14,8 +14,9 @@ func getTextSpecific():
 	return text.format({"verb": verb, "number": valueToMatchOrExceed})
 
 func check(ctxt: GameStateContext):
-	print('check triggered')
-	var currValue = ctxt.getContainerFromPurpose(containerToCheck).getTotalValue()
+	print('conditional value check triggered')
+	var actor = ctxt.getActorFromType(subjectActor)
+	var currValue = actor.getContainerFromPurpose(containerToCheck).getTotalValue()
 	if not disabledOnMatchOrExceed and currValue >= valueToMatchOrExceed:
 		return true
 	if disabledOnMatchOrExceed and currValue < valueToMatchOrExceed:
