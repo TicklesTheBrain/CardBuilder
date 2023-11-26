@@ -6,7 +6,9 @@ extends Node2D
 @export var symbolPositions: Node2D
 @export var coloredGroup: CanvasGroup
 @export var subviewPort: SubViewport
+@export var subCamera: Camera2D
 @export var renderSprite: Sprite2D
+@export var background: Sprite2D
 
 @export var testType: CardType.Types
 @export var testNumber: int
@@ -14,8 +16,8 @@ extends Node2D
 func _ready():
 	setup(testType, testNumber)
 	await RenderingServer.frame_post_draw
-	var image = subviewPort.get_texture().get_image()
-	renderSprite.texture = ImageTexture.create_from_image(image)
+	# RenderingServer.force_draw()
+	#renderSprite.texture = ImageTexture.create_from_image(subviewPort.get_texture().get_image())
 
 func setup(type: CardType.Types, number: int):
 	assert(number >= 0 and number <= 11)
@@ -30,4 +32,11 @@ func setup(type: CardType.Types, number: int):
 		newSprite.texture = symbolProperties.cardSymbolSprite
 		newSprite.position = positionGroup.get_children()[i].position
 		coloredGroup.add_child(newSprite)
+
+func getCardImage(type: CardType.Types, number: int, receivingFunction: Callable):
+	setup(type, number)
+	await RenderingServer.frame_post_draw
+	receivingFunction.call(ImageTexture.create_from_image(subviewPort.get_texture().get_image()))
+
+
 

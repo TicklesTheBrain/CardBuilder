@@ -1,4 +1,4 @@
-extends PanelContainer
+extends TextureRect
 
 
 func _gui_input(event):

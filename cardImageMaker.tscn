@@ -1,72 +1,89 @@
 [gd_scene load_steps=13 format=3 uid="uid://ceyxukwff6y10"]
 
-[ext_resource type="Script" path="res://cardDisplayTemp.gd" id="1_yd72a"]
-[ext_resource type="Texture2D" uid="uid://borasnacb7ps2" path="res://assets/symbolS.png" id="2_36v7k"]
-[ext_resource type="Script" path="res://cardInterfaceStuff/typeDisplay.gd" id="3_hcxe8"]
-[ext_resource type="Texture2D" uid="uid://ccghpll8o6r4g" path="res://assets/symbolD.png" id="4_q4tes"]
-[ext_resource type="Texture2D" uid="uid://chj8mjmxg322o" path="res://assets/symbolT.png" id="5_e11x6"]
-[ext_resource type="Texture2D" uid="uid://b2t5os3i8osfs" path="res://assets/symbolQ.png" id="6_psfa3"]
-[ext_resource type="Texture2D" uid="uid://yjm7ihicna6h" path="res://assets/cardFrontBackground.png" id="7_mdevn"]
-[ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="8_04g4f"]
+[ext_resource type="Script" path="res://cardImageMaker.gd" id="1_r40yl"]
+[ext_resource type="Texture2D" uid="uid://borasnacb7ps2" path="res://assets/symbolS.png" id="2_3u7tc"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/typeDisplay.gd" id="3_5h60h"]
+[ext_resource type="Texture2D" uid="uid://ccghpll8o6r4g" path="res://assets/symbolD.png" id="4_txy14"]
+[ext_resource type="Texture2D" uid="uid://chj8mjmxg322o" path="res://assets/symbolT.png" id="5_n2iee"]
+[ext_resource type="Texture2D" uid="uid://b2t5os3i8osfs" path="res://assets/symbolQ.png" id="6_thp1i"]
+[ext_resource type="Texture2D" uid="uid://yjm7ihicna6h" path="res://assets/cardFrontBackground.png" id="7_b3l05"]
+[ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="8_kvg2p"]
 
 [sub_resource type="Resource" id="Resource_q45l2"]
-script = ExtResource("3_hcxe8")
+script = ExtResource("3_5h60h")
 cardType = 0
-cardSymbolSprite = ExtResource("2_36v7k")
+cardSymbolSprite = ExtResource("2_3u7tc")
 typeColor = Color(0.592157, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_vph0m"]
-script = ExtResource("3_hcxe8")
+script = ExtResource("3_5h60h")
 cardType = 1
-cardSymbolSprite = ExtResource("4_q4tes")
+cardSymbolSprite = ExtResource("4_txy14")
 typeColor = Color(0, 0, 0.447059, 1)
 
 [sub_resource type="Resource" id="Resource_ogwbp"]
-script = ExtResource("3_hcxe8")
+script = ExtResource("3_5h60h")
 cardType = 2
-cardSymbolSprite = ExtResource("5_e11x6")
+cardSymbolSprite = ExtResource("5_n2iee")
 typeColor = Color(0.0823529, 0.462745, 0.054902, 1)
 
 [sub_resource type="Resource" id="Resource_ruoui"]
-script = ExtResource("3_hcxe8")
+script = ExtResource("3_5h60h")
 cardType = 3
-cardSymbolSprite = ExtResource("6_psfa3")
+cardSymbolSprite = ExtResource("6_thp1i")
 typeColor = Color(0.415686, 0.0392157, 0.45098, 1)
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("numberLabel", "cornerSymbol", "symbolPositions", "coloredGroup", "subviewPort", "renderSprite")]
-script = ExtResource("1_yd72a")
-typeProperties = Array[ExtResource("3_hcxe8")]([SubResource("Resource_q45l2"), SubResource("Resource_vph0m"), SubResource("Resource_ogwbp"), SubResource("Resource_ruoui")])
+[node name="CardImageMaker" type="Node2D" node_paths=PackedStringArray("numberLabel", "cornerSymbol", "symbolPositions", "coloredGroup", "subviewPort", "subCamera", "renderSprite", "background")]
+script = ExtResource("1_r40yl")
+typeProperties = Array[ExtResource("3_5h60h")]([SubResource("Resource_q45l2"), SubResource("Resource_vph0m"), SubResource("Resource_ogwbp"), SubResource("Resource_ruoui")])
 numberLabel = NodePath("SubViewport/ColoredGroup/NumberLabel")
 cornerSymbol = NodePath("SubViewport/ColoredGroup/CornerSymbol")
 symbolPositions = NodePath("SymbolPositions")
 coloredGroup = NodePath("SubViewport/ColoredGroup")
 subviewPort = NodePath("SubViewport")
+subCamera = NodePath("SubViewport/Subcamera")
 renderSprite = NodePath("RenderingSprite")
-testType = 3
-testNumber = 5
+background = NodePath("SubViewport/Background")
+testType = 1
+testNumber = 2
+metadata/_edit_horizontal_guides_ = [-347.0]
+metadata/_edit_vertical_guides_ = [-249.0]
+
+[node name="RenderingSprite" type="Sprite2D" parent="."]
+position = Vector2(360, 360)
 
 [node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(500, 700)
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport"]
+offset_left = -408.0
+offset_top = -390.0
+offset_right = 1349.0
+offset_bottom = 919.0
 
 [node name="Background" type="Sprite2D" parent="SubViewport"]
-texture = ExtResource("7_mdevn")
+texture = ExtResource("7_b3l05")
+
+[node name="Subcamera" type="Camera2D" parent="SubViewport"]
 
 [node name="ColoredGroup" type="CanvasGroup" parent="SubViewport"]
 
 [node name="CornerSymbol" type="Sprite2D" parent="SubViewport/ColoredGroup"]
 position = Vector2(-116, -281)
-texture = ExtResource("2_36v7k")
+texture = ExtResource("2_3u7tc")
 
 [node name="NumberLabel" type="Label" parent="SubViewport/ColoredGroup"]
 offset_left = -228.0
 offset_top = -342.0
 offset_right = -167.0
 offset_bottom = -241.0
-theme_override_fonts/font = ExtResource("8_04g4f")
+theme_override_fonts/font = ExtResource("8_kvg2p")
 theme_override_font_sizes/font_size = 75
 text = "10"
 
 [node name="SymbolPositions" type="Node2D" parent="."]
-visible = false
 
 [node name="1" type="Node2D" parent="SymbolPositions"]
 
@@ -218,6 +235,7 @@ position = Vector2(150, 67)
 [node name="Marker2D9" type="Marker2D" parent="SymbolPositions/9"]
 
 [node name="10" type="Node2D" parent="SymbolPositions"]
+position = Vector2(143, 90)
 
 [node name="Marker2D" type="Marker2D" parent="SymbolPositions/10"]
 position = Vector2(-150, -200)
@@ -248,6 +266,3 @@ position = Vector2(0, -134)
 
 [node name="Marker2D10" type="Marker2D" parent="SymbolPositions/10"]
 position = Vector2(0, 134)
-
-[node name="RenderingSprite" type="Sprite2D" parent="."]
-position = Vector2(100, 100)

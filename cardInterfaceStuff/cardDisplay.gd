@@ -4,6 +4,7 @@ class_name CardDisplay
 @export var cardShape: Area2D
 @export var valueTypeLabel: Label
 @export var costLabel: Label
+@export var cardImageRect: TextureRect
 
 @export var playTextLabel: RichTextLabel
 @export var otherTextLabel: RichTextLabel
@@ -40,6 +41,10 @@ func setupCardDisplay(data: CardData):
 	cardData = data
 	cardData.announceDestroy.connect(queue_free)
 	updateCardDisplay()
+	await CardImageMaker.getCardImage(cardData.type.type, cardData.value.getBaseValue(), receiveCardImage)
+
+func receiveCardImage(image: Texture2D):
+	cardImageRect.texture = image
 
 func updateCardDisplay(dataToShow: CardData = cardData):
 

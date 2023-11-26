@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=169 format=3 uid="uid://dc1pbwqrsnd4m"]
+[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=166 format=3 uid="uid://dc1pbwqrsnd4m"]
 
 [ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="1_5jvcn"]
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="2_j5dh7"]
@@ -18,8 +18,6 @@
 [ext_resource type="Script" path="res://modifiers/paramModifierFlat.gd" id="15_ywb4c"]
 [ext_resource type="Script" path="res://cardEffects/ceSetValueToPrevious.gd" id="16_7u532"]
 [ext_resource type="Script" path="res://conditionals/conditionalAmount.gd" id="17_703uu"]
-[ext_resource type="Resource" uid="uid://c4nt0nc0bnkvy" path="res://content/debug_simple_graftDeck.tres" id="18_6tr5s"]
-[ext_resource type="Script" path="res://cardEffects/ceGraft.gd" id="18_8vled"]
 [ext_resource type="Script" path="res://cardAbstractions/cardTemplatePackage.gd" id="19_47fy2"]
 
 [sub_resource type="Resource" id="Resource_oams6"]
@@ -1416,21 +1414,6 @@ modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
 capAtZero = false
 
-[sub_resource type="Resource" id="Resource_dhyph"]
-script = ExtResource("18_8vled")
-graftCardPackage = ExtResource("18_6tr5s")
-graftOptionsNo = 3
-cardOptions = 3
-graftOptionsSource = 0
-numberOfGrafts = 1
-debugOnly = false
-effectName = ""
-staticText = "Add graft to top 3 cards of your deck"
-conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
-followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
-includeFollowUpText = false
-subjectActor = 0
-
 [sub_resource type="Resource" id="Resource_5l0y0"]
 script = ExtResource("3_oubj8")
 type = 3
@@ -1455,7 +1438,7 @@ type = SubResource("Resource_5l0y0")
 cost = SubResource("Resource_h57qx")
 attack = SubResource("Resource_uuod1")
 defence = SubResource("Resource_hsj33")
-onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_dhyph")])
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
