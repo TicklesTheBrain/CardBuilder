@@ -16,5 +16,4 @@ func registerUsedName(used: String):
 	usedNames.push_back(used)
 
 func getCardFace(cardName: String):
-	return cardFaceReference.find(func(p): return p.identifier == cardName)
-	
+	return cardFaceReference.filter(func(p): return p.identifier == cardName)[0].texture

@@ -13,6 +13,7 @@ class_name CardImageTemplate
 @export var doublingShield: SelfDoublingSprite
 @export var doublingSword: SelfDoublingSprite
 @export var cardFace: TextureRect
+@export var cardNameLabel: Label
 
 @export_group("Card Display Properties")
 @export var typeProperties: Array[CardTypeDisplayProperties]
@@ -29,15 +30,18 @@ func setup(cardData: CardData):
 	var symbolProperties = typeProperties.filter(func(p): return p.cardType == cardData.type.type)[0]
 	coloredGroup.modulate = symbolProperties.typeColor
 	cornerSymbol.texture = symbolProperties.cardSymbolSprite
-	if cardData.cardName == null and (value < 0 or value > 10):
+	if cardData.cardName == "" and (value < 1 or value > 10):
 		CardNamingLord.askToNameCard(cardData)
 
-	if cardData.cardName:
+	if cardData.cardName != "":
 		cardFace.visible = true
 		cardFace.texture = CardNamingLord.getCardFace(cardData.cardName)
+		cardNameLabel.visible = true
+		cardNameLabel.text = cardData.cardName
 
 	else:
 		cardFace.visible = false
+		cardNameLabel.visible = false
 		var positionGroup = symbolPositions.find_child(str(value))
 		for i in range(value):
 			var newSprite = Sprite2D.new()
@@ -80,7 +84,7 @@ func setup(cardData: CardData):
 	addSymbols(cardData.endRoundEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "E:")
 
 	
-func addSymbols(identifierArray: Array[String], identifierReference: Array[CardInfoDisplayProperties], precedingLetter = null):
+func addSymbols(identifierArray, identifierReference: Array[CardInfoDisplayProperties], precedingLetter = null):
 	#TODO: add clauses for too many symbols
 	var letterAdded = false
 	for id in identifierArray:
@@ -96,13 +100,12 @@ func addSymbols(identifierArray: Array[String], identifierReference: Array[CardI
 			infoSymbolsColumn.add_child(newLetter)
 			newLetter.visible = true
 			letterAdded = true
-		var newSymbol = infoColumnSymbol.duplicate()
-		newSymbol.texture = symbolTexture
-		infoSymbolsColumn.add_child(newSymbol)
-		newSymbol.visible = true
-
-		
+		addSymbol(symbolTexture)
 		
 
+func addSymbol(texture: Texture2D):
 
-
+	var newSymbol = infoColumnSymbol.duplicate()
+	newSymbol.texture = texture
+	infoSymbolsColumn.add_child(newSymbol)
+	newSymbol.visible = true

@@ -1,6 +1,80 @@
-[gd_scene load_steps=2 format=3 uid="uid://br1m8pkbiuqnf"]
+[gd_scene load_steps=27 format=3 uid="uid://br1m8pkbiuqnf"]
 
 [ext_resource type="Script" path="res://cardNamingLord.gd" id="1_6cdnq"]
+[ext_resource type="Script" path="res://cardEffectDisplayProperties.gd" id="2_ddla3"]
+[ext_resource type="Texture2D" uid="uid://bcw4n7f5gfeg1" path="res://assets/specialCardFaces/AngryApe.png" id="3_6qiuq"]
+[ext_resource type="Texture2D" uid="uid://gi762hjifjgk" path="res://assets/specialCardFaces/BatKing.png" id="4_00480"]
+[ext_resource type="Texture2D" uid="uid://bs4iu677555a2" path="res://assets/specialCardFaces/BirdLawyer.png" id="5_0kx4q"]
+[ext_resource type="Texture2D" uid="uid://dhd3d81ggbrea" path="res://assets/specialCardFaces/FishMan.png" id="6_o30tk"]
+[ext_resource type="Texture2D" uid="uid://cs84rtpmywehe" path="res://assets/specialCardFaces/FrogKing.png" id="7_kpngk"]
+[ext_resource type="Texture2D" uid="uid://crwd5w3lsfiv5" path="res://assets/specialCardFaces/Goat.png" id="8_sd1au"]
+[ext_resource type="Texture2D" uid="uid://cpdwsy2d7nk8u" path="res://assets/specialCardFaces/Melt.png" id="9_o5asb"]
+[ext_resource type="Texture2D" uid="uid://dfxlgkjy77cq8" path="res://assets/specialCardFaces/Mimic.png" id="10_6kaor"]
+[ext_resource type="Texture2D" uid="uid://drc16vhta3aoq" path="res://assets/specialCardFaces/NatureMerc.png" id="11_ywl50"]
+[ext_resource type="Texture2D" uid="uid://bhkag1leq1kw1" path="res://assets/specialCardFaces/Ostrich.png" id="12_0der1"]
+[ext_resource type="Texture2D" uid="uid://e4ugib01x42h" path="res://assets/specialCardFaces/SmallWarrior.png" id="13_x5mu2"]
+[ext_resource type="Texture2D" uid="uid://o5hx3h5uc425" path="res://assets/specialCardFaces/snowman.png" id="14_c27at"]
+
+[sub_resource type="Resource" id="Resource_jj82i"]
+script = ExtResource("2_ddla3")
+identifier = "APE ANGER"
+texture = ExtResource("3_6qiuq")
+
+[sub_resource type="Resource" id="Resource_cn8rg"]
+script = ExtResource("2_ddla3")
+identifier = "BAT KING"
+texture = ExtResource("4_00480")
+
+[sub_resource type="Resource" id="Resource_1ldch"]
+script = ExtResource("2_ddla3")
+identifier = "BIRD LAWYER"
+texture = ExtResource("5_0kx4q")
+
+[sub_resource type="Resource" id="Resource_2h3de"]
+script = ExtResource("2_ddla3")
+identifier = "FISH MAN"
+texture = ExtResource("6_o30tk")
+
+[sub_resource type="Resource" id="Resource_o5g6c"]
+script = ExtResource("2_ddla3")
+identifier = "FROG KING"
+texture = ExtResource("7_kpngk")
+
+[sub_resource type="Resource" id="Resource_mt16e"]
+script = ExtResource("2_ddla3")
+identifier = "GOAT"
+texture = ExtResource("8_sd1au")
+
+[sub_resource type="Resource" id="Resource_xj1ka"]
+script = ExtResource("2_ddla3")
+identifier = "MELT"
+texture = ExtResource("9_o5asb")
+
+[sub_resource type="Resource" id="Resource_d6ka0"]
+script = ExtResource("2_ddla3")
+identifier = "CHEST WORM"
+texture = ExtResource("10_6kaor")
+
+[sub_resource type="Resource" id="Resource_6bhrt"]
+script = ExtResource("2_ddla3")
+identifier = "NATURE MERC"
+texture = ExtResource("11_ywl50")
+
+[sub_resource type="Resource" id="Resource_23nq7"]
+script = ExtResource("2_ddla3")
+identifier = "OSTRICH"
+texture = ExtResource("12_0der1")
+
+[sub_resource type="Resource" id="Resource_fn4d5"]
+script = ExtResource("2_ddla3")
+identifier = "WARRIOR"
+texture = ExtResource("13_x5mu2")
+
+[sub_resource type="Resource" id="Resource_go8vm"]
+script = ExtResource("2_ddla3")
+identifier = "SNOW MAN"
+texture = ExtResource("14_c27at")
 
 [node name="CardNamingLord" type="Node"]
 script = ExtResource("1_6cdnq")
+cardFaceReference = Array[ExtResource("2_ddla3")]([SubResource("Resource_jj82i"), SubResource("Resource_cn8rg"), SubResource("Resource_1ldch"), SubResource("Resource_2h3de"), SubResource("Resource_o5g6c"), SubResource("Resource_mt16e"), SubResource("Resource_xj1ka"), SubResource("Resource_d6ka0"), SubResource("Resource_6bhrt"), SubResource("Resource_23nq7"), SubResource("Resource_fn4d5"), SubResource("Resource_go8vm")])
