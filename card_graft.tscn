@@ -15,21 +15,12 @@ corner_radius_bottom_left = 15
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwt7q"]
 size = Vector2(141, 192)
 
-[node name="CardGraft" type="Node2D" node_paths=PackedStringArray("cardShape", "valueTypeLabel", "costLabel", "playTextLabel", "otherTextLabel", "discardTextLabel", "attackLabel", "defenceLabel", "selection")]
+[node name="CardGraft" type="Node2D"]
 position = Vector2(364, 330)
 script = ExtResource("1_38ait")
 increaseColor = Color(0, 0.772549, 0, 1)
 decreaseColor = Color(0.780392, 0.145098, 0.337255, 1)
-cardShape = NodePath("")
-valueTypeLabel = NodePath("")
-costLabel = NodePath("")
-playTextLabel = NodePath("")
-otherTextLabel = NodePath("")
-discardTextLabel = NodePath("")
-attackLabel = NodePath("")
-defenceLabel = NodePath("")
 forceUpdateSeconds = 1.1
-selection = NodePath("")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 8

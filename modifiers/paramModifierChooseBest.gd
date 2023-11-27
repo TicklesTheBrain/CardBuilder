@@ -28,7 +28,7 @@ func getText():
 func calculateSpecific(ctxt: GameStateContext, _currValue: int, card: CardData):
 
 	#ESTABLISH SOME BASE VARIABLES
-	var playArea = ctxt.playArea
+	var playArea = ctxt.player.playArea
 	var bustValue = playArea.bustCounter.bustValue
 	var allCards = playArea.getAll()
 	var staticCards = allCards.filter(func(c): return not c.value.checkIsNonStatic())

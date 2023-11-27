@@ -43,6 +43,7 @@ layout_mode = 2
 color = Color(0.0823529, 0.101961, 0.321569, 1)
 
 [node name="Info" type="VBoxContainer" parent="CardImageRect"]
+modulate = Color(1, 1, 1, 0.4)
 layout_mode = 2
 offset_right = 141.0
 offset_bottom = 191.0

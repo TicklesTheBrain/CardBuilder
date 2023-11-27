@@ -41,7 +41,7 @@ func setupCardDisplay(data: CardData):
 	cardData = data
 	cardData.announceDestroy.connect(queue_free)
 	updateCardDisplay()
-	await CardImageMaker.getCardImage(cardData.type.type, cardData.value.getBaseValue(), receiveCardImage)
+	await CardImageMaker.getCardImage(data, receiveCardImage)
 
 func receiveCardImage(image: Texture2D):
 	cardImageRect.texture = image

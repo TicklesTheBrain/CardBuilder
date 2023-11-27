@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=21 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://b2ru52u3aw843" path="res://content/debug_enemyDeck.tres" id="9_t18bm"]
 [ext_resource type="Script" path="res://cardAbstractions/containerCounter.gd" id="11_rgdhd"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="12_q8pst"]
+[ext_resource type="Texture2D" uid="uid://cj75g71nh52om" path="res://assets/table_background.png" id="15_2rvab"]
 [ext_resource type="Resource" uid="uid://dc1pbwqrsnd4m" path="res://content/test_cards.tres" id="24_wh5ls"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="27_mupmx"]
 
@@ -42,6 +43,12 @@ endHandButton = NodePath("EndButton")
 okButton = NodePath("OkBUtton")
 player = NodePath("Logic/Player")
 enemy = NodePath("Logic/Enemy")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -3
+scale = Vector2(0.801875, 0.695202)
+texture = ExtResource("15_2rvab")
+centered = false
 
 [node name="Logic" type="Node" parent="."]
 
@@ -250,7 +257,7 @@ text = "OK
 
 [node name="EnemyPlayAreaController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer")]
 script = ExtResource("27_mupmx")
-cardAreas = [NodePath("EnemyPlayAreaFull"), NodePath("EnemyPlayAreaSmall")]
+cardAreas = [NodePath("EnemyPlayAreaSmall"), NodePath("EnemyPlayAreaFull")]
 minCardCenterDistance = 25.0
 maxCardGap = 25.0
 logicalContainer = NodePath("../Logic/Enemy/EnemyPlayArea")
@@ -265,16 +272,16 @@ shape = SubResource("RectangleShape2D_7o7mm")
 
 [node name="EnemyDiscardController" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
 script = ExtResource("3_lpmun")
-positionMarker = NodePath("")
-logicalContainer = NodePath("")
+positionMarker = NodePath("EnemyDiscard")
+logicalContainer = NodePath("../Logic/Enemy/EnemyDiscard")
 
 [node name="EnemyDiscard" type="Marker2D" parent="EnemyDiscardController"]
 position = Vector2(1216, 164)
 
 [node name="DiscardDisplaySink" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
 script = ExtResource("3_lpmun")
-positionMarker = NodePath("")
-logicalContainer = NodePath("")
+positionMarker = NodePath("DiscardOrigin")
+logicalContainer = NodePath("../Logic/Player/DiscardManager")
 canCreateNewDisplays = false
 
 [node name="DiscardOrigin" type="Marker2D" parent="DiscardDisplaySink"]
@@ -282,8 +289,8 @@ position = Vector2(1207, 381)
 
 [node name="DeckDisplaySink" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
 script = ExtResource("3_lpmun")
-positionMarker = NodePath("")
-logicalContainer = NodePath("")
+positionMarker = NodePath("DeckOrigin")
+logicalContainer = NodePath("../Logic/Player/DeckManager")
 canCreateNewDisplays = false
 
 [node name="DeckOrigin" type="Marker2D" parent="DeckDisplaySink"]
@@ -300,10 +307,8 @@ logicalContainer = NodePath("../Logic/Player/HandManager")
 position = Vector2(565, 605)
 shape = SubResource("RectangleShape2D_c17rp")
 
-[node name="PlayArea" type="Area2D" parent="." node_paths=PackedStringArray("positionController", "shape")]
+[node name="PlayArea" type="Area2D" parent="."]
 script = ExtResource("5_fctuw")
-positionController = NodePath("")
-shape = NodePath("")
 
 [node name="PlayAreaPositionController" type="Node2D" parent="PlayArea" node_paths=PackedStringArray("cardAreas", "logicalContainer")]
 script = ExtResource("27_mupmx")

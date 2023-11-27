@@ -15,18 +15,13 @@ size = Vector2(1151.5, 319)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6bfs"]
 size = Vector2(1200, 700)
 
-[node name="GraftingScene" type="Node2D" node_paths=PackedStringArray("graftDeck", "playerDeck", "graftDiscard", "newCardMarker")]
+[node name="GraftingScene" type="Node2D"]
 script = ExtResource("1_aty88")
-graftDeck = NodePath("")
-playerDeck = NodePath("")
-graftDiscard = NodePath("")
 cardGraftDisplay = ExtResource("1_w2i3f")
 cardDisplay = ExtResource("3_sw0ic")
-newCardMarker = NodePath("")
 
-[node name="CardDisplaySink" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker")]
+[node name="CardDisplaySink" type="Node2D" parent="."]
 script = ExtResource("9_yg58f")
-positionMarker = NodePath("")
 
 [node name="Marker2D" type="Marker2D" parent="CardDisplaySink"]
 position = Vector2(79, 648)
@@ -66,9 +61,8 @@ script = ExtResource("25_0eao4")
 [node name="GraftDiscard" type="Node" parent="."]
 script = ExtResource("4_eldwq")
 
-[node name="CardDisplaySink" type="Node2D" parent="GraftDiscard" node_paths=PackedStringArray("positionMarker")]
+[node name="CardDisplaySink" type="Node2D" parent="GraftDiscard"]
 script = ExtResource("9_yg58f")
-positionMarker = NodePath("")
 
 [node name="Marker2D" type="Marker2D" parent="GraftDiscard/CardDisplaySink"]
 position = Vector2(1170, 622)

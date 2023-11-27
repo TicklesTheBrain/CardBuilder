@@ -17,4 +17,4 @@ func _on_area_entered(area:Area2D):
 
 func addCard(card: CardDisplay):
 	if cardsInPlayArea.has(card):
-		get_parent().addToPlayArea(card.cardData)
+		get_parent().addToPlayArea(card.cardData) #TODO: get parent here is ugly
