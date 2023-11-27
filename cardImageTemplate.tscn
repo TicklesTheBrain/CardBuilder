@@ -53,14 +53,14 @@ offset_top = -237.0
 offset_right = -185.0
 offset_bottom = 274.0
 
-[node name="Label" type="Label" parent="InfoSymbolColumn"]
+[node name="InfoColumnLetter" type="Label" parent="InfoSymbolColumn"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "P:"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="InfoSymbolColumn"]
+[node name="InfoColumnSymbol" type="TextureRect" parent="InfoSymbolColumn"]
 layout_mode = 2
 texture = ExtResource("2_rlkwh")
 expand_mode = 4
@@ -362,9 +362,9 @@ script = ExtResource("1_0ivgc")
 numberLabel = NodePath("../ColoredGroup/NumberLabel")
 cornerSymbol = NodePath("../ColoredGroup/CornerSymbol")
 symbolPositions = NodePath("../SymbolPositions")
-typeProperties = Array[ExtResource("3_rpyhr")]([SubResource("Resource_ve20g"), SubResource("Resource_11f8w"), SubResource("Resource_kggi4"), SubResource("Resource_cqa7h")])
 coloredGroup = NodePath("../ColoredGroup")
 doublingMana = NodePath("../DoublingMana")
 doublingShield = NodePath("../DoublingShield")
 doublingSword = NodePath("../DoublingSword")
 cardFace = NodePath("../ColoredGroup/TextureRect")
+typeProperties = Array[ExtResource("3_rpyhr")]([SubResource("Resource_ve20g"), SubResource("Resource_11f8w"), SubResource("Resource_kggi4"), SubResource("Resource_cqa7h")])

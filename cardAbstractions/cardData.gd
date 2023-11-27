@@ -20,6 +20,9 @@ class_name CardData
 
 signal announceDestroy()
 
+#TODO: Add exclusion flags for merging
+#TODO: Add additional name get identifiers, when merging is possible, but should produce a different symbol
+
 var container: CardContainer:
 	set (new):
 		if container:
@@ -119,6 +122,7 @@ func applyCardGraft():
 
 func duplicateSelf() -> CardData:
 	var newCard = CardData.new()
+	newCard.cardName = cardName
 	newCard.value = value.duplicate(true)
 	newCard.type = type.duplicate(true)
 	newCard.graft = graft
