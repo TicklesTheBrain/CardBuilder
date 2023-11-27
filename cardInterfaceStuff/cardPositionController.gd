@@ -45,6 +45,7 @@ func addCardDisplay(newCard: CardDisplay):
 	
 	newCard.positionController = self
 	cards.push_back(newCard)
+	newCard.z_index = cards.size()
 	scuttleCards()
 
 func removeCardDisplay(cardToRemove: CardDisplay):

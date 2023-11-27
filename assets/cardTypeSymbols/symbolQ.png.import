@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0w7c2tneqm4g"
-path="res://.godot/imported/tag_shield.png-023869dadacbc33a77d404263a0467bf.ctex"
+uid="uid://b2t5os3i8osfs"
+path="res://.godot/imported/symbolQ.png-fbe5f0c5a0ff4efb2ba03badc0609d94.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tag_shield.png"
-dest_files=["res://.godot/imported/tag_shield.png-023869dadacbc33a77d404263a0467bf.ctex"]
+source_file="res://assets/cardTypeSymbols/symbolQ.png"
+dest_files=["res://.godot/imported/symbolQ.png-fbe5f0c5a0ff4efb2ba03badc0609d94.ctex"]
 
 [params]
 

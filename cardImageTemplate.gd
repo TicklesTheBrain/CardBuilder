@@ -9,6 +9,10 @@ class_name CardImageTemplate
 @export var doublingMana: SelfDoublingSprite
 @export var doublingShield: SelfDoublingSprite
 @export var doublingSword: SelfDoublingSprite
+@export var cardFace: TextureRect
+@export var cardEffectSymbolReference: Array[CardInfoDisplayProperties]
+@export var conditionalSymbolReference: Array[CardInfoDisplayProperties]
+@export var modifierSymbolReference: Array[CardInfoDisplayProperties]
 
 func setup(cardData: CardData):
 	#assert(number >= 0 and number <= 11)
@@ -20,11 +24,13 @@ func setup(cardData: CardData):
 	var positionGroup = symbolPositions.find_child(str(value))
 
 	if value > 0 and value < 11:
+		cardFace.visible = false
 		for i in range(value):
 			var newSprite = Sprite2D.new()
 			newSprite.texture = symbolProperties.cardSymbolSprite
 			newSprite.position = positionGroup.get_children()[i].position
 			coloredGroup.add_child(newSprite)
+	
 
 	var cost = cardData.cost.getBaseValue()
 	if cost == 0:

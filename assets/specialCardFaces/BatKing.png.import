@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://borasnacb7ps2"
-path="res://.godot/imported/symbolS.png-2756de174be4ad3676ef620ba46e15fa.ctex"
+uid="uid://gi762hjifjgk"
+path="res://.godot/imported/BatKing.png-78702c5c2bdefdadf293a2a9ebdec21f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/symbolS.png"
-dest_files=["res://.godot/imported/symbolS.png-2756de174be4ad3676ef620ba46e15fa.ctex"]
+source_file="res://assets/specialCardFaces/BatKing.png"
+dest_files=["res://.godot/imported/BatKing.png-78702c5c2bdefdadf293a2a9ebdec21f.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpwdfuplrfb8t"
-path="res://.godot/imported/ShieldLargeT2.png-dd47fdf69e457f763878c87ea9ff3bb0.ctex"
+uid="uid://cilwu14rk48nx"
+path="res://.godot/imported/card_add.png-7ac22f51504a162cb06b7cadd85b00c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ShieldLargeT2.png"
-dest_files=["res://.godot/imported/ShieldLargeT2.png-dd47fdf69e457f763878c87ea9ff3bb0.ctex"]
+source_file="res://assets/cardInfoSymbols/card_add.png"
+dest_files=["res://.godot/imported/card_add.png-7ac22f51504a162cb06b7cadd85b00c0.ctex"]
 
 [params]
 

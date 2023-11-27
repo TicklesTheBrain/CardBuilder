@@ -1,7 +1,7 @@
 extends Resource
 class_name CardData
 
-@export var cardTitle: String
+@export var cardName: String
 @export var graft: bool
 @export var value: CardParam
 @export var type: CardType

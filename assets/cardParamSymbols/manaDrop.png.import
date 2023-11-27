@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1e8nnr61yeeh"
-path="res://.godot/imported/SwordT1.png-02749997a61dbf0dbb72a8a3fd10ac91.ctex"
+uid="uid://cq124k65g070u"
+path="res://.godot/imported/manaDrop.png-3a191cc93fa1fdb251dcb1c5bc41a651.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/SwordT1.png"
-dest_files=["res://.godot/imported/SwordT1.png-02749997a61dbf0dbb72a8a3fd10ac91.ctex"]
+source_file="res://assets/cardParamSymbols/manaDrop.png"
+dest_files=["res://.godot/imported/manaDrop.png-3a191cc93fa1fdb251dcb1c5bc41a651.ctex"]
 
 [params]
 
