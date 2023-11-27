@@ -36,8 +36,6 @@ func _ready():
 	Events.requestContext.connect(provideContext)
 	Events.startMatch.emit()
 
-	InputLord.addDragContainers(player.hand)
-
 	roundLoop()
 
 func makeContext() -> GameStateContext:
@@ -91,12 +89,18 @@ func enemyPlayTopCard():
 	var card = enemy.deck.drawCard()
 	enemy.playArea.addCard(card)
 
+func askToShowDetailed(cardDisplay: CardDisplay, addExitDelegate: Callable):
+	cardDisplay.showDetailed()
+	addExitDelegate.call(cardDisplay, cardDisplay.hideDetailed)
 
 func roundLoop():
 	
 	## PLAYER TURN SETUP
 	message = 'New round started'
 
+	InputLord.addDragContainers(player.hand)
+	InputLord.addMouseOverDelegate(player.hand, askToShowDetailed)
+	InputLord.addMouseOverDelegate(player.playArea, askToShowDetailed)
 	player.resetResources()
 	playAreaPositionController.resetCardArea()
 	enemyPlayAreaPositionController.resetCardArea()
@@ -118,7 +122,7 @@ func roundLoop():
 	## CLEANUP AT THE END OF PLAYER TURN
 	playAreaPositionController.switchCardArea(1)
 	enemyPlayAreaPositionController.switchCardArea(1)
-	#handManager.disposeAll()
+	InputLord.removeDragContainers(player.hand)
 
 	drawCardButton.disabled = true
 	endHandButton.disabled = true

@@ -54,6 +54,9 @@ func removeFromSelection(card: CardData):
 func addDragContainers(cont: CardContainer):
 	dragContainers.push_back(cont)
 
+func removeDragContainers(cont: CardContainer):
+	dragContainers.erase(cont)
+
 func checkCanDrag(card: CardData) -> bool:
 	if not dragging:
 		return false

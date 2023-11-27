@@ -46,6 +46,8 @@ func addCardDisplay(newCard: CardDisplay):
 	newCard.positionController = self
 	cards.push_back(newCard)
 	newCard.z_index = cards.size()
+	newCard.previousZOrder = cards.size() #TODO: this needs its own dedicated method, smells
+	print(name, ' add card display triggered, new z_index ', newCard.z_index)
 	scuttleCards()
 
 func removeCardDisplay(cardToRemove: CardDisplay):

@@ -8,7 +8,7 @@ func updateCardDisplay(_dataToShow: CardData = cardData):
 
 	var baseValue = cardData.value.getBaseValue()
 	if baseValue != 0:
-		valueTypeLabel.text = "{symbol}{amount}".format({"symbol": "+" if baseValue > 0 else "-", "amount": baseValue})
+		valueLabel.text = "{symbol}{amount}".format({"symbol": "+" if baseValue > 0 else "-", "amount": baseValue})
 
 	var baseCost = cardData.cost.getBaseValue()
 	if baseCost != 0:
@@ -19,13 +19,7 @@ func updateCardDisplay(_dataToShow: CardData = cardData):
 		else:
 			costLabel.set("theme_override_colors/font_color", decreaseColor)
 	
-	var playText = cardData.getPlayEffectText()
-	if playText != "":
-		playTextLabel.text = "[b]Play:[/b] " + playText
-
-	var otherText = cardData.getOtherText()
-	if otherText != "":
-		otherTextLabel.text = otherText
+	updateAllTextFields(_dataToShow)
 	
 	var attackValue = cardData.attack.getBaseValue()
 	if attackValue != 0:

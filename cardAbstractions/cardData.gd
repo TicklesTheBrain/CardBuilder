@@ -89,18 +89,30 @@ func triggerEffect(typeToTrigger: CardEffect.triggerType):
 			await triggerEffectBucket(drawEffects)
 		CardEffect.triggerType.START_MATCH:
 			await triggerEffectBucket(startMatchEffects)
-		
-func getPlayEffectText() -> String:
+
+func getEffectTextDictionary():
+	return {
+		"onPlay" = getEffectTextFromBucket(onPlayEffects),
+		"onLose" = getEffectTextFromBucket(onLoseEffects),
+		"onWin" = getEffectTextFromBucket(onWinEffects),
+		"onBust" = getEffectTextFromBucket(onBustEffects),
+		"endRound" = getEffectTextFromBucket(endRoundEffects),
+		"onDraw" = getEffectTextFromBucket(drawEffects),
+		"startMatch" = getEffectTextFromBucket(startMatchEffects)
+	}
+
+func getPlayConditionalText():
 	var result = ''
-	for effect in onPlayEffects:	
+	for con in playConditionals:
+		result += con.getText()
+	return result
+
+func getEffectTextFromBucket(bucketToQuery: Array[CardEffect]):
+	var result = ''
+	for effect in bucketToQuery:	
 		if result != '':
 			result += " "
 		result += effect.getText()
-	return result
-
-func getOtherText():
-	var result = ''
-	result += cost.getText() + value.getText() + attack.getText() + defence.getText() + getPlayConditionalText()
 	return result
 
 func checkPlayConditionals() -> bool:
@@ -111,11 +123,6 @@ func checkPlayConditionals() -> bool:
 			return false
 	return true
 
-func getPlayConditionalText():
-	var result = ''
-	for con in playConditionals:
-		result += con.getText()
-	return result
 
 func applyCardGraft():
 	pass

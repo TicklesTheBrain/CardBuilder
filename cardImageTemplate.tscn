@@ -129,9 +129,9 @@ expand_mode = 4
 [node name="ColoredGroup" type="CanvasGroup" parent="DebugNestingLevel"]
 
 [node name="cardName" type="Label" parent="DebugNestingLevel/ColoredGroup"]
-offset_left = -84.0
+offset_left = -239.0
 offset_top = 271.0
-offset_right = 91.0
+offset_right = 239.0
 offset_bottom = 318.0
 theme_override_fonts/font = ExtResource("3_87qla")
 theme_override_font_sizes/font_size = 35
@@ -226,22 +226,22 @@ position = Vector2(100, 200)
 [node name="6" type="Node2D" parent="DebugNestingLevel/SymbolPositions"]
 
 [node name="Marker2D" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/6"]
-position = Vector2(-150, -200)
+position = Vector2(-100, -200)
 
 [node name="Marker2D2" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/6"]
-position = Vector2(-150, 200)
+position = Vector2(-100, 200)
 
 [node name="Marker2D3" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/6"]
-position = Vector2(150, -200)
+position = Vector2(100, -200)
 
 [node name="Marker2D4" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/6"]
-position = Vector2(150, 200)
+position = Vector2(100, 200)
 
 [node name="Marker2D5" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/6"]
-position = Vector2(-150, 0)
+position = Vector2(-100, 0)
 
 [node name="Marker2D6" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/6"]
-position = Vector2(150, 0)
+position = Vector2(100, 0)
 
 [node name="7" type="Node2D" parent="DebugNestingLevel/SymbolPositions"]
 

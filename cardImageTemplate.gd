@@ -31,7 +31,7 @@ func setup(cardData: CardData):
 	coloredGroup.modulate = symbolProperties.typeColor
 	cornerSymbol.texture = symbolProperties.cardSymbolSprite
 	if cardData.cardName == "" and (value < 1 or value > 10):
-		CardNamingLord.askToNameCard(cardData)
+		CardNamingLord.askToNameCard(cardData) #TODO: This should be moved somewhere else
 
 	if cardData.cardName != "":
 		cardFace.visible = true
