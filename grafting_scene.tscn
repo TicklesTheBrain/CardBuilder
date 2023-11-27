@@ -15,24 +15,18 @@ size = Vector2(1151.5, 319)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6bfs"]
 size = Vector2(1200, 700)
 
-[node name="GraftingScene" type="Node2D"]
+[node name="GraftingScene" type="Node2D" node_paths=PackedStringArray("graftDeck", "playerDeck", "graftDiscard", "newCardMarker")]
 script = ExtResource("1_aty88")
+graftDeck = NodePath("")
+playerDeck = NodePath("")
+graftDiscard = NodePath("")
 cardGraftDisplay = ExtResource("1_w2i3f")
 cardDisplay = ExtResource("3_sw0ic")
-graftDeck = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("3_lygcp"),"debug":false,"templatePackage":null,"maxCards":-1,"cards":Array[Resource("res://cardAbstractions/cardData.gd")]([]),"bustCounter":null,"feedContainer":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("4_eldwq"),"maxCards":-1,"cards":Array[Resource("res://cardAbstractions/cardData.gd")]([]),"bustCounter":null,"feedContainer":null,"disposeContainer":null,"addTriggerType":0,"modifiers":Array[Resource("res://modifiers/modifier.gd")]([]))
-,"disposeContainer":null,"addTriggerType":0,"modifiers":Array[Resource("res://modifiers/modifier.gd")]([]))
+newCardMarker = NodePath("")
 
-playerDeck = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("3_lygcp"),"debug":true,"templatePackage":null,"maxCards":-1,"cards":Array[Resource("res://cardAbstractions/cardData.gd")]([]),"bustCounter":null,"feedContainer":null,"disposeContainer":null,"addTriggerType":0,"modifiers":Array[Resource("res://modifiers/modifier.gd")]([]))
-
-graftDiscard = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("4_eldwq"),"maxCards":-1,"cards":Array[Resource("res://cardAbstractions/cardData.gd")]([]),"bustCounter":null,"feedContainer":null,"disposeContainer":null,"addTriggerType":0,"modifiers":Array[Resource("res://modifiers/modifier.gd")]([]))
-
-newCardMarker = Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(670, 578),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
-
-
-[node name="CardDisplaySink" type="Node2D" parent="."]
+[node name="CardDisplaySink" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker")]
 script = ExtResource("9_yg58f")
-positionMarker = Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(79, 648),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
-
+positionMarker = NodePath("")
 
 [node name="Marker2D" type="Marker2D" parent="CardDisplaySink"]
 position = Vector2(79, 648)
@@ -72,10 +66,9 @@ script = ExtResource("25_0eao4")
 [node name="GraftDiscard" type="Node" parent="."]
 script = ExtResource("4_eldwq")
 
-[node name="CardDisplaySink" type="Node2D" parent="GraftDiscard"]
+[node name="CardDisplaySink" type="Node2D" parent="GraftDiscard" node_paths=PackedStringArray("positionMarker")]
 script = ExtResource("9_yg58f")
-positionMarker = Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(1170, 622),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
-
+positionMarker = NodePath("")
 
 [node name="Marker2D" type="Marker2D" parent="GraftDiscard/CardDisplaySink"]
 position = Vector2(1170, 622)

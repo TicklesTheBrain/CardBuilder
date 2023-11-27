@@ -4,12 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://d1lj52mw7mxay" path="res://card.tscn" id="2_s08eg"]
 [ext_resource type="PackedScene" uid="uid://dsfqrofqt0xs4" path="res://card_graft.tscn" id="3_catw8"]
 
-[node name="CardDisplayLord" type="Node"]
+[node name="CardDisplayLord" type="Node" node_paths=PackedStringArray("defaultCardOrigin")]
 script = ExtResource("1_xqnyb")
 cardDisplayPacked = ExtResource("2_s08eg")
 cardGraftPacked = ExtResource("3_catw8")
-defaultCardOrigin = Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(665, 906),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
-
+defaultCardOrigin = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(665, 906)
