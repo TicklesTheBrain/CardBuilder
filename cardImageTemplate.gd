@@ -16,15 +16,45 @@ class_name CardImageTemplate
 @export var cardNameLabel: Label
 
 @export_group("Card Display Properties")
+@export var maxColumnItems: int = 10
 @export var typeProperties: Array[CardTypeDisplayProperties]
-@export var cardEffectSymbolReference: Array[CardInfoDisplayProperties]
-@export var conditionalSymbolReference: Array[CardInfoDisplayProperties]
-@export var modifierSymbolReference: Array[CardInfoDisplayProperties]
-
+@export var cardEffectSymbolReference: Array[EffectDisplayProperties]
+@export var playConditionSymbol: Texture2D
 @export var defaultSymbol: Texture2D
+
+var columnNodes = []
 
 func setup(cardData: CardData):
 	
+	if cardData.playConditionals.size() > 0:
+		columnNodes.push_back(addSymbol(playConditionSymbol))
+
+	addSymbols(cardData.value.modifiers.map(func(m): return m.modifierName), cardEffectSymbolReference)
+	addSymbols(cardData.cost.modifiers.map(func(m): return m.modifierName), cardEffectSymbolReference)
+	addSymbols(cardData.attack.modifiers.map(func(m): return m.modifierName), cardEffectSymbolReference)
+	addSymbols(cardData.defence.modifiers.map(func(m): return m.modifierName), cardEffectSymbolReference)
+	addSymbols(cardData.startMatchEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "S:")
+	addSymbols(cardData.drawEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "D:")
+	addSymbols(cardData.onPlayEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "P:")
+	addSymbols(cardData.onWinEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "W:")
+	addSymbols(cardData.onLoseEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "L:")
+	addSymbols(cardData.onBustEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "B:")
+	addSymbols(cardData.endRoundEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "E:")
+
+	if columnNodes.size() > maxColumnItems:
+		for node in columnNodes:
+			node.visible = false
+		addLetter('S')
+		addLetter('O')
+		addLetter(" ")
+		addLetter("M")
+		addLetter("A")
+		addLetter("N")
+		addLetter("Y")
+	
+	if cardData.cardName == "null":
+		CardNamingLord.askToNameCard(cardData)
+
 	var value = cardData.getValue()
 	numberLabel.text = str(value)
 	var symbolProperties = typeProperties.filter(func(p): return p.cardType == cardData.type.type)[0]
@@ -69,23 +99,8 @@ func setup(cardData: CardData):
 	elif defence > 1:
 		for i in range(defence-1):
 			doublingShield = doublingShield.doubleWithOffset()
-
-	addSymbols(cardData.playConditionals.map(func(c): return c.conditionalName), conditionalSymbolReference)
-	addSymbols(cardData.value.modifiers.map(func(m): return m.modifierName), modifierSymbolReference)
-	addSymbols(cardData.cost.modifiers.map(func(m): return m.modifierName), modifierSymbolReference)
-	addSymbols(cardData.attack.modifiers.map(func(m): return m.modifierName), modifierSymbolReference)
-	addSymbols(cardData.defence.modifiers.map(func(m): return m.modifierName), modifierSymbolReference)
-	addSymbols(cardData.startMatchEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "S:")
-	addSymbols(cardData.drawEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "D:")
-	addSymbols(cardData.onPlayEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "P:")
-	addSymbols(cardData.onWinEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "W:")
-	addSymbols(cardData.onLoseEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "L:")
-	addSymbols(cardData.onBustEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "B:")
-	addSymbols(cardData.endRoundEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "E:")
-
 	
-func addSymbols(identifierArray, identifierReference: Array[CardInfoDisplayProperties], precedingLetter = null):
-	#TODO: add clauses for too many symbols
+func addSymbols(identifierArray, identifierReference: Array[EffectDisplayProperties], precedingLetter = null):
 	var letterAdded = false
 	for id in identifierArray:
 		if id == null:
@@ -95,12 +110,9 @@ func addSymbols(identifierArray, identifierReference: Array[CardInfoDisplayPrope
 		if matching.size() > 0:
 			symbolTexture = matching[0].texture
 		if not letterAdded and precedingLetter != null:
-			var newLetter = infoColumnLetter.duplicate()
-			newLetter.text = precedingLetter
-			infoSymbolsColumn.add_child(newLetter)
-			newLetter.visible = true
+			columnNodes.push_back(addLetter("precedingLetter"))
 			letterAdded = true
-		addSymbol(symbolTexture)
+		columnNodes.push_back(addSymbol(symbolTexture))
 		
 
 func addSymbol(texture: Texture2D):
@@ -109,3 +121,12 @@ func addSymbol(texture: Texture2D):
 	newSymbol.texture = texture
 	infoSymbolsColumn.add_child(newSymbol)
 	newSymbol.visible = true
+	return newSymbol
+
+func addLetter(letterToAdd: String):
+	var newLetter = infoColumnLetter.duplicate()
+	newLetter.text = letterToAdd
+	infoSymbolsColumn.add_child(newLetter)
+	newLetter.visible = true
+	return newLetter
+

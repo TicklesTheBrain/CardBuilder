@@ -3,6 +3,7 @@ class_name ParamModifier
 
 @export var type: CardParam.ParamType
 @export var capAtZero: bool = true
+@export var modifierSymbols: Array[EffectDisplayProperties.SymbolFlags]
 
 func calculate(ctxt: GameStateContext, currValue: int, card: CardData) -> int:
     if not active:

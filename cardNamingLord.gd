@@ -1,6 +1,6 @@
 extends Node
 
-@export var cardFaceReference: Array[CardInfoDisplayProperties]
+@export var cardFaceReference: Array[CardDisplayProperties]
 
 var usedNames: Array[String] = []
 

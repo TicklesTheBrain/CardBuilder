@@ -1,5 +1,5 @@
 extends Resource
-class_name CardInfoDisplayProperties
+class_name CardDisplayProperties
 
 @export var identifier: String
 @export var texture: Texture2D
