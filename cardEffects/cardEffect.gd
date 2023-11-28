@@ -1,6 +1,7 @@
 extends Resource
 class_name CardEffect
 
+#Maybe move this to CardData?
 enum triggerType {NONE, PLAY, DISCARD, END_ROUND, DRAW, START_MATCH, WIN, LOSE, BUST}
 
 @export var effectName: String

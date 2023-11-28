@@ -17,6 +17,7 @@ class_name CardData
 @export var endRoundEffects: Array[CardEffect] = []
 @export var drawEffects: Array[CardEffect] = []
 @export var startMatchEffects: Array[CardEffect] = []
+@export var templateCard: EmptyCardData
 
 signal announceDestroy()
 

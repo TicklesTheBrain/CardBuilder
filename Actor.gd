@@ -16,7 +16,7 @@ class_name Actor
 @export var hand: CardContainer
 @export var discard: CardContainer
 @export var playArea: CardContainer
-@export var deck: CardContainer
+@export var deck: DeckManager
 
 enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
 enum GameResources {ENERGY, CARDS_PER_TURN, BONUS_ATTACK, BONUS_DEFENCE, MULTIPLIER_ATTACK, MULTIPLIER_DEFENCE, HP}

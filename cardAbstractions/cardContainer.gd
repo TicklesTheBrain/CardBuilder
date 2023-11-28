@@ -37,13 +37,16 @@ func triggerAll(triggerType: CardEffect.triggerType):
 	for card in cards:
 		await card.triggerEffect(triggerType)
 
-func addCard(cardToAdd: CardData) -> bool:
+func addCard(cardToAdd: CardData, addToTop: bool = false) -> bool:
 
 	#TODO: need to cleanup this order so it is bulletproof here. since trigger effect can sometimes add more cards with their own effects, the order on card added events is important for order
 	#of the cards, which is a cosmetic incosistency, but might cause further fuckyness later on.
 
 	if not checkFull():
-		cards.push_back(cardToAdd)
+		if addToTop:
+			cards.push_front(cardToAdd)
+		else:
+			cards.push_back(cardToAdd)
 		cardToAdd.container = self
 		cardToAdd.triggerEffect(addTriggerType)
 		Events.cardAdded.emit(self, cardToAdd)

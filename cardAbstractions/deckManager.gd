@@ -9,6 +9,9 @@ func populateContainerFromTemplate():
 	for card in newCards:
 		addCard(card)
 
+func addNewTemplateCards(newCards: Array[EmptyCardData]):
+	templatePackage.cards.append_array(newCards)
+
 static func makeCardArrayFromTemplate(template: Array[EmptyCardData], onlyDebug: bool = false):
 
 	var cardArray = [] as Array[CardData]
