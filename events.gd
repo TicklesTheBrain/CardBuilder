@@ -5,16 +5,4 @@ signal cardAdded(to: CardContainer, card: CardData)
 signal startMatch()
 signal playerTurnStart()
 signal playerTurnEnd(playerValue: int, buster: bool)
-signal updateAllDisplays()
 signal gameStateChange()
-
-func _ready():
-	cardAdded.connect(displayUpdateWrapper)
-	playerTurnStart.connect(displayUpdateWrapper)
-	playerTurnEnd.connect(displayUpdateWrapper)
-
-func displayUpdate():
-	updateAllDisplays.emit()
-
-func displayUpdateWrapper(_discardedVar1 = null, _discardedVar2 = null):
-	call_deferred("displayUpdate")

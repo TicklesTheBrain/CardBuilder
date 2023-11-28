@@ -12,8 +12,10 @@ func getTextSpecific():
 	return text.format({"verb": verb, "number": amountToMatchOrExceed})
 
 func check(ctxt: GameStateContext):
+
 	print('check amount triggered')
-	var currAmount = ctxt.getContainerFromPurpose(containerToCheck).getAll().size()
+	var actor = ctxt.getActorFromType(subjectActor)
+	var currAmount = actor.getContainerFromPurpose(containerToCheck).getAll().size()
 	if not disabledOnMatchOrExceed and currAmount >= amountToMatchOrExceed:
 		return true
 	if disabledOnMatchOrExceed and currAmount < amountToMatchOrExceed:

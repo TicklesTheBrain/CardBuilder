@@ -25,7 +25,7 @@ class_name CardImageTemplate
 
 func setup(cardData: CardData):
 	
-	var value = cardData.value.getBaseValue()
+	var value = cardData.getValue()
 	numberLabel.text = str(value)
 	var symbolProperties = typeProperties.filter(func(p): return p.cardType == cardData.type.type)[0]
 	coloredGroup.modulate = symbolProperties.typeColor
@@ -49,21 +49,21 @@ func setup(cardData: CardData):
 			newSprite.position = positionGroup.get_children()[i].position
 			coloredGroup.add_child(newSprite)	
 
-	var cost = cardData.cost.getBaseValue()
+	var cost = cardData.getCost()
 	if cost == 0:
 		doublingMana.visible = false
 	elif cost > 1:
 		for i in range(cost-1):
 			doublingMana = doublingMana.doubleWithOffset()
 
-	var attack = cardData.attack.getBaseValue()
+	var attack = cardData.getAttack()
 	if attack == 0:
 		doublingSword.visible = false
 	elif attack > 1:
 		for i in range(attack-1):
 			doublingSword = doublingSword.doubleWithOffset()
 
-	var defence = cardData.defence.getBaseValue()
+	var defence = cardData.getDefence()
 	if defence == 0:
 		doublingShield.visible = false
 	elif defence > 1:

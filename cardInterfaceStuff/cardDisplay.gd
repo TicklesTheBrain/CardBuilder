@@ -28,11 +28,14 @@ class_name CardDisplay
 
 @export var selectedColor: Color
 
+var prevAttack: int
+var prevValue: String
+var prevDefence: int
+var prevCost: int
+
 var previousZOrder: int
 var graftToShow: CardData
-var counter: float = 0
 var cardData: CardData
-var mouseOver: bool
 var dragged: bool
 var mouseOffset = Vector2()
 var previousPosition = Vector2()
@@ -47,7 +50,7 @@ var selected = false:
 		selected = value
 
 func _ready():
-	Events.updateAllDisplays.connect(updateCardDisplay)
+	Events.gameStateChange.connect(maybeUpdateNeeded)
 	InputLord.cardSelectionComplete.connect(unselect)
 
 func updateCardImage(data: CardData):
@@ -56,31 +59,55 @@ func updateCardImage(data: CardData):
 func setupCardDisplay(data: CardData):
 	cardData = data
 	cardData.announceDestroy.connect(queue_free)
-	updateCardDisplay()
+	updateCardDetails()
 	updateCardImage(data)
 
 func receiveCardImage(image: Texture2D):
 	cardImageRect.texture = image
 
-func updateCardDisplay(dataToShow: CardData = cardData):
+func maybeUpdateNeeded(dataToShow: CardData = cardData):
+
+	var currValue = str(dataToShow.getValue()) + ' ' + dataToShow.type.getStringType()
+	var currCost = dataToShow.getCost()
+	var currAttack = dataToShow.getAttack()
+	var currDefence = dataToShow.getDefence()
+
+	if currValue != prevValue or currCost != prevCost or currAttack != prevAttack or currDefence != prevDefence:
+		updateCardImage(dataToShow)
+		updateCardDetails(dataToShow)
+
+func updateCardDetails(dataToShow: CardData = cardData):
 
 	if graftToShow:
 		dataToShow = graftToShow
 
-	valueLabel.text = str(dataToShow.getValue()) + ' ' + dataToShow.type.getStringType()
-	costLabel.text = str(dataToShow.getCost())	
+	var currValue = str(dataToShow.getValue()) + ' ' + dataToShow.type.getStringType()
+	prevValue = currValue
+	valueLabel.text = currValue
 
-	updateAllTextFields(dataToShow)
+	var currCost = dataToShow.getCost()
+	prevCost = currCost
+	costLabel.text = str(currCost)
 	
-	if dataToShow.getAttack() > 0:
-		attackLabel.text = str(dataToShow.getAttack()) + 'A'
+	var currAttack = dataToShow.getAttack()
+	prevAttack = currAttack
+
+	
+	if currAttack > 0:
+		attackLabel.text = str(currAttack) + 'A'
 	else:
 		attackLabel.text = ""
-	if dataToShow.getDefence() >0:
-		defenceLabel.text = str(dataToShow.getDefence()) + 'D'
+
+	var currDefence = dataToShow.getDefence()
+	prevDefence = currDefence
+
+	if currDefence >0:
+		defenceLabel.text = str(currDefence) + 'D'
 	else:
 		defenceLabel.text = ""
 
+	updateAllTextFields(dataToShow)
+			
 func updateAllTextFields(dataToShow: CardData):
 
 	var effectDict = dataToShow.getEffectTextDictionary()
@@ -98,12 +125,7 @@ func updateAllTextFields(dataToShow: CardData):
 	updateTextField(onDrawTextLabel, effectDict.onDraw, "[b]Draw:[/b] ")
 	updateTextField(startMatchTextLabel, effectDict.startMatch, "[b]Start:[/b] ")
 
-func _process(delta):
-
-	counter -= delta
-	if counter <= 0:
-		updateCardDisplay()
-		counter = forceUpdateSeconds
+func _process(_delta):
 
 	if dragged:
 		position = get_viewport().get_mouse_position() - mouseOffset

@@ -4,10 +4,18 @@ class_name TimingCheck
 enum CheckType {ACTIVATOR, DEACTIVATOR}
 
 var type: CheckType
-var turnOn: bool = false
-var turnOff: bool = false
-var counter: int = -1
+var turnOn: bool = false:
+	set(val):
+		if val != turnOn:
+			Events.gameStateChange.emit()
+			turnOn = val
+var turnOff: bool = false:
+	set(val):
+		if val != turnOff:
+			Events.gameStateChange.emit()
+			turnOff = val
 
+var counter: int = -1
 var cardSubject: CardData
 var containerSubject: CardContainer
 

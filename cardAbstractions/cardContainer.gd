@@ -48,6 +48,7 @@ func addCard(cardToAdd: CardData) -> bool:
 		cardToAdd.triggerEffect(addTriggerType)
 		Events.cardAdded.emit(self, cardToAdd)
 		cardAdded.emit(cardToAdd)
+		Events.gameStateChange.emit()
 		return true
 	return false
 

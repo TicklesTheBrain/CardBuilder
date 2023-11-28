@@ -20,6 +20,7 @@ func trigger(ctxt: GameStateContext):
 	await triggerSpecific(ctxt)
 	for eff in followUpEffects:
 		await eff.trigger(ctxt)
+	Events.gameStateChange.emit()
 
 func triggerSpecific(_effectContext: GameStateContext):
 	print('this was a default play effect trigger function that was not overriden. is this expected?')
