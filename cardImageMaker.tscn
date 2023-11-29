@@ -1,7 +1,176 @@
-[gd_scene load_steps=3 format=3 uid="uid://ceyxukwff6y10"]
+[gd_scene load_steps=52 format=3 uid="uid://ceyxukwff6y10"]
 
 [ext_resource type="Script" path="res://cardImageMaker.gd" id="1_r40yl"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/effectDisplayProperties.gd" id="3_i6w47"]
+[ext_resource type="Texture2D" uid="uid://dvdq4uywgjh4d" path="res://assets/cardInfoSymbols/conditionSym.png" id="3_lkrpv"]
+[ext_resource type="Texture2D" uid="uid://ctdinche2d6ok" path="res://assets/cardInfoSymbols/bustDownSym.png" id="4_b8b5a"]
+[ext_resource type="Texture2D" uid="uid://fyapjh5oi8us" path="res://assets/cardInfoSymbols/bustUpSym.png" id="5_dphs8"]
+[ext_resource type="Texture2D" uid="uid://1q1uce8mi2o8" path="res://assets/cardInfoSymbols/cardAddSym.png" id="6_20j2r"]
+[ext_resource type="Texture2D" uid="uid://djmopo04klui4" path="res://assets/cardInfoSymbols/cardDestroySym.png" id="7_36tcq"]
 [ext_resource type="PackedScene" uid="uid://c4t3gpgrn0fx3" path="res://cardImageTemplate.tscn" id="7_ndxtj"]
+[ext_resource type="Texture2D" uid="uid://b8q2qy7mxflcj" path="res://assets/cardInfoSymbols/cardDiscardSym.png" id="8_gjqwc"]
+[ext_resource type="Texture2D" uid="uid://cilwu14rk48nx" path="res://assets/cardInfoSymbols/cardDrawSym.png" id="9_nimp8"]
+[ext_resource type="Texture2D" uid="uid://ba0pkhx7d82ga" path="res://assets/cardInfoSymbols/createCardSym.png" id="10_56m5i"]
+[ext_resource type="Texture2D" uid="uid://oa16klgs2oa0" path="res://assets/cardInfoSymbols/discardSelfSym.png" id="11_ko6wj"]
+[ext_resource type="Texture2D" uid="uid://lt622qw2hgq4" path="res://assets/cardInfoSymbols/graftSym.png" id="12_2lyh2"]
+[ext_resource type="Texture2D" uid="uid://bdk735xcafq66" path="res://assets/cardInfoSymbols/manaMinusSym.png" id="13_ffxc4"]
+[ext_resource type="Texture2D" uid="uid://3xvot07h2s1b" path="res://assets/cardInfoSymbols/manaPlusSym.png" id="14_v3y2s"]
+[ext_resource type="Texture2D" uid="uid://vnkfewfkbqkc" path="res://assets/cardInfoSymbols/multiManaMinusSym.png" id="15_xg3wv"]
+[ext_resource type="Texture2D" uid="uid://dvfxh6adgm4ud" path="res://assets/cardInfoSymbols/multiManaPlusSym.png" id="16_hjnxq"]
+[ext_resource type="Texture2D" uid="uid://bn3virg4d6oip" path="res://assets/cardInfoSymbols/shieldUpSym.png" id="17_yckrr"]
+[ext_resource type="Texture2D" uid="uid://dgxe505tsdsyl" path="res://assets/cardInfoSymbols/shieldDownSym.png" id="18_vhxqw"]
+[ext_resource type="Texture2D" uid="uid://cvxr13aiv3xw6" path="res://assets/cardInfoSymbols/multiShieldSym.png" id="19_f7rn3"]
+[ext_resource type="Texture2D" uid="uid://dg0s7aahhlav6" path="res://assets/cardInfoSymbols/swordUpSym.png" id="20_b4p57"]
+[ext_resource type="Texture2D" uid="uid://coqs5xchy0834" path="res://assets/cardInfoSymbols/swordDownSym.png" id="21_qddec"]
+[ext_resource type="Texture2D" uid="uid://rrnjxbu4mjj5" path="res://assets/cardInfoSymbols/multiSwordSym.png" id="22_48ty7"]
+[ext_resource type="Texture2D" uid="uid://0phbw3dey6cw" path="res://assets/cardInfoSymbols/xUpSym.png" id="23_co0cm"]
+[ext_resource type="Texture2D" uid="uid://c3fdci3uqpuvr" path="res://assets/cardInfoSymbols/xDownSym.png" id="24_5gaie"]
+[ext_resource type="Texture2D" uid="uid://dubjgun2j3bsb" path="res://assets/cardInfoSymbols/xUnknownSym.png" id="25_uc2yd"]
+[ext_resource type="Texture2D" uid="uid://d0y3xgdyqggy8" path="res://assets/cardInfoSymbols/modifierSym.png" id="26_bbus4"]
+
+[sub_resource type="Resource" id="Resource_si11j"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 0
+identifier = ""
+texture = ExtResource("4_b8b5a")
+
+[sub_resource type="Resource" id="Resource_23cca"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 1
+identifier = ""
+texture = ExtResource("5_dphs8")
+
+[sub_resource type="Resource" id="Resource_hp68o"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 2
+identifier = ""
+texture = ExtResource("6_20j2r")
+
+[sub_resource type="Resource" id="Resource_qhiwk"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 3
+identifier = ""
+texture = ExtResource("7_36tcq")
+
+[sub_resource type="Resource" id="Resource_2yugf"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 4
+identifier = ""
+texture = ExtResource("8_gjqwc")
+
+[sub_resource type="Resource" id="Resource_3q57m"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 5
+identifier = ""
+texture = ExtResource("9_nimp8")
+
+[sub_resource type="Resource" id="Resource_okoi8"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 6
+identifier = ""
+texture = ExtResource("10_56m5i")
+
+[sub_resource type="Resource" id="Resource_f2dl7"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 7
+identifier = ""
+texture = ExtResource("11_ko6wj")
+
+[sub_resource type="Resource" id="Resource_qjv0l"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 8
+identifier = ""
+texture = ExtResource("12_2lyh2")
+
+[sub_resource type="Resource" id="Resource_8mg32"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 9
+identifier = ""
+texture = ExtResource("13_ffxc4")
+
+[sub_resource type="Resource" id="Resource_5ru8q"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 10
+identifier = ""
+texture = ExtResource("14_v3y2s")
+
+[sub_resource type="Resource" id="Resource_ge3rs"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 11
+identifier = ""
+texture = ExtResource("15_xg3wv")
+
+[sub_resource type="Resource" id="Resource_85sy8"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 12
+identifier = ""
+texture = ExtResource("16_hjnxq")
+
+[sub_resource type="Resource" id="Resource_rfcp4"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 13
+identifier = ""
+texture = ExtResource("17_yckrr")
+
+[sub_resource type="Resource" id="Resource_w5ssd"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 14
+identifier = ""
+texture = ExtResource("18_vhxqw")
+
+[sub_resource type="Resource" id="Resource_3stci"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 18
+identifier = ""
+texture = ExtResource("19_f7rn3")
+
+[sub_resource type="Resource" id="Resource_6cg1p"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 16
+identifier = ""
+texture = ExtResource("20_b4p57")
+
+[sub_resource type="Resource" id="Resource_4kcd4"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 17
+identifier = ""
+texture = ExtResource("21_qddec")
+
+[sub_resource type="Resource" id="Resource_u8jst"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 18
+identifier = ""
+texture = ExtResource("22_48ty7")
+
+[sub_resource type="Resource" id="Resource_7cvb4"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 19
+identifier = ""
+texture = ExtResource("23_co0cm")
+
+[sub_resource type="Resource" id="Resource_8fe4m"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 20
+identifier = ""
+texture = ExtResource("24_5gaie")
+
+[sub_resource type="Resource" id="Resource_n4tox"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 21
+identifier = ""
+texture = ExtResource("25_uc2yd")
+
+[sub_resource type="Resource" id="Resource_otds3"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 22
+identifier = ""
+texture = ExtResource("26_bbus4")
+
+[sub_resource type="Resource" id="Resource_h8um3"]
+script = ExtResource("3_i6w47")
+cardEffectSymbolFlag = 23
+identifier = ""
+texture = ExtResource("3_lkrpv")
 
 [node name="CardImageMaker" type="Node2D"]
 script = ExtResource("1_r40yl")
@@ -10,3 +179,5 @@ metadata/_edit_horizontal_guides_ = [-347.0]
 metadata/_edit_vertical_guides_ = [-249.0]
 
 [node name="SubViewport" parent="." instance=ExtResource("7_ndxtj")]
+cardEffectSymbolReference = Array[ExtResource("3_i6w47")]([SubResource("Resource_si11j"), SubResource("Resource_23cca"), SubResource("Resource_hp68o"), SubResource("Resource_qhiwk"), SubResource("Resource_2yugf"), SubResource("Resource_3q57m"), SubResource("Resource_okoi8"), SubResource("Resource_f2dl7"), SubResource("Resource_qjv0l"), SubResource("Resource_8mg32"), SubResource("Resource_5ru8q"), SubResource("Resource_ge3rs"), SubResource("Resource_85sy8"), SubResource("Resource_rfcp4"), SubResource("Resource_w5ssd"), SubResource("Resource_3stci"), SubResource("Resource_6cg1p"), SubResource("Resource_4kcd4"), SubResource("Resource_u8jst"), SubResource("Resource_7cvb4"), SubResource("Resource_8fe4m"), SubResource("Resource_n4tox"), SubResource("Resource_otds3"), SubResource("Resource_h8um3")])
+playConditionSymbol = ExtResource("3_lkrpv")

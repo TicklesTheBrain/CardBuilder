@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://c4t3gpgrn0fx3"]
+[gd_scene load_steps=68 format=3 uid="uid://c4t3gpgrn0fx3"]
 
 [ext_resource type="Script" path="res://cardImageTemplate.gd" id="1_0ivgc"]
 [ext_resource type="Texture2D" uid="uid://yjm7ihicna6h" path="res://assets/cardFrontBackground.png" id="1_jh6uf"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://bn3virg4d6oip" path="res://assets/cardInfoSymbols/shieldUpSym.png" id="28_ep7gp"]
 [ext_resource type="Texture2D" uid="uid://dgxe505tsdsyl" path="res://assets/cardInfoSymbols/shieldDownSym.png" id="29_urlhp"]
 [ext_resource type="Texture2D" uid="uid://cvxr13aiv3xw6" path="res://assets/cardInfoSymbols/multiShieldSym.png" id="30_nod7w"]
+[ext_resource type="Texture2D" uid="uid://fbt6t80wpfpf" path="res://assets/cardInfoSymbols/chooseSym.png" id="31_5d3cu"]
 [ext_resource type="Texture2D" uid="uid://dg0s7aahhlav6" path="res://assets/cardInfoSymbols/swordUpSym.png" id="31_hbsox"]
 [ext_resource type="Texture2D" uid="uid://coqs5xchy0834" path="res://assets/cardInfoSymbols/swordDownSym.png" id="32_fdf8n"]
 [ext_resource type="Texture2D" uid="uid://rrnjxbu4mjj5" path="res://assets/cardInfoSymbols/multiSwordSym.png" id="33_vgrqk"]
@@ -201,6 +202,12 @@ cardEffectSymbolFlag = 22
 identifier = ""
 texture = ExtResource("37_sv7v1")
 
+[sub_resource type="Resource" id="Resource_cc12k"]
+script = ExtResource("15_mwoi4")
+cardEffectSymbolFlag = 24
+identifier = ""
+texture = ExtResource("31_5d3cu")
+
 [node name="SubViewport" type="SubViewport" node_paths=PackedStringArray("infoSymbolsColumn", "infoColumnLetter", "infoColumnSymbol", "numberLabel", "cornerSymbol", "symbolPositions", "coloredGroup", "doublingMana", "doublingShield", "doublingSword", "cardFace", "cardNameLabel")]
 transparent_bg = true
 handle_input_locally = false
@@ -220,7 +227,7 @@ doublingSword = NodePath("DebugNestingLevel/DoublingSword")
 cardFace = NodePath("DebugNestingLevel/ColoredGroup/TextureRect")
 cardNameLabel = NodePath("DebugNestingLevel/ColoredGroup/cardName")
 typeProperties = Array[ExtResource("3_rpyhr")]([SubResource("Resource_ve20g"), SubResource("Resource_11f8w"), SubResource("Resource_kggi4"), SubResource("Resource_cqa7h")])
-cardEffectSymbolReference = Array[ExtResource("15_mwoi4")]([SubResource("Resource_si11j"), SubResource("Resource_23cca"), SubResource("Resource_hp68o"), SubResource("Resource_qhiwk"), SubResource("Resource_2yugf"), SubResource("Resource_3q57m"), SubResource("Resource_okoi8"), SubResource("Resource_f2dl7"), SubResource("Resource_qjv0l"), SubResource("Resource_8mg32"), SubResource("Resource_5ru8q"), SubResource("Resource_ge3rs"), SubResource("Resource_85sy8"), SubResource("Resource_rfcp4"), SubResource("Resource_w5ssd"), SubResource("Resource_3stci"), SubResource("Resource_6cg1p"), SubResource("Resource_4kcd4"), SubResource("Resource_u8jst"), SubResource("Resource_7cvb4"), SubResource("Resource_8fe4m"), SubResource("Resource_n4tox"), SubResource("Resource_otds3")])
+cardEffectSymbolReference = Array[ExtResource("15_mwoi4")]([SubResource("Resource_si11j"), SubResource("Resource_23cca"), SubResource("Resource_hp68o"), SubResource("Resource_qhiwk"), SubResource("Resource_2yugf"), SubResource("Resource_3q57m"), SubResource("Resource_okoi8"), SubResource("Resource_f2dl7"), SubResource("Resource_qjv0l"), SubResource("Resource_8mg32"), SubResource("Resource_5ru8q"), SubResource("Resource_ge3rs"), SubResource("Resource_85sy8"), SubResource("Resource_rfcp4"), SubResource("Resource_w5ssd"), SubResource("Resource_3stci"), SubResource("Resource_6cg1p"), SubResource("Resource_4kcd4"), SubResource("Resource_u8jst"), SubResource("Resource_7cvb4"), SubResource("Resource_8fe4m"), SubResource("Resource_n4tox"), SubResource("Resource_otds3"), SubResource("Resource_cc12k")])
 defaultSymbol = ExtResource("38_qyqde")
 
 [node name="DebugNestingLevel" type="Node2D" parent="."]

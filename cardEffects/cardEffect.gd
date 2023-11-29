@@ -10,7 +10,7 @@ enum triggerType {NONE, PLAY, DISCARD, END_ROUND, DRAW, START_MATCH, WIN, LOSE, 
 @export var followUpEffects: Array[CardEffect] = []
 @export var includeFollowUpText: bool = false
 @export var subjectActor: GameStateContext.ActorType
-@export var effectSymbols: Array[EffectDisplayProperties.SymbolFlags]
+@export var symbols: Array[EffectDisplayProperties.SymbolFlags]
 
 func trigger(ctxt: GameStateContext):
 	#print('trigger launched', conditionals)

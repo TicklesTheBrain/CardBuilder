@@ -24,22 +24,28 @@ class_name CardImageTemplate
 
 var columnNodes = []
 
+func symbolArrayReduce(acc, source):
+	var a = []
+	a.append_array(acc)
+	a.append_array(source.symbols)
+	return a
+
 func setup(cardData: CardData):
 	
 	if cardData.playConditionals.size() > 0:
 		columnNodes.push_back(addSymbol(playConditionSymbol))
 
-	addSymbols(cardData.value.modifiers.map(func(m): return m.modifierName), cardEffectSymbolReference)
-	addSymbols(cardData.cost.modifiers.map(func(m): return m.modifierName), cardEffectSymbolReference)
-	addSymbols(cardData.attack.modifiers.map(func(m): return m.modifierName), cardEffectSymbolReference)
-	addSymbols(cardData.defence.modifiers.map(func(m): return m.modifierName), cardEffectSymbolReference)
-	addSymbols(cardData.startMatchEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "S:")
-	addSymbols(cardData.drawEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "D:")
-	addSymbols(cardData.onPlayEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "P:")
-	addSymbols(cardData.onWinEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "W:")
-	addSymbols(cardData.onLoseEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "L:")
-	addSymbols(cardData.onBustEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "B:")
-	addSymbols(cardData.endRoundEffects.map(func(m): return m.effectName), cardEffectSymbolReference, "E:")
+	addSymbols(cardData.value.modifiers.reduce(symbolArrayReduce, []), cardEffectSymbolReference)
+	addSymbols(cardData.cost.modifiers.reduce(symbolArrayReduce, []), cardEffectSymbolReference)
+	addSymbols(cardData.attack.modifiers.reduce(symbolArrayReduce, []), cardEffectSymbolReference)
+	addSymbols(cardData.defence.modifiers.reduce(symbolArrayReduce, []), cardEffectSymbolReference)
+	addSymbols(cardData.startMatchEffects.reduce(symbolArrayReduce, []), cardEffectSymbolReference, "S:")
+	addSymbols(cardData.drawEffects.reduce(symbolArrayReduce, []), cardEffectSymbolReference, "D:")
+	addSymbols(cardData.onPlayEffects.reduce(symbolArrayReduce, []), cardEffectSymbolReference, "P:")
+	addSymbols(cardData.onWinEffects.reduce(symbolArrayReduce, []), cardEffectSymbolReference, "W:")
+	addSymbols(cardData.onLoseEffects.reduce(symbolArrayReduce, []), cardEffectSymbolReference, "L:")
+	addSymbols(cardData.onBustEffects.reduce(symbolArrayReduce, []), cardEffectSymbolReference, "B:")
+	addSymbols(cardData.endRoundEffects.reduce(symbolArrayReduce, []), cardEffectSymbolReference, "E:")
 
 	if columnNodes.size() > maxColumnItems:
 		for node in columnNodes:
@@ -103,14 +109,12 @@ func setup(cardData: CardData):
 func addSymbols(identifierArray, identifierReference: Array[EffectDisplayProperties], precedingLetter = null):
 	var letterAdded = false
 	for id in identifierArray:
-		if id == null:
-			continue
 		var symbolTexture = defaultSymbol
-		var matching = identifierReference.filter(func(p): return p.identifier == id)
+		var matching = identifierReference.filter(func(p): return p.cardEffectSymbolFlag == id)
 		if matching.size() > 0:
 			symbolTexture = matching[0].texture
 		if not letterAdded and precedingLetter != null:
-			columnNodes.push_back(addLetter("precedingLetter"))
+			columnNodes.push_back(addLetter(precedingLetter))
 			letterAdded = true
 		columnNodes.push_back(addSymbol(symbolTexture))
 		

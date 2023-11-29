@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=166 format=3 uid="uid://dc1pbwqrsnd4m"]
+[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=177 format=3 uid="uid://dc1pbwqrsnd4m"]
 
 [ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="1_5jvcn"]
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="2_j5dh7"]
@@ -19,6 +19,8 @@
 [ext_resource type="Script" path="res://cardEffects/ceSetValueToPrevious.gd" id="16_7u532"]
 [ext_resource type="Script" path="res://conditionals/conditionalAmount.gd" id="17_703uu"]
 [ext_resource type="Script" path="res://cardAbstractions/cardTemplatePackage.gd" id="19_47fy2"]
+[ext_resource type="Script" path="res://cardEffects/ceDiscardSelf.gd" id="19_bwy3c"]
+[ext_resource type="Script" path="res://cardEffects/ceGraft.gd" id="21_c8x8g"]
 
 [sub_resource type="Resource" id="Resource_oams6"]
 script = ExtResource("1_5jvcn")
@@ -53,7 +55,7 @@ script = ExtResource("3_qmpx4")
 setTo = 0
 type = 1
 capAtZero = true
-modifierSymbols = Array[int]([])
+symbols = Array[int]([19])
 inEffect = true
 staticText = ""
 modifierName = ""
@@ -118,7 +120,7 @@ script = ExtResource("4_ye8h6")
 shift = -1
 type = 0
 capAtZero = true
-modifierSymbols = Array[int]([])
+symbols = Array[int]([])
 inEffect = true
 staticText = ""
 modifierName = ""
@@ -142,7 +144,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([11])
 
 [sub_resource type="Resource" id="Resource_he6j3"]
 script = ExtResource("3_oubj8")
@@ -212,7 +214,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([5])
 
 [sub_resource type="Resource" id="Resource_swqpn"]
 script = ExtResource("3_oubj8")
@@ -291,7 +293,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResourc
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([23, 5])
 
 [sub_resource type="Resource" id="Resource_o4n8o"]
 script = ExtResource("3_oubj8")
@@ -360,7 +362,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([4])
 
 [sub_resource type="Resource" id="Resource_16xpr"]
 script = ExtResource("3_oubj8")
@@ -430,7 +432,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([10])
 
 [sub_resource type="Resource" id="Resource_4xg7e"]
 script = ExtResource("3_oubj8")
@@ -501,7 +503,7 @@ optionRangeEnd = 10
 nonStatic = true
 type = 1
 capAtZero = true
-modifierSymbols = Array[int]([])
+symbols = Array[int]([21])
 inEffect = true
 staticText = ""
 modifierName = ""
@@ -576,7 +578,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([24, 2])
 
 [sub_resource type="Resource" id="Resource_hmdcc"]
 script = ExtResource("3_oubj8")
@@ -662,7 +664,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([1])
 
 [sub_resource type="Resource" id="Resource_pfffg"]
 script = ExtResource("3_oubj8")
@@ -748,7 +750,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([0])
 
 [sub_resource type="Resource" id="Resource_5mm3t"]
 script = ExtResource("3_oubj8")
@@ -818,7 +820,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([2])
 
 [sub_resource type="Resource" id="Resource_qs1yb"]
 script = ExtResource("3_oubj8")
@@ -886,7 +888,7 @@ cutoffBasedOnParamItself = true
 cutoffCriteriaParam = 1
 type = 1
 capAtZero = true
-modifierSymbols = Array[int]([])
+symbols = Array[int]([])
 inEffect = true
 staticText = ""
 modifierName = ""
@@ -910,7 +912,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([22])
 
 [sub_resource type="Resource" id="Resource_m3o81"]
 script = ExtResource("3_oubj8")
@@ -980,7 +982,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([5])
 
 [sub_resource type="Resource" id="Resource_aeh5k"]
 script = ExtResource("3_oubj8")
@@ -1050,7 +1052,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([9])
 
 [sub_resource type="Resource" id="Resource_thuiu"]
 script = ExtResource("3_oubj8")
@@ -1115,7 +1117,7 @@ flatChange = -1
 increaseOnMerge = false
 type = 1
 capAtZero = true
-modifierSymbols = Array[int]([])
+symbols = Array[int]([])
 inEffect = true
 staticText = ""
 modifierName = ""
@@ -1138,7 +1140,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([21])
 
 [sub_resource type="Resource" id="Resource_ad17n"]
 script = ExtResource("3_oubj8")
@@ -1282,7 +1284,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([])
 
 [sub_resource type="Resource" id="Resource_81elk"]
 script = ExtResource("7_uut4y")
@@ -1295,7 +1297,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResourc
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_nmgbw")])
 includeFollowUpText = true
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([23, 5, 4])
 
 [sub_resource type="Resource" id="Resource_c46vx"]
 script = ExtResource("3_oubj8")
@@ -1364,7 +1366,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([4])
 
 [sub_resource type="Resource" id="Resource_ucj0k"]
 script = ExtResource("7_uut4y")
@@ -1377,7 +1379,7 @@ conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
-effectSymbols = Array[int]([])
+symbols = Array[int]([5])
 
 [sub_resource type="Resource" id="Resource_r75yl"]
 script = ExtResource("3_oubj8")
@@ -1436,6 +1438,93 @@ modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
 capAtZero = false
 
+[sub_resource type="Resource" id="Resource_a734m"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 2
+modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_qow3h"]
+script = ExtResource("1_5jvcn")
+baseValue = -1
+type = 0
+modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_rm17h"]
+script = ExtResource("1_5jvcn")
+baseValue = -1
+type = 3
+modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_6iq3s"]
+script = ExtResource("19_bwy3c")
+discardDesitnation = 3
+effectName = ""
+staticText = "Discard itself."
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+symbols = Array[int]([7])
+
+[sub_resource type="Resource" id="Resource_c50bb"]
+script = ExtResource("3_oubj8")
+type = 1
+
+[sub_resource type="Resource" id="Resource_35byc"]
+script = ExtResource("1_5jvcn")
+baseValue = 1
+type = 1
+modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
+staticText = ""
+capAtZero = false
+
+[sub_resource type="Resource" id="Resource_toccl"]
+script = ExtResource("2_j5dh7")
+amount = 3
+debug = false
+cardName = ""
+graft = false
+value = SubResource("Resource_35byc")
+type = SubResource("Resource_c50bb")
+cost = SubResource("Resource_qow3h")
+attack = SubResource("Resource_a734m")
+defence = SubResource("Resource_rm17h")
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_6iq3s")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_8n2n2"]
+script = ExtResource("19_47fy2")
+cards = Array[ExtResource("2_j5dh7")]([SubResource("Resource_toccl")])
+
+[sub_resource type="Resource" id="Resource_x36ki"]
+script = ExtResource("21_c8x8g")
+graftCardPackage = SubResource("Resource_8n2n2")
+graftOptionsNo = 3
+cardOptions = 3
+graftOptionsSource = 0
+numberOfGrafts = 1
+debugOnly = false
+effectName = ""
+staticText = "Graft 1 card."
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+symbols = Array[int]([8])
+
 [sub_resource type="Resource" id="Resource_5l0y0"]
 script = ExtResource("3_oubj8")
 type = 3
@@ -1460,7 +1549,7 @@ type = SubResource("Resource_5l0y0")
 cost = SubResource("Resource_h57qx")
 attack = SubResource("Resource_uuod1")
 defence = SubResource("Resource_hsj33")
-onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_x36ki")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
