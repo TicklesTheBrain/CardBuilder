@@ -2,6 +2,7 @@ extends Node
 
 @export var cardDisplayPacked: PackedScene
 @export var cardGraftPacked: PackedScene
+@export var cardBackPacked: PackedScene
 @export var defaultCardOrigin: Marker2D
 
 signal orphanedCardDisplay(cd: CardDisplay)
@@ -29,5 +30,17 @@ func spawnNewCardDisplay(card: CardData):
 	newCardDisplay.add_to_group("cd")
 
 func reparentCardDisplay(cd: CardDisplay):
+
 	cd.get_parent().remove_child(cd)
 	add_child(cd)
+
+func getCardDisplay(card: CardData):
+	var cardDisplays = get_tree().get_nodes_in_group("cd")
+	var matchingCD = cardDisplays.filter(func(cd): return cd.cardData == card)
+	if matchingCD.size() == 0:
+		return null
+	else:
+		return matchingCD[0]
+
+func checkCardDisplayExists(card: CardData):
+	return getCardDisplay(card) != null	

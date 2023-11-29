@@ -1,8 +1,14 @@
 extends Node2D
 class_name CardDisplay
 
+enum BackTypes {RED, BLUE}
+
 @export var cardShape: Area2D
 @export var cardImageRect: TextureRect
+
+@export_group("Card Back Stuff")
+@export var backsRed: Array[Texture2D]
+@export var backsBlue: Array[Texture2D]
 
 @export_group("Detailed Info References")
 @export var detailedInfoRoot: PanelContainer
@@ -24,7 +30,6 @@ class_name CardDisplay
 
 @export var attackLabel: Label
 @export var defenceLabel: Label
-@export var forceUpdateSeconds: float
 
 @export var selectedColor: Color
 
@@ -32,6 +37,7 @@ var prevAttack: int
 var prevValue: String
 var prevDefence: int
 var prevCost: int
+var prevRevealed: bool
 
 var previousZOrder: int
 var graftToShow: CardData
@@ -53,12 +59,24 @@ func _ready():
 	Events.gameStateChange.connect(maybeUpdateNeeded)
 	InputLord.cardSelectionComplete.connect(unselect)
 
+func getCardBack(type: BackTypes) -> Texture2D:
+	match type:
+		BackTypes.RED:
+			return backsRed.pick_random()
+		BackTypes.BLUE:
+			return backsBlue.pick_random()
+	return null
+
 func updateCardImage(data: CardData):
-	await CardImageMaker.getCardImage(data, receiveCardImage)
+	if data.revealed:
+		await CardImageMaker.getCardImage(data, receiveCardImage)
+	else:
+		cardImageRect.texture = getCardBack(data.cardBack)
 
 func setupCardDisplay(data: CardData):
 	cardData = data
 	cardData.announceDestroy.connect(queue_free)
+	cardData.revealChange.connect(maybeUpdateNeeded)
 	updateCardDetails()
 	updateCardImage(data)
 
@@ -71,8 +89,9 @@ func maybeUpdateNeeded(dataToShow: CardData = cardData):
 	var currCost = dataToShow.getCost()
 	var currAttack = dataToShow.getAttack()
 	var currDefence = dataToShow.getDefence()
+	var currRevealed = dataToShow.revealed	
 
-	if currValue != prevValue or currCost != prevCost or currAttack != prevAttack or currDefence != prevDefence:
+	if currValue != prevValue or currCost != prevCost or currAttack != prevAttack or currDefence != prevDefence or prevRevealed != currRevealed:
 		updateCardImage(dataToShow)
 		updateCardDetails(dataToShow)
 
@@ -80,6 +99,8 @@ func updateCardDetails(dataToShow: CardData = cardData):
 
 	if graftToShow:
 		dataToShow = graftToShow
+
+	prevRevealed = dataToShow.revealed
 
 	var currValue = str(dataToShow.getValue()) + ' ' + dataToShow.type.getStringType()
 	prevValue = currValue
@@ -165,7 +186,8 @@ func hideGraft():
 	graftToShow = null
 
 func showDetailed():
-	detailedInfoRoot.visible = true
+	if cardData.revealed:
+		detailedInfoRoot.visible = true
 	previousZOrder = z_index
 	z_index = 100
 

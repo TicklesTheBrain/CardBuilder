@@ -5,6 +5,8 @@ class_name CardPositionController
 @export var logicalContainer: CardContainer
 @export var canvasLayer: CanvasLayer
 @export var canCreateNewDisplays: bool  = true
+@export var resetRotation: bool = true
+@export var resetRotationTo: float = 0
 
 var cards: Array[CardDisplay] = []
 var setupDone: bool = false
@@ -15,31 +17,29 @@ func _ready():
 	InputLord.cardDragReleased.connect(_onCardDragReleased)
 
 func addCardData(cardData: CardData):
-	var cardDisplays = get_tree().get_nodes_in_group("cd")
-	var matchingCD = cardDisplays.filter(func(cd): return cd.cardData == cardData)
-	if matchingCD.size() == 0:
+
+	if not CardDisplayLord.checkCardDisplayExists(cardData):
 		if canCreateNewDisplays:
 			CardDisplayLord.newCardDisplayRequested.emit(cardData)
 		else:
 			return
-	cardDisplays = get_tree().get_nodes_in_group("cd")
-	var cardDisplay = cardDisplays.filter(func(cd): return cd.cardData == cardData)[0]
+	
+	var cardDisplay = CardDisplayLord.getCardDisplay(cardData)
 	addCardDisplay(cardDisplay)
 	if canvasLayer:
 		#print('triggered add child')
 		cardDisplay.get_parent().remove_child(cardDisplay)
 		canvasLayer.add_child(cardDisplay)
 
-func removeCardData(cardData: CardData):
-	var cardDisplays = get_tree().get_nodes_in_group("cd")
-	var matchingDisplays = cardDisplays.filter(func(cd): return cd.cardData == cardData)
+func removeCardData(cardData: CardData):	
 	
-	if matchingDisplays.size() == 0:
+	if not CardDisplayLord.checkCardDisplayExists(cardData):
 		return
-
-	removeCardDisplay(matchingDisplays[0]) #TODO: this is kinda ugly
+	
+	var cardDisplay = CardDisplayLord.getCardDisplay(cardData)
+	removeCardDisplay(cardDisplay) #TODO: this is kinda ugly
 	if canvasLayer:
-		CardDisplayLord.orphanedCardDisplay.emit(matchingDisplays[0])
+		CardDisplayLord.orphanedCardDisplay.emit(cardDisplay)
 
 func addCardDisplay(newCard: CardDisplay):
 	
@@ -48,6 +48,7 @@ func addCardDisplay(newCard: CardDisplay):
 	newCard.z_index = cards.size()
 	newCard.previousZOrder = cards.size() #TODO: this needs its own dedicated method, smells
 	print(name, ' add card display triggered, new z_index ', newCard.z_index)
+	resetCardRotation()
 	scuttleCards()
 
 func removeCardDisplay(cardToRemove: CardDisplay):
@@ -78,7 +79,14 @@ func scuttleCards():
 
 func _onCardDragReleased(cardDisplay: CardDisplay):
 	if cards.has(cardDisplay):
+		resetCardRotation()
 		scuttleCards()
 
 func setupContainerSpecific():
 	print("setup container specific not overriden, might be alright")
+
+func resetCardRotation():
+	if resetRotation:
+		for card in cards:
+			card.rotation_degrees = resetRotationTo
+

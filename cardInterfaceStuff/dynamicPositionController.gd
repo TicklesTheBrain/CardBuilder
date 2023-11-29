@@ -50,8 +50,7 @@ func scuttleCards():
 	for row in cardsInRows:
 		var rowCenter = firstRowCenter+r*Vector2(0,cardHeight+rowGap)
 		scuttleOneRow(row, rowCenter, areaWidth)
-		r+=1
-	
+		r+=1	
 
 func scuttleOneRow(rowCards, centerPos: Vector2, areaWidth: float):
 

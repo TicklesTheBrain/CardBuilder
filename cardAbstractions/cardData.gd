@@ -2,6 +2,12 @@ extends Resource
 class_name CardData
 
 @export var cardName: String
+@export var revealed: bool = false:
+	set(new):
+		if revealed != new:
+			revealChange.emit()
+		revealed = new
+@export var cardBack: CardDisplay.BackTypes
 @export var graft: bool
 @export var value: CardParam
 @export var type: CardType
@@ -20,6 +26,7 @@ class_name CardData
 @export var templateCard: EmptyCardData
 
 signal announceDestroy()
+signal revealChange()
 
 #TODO: Add exclusion flags for merging
 #TODO: Add additional name get identifiers, when merging is possible, but should produce a different symbol

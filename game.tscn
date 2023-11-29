@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=22 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://b2ru52u3aw843" path="res://content/debug_enemyDeck.tres" id="9_t18bm"]
 [ext_resource type="Script" path="res://cardAbstractions/containerCounter.gd" id="11_rgdhd"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="12_q8pst"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/pilePositionController.gd" id="14_27y8n"]
 [ext_resource type="Texture2D" uid="uid://cj75g71nh52om" path="res://assets/table_background.png" id="15_2rvab"]
 [ext_resource type="Resource" uid="uid://dc1pbwqrsnd4m" path="res://content/test_cards.tres" id="24_wh5ls"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="27_mupmx"]
@@ -113,6 +114,8 @@ debug = false
 templatePackage = ExtResource("24_wh5ls")
 feedContainer = NodePath("../DiscardManager")
 disposeContainer = NodePath("../DiscardManager")
+overrideRevealed = true
+overrideRevealedState = false
 
 [node name="DeckCounter" type="Node" parent="Logic/Player/DeckManager" node_paths=PackedStringArray("label")]
 script = ExtResource("11_rgdhd")
@@ -124,6 +127,7 @@ script = ExtResource("12_q8pst")
 feedContainer = NodePath("../DiscardManager")
 disposeContainer = NodePath("../DiscardManager")
 addTriggerType = 4
+overrideRevealed = true
 
 [node name="PlayAreaManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("bustCounter", "disposeContainer")]
 script = ExtResource("12_q8pst")
@@ -131,6 +135,7 @@ maxCards = 6
 bustCounter = NodePath("ValueCounter")
 disposeContainer = NodePath("../DiscardManager")
 addTriggerType = 1
+overrideRevealed = true
 
 [node name="ValueCounter" type="Node" parent="Logic/Player/PlayAreaManager" node_paths=PackedStringArray("label")]
 script = ExtResource("11_rgdhd")
@@ -175,6 +180,7 @@ debugLabel = NodePath("../../../InfoStuff/theirHpCounter")
 [node name="EnemyHand" type="Node" parent="Logic/Enemy"]
 script = ExtResource("12_q8pst")
 maxCards = 0
+overrideRevealed = true
 
 [node name="EnemyPlayArea" type="Node" parent="Logic/Enemy" node_paths=PackedStringArray("bustCounter", "disposeContainer")]
 script = ExtResource("12_q8pst")
@@ -182,6 +188,7 @@ maxCards = 6
 bustCounter = NodePath("ValueCounter")
 disposeContainer = NodePath("../EnemyDiscard")
 addTriggerType = 1
+overrideRevealed = true
 
 [node name="ValueCounter" type="Node" parent="Logic/Enemy/EnemyPlayArea" node_paths=PackedStringArray("label")]
 script = ExtResource("11_rgdhd")
@@ -287,14 +294,15 @@ canCreateNewDisplays = false
 [node name="DiscardOrigin" type="Marker2D" parent="DiscardDisplaySink"]
 position = Vector2(1207, 381)
 
-[node name="DeckDisplaySink" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
-script = ExtResource("3_lpmun")
-positionMarker = NodePath("DeckOrigin")
+[node name="DeckDisplayPile" type="Node2D" parent="." node_paths=PackedStringArray("pileCenter", "logicalContainer")]
+script = ExtResource("14_27y8n")
+pileCenter = NodePath("DeckOrigin")
+rotationPlusMinus = 5.6
 logicalContainer = NodePath("../Logic/Player/DeckManager")
-canCreateNewDisplays = false
+resetRotation = false
 
-[node name="DeckOrigin" type="Marker2D" parent="DeckDisplaySink"]
-position = Vector2(38, 406)
+[node name="DeckOrigin" type="Marker2D" parent="DeckDisplayPile"]
+position = Vector2(114, 382)
 
 [node name="HandCardDisplayController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer")]
 script = ExtResource("27_mupmx")
@@ -327,10 +335,10 @@ shape = SubResource("RectangleShape2D_625ey")
 script = ExtResource("6_53o6h")
 
 [node name="MessageContent" type="Label" parent="."]
-offset_left = 29.0
-offset_top = 320.0
-offset_right = 163.0
-offset_bottom = 343.0
+offset_left = 256.0
+offset_top = 315.0
+offset_right = 390.0
+offset_bottom = 338.0
 text = "Message Content"
 
 [node name="InfoStuff" type="GridContainer" parent="."]

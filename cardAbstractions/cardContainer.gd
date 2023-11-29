@@ -8,12 +8,15 @@ class_name CardContainer
 @export var disposeContainer: CardContainer # Container to which things are disposed to on disposeCards call
 @export var addTriggerType: CardEffect.triggerType
 @export var modifiers: Array[Modifier]
+@export var overrideRevealed: bool = false
+@export var overrideRevealedState: bool = true
 
 var ownerActor: Actor
 var originMarker: Marker2D #TODO: THIS IS UGLY, need to fix this somehow
 
 signal cardAdded(card: CardData)
 signal cardRemoved(card: CardData)
+signal shuffled()
 
 func _ready():
 	var parent = get_parent()
@@ -47,6 +50,10 @@ func addCard(cardToAdd: CardData, addToTop: bool = false) -> bool:
 			cards.push_front(cardToAdd)
 		else:
 			cards.push_back(cardToAdd)
+		
+		if overrideRevealed:
+			cardToAdd.revealed = overrideRevealedState
+
 		cardToAdd.container = self
 		cardToAdd.triggerEffect(addTriggerType)
 		Events.cardAdded.emit(self, cardToAdd)
@@ -63,6 +70,7 @@ func checkEmpty() -> bool:
 
 func shuffle():
 	cards.shuffle()
+	shuffled.emit()
 
 func getTop() -> CardData:
 	return cards.front()
