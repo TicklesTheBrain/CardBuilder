@@ -76,12 +76,14 @@ func scuttleOneRow(rowCards, centerPos: Vector2, areaWidth: float):
 		startingPoint = centerPos - Vector2(totalCardWidth/2, 0) + Vector2(cardWidth/2,0)
 
 	var i = 0
-	var tween = get_tree().create_tween().set_parallel()
+	if activeTween == null or not activeTween.is_running(): #TODO: this can potential call problems, when starting tween on already finished ones
+		activeTween = get_tree().create_tween().set_parallel()
 
 	for card: CardDisplay in rowCards:
 		var cardPosition = startingPoint + Vector2(i*distanceBetweenCards,0)
 		i +=1
-		tween.tween_property(card,"position", cardPosition, cardMoveTime)
+		activeTween.tween_property(card,"position", cardPosition, cardMoveTime)
+		print(' tween started for dynamic position controller card ', card.name)
 
 
 func switchCardArea(newId: int):

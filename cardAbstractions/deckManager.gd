@@ -7,7 +7,7 @@ class_name DeckManager
 func populateContainerFromTemplate():
 	var newCards = DeckManager.makeCardArrayFromTemplate(templatePackage.cards, debug)
 	for card in newCards:
-		addCard(card)
+		addCard(card, true)
 
 func addNewTemplateCards(newCards: Array[EmptyCardData]):
 	templatePackage.cards.append_array(newCards)

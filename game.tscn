@@ -46,7 +46,7 @@ player = NodePath("Logic/Player")
 enemy = NodePath("Logic/Enemy")
 
 [node name="Background" type="Sprite2D" parent="."]
-z_index = -3
+z_index = -100
 scale = Vector2(0.801875, 0.695202)
 texture = ExtResource("15_2rvab")
 centered = false
@@ -124,18 +124,27 @@ countSubject = 1
 
 [node name="HandManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("12_q8pst")
+maxCards = null
+cards = null
 feedContainer = NodePath("../DiscardManager")
 disposeContainer = NodePath("../DiscardManager")
 addTriggerType = 4
+modifiers = null
 overrideRevealed = true
+overrideRevealedState = null
+addToTopWhenFeeding = null
 
 [node name="PlayAreaManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("bustCounter", "disposeContainer")]
 script = ExtResource("12_q8pst")
 maxCards = 6
+cards = null
 bustCounter = NodePath("ValueCounter")
 disposeContainer = NodePath("../DiscardManager")
 addTriggerType = 1
+modifiers = null
 overrideRevealed = true
+overrideRevealedState = null
+addToTopWhenFeeding = null
 
 [node name="ValueCounter" type="Node" parent="Logic/Player/PlayAreaManager" node_paths=PackedStringArray("label")]
 script = ExtResource("11_rgdhd")
@@ -151,6 +160,13 @@ countSubject = 3
 
 [node name="DiscardManager" type="Node" parent="Logic/Player"]
 script = ExtResource("12_q8pst")
+maxCards = null
+cards = null
+addTriggerType = null
+modifiers = null
+overrideRevealed = null
+overrideRevealedState = null
+addToTopWhenFeeding = null
 
 [node name="AmountCounter" type="Node" parent="Logic/Player/DiscardManager" node_paths=PackedStringArray("label")]
 script = ExtResource("11_rgdhd")
@@ -180,15 +196,24 @@ debugLabel = NodePath("../../../InfoStuff/theirHpCounter")
 [node name="EnemyHand" type="Node" parent="Logic/Enemy"]
 script = ExtResource("12_q8pst")
 maxCards = 0
+cards = null
+addTriggerType = null
+modifiers = null
 overrideRevealed = true
+overrideRevealedState = null
+addToTopWhenFeeding = null
 
 [node name="EnemyPlayArea" type="Node" parent="Logic/Enemy" node_paths=PackedStringArray("bustCounter", "disposeContainer")]
 script = ExtResource("12_q8pst")
 maxCards = 6
+cards = null
 bustCounter = NodePath("ValueCounter")
 disposeContainer = NodePath("../EnemyDiscard")
 addTriggerType = 1
+modifiers = null
 overrideRevealed = true
+overrideRevealedState = null
+addToTopWhenFeeding = null
 
 [node name="ValueCounter" type="Node" parent="Logic/Enemy/EnemyPlayArea" node_paths=PackedStringArray("label")]
 script = ExtResource("11_rgdhd")
@@ -204,6 +229,13 @@ countSubject = 3
 
 [node name="EnemyDiscard" type="Node" parent="Logic/Enemy"]
 script = ExtResource("12_q8pst")
+maxCards = null
+cards = null
+addTriggerType = null
+modifiers = null
+overrideRevealed = null
+overrideRevealedState = null
+addToTopWhenFeeding = null
 
 [node name="EnemyDeck" type="Node" parent="Logic/Enemy" node_paths=PackedStringArray("feedContainer")]
 script = ExtResource("3_8edax")
@@ -300,6 +332,7 @@ pileCenter = NodePath("DeckOrigin")
 rotationPlusMinus = 5.6
 logicalContainer = NodePath("../Logic/Player/DeckManager")
 resetRotation = false
+reverseZ = true
 
 [node name="DeckOrigin" type="Marker2D" parent="DeckDisplayPile"]
 position = Vector2(114, 382)

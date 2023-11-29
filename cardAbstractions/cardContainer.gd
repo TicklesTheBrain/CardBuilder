@@ -10,6 +10,8 @@ class_name CardContainer
 @export var modifiers: Array[Modifier]
 @export var overrideRevealed: bool = false
 @export var overrideRevealedState: bool = true
+@export var addToTopWhenFeeding: bool = true
+
 
 var ownerActor: Actor
 var originMarker: Marker2D #TODO: THIS IS UGLY, need to fix this somehow
@@ -97,7 +99,8 @@ func drawCard():
 			return
 		while (not checkFull() and not feedContainer.checkEmpty()):
 			var newCard = feedContainer.drawCard()
-			addCard(newCard)
+			addCard(newCard, addToTopWhenFeeding)
+	shuffle()
 	var cardToDraw = getTop()
 	removeCard(cardToDraw)
 	return cardToDraw

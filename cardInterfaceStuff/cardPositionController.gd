@@ -7,6 +7,9 @@ class_name CardPositionController
 @export var canCreateNewDisplays: bool  = true
 @export var resetRotation: bool = true
 @export var resetRotationTo: float = 0
+@export var reverseZ: bool = false
+
+var activeTween: Tween
 
 var cards: Array[CardDisplay] = []
 var setupDone: bool = false
@@ -45,9 +48,13 @@ func addCardDisplay(newCard: CardDisplay):
 	
 	newCard.positionController = self
 	cards.push_back(newCard)
-	newCard.z_index = cards.size()
+	if not reverseZ:
+		newCard.z_index = cards.size()
+	else:
+		newCard.z_index = -cards.size()
 	newCard.previousZOrder = cards.size() #TODO: this needs its own dedicated method, smells
 	print(name, ' add card display triggered, new z_index ', newCard.z_index)
+	stopPreviousTween()
 	resetCardRotation()
 	scuttleCards()
 
@@ -56,6 +63,7 @@ func removeCardDisplay(cardToRemove: CardDisplay):
 		return
 	
 	cards.erase(cardToRemove)
+	stopPreviousTween()
 	scuttleCards()
 
 func setupNewLogicalContainer(newContainer = null):
@@ -79,6 +87,7 @@ func scuttleCards():
 
 func _onCardDragReleased(cardDisplay: CardDisplay):
 	if cards.has(cardDisplay):
+		stopPreviousTween()
 		resetCardRotation()
 		scuttleCards()
 
@@ -89,4 +98,12 @@ func resetCardRotation():
 	if resetRotation:
 		for card in cards:
 			card.rotation_degrees = resetRotationTo
+
+		#print(name,' card rotation reset', cards.map(func(c): return c.rotation_degrees))
+
+func stopPreviousTween():
+	print(name, "stop previous tween called")
+	if activeTween != null and activeTween.is_running():
+		activeTween.kill()
+		activeTween = null
 

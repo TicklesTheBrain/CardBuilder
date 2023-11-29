@@ -33,6 +33,8 @@ enum BackTypes {RED, BLUE}
 
 @export var selectedColor: Color
 
+var tweens = {}
+
 var prevAttack: int
 var prevValue: String
 var prevDefence: int
