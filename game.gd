@@ -218,6 +218,7 @@ func roundLoop():
 
 	enemy.playArea.disposeAll()
 	player.playArea.disposeAll()
+	player.deck.shuffle()
 
 	okButton.disabled = false
 

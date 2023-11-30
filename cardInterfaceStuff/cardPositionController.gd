@@ -9,7 +9,8 @@ class_name CardPositionController
 @export var resetRotationTo: float = 0
 @export var reverseZ: bool = false
 
-var activeTween: Tween
+var interruptableTweens = {} #Tweens that can be interrupted if new interruptable or mandatory is made
+var mandatoryTweens = {} #Tweens that cannot be interrupted unless cardDisplay is removed from controller
 
 var cards: Array[CardDisplay] = []
 var setupDone: bool = false
@@ -29,8 +30,7 @@ func addCardData(cardData: CardData):
 	
 	var cardDisplay = CardDisplayLord.getCardDisplay(cardData)
 	addCardDisplay(cardDisplay)
-	if canvasLayer:
-		#print('triggered add child')
+	if canvasLayer:		
 		cardDisplay.get_parent().remove_child(cardDisplay)
 		canvasLayer.add_child(cardDisplay)
 
@@ -48,14 +48,7 @@ func addCardDisplay(newCard: CardDisplay):
 	
 	newCard.positionController = self
 	cards.push_back(newCard)
-	if not reverseZ:
-		newCard.z_index = cards.size()
-	else:
-		newCard.z_index = -cards.size()
-	newCard.previousZOrder = cards.size() #TODO: this needs its own dedicated method, smells
-	print(name, ' add card display triggered, new z_index ', newCard.z_index)
-	stopPreviousTween()
-	resetCardRotation()
+	updateCardZIndex()
 	scuttleCards()
 
 func removeCardDisplay(cardToRemove: CardDisplay):
@@ -63,7 +56,8 @@ func removeCardDisplay(cardToRemove: CardDisplay):
 		return
 	
 	cards.erase(cardToRemove)
-	stopPreviousTween()
+	removeInterruptableTween(cardToRemove)
+	removeMandatoryTween(cardToRemove)
 	scuttleCards()
 
 func setupNewLogicalContainer(newContainer = null):
@@ -76,20 +70,24 @@ func setupNewLogicalContainer(newContainer = null):
 
 	logicalContainer.cardAdded.connect(addCardData)
 	logicalContainer.cardRemoved.connect(removeCardData)
+	logicalContainer.shuffled.connect(showShuffle)
 
 	setupContainerSpecific()
 
 	setupDone = true	
 
 func scuttleCards():
+	resetCardRotation()
+	#stopPreviousTween()
+	scuttleCardsSpecific()
+
+func scuttleCardsSpecific():
 	print("generic scuttle cards for position controller not overrriden")
 	pass
 
 func _onCardDragReleased(cardDisplay: CardDisplay):
 	if cards.has(cardDisplay):
-		stopPreviousTween()
-		resetCardRotation()
-		scuttleCards()
+			scuttleCards()
 
 func setupContainerSpecific():
 	print("setup container specific not overriden, might be alright")
@@ -99,11 +97,50 @@ func resetCardRotation():
 		for card in cards:
 			card.rotation_degrees = resetRotationTo
 
-		#print(name,' card rotation reset', cards.map(func(c): return c.rotation_degrees))
+func showShuffle():
+	updateCardZIndex()
+	showShuffleSpecific()
 
-func stopPreviousTween():
-	print(name, "stop previous tween called")
-	if activeTween != null and activeTween.is_running():
-		activeTween.kill()
-		activeTween = null
+func showShuffleSpecific():
+	pass # Override by inheriting if needed
+
+func updateCardZIndex():
+	for cardDisplay in cards:
+		var cardPosition = logicalContainer.getCardPosition(cardDisplay.cardData)
+		if reverseZ:
+			cardDisplay.setRegularZIndex(-cardPosition)
+		else:
+			cardDisplay.setRegularZIndex(cardPosition)
+
+func addMandatoryTween(card: CardDisplay, tween: Tween):
+	removeInterruptableTween(card)
+	mandatoryTweens[card] = tween
+	tween.finished.connect(removeMandatoryTween.bind(card))
+
+func removeMandatoryTween(card: CardDisplay):
+	if not mandatoryTweens.has(card):
+		return
+	mandatoryTweens[card].kill()
+	mandatoryTweens.erase(card)
+
+func addInterruptableTween(card: CardDisplay, tween: Tween):
+	if mandatoryTweens.has(card):
+		tween.kill()
+	if interruptableTweens.has(card):
+		interruptableTweens[card].kill()
+		interruptableTweens.erase(card)
+
+	interruptableTweens[card] = tween
+	tween.finished.connect(removeInterruptableTween.bind(card))
+
+func removeInterruptableTween(card: CardDisplay):
+	if not interruptableTweens.has(card):
+		return
+	interruptableTweens[card].kill()
+	interruptableTweens.erase(card)
+
+
+
+
+
 

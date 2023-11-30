@@ -100,7 +100,7 @@ func drawCard():
 		while (not checkFull() and not feedContainer.checkEmpty()):
 			var newCard = feedContainer.drawCard()
 			addCard(newCard, addToTopWhenFeeding)
-	shuffle()
+		shuffle()
 	var cardToDraw = getTop()
 	removeCard(cardToDraw)
 	return cardToDraw
@@ -142,3 +142,6 @@ func getModifiedBustValue(bustValue: int):
 			bustValue = mod.calculate(self, bustValue)
 
 	return bustValue
+
+func getCardPosition(card: CardData):
+	return cards.find(card)

@@ -41,6 +41,7 @@ var prevDefence: int
 var prevCost: int
 var prevRevealed: bool
 
+var broughtToFront: bool
 var previousZOrder: int
 var graftToShow: CardData
 var cardData: CardData
@@ -190,12 +191,11 @@ func hideGraft():
 func showDetailed():
 	if cardData.revealed:
 		detailedInfoRoot.visible = true
-	previousZOrder = z_index
-	z_index = 100
+	bringToFront()
 
 func hideDetailed():
 	detailedInfoRoot.visible = false
-	z_index = previousZOrder
+	bringBackFromFront()
 
 func updateTextField(textFieldToFormat: RichTextLabel, newText: String, prefix: String = ""):
 	if newText != "":
@@ -204,3 +204,21 @@ func updateTextField(textFieldToFormat: RichTextLabel, newText: String, prefix: 
 	else:
 		textFieldToFormat.text = ""
 		textFieldToFormat.visible = false
+
+func bringToFront():
+	broughtToFront = true
+	previousZOrder = z_index
+	z_index = 100
+
+func bringBackFromFront():
+	broughtToFront = false
+	z_index = previousZOrder
+
+func setRegularZIndex(newIndex: int):
+	if broughtToFront:
+		previousZOrder = newIndex
+	else:
+		z_index = newIndex
+
+
+	
