@@ -100,8 +100,9 @@ script = ExtResource("2_1vbvx")
 overrideRevealed = true
 addToTopWhenFeeding = false
 
-[node name="PocketDynamicPosition" type="Node2D" parent="." node_paths=PackedStringArray("logicalContainer", "canvasLayer")]
+[node name="PocketDynamicPosition" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer", "canvasLayer")]
 script = ExtResource("2_sxrrm")
+cardAreas = [NodePath("ShapeSmall"), NodePath("ShapeMid"), NodePath("ShapeBig"), NodePath("ShapeFull")]
 logicalContainer = NodePath("../PocketContainer")
 canvasLayer = NodePath("..")
 

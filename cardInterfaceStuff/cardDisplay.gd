@@ -6,6 +6,20 @@ enum BackTypes {RED, BLUE}
 @export var cardShape: Area2D
 @export var cardImageRect: TextureRect
 
+@export_group("Shadow stuff")
+@export var maxShadowOffset: Vector2
+@export var minShadowOffset: Vector2 = Vector2(0,0)
+@export var shadowOffsetGrowTime: float
+@export var shadowOffsetShrinkTime: float
+@export var offsetNode: Node2D
+var prevPosition: Vector2 
+var shadowTimer: float = 0
+var shadowGrow: bool = false:
+	set(new):
+		if new != shadowGrow:
+			shadowTimer = 0
+		shadowGrow = new
+
 @export_group("Card Back Stuff")
 @export var backsRed: Array[Texture2D]
 @export var backsBlue: Array[Texture2D]
@@ -149,10 +163,20 @@ func updateAllTextFields(dataToShow: CardData):
 	updateTextField(onDrawTextLabel, effectDict.onDraw, "[b]Draw:[/b] ")
 	updateTextField(startMatchTextLabel, effectDict.startMatch, "[b]Start:[/b] ")
 
-func _process(_delta):
-
+func _process(delta):
+	
+	shadowTimer += delta
 	if dragged:
 		position = get_viewport().get_mouse_position() - mouseOffset
+		shadowGrow = true
+	else:
+		shadowGrow = false
+
+	if shadowGrow:
+		offsetNode.position = clamp(lerp(minShadowOffset, maxShadowOffset, shadowTimer / shadowOffsetGrowTime), minShadowOffset, maxShadowOffset)
+	else:
+		offsetNode.position = clamp(lerp(offsetNode.position, minShadowOffset, shadowTimer / shadowOffsetShrinkTime), minShadowOffset, maxShadowOffset)
+
 
 func onClick():
 	InputLord.cardClicked.emit(self)

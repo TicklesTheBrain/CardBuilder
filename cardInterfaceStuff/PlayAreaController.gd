@@ -1,7 +1,5 @@
 extends Area2D
 
-@export var positionController: CardPositionController
-@export var shape: CollisionShape2D
 var cardsInPlayArea: Array[CardDisplay] = []
 
 func _ready():

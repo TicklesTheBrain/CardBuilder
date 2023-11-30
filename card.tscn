@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d1lj52mw7mxay"]
+[gd_scene load_steps=16 format=3 uid="uid://d1lj52mw7mxay"]
 
 [ext_resource type="Script" path="res://cardInterfaceStuff/cardDisplay.gd" id="1_lql06"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/cardDisplayBody.gd" id="2_b8cjq"]
@@ -12,6 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://bla3ernwtj6x" path="res://assets/cardBacks/BlueC.png" id="8_uifly"]
 [ext_resource type="Texture2D" uid="uid://8xme0g568yvc" path="res://assets/cardBacks/BlueD.png" id="9_yf1aw"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ff4vj"]
+bg_color = Color(0, 0, 0, 0.482353)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1040s"]
 bg_color = Color(0.992157, 0.992157, 0.992157, 0.803922)
 
@@ -20,10 +27,14 @@ bg_color = Color(0.992157, 0.992157, 0.992157, 0.803922)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwt7q"]
 size = Vector2(141, 192)
 
-[node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "cardImageRect", "detailedInfoRoot", "valueLabel", "costLabel", "conditionalTextLabel", "valuesModifiersTextLabel", "costModifiersTextLabel", "attackModifiersTextLabel", "defenceModifiersTextLabel", "onPlayTextLabel", "onLoseTextLabel", "onWinTextLabel", "onBustTextLabel", "endRoundTextLabel", "onDrawTextLabel", "startMatchTextLabel", "attackLabel", "defenceLabel")]
+[node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "cardImageRect", "offsetNode", "detailedInfoRoot", "valueLabel", "costLabel", "conditionalTextLabel", "valuesModifiersTextLabel", "costModifiersTextLabel", "attackModifiersTextLabel", "defenceModifiersTextLabel", "onPlayTextLabel", "onLoseTextLabel", "onWinTextLabel", "onBustTextLabel", "endRoundTextLabel", "onDrawTextLabel", "startMatchTextLabel", "attackLabel", "defenceLabel")]
 script = ExtResource("1_lql06")
 cardShape = NodePath("CardShape")
 cardImageRect = NodePath("CardImageRect")
+maxShadowOffset = Vector2(20, 20)
+shadowOffsetGrowTime = 0.3
+shadowOffsetShrinkTime = 1.0
+offsetNode = NodePath("ShadowOffset")
 backsRed = Array[Texture2D]([ExtResource("2_fj55x"), ExtResource("3_trcic"), ExtResource("4_m25as"), ExtResource("5_1je0t")])
 backsBlue = Array[Texture2D]([ExtResource("6_pfduv"), ExtResource("7_da838"), ExtResource("8_uifly"), ExtResource("9_yf1aw")])
 detailedInfoRoot = NodePath("CardImageRect/Detailed Info")
@@ -44,6 +55,22 @@ startMatchTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text
 attackLabel = NodePath("CardImageRect/Detailed Info/Info/BottomMargin/Bottom Info/MarginContainer2/Attack")
 defenceLabel = NodePath("CardImageRect/Detailed Info/Info/BottomMargin/Bottom Info/MarginContainer/Defence")
 selectedColor = Color(0.231373, 0.290196, 0.839216, 1)
+
+[node name="ShadowOffset" type="Node2D" parent="."]
+
+[node name="Shadow" type="Panel" parent="ShadowOffset"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -96.0
+offset_right = 69.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ff4vj")
 
 [node name="CardImageRect" type="TextureRect" parent="."]
 anchors_preset = 8
