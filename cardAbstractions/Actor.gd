@@ -79,6 +79,8 @@ func getResourceFromEnum(enumOfResource: GameResources) -> GameResource:
 			return multiplierDefence
 		GameResources.HP:
 			return hp
+		GameResources.BUST_VALUE:
+			return bustValue
 	return null
 
 func resetResources():

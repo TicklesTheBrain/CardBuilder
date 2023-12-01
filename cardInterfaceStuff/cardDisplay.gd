@@ -60,7 +60,7 @@ var prevCost: int
 var prevRevealed: bool
 
 var broughtToFront: bool
-var previousZOrder: int
+var regularZOrder: int = 0
 var graftToShow: CardData
 var cardData: CardData
 var dragged: bool
@@ -248,18 +248,20 @@ func updateTextField(textFieldToFormat: RichTextLabel, newText: String, prefix: 
 
 func bringToFront():
 	broughtToFront = true
-	previousZOrder = z_index
-	z_index = 100
+	updateZ()
 
 func bringBackFromFront():
 	broughtToFront = false
-	z_index = previousZOrder
+	updateZ()
 
 func setRegularZIndex(newIndex: int):
-	if broughtToFront:
-		previousZOrder = newIndex
-	else:
-		z_index = newIndex
+	regularZOrder = newIndex
+	updateZ()
 
+func updateZ():
+	if broughtToFront:
+		z_index = 100
+	else:
+		z_index = regularZOrder
 
 	
