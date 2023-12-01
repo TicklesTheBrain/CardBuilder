@@ -34,7 +34,7 @@ func getTextSpecific():
 
 	var whatState = "is less" if disabledOnMatchOrExceed else "is more"
 	var text = "If {what} {where} {whatState} than {number},"
-	return text.format({"what": what, "where": where, "whatStat": whatState, "number": amountToMatchOrExceed})
+	return text.format({"what": what, "where": where, "whatState": whatState, "number": amountToMatchOrExceed})
 
 func check(ctxt: GameStateContext):
 

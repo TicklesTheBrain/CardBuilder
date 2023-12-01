@@ -4,41 +4,32 @@ class_name CardGraftDisplay
 @export var increaseColor: Color
 @export var decreaseColor: Color
 
-func updateCardDisplay(_dataToShow: CardData = cardData):
+func updateCardDetails(dataToShow: CardData = cardData):
 
-	var baseValue = cardData.value.getBaseValue()
-	if baseValue != 0:
-		valueLabel.text = "{symbol}{amount}".format({"symbol": "+" if baseValue > 0 else "-", "amount": baseValue})
-
-	var baseCost = cardData.cost.getBaseValue()
-	if baseCost != 0:
-		var increaseCost = baseCost > 0
-		costLabel.text = "{symbol}{amount}".format({"symbol": "+" if increaseCost else "-", "amount": baseCost})
-		if increaseCost:
-			costLabel.set("theme_override_colors/font_color", increaseColor)
-		else:
-			costLabel.set("theme_override_colors/font_color", decreaseColor)
+	updateParamField(valueLabel, dataToShow.value.getBaseValue(), "Value: ")
+	updateParamField(costLabel, dataToShow.cost.getBaseValue(), "Cost: ")
+	updateParamField(attackLabel, dataToShow.attack.getBaseValue(), "Attack: ")
+	updateParamField(defenceLabel, dataToShow.defence.getBaseValue(), "Defence: ")	
 	
-	updateAllTextFields(_dataToShow)
-	
-	var attackValue = cardData.attack.getBaseValue()
-	if attackValue != 0:
-		var increaseAttack = attackValue > 0
-		attackLabel.text = "{symbol}{amount}".format({"symbol": "+" if increaseAttack else "-", "amount": attackValue})
-		if increaseAttack:
-			attackLabel.set("theme_override_colors/font_color", increaseColor)
-		else:
-			attackLabel.set("theme_override_colors/font_color", decreaseColor)
-	else:
-		attackLabel.text = ""
+	updateAllTextFields(dataToShow)	
 
-	var defenceValue = cardData.defence.getBaseValue()
-	if defenceValue != 0:
-		var increaseDefence = defenceValue > 0
-		defenceLabel.text = "{symbol}{amount}".format({"symbol": "+" if increaseDefence else "-", "amount": defenceValue})
-		if increaseDefence:
-			defenceLabel.set("theme_override_colors/font_color", increaseColor)
+func updateCardImage(_data: CardData = cardData):
+	pass #JUST DO NOTHING HERE
+
+func _ready():
+	super()
+	selectionNode = detailedInfoRoot
+
+func updateParamField(label: Label, value: int, stringPrefix: String):
+	if value != 0:
+		label.visible = true
+		var increase = value > 0
+		label.text = "{prefix}{symbol}{amount}".format({"symbol": "+" if increase else "", "amount": value, "prefix": stringPrefix})
+		if increase:
+			label.set("theme_override_colors/font_color", increaseColor)
 		else:
-			defenceLabel.set("theme_override_colors/font_color", decreaseColor)
+			label.set("theme_override_colors/font_color", decreaseColor)
 	else:
-		defenceLabel.text = ""
+		label.text = ""
+		label.visible = false
+

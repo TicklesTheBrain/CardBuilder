@@ -73,7 +73,6 @@ func triggerSpecific(ctxt: GameStateContext):
 		await deckPocketClosed
 
 
-
 func processPocketClosed(cont: CardContainer):
 	if cont == grafOptionsPocket:
 		deckPocketClosed.emit()
@@ -86,7 +85,12 @@ func receiveSelection(cards: Array[CardData]):
 
 func askToShowGraft(card: CardDisplay, addExitDelegate: Callable,  graftToShow: CardData):
 	card.showGraft(graftToShow)
-	addExitDelegate.call(card, card.hideGraft)
+	card.showDetailed()
+	addExitDelegate.call(card, closeShowGraft.bind(card))
+
+func closeShowGraft(card: CardDisplay):
+	card.hideGraft()
+	card.hideDetailed()
 
 func receiveCardOptionSelection(cards: Array[CardData]):
 	selectedCardOption = cards[0]

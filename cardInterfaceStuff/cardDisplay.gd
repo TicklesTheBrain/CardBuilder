@@ -52,6 +52,7 @@ var shadowGrow: bool = false:
 
 var tweens = {}
 
+var selectionNode
 var prevAttack: int
 var prevValue: String
 var prevDefence: int
@@ -70,14 +71,16 @@ var positionController: CardPositionController
 var selected = false:
 	set(value):
 		if value == true:
-			cardImageRect.self_modulate = selectedColor
+			selectionNode.self_modulate = selectedColor
 		else:
-			cardImageRect.self_modulate = Color.WHITE
+			selectionNode.self_modulate = Color.WHITE
 		selected = value
 
 func _ready():
 	Events.gameStateChange.connect(maybeUpdateNeeded)
 	InputLord.cardSelectionComplete.connect(unselect)
+	if cardImageRect != null:
+		selectionNode = cardImageRect
 
 func getCardBack(type: BackTypes) -> Texture2D:
 	match type:
@@ -87,7 +90,7 @@ func getCardBack(type: BackTypes) -> Texture2D:
 			return backsBlue.pick_random()
 	return null
 
-func updateCardImage(data: CardData):
+func updateCardImage(data: CardData = cardData):
 	if data.revealed:
 		await CardImageMaker.getCardImage(data, receiveCardImage)
 	else:
@@ -211,10 +214,14 @@ func select():
 
 func showGraft(graft: CardData):
 	graftToShow = cardData.duplicateSelf().addCardGraft(graft)
+	updateCardDetails()
 	print('new graft', graftToShow)
+	updateCardImage(graftToShow)
 
 func hideGraft():
 	graftToShow = null
+	updateCardDetails()
+	updateCardImage()
 
 func showDetailed():
 	shouldShowDetailed = true

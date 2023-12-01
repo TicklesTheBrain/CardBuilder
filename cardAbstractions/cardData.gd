@@ -141,6 +141,7 @@ func duplicateSelf() -> CardData:
 	newCard.value = value.duplicate(true)
 	newCard.type = type.duplicate(true)
 	newCard.graft = graft
+	newCard.revealed = revealed
 	newCard.cost = cost.duplicate(true)
 	newCard.attack = attack.duplicate(true)
 	newCard.defence = defence.duplicate(true)
@@ -163,7 +164,7 @@ func duplicateSelf() -> CardData:
 
 func addCardGraft(newGraft: CardData):
 	value.mergeCardParam(newGraft.value)
-	type = newGraft.type.duplicate()
+	#type = newGraft.type.duplicate()
 	cost.mergeCardParam(newGraft.cost)
 	attack.mergeCardParam(newGraft.attack)
 	defence.mergeCardParam(newGraft.defence)
