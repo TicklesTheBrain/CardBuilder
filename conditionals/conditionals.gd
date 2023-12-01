@@ -2,7 +2,6 @@ extends Resource
 class_name Conditional
 
 @export var staticText: String
-@export var containerToCheck: Actor.ContainerPurposes
 @export var conditionalName: String
 @export var subjectActor: GameStateContext.ActorType
 
@@ -20,7 +19,7 @@ func getTextSpecific():
     return "conditional text not overriden"
 
 func mergeConditional(newConditional: Conditional):
-    assert(containerToCheck == newConditional.containerToCheck)
+   
     mergeConditionalSpecific(newConditional)
 
 func mergeConditionalSpecific(_newConditiona: Conditional):

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=172 format=3 uid="uid://dc1pbwqrsnd4m"]
+[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=171 format=3 uid="uid://dc1pbwqrsnd4m"]
 
 [ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="1_5jvcn"]
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="2_j5dh7"]
@@ -8,15 +8,14 @@
 [ext_resource type="Script" path="res://cardEffects/ceContainerModifier.gd" id="5_sj401"]
 [ext_resource type="Script" path="res://cardAbstractions/tcRules.gd" id="6_8v3to"]
 [ext_resource type="Script" path="res://cardEffects/ceDraw.gd" id="7_uut4y"]
-[ext_resource type="Script" path="res://conditionals/conditionalValue.gd" id="8_bx840"]
 [ext_resource type="Script" path="res://cardEffects/ceDiscard.gd" id="9_5yqjs"]
+[ext_resource type="Script" path="res://conditionals/conditionalOnContainer.gd" id="9_nb25s"]
 [ext_resource type="Script" path="res://cardEffects/ceResourceModify.gd" id="10_n13vk"]
 [ext_resource type="Script" path="res://modifiers/paramModifierChooseBest.gd" id="11_h5yit"]
 [ext_resource type="Script" path="res://cardEffects/ceChooseFrom.gd" id="12_ym1ng"]
 [ext_resource type="Script" path="res://modifiers/paramModifierCutoff.gd" id="14_gdku7"]
 [ext_resource type="Script" path="res://modifiers/paramModifierFlat.gd" id="15_ywb4c"]
 [ext_resource type="Script" path="res://cardEffects/ceSetValueToPrevious.gd" id="16_7u532"]
-[ext_resource type="Script" path="res://conditionals/conditionalAmount.gd" id="17_703uu"]
 [ext_resource type="Script" path="res://cardAbstractions/cardTemplatePackage.gd" id="19_47fy2"]
 [ext_resource type="Script" path="res://cardEffects/ceDiscardSelf.gd" id="19_bwy3c"]
 [ext_resource type="Script" path="res://cardEffects/ceGraft.gd" id="21_c8x8g"]
@@ -73,7 +72,7 @@ capAtZero = false
 resource_name = "SetToHigh"
 script = ExtResource("2_j5dh7")
 amount = 2
-debug = true
+debug = false
 cardName = ""
 revealed = false
 cardBack = 0
@@ -163,7 +162,7 @@ capAtZero = false
 resource_name = "Next Costs 1 less"
 script = ExtResource("2_j5dh7")
 amount = 2
-debug = true
+debug = false
 cardName = ""
 revealed = false
 cardBack = 0
@@ -235,7 +234,7 @@ capAtZero = false
 resource_name = "Draw 1"
 script = ExtResource("2_j5dh7")
 amount = 2
-debug = true
+debug = false
 cardName = ""
 revealed = false
 cardBack = 0
@@ -278,12 +277,14 @@ modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
 capAtZero = false
 
-[sub_resource type="Resource" id="Resource_kcane"]
-script = ExtResource("8_bx840")
-valueToMatchOrExceed = 10
+[sub_resource type="Resource" id="Resource_msci8"]
+script = ExtResource("9_nb25s")
+amountToMatchOrExceed = 10
 disabledOnMatchOrExceed = true
-staticText = ""
 containerToCheck = 2
+cardTypeSubject = 0
+checkType = 0
+staticText = ""
 conditionalName = ""
 subjectActor = 0
 
@@ -293,8 +294,8 @@ source = 0
 destination = 1
 amountOfCardsToDraw = 1
 effectName = ""
-staticText = "If played value 10 or less, draw 1."
-conditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResource("Resource_kcane")])
+staticText = "If played less than 10, draw 1."
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResource("Resource_msci8")])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
@@ -306,7 +307,7 @@ type = 0
 
 [sub_resource type="Resource" id="Resource_2jh3x"]
 script = ExtResource("1_5jvcn")
-baseValue = 6
+baseValue = 5
 type = 1
 modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
@@ -609,7 +610,7 @@ capAtZero = false
 resource_name = "choose 2 from deck"
 script = ExtResource("2_j5dh7")
 amount = 10
-debug = true
+debug = false
 cardName = ""
 revealed = false
 cardBack = 0
@@ -1196,12 +1197,14 @@ modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
 capAtZero = false
 
-[sub_resource type="Resource" id="Resource_kt07k"]
-script = ExtResource("8_bx840")
-valueToMatchOrExceed = 10
+[sub_resource type="Resource" id="Resource_a6akj"]
+script = ExtResource("9_nb25s")
+amountToMatchOrExceed = 10
 disabledOnMatchOrExceed = false
-staticText = "Can only play if already played at least 10 value"
 containerToCheck = 2
+cardTypeSubject = 0
+checkType = 0
+staticText = ""
 conditionalName = ""
 subjectActor = 0
 
@@ -1221,7 +1224,7 @@ capAtZero = false
 resource_name = "OnlyPlayOn10+"
 script = ExtResource("2_j5dh7")
 amount = 2
-debug = false
+debug = true
 cardName = ""
 revealed = false
 cardBack = 0
@@ -1232,7 +1235,7 @@ cost = SubResource("Resource_gavr1")
 attack = SubResource("Resource_433q5")
 defence = SubResource("Resource_phctl")
 onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
-playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResource("Resource_kt07k")])
+playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResource("Resource_a6akj")])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -1264,12 +1267,14 @@ modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
 capAtZero = false
 
-[sub_resource type="Resource" id="Resource_t70pn"]
-script = ExtResource("17_703uu")
+[sub_resource type="Resource" id="Resource_uu6b4"]
+script = ExtResource("9_nb25s")
 amountToMatchOrExceed = 2
 disabledOnMatchOrExceed = true
-staticText = "If less than 2 cards in hand"
 containerToCheck = 1
+cardTypeSubject = 0
+checkType = 1
+staticText = "If only one card left in hand"
 conditionalName = ""
 subjectActor = 0
 
@@ -1292,7 +1297,7 @@ destination = 1
 amountOfCardsToDraw = 2
 effectName = ""
 staticText = ""
-conditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResource("Resource_t70pn")])
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResource("Resource_uu6b4")])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_nmgbw")])
 includeFollowUpText = true
 subjectActor = 0
@@ -1314,7 +1319,7 @@ capAtZero = false
 resource_name = "If<2,draw+discard"
 script = ExtResource("2_j5dh7")
 amount = 2
-debug = false
+debug = true
 cardName = ""
 revealed = false
 cardBack = 0
@@ -1546,7 +1551,7 @@ capAtZero = false
 resource_name = "Graft1"
 script = ExtResource("2_j5dh7")
 amount = 2
-debug = true
+debug = false
 cardName = ""
 revealed = false
 cardBack = 0
