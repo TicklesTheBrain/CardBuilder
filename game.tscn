@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dsfqrofqt0xs4" path="res://card_graft.tscn" id="3_ieoty"]
 [ext_resource type="PackedScene" uid="uid://d1lj52mw7mxay" path="res://card.tscn" id="3_kxrxo"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/CardDisplaySink.gd" id="3_lpmun"]
-[ext_resource type="Script" path="res://Actor.gd" id="4_8gay1"]
+[ext_resource type="Script" path="res://cardAbstractions/Actor.gd" id="4_8gay1"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/PlayAreaController.gd" id="5_fctuw"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/drawnCollisionShape.gd" id="6_53o6h"]
 [ext_resource type="Resource" uid="uid://b2ru52u3aw843" path="res://content/debug_enemyDeck.tres" id="9_t18bm"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=72 format=3 uid="uid://c4t3gpgrn0fx3"]
 
-[ext_resource type="Script" path="res://cardImageTemplate.gd" id="1_0ivgc"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/cardImageTemplate.gd" id="1_4t387"]
 [ext_resource type="Texture2D" uid="uid://yjm7ihicna6h" path="res://assets/cardFrontBackground.png" id="1_jh6uf"]
 [ext_resource type="Texture2D" uid="uid://gi762hjifjgk" path="res://assets/specialCardFaces/BatKing.png" id="2_10xu8"]
 [ext_resource type="Texture2D" uid="uid://cq124k65g070u" path="res://assets/cardParamSymbols/manaDrop.png" id="2_rlkwh"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://chj8mjmxg322o" path="res://assets/cardTypeSymbols/symbolT.png" id="6_dv4bh"]
 [ext_resource type="Texture2D" uid="uid://bru5bfyu7p22" path="res://assets/cardParamSymbols/shield.png" id="8_om3ep"]
 [ext_resource type="Texture2D" uid="uid://bhetmn6uguvvr" path="res://assets/cardParamSymbols/sword.png" id="9_jbu6v"]
-[ext_resource type="Script" path="res://SelfDoublingSprite.gd" id="10_ws2it"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/SelfDoublingSprite.gd" id="10_ws2it"]
 [ext_resource type="Texture2D" uid="uid://bgtve4d23yr6w" path="res://assets/cardTypeSymbols/symbolS.png" id="11_amyvl"]
 [ext_resource type="Texture2D" uid="uid://ccghpll8o6r4g" path="res://assets/cardTypeSymbols/symbolD.png" id="13_m2d73"]
 [ext_resource type="Texture2D" uid="uid://b2t5os3i8osfs" path="res://assets/cardTypeSymbols/symbolQ.png" id="14_6qolb"]
@@ -227,7 +227,7 @@ transparent_bg = true
 handle_input_locally = false
 size = Vector2i(500, 700)
 render_target_update_mode = 4
-script = ExtResource("1_0ivgc")
+script = ExtResource("1_4t387")
 infoSymbolsColumn = NodePath("DebugNestingLevel/InfoSymbolColumn")
 infoColumnLetter = NodePath("DebugNestingLevel/InfoSymbolColumn/InfoColumnLetter")
 infoColumnSymbol = NodePath("DebugNestingLevel/InfoSymbolColumn/InfoColumnSymbol")

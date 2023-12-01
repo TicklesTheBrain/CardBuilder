@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://o20e5thwdy3j"]
 
-[ext_resource type="Script" path="res://pocketDisplay.gd" id="1_q2qv6"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/pocketDisplay.gd" id="1_q2qv6"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="2_1vbvx"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="2_sxrrm"]
 
