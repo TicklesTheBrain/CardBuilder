@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=21 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://cardInterfaceStuff/PlayAreaController.gd" id="5_fctuw"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/drawnCollisionShape.gd" id="6_53o6h"]
 [ext_resource type="Resource" uid="uid://b2ru52u3aw843" path="res://content/debug_enemyDeck.tres" id="9_t18bm"]
-[ext_resource type="Script" path="res://cardAbstractions/containerCounter.gd" id="11_rgdhd"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="12_q8pst"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/pilePositionController.gd" id="14_27y8n"]
 [ext_resource type="Texture2D" uid="uid://cj75g71nh52om" path="res://assets/table_background.png" id="15_2rvab"]
@@ -53,60 +52,68 @@ centered = false
 
 [node name="Logic" type="Node" parent="."]
 
-[node name="Player" type="Node" parent="Logic" node_paths=PackedStringArray("energy", "cardsPerTurn", "bonusAttack", "bonusDefence", "multiplierAttack", "multiplierDefence", "hp", "hand", "discard", "playArea", "deck")]
+[node name="Player" type="Node" parent="Logic" node_paths=PackedStringArray("energy", "cardsPerTurn", "bonusAttack", "bonusDefence", "multiplierAttack", "multiplierDefence", "hp", "bustValue", "hand", "discard", "playArea", "deck")]
 script = ExtResource("4_8gay1")
-energy = NodePath("Energy")
-cardsPerTurn = NodePath("StartTurnCardDraw")
-bonusAttack = NodePath("BonusAttack")
-bonusDefence = NodePath("BonusDefence")
-multiplierAttack = NodePath("MultiplierAttack")
-multiplierDefence = NodePath("MultiplierDefence")
-hp = NodePath("hp")
+energy = NodePath("Resources/Energy")
+cardsPerTurn = NodePath("Resources/StartTurnCardDraw")
+bonusAttack = NodePath("Resources/BonusAttack")
+bonusDefence = NodePath("Resources/BonusDefence")
+multiplierAttack = NodePath("Resources/MultiplierAttack")
+multiplierDefence = NodePath("Resources/MultiplierDefence")
+hp = NodePath("Resources/hp")
+bustValue = NodePath("Resources/BustValue")
 hand = NodePath("HandManager")
 discard = NodePath("DiscardManager")
 playArea = NodePath("PlayAreaManager")
 deck = NodePath("DeckManager")
 
-[node name="hp" type="Node" parent="Logic/Player" node_paths=PackedStringArray("debugLabel")]
+[node name="Resources" type="Node" parent="Logic/Player"]
+
+[node name="hp" type="Node" parent="Logic/Player/Resources" node_paths=PackedStringArray("debugLabel")]
 script = ExtResource("3_c142g")
 resourceName = "hp"
 baseline = 25
-debugLabel = NodePath("../../../InfoStuff/myhpCounter")
+debugLabel = NodePath("../../../../InfoStuff/myhpCounter")
 
-[node name="BonusAttack" type="Node" parent="Logic/Player"]
+[node name="BonusAttack" type="Node" parent="Logic/Player/Resources"]
 script = ExtResource("3_c142g")
 resourceName = "BonusAttack"
 capAtZero = true
 
-[node name="MultiplierAttack" type="Node" parent="Logic/Player"]
+[node name="MultiplierAttack" type="Node" parent="Logic/Player/Resources"]
 script = ExtResource("3_c142g")
 resourceName = "MultiplierAttack"
 baseline = 1
 capAtZero = true
 
-[node name="MultiplierDefence" type="Node" parent="Logic/Player"]
+[node name="MultiplierDefence" type="Node" parent="Logic/Player/Resources"]
 script = ExtResource("3_c142g")
 resourceName = "MultiplierDefence"
 baseline = 1
 capAtZero = true
 
-[node name="BonusDefence" type="Node" parent="Logic/Player"]
+[node name="BonusDefence" type="Node" parent="Logic/Player/Resources"]
 script = ExtResource("3_c142g")
 resourceName = "BonusDefence"
 capAtZero = true
 
-[node name="Energy" type="Node" parent="Logic/Player" node_paths=PackedStringArray("debugLabel")]
+[node name="Energy" type="Node" parent="Logic/Player/Resources" node_paths=PackedStringArray("debugLabel")]
 script = ExtResource("3_c142g")
 resourceName = "Energy"
 baseline = 30
 capAtZero = true
-debugLabel = NodePath("../../../InfoStuff/EnergyCounter")
+debugLabel = NodePath("../../../../InfoStuff/EnergyCounter")
 
-[node name="StartTurnCardDraw" type="Node" parent="Logic/Player"]
+[node name="StartTurnCardDraw" type="Node" parent="Logic/Player/Resources"]
 script = ExtResource("3_c142g")
 resourceName = "StartTurnCardDraw"
 baseline = 3
 capAtZero = true
+
+[node name="BustValue" type="Node" parent="Logic/Player/Resources"]
+script = ExtResource("3_c142g")
+resourceName = "BustValue"
+baseline = 21
 
 [node name="DeckManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("3_8edax")
@@ -117,11 +124,6 @@ disposeContainer = NodePath("../DiscardManager")
 overrideRevealed = true
 overrideRevealedState = false
 
-[node name="DeckCounter" type="Node" parent="Logic/Player/DeckManager" node_paths=PackedStringArray("label")]
-script = ExtResource("11_rgdhd")
-label = NodePath("../../../../InfoStuff/DeckCounter")
-countSubject = 1
-
 [node name="HandManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("12_q8pst")
 feedContainer = NodePath("../DiscardManager")
@@ -129,36 +131,17 @@ disposeContainer = NodePath("../DiscardManager")
 addTriggerType = 4
 overrideRevealed = true
 
-[node name="PlayAreaManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("bustCounter", "disposeContainer")]
+[node name="PlayAreaManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("disposeContainer")]
 script = ExtResource("12_q8pst")
 maxCards = 6
-bustCounter = NodePath("ValueCounter")
 disposeContainer = NodePath("../DiscardManager")
 addTriggerType = 1
 overrideRevealed = true
 
-[node name="ValueCounter" type="Node" parent="Logic/Player/PlayAreaManager" node_paths=PackedStringArray("label")]
-script = ExtResource("11_rgdhd")
-label = NodePath("../../../../InfoStuff/PlayAreaCounter")
-
-[node name="AttackCounter" type="Node" parent="Logic/Player/PlayAreaManager"]
-script = ExtResource("11_rgdhd")
-countSubject = 2
-
-[node name="DefenceCounter" type="Node" parent="Logic/Player/PlayAreaManager"]
-script = ExtResource("11_rgdhd")
-countSubject = 3
-
 [node name="DiscardManager" type="Node" parent="Logic/Player"]
 script = ExtResource("12_q8pst")
 
-[node name="AmountCounter" type="Node" parent="Logic/Player/DiscardManager" node_paths=PackedStringArray("label")]
-script = ExtResource("11_rgdhd")
-bustValue = -1
-label = NodePath("../../../../InfoStuff/DiscardCounter")
-countSubject = 1
-
-[node name="Enemy" type="Node" parent="Logic" node_paths=PackedStringArray("cardsPerTurn", "bonusAttack", "bonusDefence", "multiplierAttack", "multiplierDefence", "hp", "hand", "discard", "playArea", "deck")]
+[node name="Enemy" type="Node" parent="Logic" node_paths=PackedStringArray("cardsPerTurn", "bonusAttack", "bonusDefence", "multiplierAttack", "multiplierDefence", "hp", "bustValue", "hand", "discard", "playArea", "deck")]
 script = ExtResource("4_8gay1")
 cardsPerTurn = NodePath("EnemyStartTurnCardDraw")
 bonusAttack = NodePath("EnemyBonusAttack")
@@ -166,10 +149,16 @@ bonusDefence = NodePath("EnemyBonusDefence")
 multiplierAttack = NodePath("EnemyMultiplierAttack")
 multiplierDefence = NodePath("EnemyMultiplierDefence")
 hp = NodePath("enemyHp")
+bustValue = NodePath("../Player/Resources/BustValue")
 hand = NodePath("EnemyHand")
 discard = NodePath("EnemyDiscard")
 playArea = NodePath("EnemyPlayArea")
 deck = NodePath("EnemyDeck")
+
+[node name="BustValue2" type="Node" parent="Logic/Enemy"]
+script = ExtResource("3_c142g")
+resourceName = "BustValue"
+baseline = 21
 
 [node name="enemyHp" type="Node" parent="Logic/Enemy" node_paths=PackedStringArray("debugLabel")]
 script = ExtResource("3_c142g")
@@ -182,25 +171,12 @@ script = ExtResource("12_q8pst")
 maxCards = 0
 overrideRevealed = true
 
-[node name="EnemyPlayArea" type="Node" parent="Logic/Enemy" node_paths=PackedStringArray("bustCounter", "disposeContainer")]
+[node name="EnemyPlayArea" type="Node" parent="Logic/Enemy" node_paths=PackedStringArray("disposeContainer")]
 script = ExtResource("12_q8pst")
 maxCards = 6
-bustCounter = NodePath("ValueCounter")
 disposeContainer = NodePath("../EnemyDiscard")
 addTriggerType = 1
 overrideRevealed = true
-
-[node name="ValueCounter" type="Node" parent="Logic/Enemy/EnemyPlayArea" node_paths=PackedStringArray("label")]
-script = ExtResource("11_rgdhd")
-label = NodePath("../../../../InfoStuff/PlayAreaCounter")
-
-[node name="AttackCounter" type="Node" parent="Logic/Enemy/EnemyPlayArea"]
-script = ExtResource("11_rgdhd")
-countSubject = 2
-
-[node name="DefenceCounter" type="Node" parent="Logic/Enemy/EnemyPlayArea"]
-script = ExtResource("11_rgdhd")
-countSubject = 3
 
 [node name="EnemyDiscard" type="Node" parent="Logic/Enemy"]
 script = ExtResource("12_q8pst")

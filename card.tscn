@@ -70,6 +70,7 @@ offset_right = 69.0
 offset_bottom = 95.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ff4vj")
 
 [node name="CardImageRect" type="TextureRect" parent="."]

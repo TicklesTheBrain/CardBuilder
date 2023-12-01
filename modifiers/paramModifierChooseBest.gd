@@ -29,7 +29,7 @@ func calculateSpecific(ctxt: GameStateContext, _currValue: int, card: CardData):
 
 	#ESTABLISH SOME BASE VARIABLES
 	var playArea = ctxt.player.playArea
-	var bustValue = playArea.bustCounter.bustValue
+	var bustValue = ctxt.player.bustValue.amount
 	var allCards = playArea.getAll()
 	var staticCards = allCards.filter(func(c): return not c.value.checkIsNonStatic())
 	var totalStaticValue = staticCards.reduce(func(acc, c): return acc+c.getValue(), 0)

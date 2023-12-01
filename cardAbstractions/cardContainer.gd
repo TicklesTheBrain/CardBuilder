@@ -3,7 +3,6 @@ class_name CardContainer
 
 @export var maxCards: int = -1
 @export var cards: Array[CardData] = []
-@export var bustCounter: ContainerCounter
 @export var feedContainer: CardContainer # Container which is reshuffled if container is empty on drawCard function
 @export var disposeContainer: CardContainer # Container to which things are disposed to on disposeCards call
 @export var addTriggerType: CardEffect.triggerType
@@ -136,12 +135,14 @@ func disposeCard(cardToDispose: CardData, containerToDisposeTo: CardContainer = 
 func getTotalValue():
 	return cards.reduce(func(acc, card): return acc+card.getValue(), 0)
 
-func getModifiedBustValue(bustValue: int):
-	for mod in modifiers:
-		if mod is CounterModifier and mod.type == ContainerCounter.countWhat.VALUE:
-			bustValue = mod.calculate(self, bustValue)
+func getTotalAttack():
+	return cards.reduce(func(acc, card): return acc+card.getAttack(), 0)
 
-	return bustValue
+func getTotalDefence():
+	return cards.reduce(func(acc, card): return acc+card.getDefence(), 0)
+
+func getNoOfCards():
+	return cards.size()
 
 func getCardPosition(card: CardData):
 	return cards.find(card)

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=177 format=3 uid="uid://dc1pbwqrsnd4m"]
+[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=172 format=3 uid="uid://dc1pbwqrsnd4m"]
 
 [ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="1_5jvcn"]
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="2_j5dh7"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://cardEffects/ceResourceModify.gd" id="10_n13vk"]
 [ext_resource type="Script" path="res://modifiers/paramModifierChooseBest.gd" id="11_h5yit"]
 [ext_resource type="Script" path="res://cardEffects/ceChooseFrom.gd" id="12_ym1ng"]
-[ext_resource type="Script" path="res://modifiers/counterModifierFixedChange.gd" id="13_yuvb8"]
 [ext_resource type="Script" path="res://modifiers/paramModifierCutoff.gd" id="14_gdku7"]
 [ext_resource type="Script" path="res://modifiers/paramModifierFlat.gd" id="15_ywb4c"]
 [ext_resource type="Script" path="res://cardEffects/ceSetValueToPrevious.gd" id="16_7u532"]
@@ -653,29 +652,13 @@ modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
 capAtZero = false
 
-[sub_resource type="Resource" id="Resource_7m7yn"]
-script = ExtResource("13_yuvb8")
-shift = 2
-type = 0
-inEffect = true
-staticText = ""
-modifierName = ""
-generateText = true
-timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
-
-[sub_resource type="Resource" id="Resource_nl27r"]
-script = ExtResource("6_8v3to")
-event = 1
-actOrDeact = 1
-counter = 1
-
-[sub_resource type="Resource" id="Resource_sv0tt"]
-script = ExtResource("5_sj401")
-containersToApply = Array[int]([2])
-modifier = SubResource("Resource_7m7yn")
-timingRules = Array[ExtResource("6_8v3to")]([SubResource("Resource_nl27r")])
+[sub_resource type="Resource" id="Resource_mrkxa"]
+script = ExtResource("10_n13vk")
+modifiedResource = 7
+resourcePropety = 3
+amountToModify = 2
 effectName = ""
-staticText = "Increase Bust Value by 2."
+staticText = "Increase bust value by 2."
 conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
@@ -708,7 +691,7 @@ type = SubResource("Resource_pfffg")
 cost = SubResource("Resource_vk4fm")
 attack = SubResource("Resource_8m6r0")
 defence = SubResource("Resource_81w02")
-onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_sv0tt")])
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_mrkxa")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
@@ -741,29 +724,13 @@ modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
 capAtZero = false
 
-[sub_resource type="Resource" id="Resource_xqmxe"]
-script = ExtResource("13_yuvb8")
-shift = -2
-type = 0
-inEffect = true
+[sub_resource type="Resource" id="Resource_uiskm"]
+script = ExtResource("10_n13vk")
+modifiedResource = 7
+resourcePropety = 3
+amountToModify = -2
+effectName = "Reduce bust value by 2"
 staticText = ""
-modifierName = ""
-generateText = true
-timingChecks = Array[Resource("res://cardAbstractions/timingCheck.gd")]([])
-
-[sub_resource type="Resource" id="Resource_ep2sd"]
-script = ExtResource("6_8v3to")
-event = 1
-actOrDeact = 1
-counter = 1
-
-[sub_resource type="Resource" id="Resource_in0gx"]
-script = ExtResource("5_sj401")
-containersToApply = Array[int]([2])
-modifier = SubResource("Resource_xqmxe")
-timingRules = Array[ExtResource("6_8v3to")]([SubResource("Resource_ep2sd")])
-effectName = ""
-staticText = "Decrease bust value by 2"
 conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 includeFollowUpText = false
@@ -796,7 +763,7 @@ type = SubResource("Resource_5mm3t")
 cost = SubResource("Resource_ir1ws")
 attack = SubResource("Resource_wstgr")
 defence = SubResource("Resource_cy7rl")
-onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_in0gx")])
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_uiskm")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])

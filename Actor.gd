@@ -11,6 +11,7 @@ class_name Actor
 @export var multiplierAttack: GameResource
 @export var multiplierDefence: GameResource
 @export var hp: GameResource
+@export var bustValue: GameResource
 
 @export_group("Containers")
 @export var hand: CardContainer
@@ -19,7 +20,7 @@ class_name Actor
 @export var deck: DeckManager
 
 enum ContainerPurposes {DECK, HAND, PLAY_AREA, DISCARD}
-enum GameResources {ENERGY, CARDS_PER_TURN, BONUS_ATTACK, BONUS_DEFENCE, MULTIPLIER_ATTACK, MULTIPLIER_DEFENCE, HP}
+enum GameResources {ENERGY, CARDS_PER_TURN, BONUS_ATTACK, BONUS_DEFENCE, MULTIPLIER_ATTACK, MULTIPLIER_DEFENCE, HP, BUST_VALUE}
 
 var gameResources: Dictionary:
 	get:
@@ -83,4 +84,7 @@ func getResourceFromEnum(enumOfResource: GameResources) -> GameResource:
 func resetResources():
 	for res in gameResources.values():
 		res.reset()
+
+func checkIsBusted():
+	return playArea.getTotalValue() > bustValue.amount
 

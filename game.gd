@@ -75,11 +75,9 @@ func enemySingleStep(valueToBeat: int) -> bool:
 	#TODO: Drawing too many cards when player busted 
 	if enemy.playArea.checkFull():
 		return false
-	if enemy.playArea.bustCounter.checkIsBusted():
+	if enemy.checkIsBusted():
 		return false
-	print(enemy.playArea.bustCounter.prevCount, 'valuetobeat', valueToBeat)
-	if enemy.playArea.bustCounter.prevCount > valueToBeat:
-	
+	if enemy.playArea.getTotalValue() > valueToBeat:
 		return false
 
 	enemyPlayTopCard()
@@ -127,8 +125,8 @@ func roundLoop():
 	drawCardButton.disabled = true
 	endHandButton.disabled = true
 
-	var playerValue = player.playArea.bustCounter.count
-	var playerBusted = player.playArea.bustCounter.checkIsBusted()
+	var playerValue = player.playArea.getTotalValue()
+	var playerBusted = player.checkIsBusted()
 
 	Events.playerTurnEnd.emit(playerValue, playerBusted)	
 
@@ -152,13 +150,13 @@ func roundLoop():
 	var bust: bool
 
 		#Determine winner/loser
-	playerValue = player.playArea.bustCounter.count #Update this in case when some enemy effects might alter player value
-	var enemyValue = enemy.playArea.bustCounter.count
-	if player.playArea.bustCounter.checkIsBusted():
+	playerValue = player.playArea.getTotalValue() #Update this in case when some enemy effects might alter player value
+	var enemyValue = enemy.playArea.getTotalValue()
+	if player.checkIsBusted():
 		winner = enemy
 		loser = player
 		bust = true
-	elif enemy.playArea.bustCounter.checkIsBusted():
+	elif enemy.checkIsBusted():
 		winner = player
 		loser = enemy
 		bust = true
@@ -191,10 +189,10 @@ func roundLoop():
 			await loser.playArea.triggerAll(CardEffect.triggerType.BUST)
 		
 		#Determine attack and defence
-		var damageCounter = winner.playArea.get_children().filter(func(c): return c is ContainerCounter and c.countSubject == ContainerCounter.countWhat.ATTACK)[0]
-		var damage = (damageCounter.count + winner.bonusAttack.amount) * winner.multiplierAttack.amount
-		var shieldCounter = loser.playArea.get_children().filter(func(c): return c is ContainerCounter and c.countSubject == ContainerCounter.countWhat.DEFENCE)[0]
-		var shields = (shieldCounter.count + loser.bonusDefence.amount) * loser.multiplierDefence.amount
+		var damageCount = winner.playArea.getTotalAttack()		
+		var damage = (damageCount + winner.bonusAttack.amount) * winner.multiplierAttack.amount
+		var shieldCount = loser.playArea.getTotalDefence()
+		var shields = (shieldCount+ loser.bonusDefence.amount) * loser.multiplierDefence.amount
 
 		var dealtDamage = max(0, damage - shields)
 
