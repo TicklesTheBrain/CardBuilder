@@ -5,6 +5,9 @@ enum BackTypes {RED, BLUE}
 
 @export var cardShape: Area2D
 @export var cardImageRect: TextureRect
+@export var showDetailsCooldown: float = 0.1
+var shouldShowDetailed: bool = false
+@onready var topControl = cardImageRect
 
 @export_group("Shadow stuff")
 @export var maxShadowOffset: Vector2
@@ -164,7 +167,6 @@ func updateAllTextFields(dataToShow: CardData):
 	updateTextField(startMatchTextLabel, effectDict.startMatch, "[b]Start:[/b] ")
 
 func _process(delta):
-	
 	shadowTimer += delta
 	if dragged:
 		position = get_viewport().get_mouse_position() - mouseOffset
@@ -182,9 +184,11 @@ func onClick():
 	InputLord.cardClicked.emit(self)
 
 func onMouseEnterCard():
+	#print(name, ' mouse enter card')
 	InputLord.cardMouseOver.emit(self)
 
 func onMouseLeaveCard():
+	#print(name, ' mouse leave card')
 	InputLord.cardMouseOverExit.emit(self)
 
 func unselect():	
@@ -213,13 +217,19 @@ func hideGraft():
 	graftToShow = null
 
 func showDetailed():
-	if cardData.revealed:
-		detailedInfoRoot.visible = true
-	bringToFront()
+	shouldShowDetailed = true
+	await get_tree().create_timer(showDetailsCooldown).timeout
+	if shouldShowDetailed:
+		if cardData.revealed:
+			detailedInfoRoot.visible = true
+		bringToFront()
 
 func hideDetailed():
-	detailedInfoRoot.visible = false
-	bringBackFromFront()
+	shouldShowDetailed = false
+	await get_tree().create_timer(showDetailsCooldown).timeout
+	if not shouldShowDetailed:
+		detailedInfoRoot.visible = false
+		bringBackFromFront()
 
 func updateTextField(textFieldToFormat: RichTextLabel, newText: String, prefix: String = ""):
 	if newText != "":

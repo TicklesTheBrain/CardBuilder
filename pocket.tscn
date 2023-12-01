@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://o20e5thwdy3j"]
 
-[ext_resource type="Script" path="res://cardInterfaceStuff/pocketDisplay.gd" id="1_q2qv6"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/pocketDisplay.gd" id="1_b68e2"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="2_1vbvx"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="2_sxrrm"]
 
@@ -84,7 +84,7 @@ _data = {
 
 [node name="PocketLayer" type="CanvasLayer" node_paths=PackedStringArray("animation", "positionController", "backGroundPanel", "infoLabel", "pocketContainer")]
 layer = 2
-script = ExtResource("1_q2qv6")
+script = ExtResource("1_b68e2")
 animation = NodePath("Pocket/PocketAnimation")
 positionController = NodePath("PocketDynamicPosition")
 backGroundPanel = NodePath("Pocket/Panel")

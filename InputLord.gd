@@ -79,6 +79,7 @@ func _onCardClicked(display: CardDisplay):
 	
 	#Next check if need to start a drag
 	if checkCanDrag(display.cardData):
+		display.get_parent().move_child(display, -1)
 		display.startDrag()
 
 func _onCardDragReleased(display: CardDisplay):
@@ -107,7 +108,3 @@ func addMouseOverExitDelegate(card: CardDisplay, delegate: Callable):
 
 func removeMouseOverDelegate(cont: CardContainer):
 	mouseOverDelegates.erase(cont)
-
-
-
-
