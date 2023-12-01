@@ -12,7 +12,7 @@ enum ParamType {COST, VALUE, ATTACK, DEFENCE}
 @export var type: ParamType
 @export var modifiers: Array[Modifier]
 @export var staticText: String
-@export var capAtZero: bool = false
+@export var capAtZero: bool = true
 
 func getValue(ctxt: GameStateContext, card: CardData):
 	var value: int

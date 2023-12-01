@@ -267,7 +267,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
-capAtZero = false
+capAtZero = true
 
 [sub_resource type="Resource" id="Resource_6x2wy"]
 script = ExtResource("1_5jvcn")
@@ -1187,7 +1187,7 @@ baseValue = 0
 type = 0
 modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
-capAtZero = false
+capAtZero = true
 
 [sub_resource type="Resource" id="Resource_phctl"]
 script = ExtResource("1_5jvcn")
@@ -1257,7 +1257,7 @@ baseValue = 1
 type = 0
 modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
-capAtZero = false
+capAtZero = true
 
 [sub_resource type="Resource" id="Resource_j27y0"]
 script = ExtResource("1_5jvcn")
@@ -1436,7 +1436,7 @@ baseValue = 0
 type = 0
 modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
-capAtZero = false
+capAtZero = true
 
 [sub_resource type="Resource" id="Resource_hsj33"]
 script = ExtResource("1_5jvcn")
