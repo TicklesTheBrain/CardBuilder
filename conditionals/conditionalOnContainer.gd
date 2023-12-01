@@ -10,11 +10,31 @@ enum CheckType {TOTAL_VALUE, AMOUNT_OF_CARDS, AMOUNT_OF_TYPES, AMOUNT_OF_SINGLE_
 @export var checkType: CheckType
 
 func getTextSpecific():
-	var text = "If no of cards played {verb} equal or more than {number}, "
-	var verb = 'are'
-	if disabledOnMatchOrExceed:
-		verb = "aren't"
-	return text.format({"verb": verb, "number": amountToMatchOrExceed})
+	var what: String
+	match checkType:
+		CheckType.TOTAL_VALUE:
+			what = "total value"
+		CheckType.AMOUNT_OF_CARDS:
+			what = "no of cards"
+		CheckType.AMOUNT_OF_TYPES:
+			what = "different types"
+		CheckType.AMOUNT_OF_SINGLE_TYPE:
+			what = "no of {symbol} cards".format({"symbol": CardType.Types.keys()[cardTypeSubject]})
+			
+	var where: String
+	match containerToCheck:
+		Actor.ContainerPurposes.DECK:
+			where = "in deck"
+		Actor.ContainerPurposes.HAND:
+			where = "in hand"
+		Actor.ContainerPurposes.PLAY_AREA:
+			where = "played"
+		Actor.ContainerPurposes.DISCARD:
+			where = "discarded"
+
+	var whatState = "is less" if disabledOnMatchOrExceed else "is more"
+	var text = "If {what} {where} {whatState} than {number},"
+	return text.format({"what": what, "where": where, "whatStat": whatState, "number": amountToMatchOrExceed})
 
 func check(ctxt: GameStateContext):
 
