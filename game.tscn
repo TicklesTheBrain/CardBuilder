@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=29 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -8,28 +8,49 @@
 [ext_resource type="Script" path="res://cardInterfaceStuff/CardDisplaySink.gd" id="3_lpmun"]
 [ext_resource type="Script" path="res://cardAbstractions/Actor.gd" id="4_8gay1"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/PlayAreaController.gd" id="5_fctuw"]
-[ext_resource type="Script" path="res://cardInterfaceStuff/drawnCollisionShape.gd" id="6_53o6h"]
+[ext_resource type="Texture2D" uid="uid://b6x1kuw8ji1aa" path="res://assets/manaCoin.png" id="5_wfs64"]
+[ext_resource type="Texture2D" uid="uid://blxhpf1kfx2ym" path="res://assets/pokerChip.png" id="6_he1b8"]
+[ext_resource type="Texture2D" uid="uid://doevg7dxoxgka" path="res://assets/pokerChip2.png" id="7_2g44v"]
 [ext_resource type="Resource" uid="uid://b2ru52u3aw843" path="res://content/debug_enemyDeck.tres" id="9_t18bm"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="12_q8pst"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/pilePositionController.gd" id="14_27y8n"]
 [ext_resource type="Texture2D" uid="uid://cj75g71nh52om" path="res://assets/table_background.png" id="15_2rvab"]
+[ext_resource type="Texture2D" uid="uid://6spm3snq4u6k" path="res://icon.svg" id="16_dsl8p"]
+[ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="17_ooe0n"]
+[ext_resource type="Script" path="res://cardInterfaceStuff/SelfDoublingCanvasItem.gd" id="19_khykf"]
+[ext_resource type="Script" path="res://ManaShower.gd" id="20_shvvi"]
 [ext_resource type="Resource" uid="uid://dc1pbwqrsnd4m" path="res://content/test_cards.tres" id="24_wh5ls"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="27_mupmx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2v7eo"]
-size = Vector2(852, 259)
+size = Vector2(587, 237)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7o7mm"]
-size = Vector2(184, 259)
+size = Vector2(368, 242)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c17rp"]
-size = Vector2(1106.5, 204)
+size = Vector2(868, 233)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnh12"]
-size = Vector2(271.5, 256.5)
+size = Vector2(293.5, 235.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_625ey"]
-size = Vector2(961.5, 256.5)
+size = Vector2(858.5, 234.25)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrk3j"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(1, 1, 1, 0.545098)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nems8"]
+blend_mode = 2
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("playAreaPositionController", "enemyPlayAreaPositionController", "messageLabel", "drawCardButton", "endHandButton", "okButton", "player", "enemy")]
 script = ExtResource("1_hbkeb")
@@ -43,12 +64,57 @@ endHandButton = NodePath("EndButton")
 okButton = NodePath("OkBUtton")
 player = NodePath("Logic/Player")
 enemy = NodePath("Logic/Enemy")
+metadata/_edit_horizontal_guides_ = [271.0, 712.0]
+metadata/_edit_vertical_guides_ = [1268.0, 11.0]
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -100
-scale = Vector2(0.801875, 0.695202)
+scale = Vector2(0.828125, 0.73095)
 texture = ExtResource("15_2rvab")
 centered = false
+
+[node name="Poker" type="TextureRect" parent="."]
+offset_left = 21.0
+offset_top = 276.0
+offset_right = 164.0
+offset_bottom = 353.0
+texture = ExtResource("6_he1b8")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Poker"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 21.0
+offset_right = 97.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 25
+text = "25"
+
+[node name="Poker2" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1181.0
+offset_top = 281.0
+offset_right = 1258.19
+offset_bottom = 357.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_2g44v")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="Poker2"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 18.0
+offset_right = 64.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 25
+text = "25"
 
 [node name="Logic" type="Node" parent="."]
 
@@ -100,7 +166,7 @@ capAtZero = true
 [node name="Energy" type="Node" parent="Logic/Player/Resources" node_paths=PackedStringArray("debugLabel")]
 script = ExtResource("3_c142g")
 resourceName = "Energy"
-baseline = 30
+baseline = 3
 capAtZero = true
 debugLabel = NodePath("../../../../InfoStuff/EnergyCounter")
 
@@ -217,25 +283,25 @@ baseline = 3
 capAtZero = true
 
 [node name="DrawButton" type="Button" parent="."]
-offset_left = 1177.0
-offset_top = 11.0
-offset_right = 1267.0
-offset_bottom = 42.0
+offset_left = 1028.0
+offset_top = 283.0
+offset_right = 1118.0
+offset_bottom = 314.0
 text = "Draw Card"
 
 [node name="EndButton" type="Button" parent="."]
-offset_left = 1178.0
-offset_top = 57.0
-offset_right = 1261.0
-offset_bottom = 88.0
+offset_left = 929.0
+offset_top = 285.0
+offset_right = 1012.0
+offset_bottom = 316.0
 text = "End Hand
 "
 
 [node name="OkBUtton" type="Button" parent="."]
-offset_left = 1178.0
-offset_top = 245.0
-offset_right = 1261.0
-offset_bottom = 276.0
+offset_left = 829.0
+offset_top = 284.0
+offset_right = 912.0
+offset_bottom = 315.0
 text = "OK
 "
 
@@ -247,11 +313,11 @@ maxCardGap = 25.0
 logicalContainer = NodePath("../Logic/Enemy/EnemyPlayArea")
 
 [node name="EnemyPlayAreaFull" type="CollisionShape2D" parent="EnemyPlayAreaController"]
-position = Vector2(739, 148.5)
+position = Vector2(971.5, 137.5)
 shape = SubResource("RectangleShape2D_2v7eo")
 
 [node name="EnemyPlayAreaSmall" type="CollisionShape2D" parent="EnemyPlayAreaController"]
-position = Vector2(1075, 148.5)
+position = Vector2(1079, 140)
 shape = SubResource("RectangleShape2D_7o7mm")
 
 [node name="EnemyDiscardController" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
@@ -261,15 +327,6 @@ logicalContainer = NodePath("../Logic/Enemy/EnemyDiscard")
 
 [node name="EnemyDiscard" type="Marker2D" parent="EnemyDiscardController"]
 position = Vector2(1216, 164)
-
-[node name="DiscardDisplaySink" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
-script = ExtResource("3_lpmun")
-positionMarker = NodePath("DiscardOrigin")
-logicalContainer = NodePath("../Logic/Player/DiscardManager")
-canCreateNewDisplays = false
-
-[node name="DiscardOrigin" type="Marker2D" parent="DiscardDisplaySink"]
-position = Vector2(1207, 381)
 
 [node name="DeckDisplayPile" type="Node2D" parent="." node_paths=PackedStringArray("pileCenter", "logicalContainer")]
 script = ExtResource("14_27y8n")
@@ -287,7 +344,25 @@ resetRotation = false
 reverseZ = true
 
 [node name="DeckOrigin" type="Marker2D" parent="DeckDisplayPile"]
-position = Vector2(114, 382)
+position = Vector2(102, 577)
+
+[node name="DiscardDisplayPile" type="Node2D" parent="." node_paths=PackedStringArray("pileCenter", "logicalContainer")]
+script = ExtResource("14_27y8n")
+pileCenter = NodePath("DiscardOrigin")
+positionDriftX = 3.0
+positionDriftY = 3.0
+rotationDrift = 6.0
+shufflePositionDriftX = 15.0
+shufflePositionDriftY = 30.0
+shuffleRotationDrift = 35.0
+shuffleTime = 1.5
+shuffleTimeDrift = 0.3
+logicalContainer = NodePath("../Logic/Player/DiscardManager")
+resetRotation = false
+reverseZ = true
+
+[node name="DiscardOrigin" type="Marker2D" parent="DiscardDisplayPile"]
+position = Vector2(1176, 582)
 
 [node name="HandCardDisplayController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer")]
 script = ExtResource("27_mupmx")
@@ -297,10 +372,11 @@ maxCardGap = 25.0
 logicalContainer = NodePath("../Logic/Player/HandManager")
 
 [node name="HandCardArea" type="CollisionShape2D" parent="HandCardDisplayController"]
-position = Vector2(565, 605)
+position = Vector2(639, 583.5)
 shape = SubResource("RectangleShape2D_c17rp")
 
 [node name="PlayArea" type="Area2D" parent="."]
+visible = false
 script = ExtResource("5_fctuw")
 
 [node name="PlayAreaPositionController" type="Node2D" parent="PlayArea" node_paths=PackedStringArray("cardAreas", "logicalContainer")]
@@ -311,13 +387,12 @@ maxCardGap = 30.0
 logicalContainer = NodePath("../../Logic/Player/PlayAreaManager")
 
 [node name="DecreasedShape" type="CollisionShape2D" parent="PlayArea/PlayAreaPositionController"]
-position = Vector2(154.25, 149)
+position = Vector2(165.25, 138.375)
 shape = SubResource("RectangleShape2D_qnh12")
 
 [node name="FullLengthShape" type="CollisionShape2D" parent="PlayArea"]
-position = Vector2(499.25, 149)
+position = Vector2(447.75, 137.875)
 shape = SubResource("RectangleShape2D_625ey")
-script = ExtResource("6_53o6h")
 
 [node name="MessageContent" type="Label" parent="."]
 offset_left = 256.0
@@ -327,10 +402,10 @@ offset_bottom = 338.0
 text = "Message Content"
 
 [node name="InfoStuff" type="GridContainer" parent="."]
-offset_left = 1150.0
-offset_top = 548.0
-offset_right = 1304.0
-offset_bottom = 706.0
+offset_left = 408.0
+offset_top = 278.0
+offset_right = 562.0
+offset_bottom = 436.0
 columns = 2
 metadata/_edit_group_ = true
 
@@ -384,6 +459,180 @@ text = "Enemy HP
 [node name="theirHpCounter" type="Label" parent="InfoStuff"]
 layout_mode = 2
 text = "0"
+
+[node name="Outlines" type="Node2D" parent="."]
+position = Vector2(11, 458)
+
+[node name="DeckOutline" type="CanvasGroup" parent="Outlines"]
+metadata/_edit_group_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Outlines/DeckOutline"]
+offset_right = 181.0
+offset_bottom = 246.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yrk3j")
+
+[node name="Icon" type="Sprite2D" parent="Outlines/DeckOutline"]
+material = SubResource("CanvasItemMaterial_nems8")
+position = Vector2(64, 242)
+scale = Vector2(0.71875, 0.4375)
+texture = ExtResource("16_dsl8p")
+
+[node name="Label" type="Label" parent="Outlines/DeckOutline"]
+offset_left = 19.0
+offset_top = 219.0
+offset_right = 107.0
+offset_bottom = 260.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.533333)
+theme_override_fonts/font = ExtResource("17_ooe0n")
+theme_override_font_sizes/font_size = 30
+text = "DECK"
+
+[node name="DiscardOutline" type="CanvasGroup" parent="Outlines"]
+position = Vector2(1076, 2)
+
+[node name="PanelContainer" type="PanelContainer" parent="Outlines/DiscardOutline"]
+offset_right = 181.0
+offset_bottom = 246.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yrk3j")
+
+[node name="Icon" type="Sprite2D" parent="Outlines/DiscardOutline"]
+material = SubResource("CanvasItemMaterial_nems8")
+position = Vector2(88.5, 242)
+scale = Vector2(1.11719, 0.4375)
+texture = ExtResource("16_dsl8p")
+
+[node name="Label" type="Label" parent="Outlines/DiscardOutline"]
+offset_left = 17.0
+offset_top = 217.0
+offset_right = 155.0
+offset_bottom = 258.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.533333)
+theme_override_fonts/font = ExtResource("17_ooe0n")
+theme_override_font_sizes/font_size = 30
+text = "DISCARD"
+
+[node name="HandOutline" type="CanvasGroup" parent="Outlines"]
+position = Vector2(190, 2)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Outlines/HandOutline"]
+offset_left = -3.0
+offset_right = 879.0
+offset_bottom = 246.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yrk3j")
+
+[node name="DeckCutOut" type="Sprite2D" parent="Outlines/HandOutline"]
+material = SubResource("CanvasItemMaterial_nems8")
+position = Vector2(64.5, 242)
+scale = Vector2(0.820313, 0.4375)
+texture = ExtResource("16_dsl8p")
+
+[node name="ManaCutOut" type="Sprite2D" parent="Outlines/HandOutline"]
+material = SubResource("CanvasItemMaterial_nems8")
+position = Vector2(838, 4.00001)
+scale = Vector2(0.296875, 0.296875)
+texture = ExtResource("16_dsl8p")
+script = ExtResource("19_khykf")
+duplicateOffset = Vector2(-30, 0)
+
+[node name="Label" type="Label" parent="Outlines/HandOutline"]
+offset_left = 11.0
+offset_top = 217.0
+offset_right = 149.0
+offset_bottom = 258.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.533333)
+theme_override_fonts/font = ExtResource("17_ooe0n")
+theme_override_font_sizes/font_size = 30
+text = "HAND"
+metadata/_edit_lock_ = true
+
+[node name="MyPlayed" type="CanvasGroup" parent="Outlines"]
+position = Vector2(4, -438)
+metadata/_edit_group_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Outlines/MyPlayed"]
+offset_left = -3.0
+offset_right = 865.0
+offset_bottom = 246.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yrk3j")
+
+[node name="Icon" type="Sprite2D" parent="Outlines/MyPlayed"]
+material = SubResource("CanvasItemMaterial_nems8")
+position = Vector2(76, 242)
+scale = Vector2(1, 0.4375)
+texture = ExtResource("16_dsl8p")
+
+[node name="Label" type="Label" parent="Outlines/MyPlayed"]
+offset_left = 11.0
+offset_top = 217.0
+offset_right = 149.0
+offset_bottom = 258.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.533333)
+theme_override_fonts/font = ExtResource("17_ooe0n")
+theme_override_font_sizes/font_size = 30
+text = "PLAYED"
+
+[node name="EnemyPlayed" type="CanvasGroup" parent="Outlines"]
+position = Vector2(878, -438)
+metadata/_edit_group_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Outlines/EnemyPlayed"]
+offset_left = -3.0
+offset_right = 379.0
+offset_bottom = 246.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yrk3j")
+
+[node name="Icon" type="Sprite2D" parent="Outlines/EnemyPlayed"]
+material = SubResource("CanvasItemMaterial_nems8")
+position = Vector2(73, 242)
+scale = Vector2(0.953125, 0.4375)
+texture = ExtResource("16_dsl8p")
+
+[node name="Label" type="Label" parent="Outlines/EnemyPlayed"]
+offset_left = 11.0
+offset_top = 217.0
+offset_right = 149.0
+offset_bottom = 258.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.533333)
+theme_override_fonts/font = ExtResource("17_ooe0n")
+theme_override_font_sizes/font_size = 30
+text = "ENEMY"
+
+[node name="ManaShower" type="Node" parent="Outlines" node_paths=PackedStringArray("doublingCutOut", "doublingManaCoin", "resourceToTrack")]
+script = ExtResource("20_shvvi")
+doublingCutOut = NodePath("../HandOutline/ManaCutOut")
+doublingManaCoin = NodePath("ManaCoin")
+resourceToTrack = NodePath("../../Logic/Player/Resources/Energy")
+
+[node name="ManaCoin" type="TextureRect" parent="Outlines/ManaShower"]
+offset_left = 1021.0
+offset_top = 447.0
+offset_right = 1056.0
+offset_bottom = 480.0
+texture = ExtResource("5_wfs64")
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("19_khykf")
+duplicateOffset = Vector2(-30, 0)
+metadata/_edit_group_ = true
+
+[node name="ManaCoin2" type="TextureRect" parent="Outlines/ManaShower/ManaCoin"]
+self_modulate = Color(0, 0, 0, 0.427451)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 36.0
+offset_bottom = 32.0
+texture = ExtResource("5_wfs64")
+expand_mode = 3
+stretch_mode = 5
 
 [connection signal="button_down" from="DrawButton" to="." method="drawFromDeckToHand"]
 [connection signal="area_entered" from="PlayArea" to="PlayArea" method="_on_area_entered"]

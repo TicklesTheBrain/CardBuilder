@@ -1,4 +1,4 @@
-extends Sprite2D
+extends CanvasItem
 class_name SelfDoublingSprite
 
 @export var duplicateOffset: Vector2

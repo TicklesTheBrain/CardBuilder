@@ -1,68 +1,51 @@
-[gd_scene load_steps=11 format=3 uid="uid://ceavuthes855u"]
+[gd_scene load_steps=6 format=3 uid="uid://ceavuthes855u"]
 
-[ext_resource type="Script" path="res://grafting_scene.gd" id="1_aty88"]
-[ext_resource type="PackedScene" uid="uid://dsfqrofqt0xs4" path="res://card_graft.tscn" id="1_w2i3f"]
-[ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_lygcp"]
-[ext_resource type="PackedScene" uid="uid://d1lj52mw7mxay" path="res://card.tscn" id="3_sw0ic"]
-[ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="4_eldwq"]
-[ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="4_sdbnn"]
-[ext_resource type="Script" path="res://cardInterfaceStuff/CardDisplaySink.gd" id="9_yg58f"]
-[ext_resource type="Script" path="res://cardInterfaceStuff/drawnCollisionShape.gd" id="25_0eao4"]
+[ext_resource type="Texture2D" uid="uid://cj75g71nh52om" path="res://assets/table_background.png" id="1_37s0k"]
+[ext_resource type="Texture2D" uid="uid://6spm3snq4u6k" path="res://icon.svg" id="2_t5nry"]
+[ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="3_muqgc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kxqi"]
-size = Vector2(1151.5, 319)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_45tmc"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(1, 1, 1, 0.545098)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6bfs"]
-size = Vector2(1200, 700)
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hnmjp"]
+blend_mode = 2
 
 [node name="GraftingScene" type="Node2D"]
-script = ExtResource("1_aty88")
-cardGraftDisplay = ExtResource("1_w2i3f")
-cardDisplay = ExtResource("3_sw0ic")
 
-[node name="CardDisplaySink" type="Node2D" parent="."]
-script = ExtResource("9_yg58f")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.806875, 0.709313)
+texture = ExtResource("1_37s0k")
+centered = false
 
-[node name="Marker2D" type="Marker2D" parent="CardDisplaySink"]
-position = Vector2(79, 648)
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+position = Vector2(64, 37)
 
-[node name="GraftDeck" type="Node" parent="." node_paths=PackedStringArray("feedContainer")]
-script = ExtResource("3_lygcp")
-debug = false
-feedContainer = NodePath("../GraftDiscard")
+[node name="PanelContainer" type="PanelContainer" parent="CanvasGroup"]
+offset_right = 181.0
+offset_bottom = 246.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_45tmc")
 
-[node name="GraftOptionsController" type="Node2D" parent="."]
-script = ExtResource("4_sdbnn")
-minCardCenterDistance = 50.0
-maxCardGap = 25.0
+[node name="Icon" type="Sprite2D" parent="CanvasGroup"]
+material = SubResource("CanvasItemMaterial_hnmjp")
+position = Vector2(115, 242)
+scale = Vector2(0.804688, 0.4375)
+texture = ExtResource("2_t5nry")
 
-[node name="GraftOptionsArea" type="CollisionShape2D" parent="GraftOptionsController"]
-position = Vector2(641.25, 181)
-shape = SubResource("RectangleShape2D_0kxqi")
-
-[node name="CardOrigin" type="Marker2D" parent="."]
-position = Vector2(670, 578)
-
-[node name="DeckManager" type="Node" parent="."]
-script = ExtResource("3_lygcp")
-
-[node name="DeckDisplayController" type="Node2D" parent="."]
-script = ExtResource("4_sdbnn")
-minCardCenterDistance = 25.0
-maxCardGap = 30.0
-multipleRows = true
-
-[node name="DeckDisplayShape" type="CollisionShape2D" parent="DeckDisplayController"]
-visible = false
-position = Vector2(622, 357)
-shape = SubResource("RectangleShape2D_t6bfs")
-script = ExtResource("25_0eao4")
-
-[node name="GraftDiscard" type="Node" parent="."]
-script = ExtResource("4_eldwq")
-
-[node name="CardDisplaySink" type="Node2D" parent="GraftDiscard"]
-script = ExtResource("9_yg58f")
-
-[node name="Marker2D" type="Marker2D" parent="GraftDiscard/CardDisplaySink"]
-position = Vector2(1170, 622)
+[node name="Label" type="Label" parent="CanvasGroup"]
+offset_left = 71.0
+offset_top = 219.0
+offset_right = 159.0
+offset_bottom = 260.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.533333)
+theme_override_fonts/font = ExtResource("3_muqgc")
+theme_override_font_sizes/font_size = 30
+text = "DECK"

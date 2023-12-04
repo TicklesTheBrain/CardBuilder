@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://o20e5thwdy3j"]
 
 [ext_resource type="Script" path="res://cardInterfaceStuff/pocketDisplay.gd" id="1_b68e2"]
-[ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="2_1vbvx"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="2_sxrrm"]
+[ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="2_sybwb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xuy27"]
 size = Vector2(1248, 688)
@@ -96,7 +96,7 @@ sizesRowGaps = Array[float]([10.0, 10.0, 35.0, 25.0])
 pocketContainer = NodePath("PocketContainer")
 
 [node name="PocketContainer" type="Node" parent="."]
-script = ExtResource("2_1vbvx")
+script = ExtResource("2_sybwb")
 overrideRevealed = true
 addToTopWhenFeeding = false
 
