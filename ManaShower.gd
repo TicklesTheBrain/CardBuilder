@@ -37,7 +37,8 @@ func showAmount(newAmount: int):
 			else:
 				manaCoins.push_back(manaCoins[manaCoins.size()-1].doubleWithOffset())
 	elif difference < 0:
-		for i in range(-(difference+rootDoublerInt)):
+		for i in range(-(difference+doublerVisible)):
+			if cutOuts.size() == 0: break
 			cutOuts.pop_at(cutOuts.size()-1).queue_free()
 			manaCoins.pop_at(manaCoins.size()-1).queue_free()
 	if newAmount < 1:

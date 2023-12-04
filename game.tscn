@@ -276,6 +276,8 @@ script = ExtResource("3_8edax")
 debug = false
 templatePackage = ExtResource("9_t18bm")
 feedContainer = NodePath("../EnemyDiscard")
+overrideRevealed = true
+overrideRevealedState = false
 
 [node name="Resources" type="Node" parent="Logic/Enemy"]
 

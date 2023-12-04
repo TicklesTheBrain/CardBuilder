@@ -25,7 +25,7 @@ func showMessage(newMessage: String):
 		hideMessage()
 		await messageHidden
 	
-	text.text = newMessage
+	text.text = newMessage.to_upper()
 	animation.play("show")
 	showing = true
 
