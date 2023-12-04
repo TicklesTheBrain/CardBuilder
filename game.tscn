@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=30 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://cardInterfaceStuff/PlayAreaController.gd" id="5_fctuw"]
 [ext_resource type="Texture2D" uid="uid://b6x1kuw8ji1aa" path="res://assets/manaCoin.png" id="5_wfs64"]
 [ext_resource type="Texture2D" uid="uid://blxhpf1kfx2ym" path="res://assets/pokerChip.png" id="6_he1b8"]
+[ext_resource type="Script" path="res://ResourceTracker.gd" id="6_oxs0c"]
 [ext_resource type="Texture2D" uid="uid://doevg7dxoxgka" path="res://assets/pokerChip2.png" id="7_2g44v"]
 [ext_resource type="Resource" uid="uid://b2ru52u3aw843" path="res://content/debug_enemyDeck.tres" id="9_t18bm"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="12_q8pst"]
@@ -74,15 +75,27 @@ texture = ExtResource("15_2rvab")
 centered = false
 
 [node name="Poker" type="TextureRect" parent="."]
-offset_left = 21.0
-offset_top = 276.0
-offset_right = 164.0
-offset_bottom = 353.0
+offset_left = -12.0
+offset_top = 280.0
+offset_right = 131.0
+offset_bottom = 357.0
+texture = ExtResource("6_he1b8")
+expand_mode = 3
+stretch_mode = 5
+metadata/_edit_group_ = true
+
+[node name="Poker3" type="TextureRect" parent="Poker"]
+self_modulate = Color(0, 0, 0, 0.498039)
+show_behind_parent = true
+offset_left = 1.5
+offset_top = -1.5
+offset_right = 144.5
+offset_bottom = 75.5
 texture = ExtResource("6_he1b8")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Poker"]
+[node name="MyHPLabel" type="Label" parent="Poker" node_paths=PackedStringArray("resourceToTrack")]
 layout_mode = 0
 offset_left = 57.0
 offset_top = 21.0
@@ -90,6 +103,8 @@ offset_right = 97.0
 offset_bottom = 56.0
 theme_override_font_sizes/font_size = 25
 text = "25"
+script = ExtResource("6_oxs0c")
+resourceToTrack = NodePath("../../Logic/Player/Resources/hp")
 
 [node name="Poker2" type="TextureRect" parent="."]
 anchors_preset = 8
@@ -97,17 +112,37 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 1181.0
-offset_top = 281.0
-offset_right = 1258.19
-offset_bottom = 357.0
+offset_left = 1187.0
+offset_top = 274.0
+offset_right = 1264.19
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_2g44v")
+expand_mode = 3
+stretch_mode = 5
+metadata/_edit_group_ = true
+
+[node name="Poker3" type="TextureRect" parent="Poker2"]
+self_modulate = Color(0, 0, 0, 0.603922)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.095
+offset_top = -39.5
+offset_right = 40.095
+offset_bottom = 36.5
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_2g44v")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label2" type="Label" parent="Poker2"]
+[node name="EnemyHPLabel" type="Label" parent="Poker2" node_paths=PackedStringArray("resourceToTrack")]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 18.0
@@ -115,6 +150,8 @@ offset_right = 64.0
 offset_bottom = 53.0
 theme_override_font_sizes/font_size = 25
 text = "25"
+script = ExtResource("6_oxs0c")
+resourceToTrack = NodePath("../../Logic/Enemy/Resources/enemyHp")
 
 [node name="Logic" type="Node" parent="."]
 
@@ -139,7 +176,7 @@ deck = NodePath("DeckManager")
 script = ExtResource("3_c142g")
 resourceName = "hp"
 baseline = 25
-debugLabel = NodePath("../../../../InfoStuff/myhpCounter")
+debugLabel = NodePath("")
 
 [node name="BonusAttack" type="Node" parent="Logic/Player/Resources"]
 script = ExtResource("3_c142g")
@@ -168,7 +205,7 @@ script = ExtResource("3_c142g")
 resourceName = "Energy"
 baseline = 3
 capAtZero = true
-debugLabel = NodePath("../../../../InfoStuff/EnergyCounter")
+debugLabel = NodePath("")
 
 [node name="StartTurnCardDraw" type="Node" parent="Logic/Player/Resources"]
 script = ExtResource("3_c142g")
@@ -252,7 +289,7 @@ baseline = 21
 script = ExtResource("3_c142g")
 resourceName = "hp"
 baseline = 20
-debugLabel = NodePath("../../../../InfoStuff/theirHpCounter")
+debugLabel = NodePath("")
 
 [node name="EnemyBonusAttack" type="Node" parent="Logic/Enemy/Resources"]
 script = ExtResource("3_c142g")
@@ -395,70 +432,11 @@ position = Vector2(447.75, 137.875)
 shape = SubResource("RectangleShape2D_625ey")
 
 [node name="MessageContent" type="Label" parent="."]
-offset_left = 256.0
-offset_top = 315.0
-offset_right = 390.0
-offset_bottom = 338.0
-text = "Message Content"
-
-[node name="InfoStuff" type="GridContainer" parent="."]
-offset_left = 408.0
+offset_left = 162.0
 offset_top = 278.0
-offset_right = 562.0
-offset_bottom = 436.0
-columns = 2
-metadata/_edit_group_ = true
-
-[node name="Deck" type="Label" parent="InfoStuff"]
-layout_mode = 2
-text = "Deck
-"
-
-[node name="DeckCounter" type="Label" parent="InfoStuff"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.756863, 0.129412, 0.164706, 1)
-text = "13"
-
-[node name="Energy" type="Label" parent="InfoStuff"]
-layout_mode = 2
-text = "Energy"
-
-[node name="EnergyCounter" type="Label" parent="InfoStuff"]
-layout_mode = 2
-text = "3"
-
-[node name="PV" type="Label" parent="InfoStuff"]
-layout_mode = 2
-text = "Play Value"
-
-[node name="PlayAreaCounter" type="Label" parent="InfoStuff"]
-layout_mode = 2
-text = "666"
-
-[node name="Discard" type="Label" parent="InfoStuff"]
-layout_mode = 2
-text = "Discard"
-
-[node name="DiscardCounter" type="Label" parent="InfoStuff"]
-layout_mode = 2
-text = "0"
-
-[node name="myhp" type="Label" parent="InfoStuff"]
-layout_mode = 2
-text = "Your HP"
-
-[node name="myhpCounter" type="Label" parent="InfoStuff"]
-layout_mode = 2
-text = "0"
-
-[node name="theirHp" type="Label" parent="InfoStuff"]
-layout_mode = 2
-text = "Enemy HP
-"
-
-[node name="theirHpCounter" type="Label" parent="InfoStuff"]
-layout_mode = 2
-text = "0"
+offset_right = 296.0
+offset_bottom = 301.0
+text = "Message Content"
 
 [node name="Outlines" type="Node2D" parent="."]
 position = Vector2(11, 458)
