@@ -5,6 +5,7 @@ class_name DynamicPositionController
 @export var cardAreaId: int = 0:
 	set (newVal):
 		relevantShape = cardAreas[newVal]
+		cardAreaChanged.emit(newVal)
 		cardAreaId = newVal
 @export var minCardCenterDistance: float
 @export var maxCardGap: float
@@ -12,6 +13,8 @@ class_name DynamicPositionController
 @export var rowGap: float = 25
 
 var relevantShape: CollisionShape2D
+
+signal cardAreaChanged(newID: int)
 
 func scuttleCardsSpecific():
 

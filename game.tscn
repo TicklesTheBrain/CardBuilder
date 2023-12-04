@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=31 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -20,23 +20,24 @@
 [ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="17_ooe0n"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/SelfDoublingCanvasItem.gd" id="19_khykf"]
 [ext_resource type="Script" path="res://ManaShower.gd" id="20_shvvi"]
+[ext_resource type="Script" path="res://DynamicPositionOutline.gd" id="21_pj6uq"]
 [ext_resource type="Resource" uid="uid://dc1pbwqrsnd4m" path="res://content/test_cards.tres" id="24_wh5ls"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="27_mupmx"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnh12"]
+size = Vector2(398.5, 235.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_625ey"]
+size = Vector2(858.5, 234.25)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2v7eo"]
-size = Vector2(402, 237)
+size = Vector2(638, 232)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7o7mm"]
 size = Vector2(185, 242)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c17rp"]
 size = Vector2(868, 233)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnh12"]
-size = Vector2(293.5, 235.25)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_625ey"]
-size = Vector2(858.5, 234.25)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrk3j"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -342,6 +343,25 @@ offset_bottom = 395.0
 text = "OK
 "
 
+[node name="PlayArea" type="Area2D" parent="."]
+visible = false
+script = ExtResource("5_fctuw")
+
+[node name="PlayAreaPositionController" type="Node2D" parent="PlayArea" node_paths=PackedStringArray("cardAreas", "logicalContainer")]
+script = ExtResource("27_mupmx")
+cardAreas = [NodePath("../FullLengthShape"), NodePath("DecreasedShape")]
+minCardCenterDistance = 40.0
+maxCardGap = 30.0
+logicalContainer = NodePath("../../Logic/Player/PlayAreaManager")
+
+[node name="DecreasedShape" type="CollisionShape2D" parent="PlayArea/PlayAreaPositionController"]
+position = Vector2(217.75, 138.375)
+shape = SubResource("RectangleShape2D_qnh12")
+
+[node name="FullLengthShape" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(447.75, 137.875)
+shape = SubResource("RectangleShape2D_625ey")
+
 [node name="EnemyPlayAreaController" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer")]
 script = ExtResource("27_mupmx")
 cardAreas = [NodePath("EnemyPlayAreaSmall"), NodePath("EnemyPlayAreaFull")]
@@ -350,7 +370,7 @@ maxCardGap = 25.0
 logicalContainer = NodePath("../Logic/Enemy/EnemyPlayArea")
 
 [node name="EnemyPlayAreaFull" type="CollisionShape2D" parent="EnemyPlayAreaController"]
-position = Vector2(879, 137.5)
+position = Vector2(761, 144)
 shape = SubResource("RectangleShape2D_2v7eo")
 
 [node name="EnemyPlayAreaSmall" type="CollisionShape2D" parent="EnemyPlayAreaController"]
@@ -429,25 +449,6 @@ logicalContainer = NodePath("../Logic/Player/HandManager")
 [node name="HandCardArea" type="CollisionShape2D" parent="HandCardDisplayController"]
 position = Vector2(639, 583.5)
 shape = SubResource("RectangleShape2D_c17rp")
-
-[node name="PlayArea" type="Area2D" parent="."]
-visible = false
-script = ExtResource("5_fctuw")
-
-[node name="PlayAreaPositionController" type="Node2D" parent="PlayArea" node_paths=PackedStringArray("cardAreas", "logicalContainer")]
-script = ExtResource("27_mupmx")
-cardAreas = [NodePath("../FullLengthShape"), NodePath("DecreasedShape")]
-minCardCenterDistance = 40.0
-maxCardGap = 30.0
-logicalContainer = NodePath("../../Logic/Player/PlayAreaManager")
-
-[node name="DecreasedShape" type="CollisionShape2D" parent="PlayArea/PlayAreaPositionController"]
-position = Vector2(165.25, 138.375)
-shape = SubResource("RectangleShape2D_qnh12")
-
-[node name="FullLengthShape" type="CollisionShape2D" parent="PlayArea"]
-position = Vector2(447.75, 137.875)
-shape = SubResource("RectangleShape2D_625ey")
 
 [node name="MessageContent" type="Label" parent="."]
 offset_left = 162.0
@@ -546,13 +547,24 @@ theme_override_font_sizes/font_size = 30
 text = "HAND"
 metadata/_edit_lock_ = true
 
-[node name="MyPlayed" type="CanvasGroup" parent="Outlines"]
+[node name="MyPlayed" type="CanvasGroup" parent="Outlines" node_paths=PackedStringArray("outlines", "positionControllerToFollow")]
 position = Vector2(4, -438)
+script = ExtResource("21_pj6uq")
+outlines = [NodePath("OutlineBigger"), NodePath("OutlineSmaller")]
+positionControllerToFollow = NodePath("../../PlayArea/PlayAreaPositionController")
 metadata/_edit_group_ = true
 
-[node name="PanelContainer" type="PanelContainer" parent="Outlines/MyPlayed"]
+[node name="OutlineBigger" type="PanelContainer" parent="Outlines/MyPlayed"]
+visible = false
 offset_left = -3.0
 offset_right = 865.0
+offset_bottom = 246.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yrk3j")
+
+[node name="OutlineSmaller" type="PanelContainer" parent="Outlines/MyPlayed"]
+offset_left = -3.0
+offset_right = 411.0
 offset_bottom = 246.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yrk3j")
@@ -573,12 +585,22 @@ theme_override_fonts/font = ExtResource("17_ooe0n")
 theme_override_font_sizes/font_size = 30
 text = "PLAYED"
 
-[node name="EnemyPlayed" type="CanvasGroup" parent="Outlines"]
+[node name="EnemyPlayed" type="CanvasGroup" parent="Outlines" node_paths=PackedStringArray("outlines", "positionControllerToFollow")]
 position = Vector2(878, -438)
-metadata/_edit_group_ = true
+script = ExtResource("21_pj6uq")
+outlines = [NodePath("EnemySmallerOutline"), NodePath("EnemyBiggerOutline")]
+positionControllerToFollow = NodePath("../../EnemyPlayAreaController")
 
-[node name="PanelContainer" type="PanelContainer" parent="Outlines/EnemyPlayed"]
+[node name="EnemySmallerOutline" type="PanelContainer" parent="Outlines/EnemyPlayed"]
 offset_left = -3.0
+offset_right = 379.0
+offset_bottom = 246.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yrk3j")
+
+[node name="EnemyBiggerOutline" type="PanelContainer" parent="Outlines/EnemyPlayed"]
+visible = false
+offset_left = -454.0
 offset_right = 379.0
 offset_bottom = 246.0
 mouse_filter = 2
@@ -586,14 +608,14 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_yrk3j")
 
 [node name="Icon" type="Sprite2D" parent="Outlines/EnemyPlayed"]
 material = SubResource("CanvasItemMaterial_nems8")
-position = Vector2(73, 242)
-scale = Vector2(0.953125, 0.4375)
+position = Vector2(301.5, 242)
+scale = Vector2(0.976563, 0.4375)
 texture = ExtResource("16_dsl8p")
 
 [node name="Label" type="Label" parent="Outlines/EnemyPlayed"]
-offset_left = 11.0
+offset_left = 241.0
 offset_top = 217.0
-offset_right = 149.0
+offset_right = 379.0
 offset_bottom = 258.0
 theme_override_colors/font_color = Color(1, 1, 1, 0.533333)
 theme_override_fonts/font = ExtResource("17_ooe0n")
