@@ -18,7 +18,9 @@ func triggerSpecific(ctxt: GameStateContext):
 		cont.disposeAll()
 	else:
 		InputLord.cardSelectionRequested.emit(actor.hand, amountOfCardsToDiscard, receiveSelection)
+		Events.newTopMessageRequested.emit("Choose {num} cards to discard".format({"num": amountOfCardsToDiscard}))
 		await cardSelectionDone
+		Events.hideTopMessages.emit()
 		for card in selectedCards:
 			cont.disposeCard(card)
 

@@ -87,6 +87,7 @@ metadata/_edit_group_ = true
 [node name="Poker3" type="TextureRect" parent="Poker"]
 self_modulate = Color(0, 0, 0, 0.498039)
 show_behind_parent = true
+layout_mode = 0
 offset_left = 1.5
 offset_top = -1.5
 offset_right = 144.5
@@ -172,11 +173,10 @@ deck = NodePath("DeckManager")
 
 [node name="Resources" type="Node" parent="Logic/Player"]
 
-[node name="hp" type="Node" parent="Logic/Player/Resources" node_paths=PackedStringArray("debugLabel")]
+[node name="hp" type="Node" parent="Logic/Player/Resources"]
 script = ExtResource("3_c142g")
 resourceName = "hp"
 baseline = 25
-debugLabel = NodePath("")
 
 [node name="BonusAttack" type="Node" parent="Logic/Player/Resources"]
 script = ExtResource("3_c142g")
@@ -200,12 +200,11 @@ script = ExtResource("3_c142g")
 resourceName = "BonusDefence"
 capAtZero = true
 
-[node name="Energy" type="Node" parent="Logic/Player/Resources" node_paths=PackedStringArray("debugLabel")]
+[node name="Energy" type="Node" parent="Logic/Player/Resources"]
 script = ExtResource("3_c142g")
 resourceName = "Energy"
 baseline = 3
 capAtZero = true
-debugLabel = NodePath("")
 
 [node name="StartTurnCardDraw" type="Node" parent="Logic/Player/Resources"]
 script = ExtResource("3_c142g")
@@ -285,11 +284,10 @@ script = ExtResource("3_c142g")
 resourceName = "BustValue"
 baseline = 21
 
-[node name="enemyHp" type="Node" parent="Logic/Enemy/Resources" node_paths=PackedStringArray("debugLabel")]
+[node name="enemyHp" type="Node" parent="Logic/Enemy/Resources"]
 script = ExtResource("3_c142g")
 resourceName = "hp"
 baseline = 20
-debugLabel = NodePath("")
 
 [node name="EnemyBonusAttack" type="Node" parent="Logic/Enemy/Resources"]
 script = ExtResource("3_c142g")
@@ -320,10 +318,10 @@ baseline = 3
 capAtZero = true
 
 [node name="DrawButton" type="Button" parent="."]
-offset_left = 1028.0
-offset_top = 283.0
-offset_right = 1118.0
-offset_bottom = 314.0
+offset_left = 927.0
+offset_top = 325.0
+offset_right = 1017.0
+offset_bottom = 356.0
 text = "Draw Card"
 
 [node name="EndButton" type="Button" parent="."]
@@ -335,10 +333,10 @@ text = "End Hand
 "
 
 [node name="OkBUtton" type="Button" parent="."]
-offset_left = 829.0
-offset_top = 284.0
-offset_right = 912.0
-offset_bottom = 315.0
+offset_left = 929.0
+offset_top = 364.0
+offset_right = 1012.0
+offset_bottom = 395.0
 text = "OK
 "
 

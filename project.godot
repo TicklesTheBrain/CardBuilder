@@ -25,6 +25,7 @@ PocketLord="*res://pocket_lord.tscn"
 CardDisplayLord="*res://card_display_lord.tscn"
 CardImageMaker="*res://cardImageMaker.tscn"
 CardNamingLord="*res://card_naming_lord.tscn"
+TopMessage="*res://top_message.tscn"
 
 [debug]
 
