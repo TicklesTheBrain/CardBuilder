@@ -142,6 +142,7 @@ func duplicateSelf() -> CardData:
 	newCard.type = type.duplicate(true)
 	newCard.graft = graft
 	newCard.revealed = revealed
+	newCard.cardBack = cardBack
 	newCard.cost = cost.duplicate(true)
 	newCard.attack = attack.duplicate(true)
 	newCard.defence = defence.duplicate(true)

@@ -24,10 +24,10 @@
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="27_mupmx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2v7eo"]
-size = Vector2(587, 237)
+size = Vector2(402, 237)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7o7mm"]
-size = Vector2(368, 242)
+size = Vector2(185, 242)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c17rp"]
 size = Vector2(868, 233)
@@ -350,11 +350,11 @@ maxCardGap = 25.0
 logicalContainer = NodePath("../Logic/Enemy/EnemyPlayArea")
 
 [node name="EnemyPlayAreaFull" type="CollisionShape2D" parent="EnemyPlayAreaController"]
-position = Vector2(971.5, 137.5)
+position = Vector2(879, 137.5)
 shape = SubResource("RectangleShape2D_2v7eo")
 
 [node name="EnemyPlayAreaSmall" type="CollisionShape2D" parent="EnemyPlayAreaController"]
-position = Vector2(1079, 140)
+position = Vector2(987.5, 140)
 shape = SubResource("RectangleShape2D_7o7mm")
 
 [node name="EnemyDiscardController" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
@@ -363,7 +363,7 @@ positionMarker = NodePath("EnemyDiscard")
 logicalContainer = NodePath("../Logic/Enemy/EnemyDiscard")
 
 [node name="EnemyDiscard" type="Marker2D" parent="EnemyDiscardController"]
-position = Vector2(1216, 164)
+position = Vector2(1200, 380)
 
 [node name="DeckDisplayPile" type="Node2D" parent="." node_paths=PackedStringArray("pileCenter", "logicalContainer")]
 script = ExtResource("14_27y8n")
@@ -382,6 +382,24 @@ reverseZ = true
 
 [node name="DeckOrigin" type="Marker2D" parent="DeckDisplayPile"]
 position = Vector2(102, 577)
+
+[node name="EnemyDeckDisplay" type="Node2D" parent="." node_paths=PackedStringArray("pileCenter", "logicalContainer")]
+script = ExtResource("14_27y8n")
+pileCenter = NodePath("EnemyDeckOrigin")
+positionDriftX = 3.0
+positionDriftY = 3.0
+rotationDrift = 6.0
+shufflePositionDriftX = 15.0
+shufflePositionDriftY = 30.0
+shuffleRotationDrift = 35.0
+shuffleTime = 1.5
+shuffleTimeDrift = 0.3
+logicalContainer = NodePath("../Logic/Enemy/EnemyDeck")
+resetRotation = false
+reverseZ = true
+
+[node name="EnemyDeckOrigin" type="Marker2D" parent="EnemyDeckDisplay"]
+position = Vector2(1153, 138)
 
 [node name="DiscardDisplayPile" type="Node2D" parent="." node_paths=PackedStringArray("pileCenter", "logicalContainer")]
 script = ExtResource("14_27y8n")
