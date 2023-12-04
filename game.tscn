@@ -117,7 +117,6 @@ baseline = 21
 
 [node name="DeckManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("3_8edax")
-debug = false
 templatePackage = ExtResource("24_wh5ls")
 feedContainer = NodePath("../DiscardManager")
 disposeContainer = NodePath("../DiscardManager")

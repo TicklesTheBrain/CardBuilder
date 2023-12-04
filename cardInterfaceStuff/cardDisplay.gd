@@ -59,6 +59,9 @@ var prevDefence: int
 var prevCost: int
 var prevRevealed: bool
 
+var waitingForCardImage: bool
+signal cardImageReceived()
+
 var broughtToFront: bool
 var regularZOrder: int = 0
 var graftToShow: CardData
@@ -91,9 +94,12 @@ func getCardBack(type: BackTypes) -> Texture2D:
 	return null
 
 func updateCardImage(data: CardData = cardData):
-	if data.revealed:
+	if data.revealed:		
+		waitingForCardImage = true
 		await CardImageMaker.getCardImage(data, receiveCardImage)
-	else:
+	else:		
+		if waitingForCardImage:
+			await cardImageReceived
 		cardImageRect.texture = getCardBack(data.cardBack)
 
 func setupCardDisplay(data: CardData):
@@ -104,7 +110,9 @@ func setupCardDisplay(data: CardData):
 	updateCardImage(data)
 
 func receiveCardImage(image: Texture2D):
+	waitingForCardImage = false
 	cardImageRect.texture = image
+	cardImageReceived.emit()
 
 func maybeUpdateNeeded(dataToShow: CardData = cardData):
 
@@ -112,7 +120,7 @@ func maybeUpdateNeeded(dataToShow: CardData = cardData):
 	var currCost = dataToShow.getCost()
 	var currAttack = dataToShow.getAttack()
 	var currDefence = dataToShow.getDefence()
-	var currRevealed = dataToShow.revealed	
+	var currRevealed = dataToShow.revealed
 
 	if currValue != prevValue or currCost != prevCost or currAttack != prevAttack or currDefence != prevDefence or prevRevealed != currRevealed:
 		updateCardImage(dataToShow)
@@ -263,5 +271,3 @@ func updateZ():
 		z_index = 100
 	else:
 		z_index = regularZOrder
-
-	
