@@ -17,12 +17,16 @@ func triggerSpecific(ctxt: GameStateContext):
 	if amountOfCardsToDiscard == -1:
 		cont.disposeAll()
 	else:
-		InputLord.cardSelectionRequested.emit(actor.hand, amountOfCardsToDiscard, receiveSelection)
-		Events.newTopMessageRequested.emit("Choose {num} cards to discard".format({"num": amountOfCardsToDiscard}))
-		await cardSelectionDone
-		Events.hideTopMessages.emit()
-		for card in selectedCards:
-			cont.disposeCard(card)
+		var clampedAmount = min(cont.getNoOfCards(), amountOfCardsToDiscard)
+		if clampedAmount > 0:
+			Events.newTopMessageRequested.emit("Choose {num} cards to discard".format({"num": clampedAmount}))
+			InputLord.cardSelectionRequested.emit(actor.hand, clampedAmount, receiveSelection)
+			await cardSelectionDone
+			Events.hideTopMessages.emit()
+			for card in selectedCards:
+				cont.disposeCard(card)
+		else:
+			print("nothing to discard")
 
 func getTextSpecific() -> String:
 	if amountOfCardsToDiscard == -1:

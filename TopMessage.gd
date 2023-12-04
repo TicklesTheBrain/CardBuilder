@@ -11,17 +11,8 @@ func _ready():
 	Events.hideTopMessages.connect(hideMessage)
 
 func showMessage(newMessage: String):
-	if animation.is_playing():
-		var animationName = animation.current_animation
-		match animationName:
-			"hide":
-				await messageHidden
-			"show":
-				await animation.animation_finished
-				hideMessage()
-				await messageHidden
-	
-	if showing:
+	print('show message triggered')
+	if animation.is_playing() or showing:
 		hideMessage()
 		await messageHidden
 	
@@ -30,6 +21,15 @@ func showMessage(newMessage: String):
 	showing = true
 
 func hideMessage():
+	print("hide top message triggered")
+
+	if animation.is_playing():
+		var animationName = animation.current_animation
+		match animationName:
+			"hide":
+				return
+			'show':
+				await animation.animation_finished
 	
 	animation.play("hide")
 	await animation.animation_finished
