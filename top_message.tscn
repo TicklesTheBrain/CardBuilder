@@ -1,38 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://die8dommtbcyo"]
+[gd_scene load_steps=9 format=3 uid="uid://die8dommtbcyo"]
 
 [ext_resource type="Script" path="res://TopMessage.gd" id="1_1hh7v"]
-[ext_resource type="Texture2D" uid="uid://bmdryvr48vu5j" path="res://assets/plankAndChain.png" id="2_vshg4"]
-[ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="3_vkxed"]
+[ext_resource type="Texture2D" uid="uid://bcx8tre6d6cnp" path="res://assets/torn_paper.png" id="2_erh1c"]
+[ext_resource type="FontFile" uid="uid://dvlkrwbvctr8j" path="res://fonts/Good Vibrations Solid.otf" id="3_1hatg"]
 
-[sub_resource type="Animation" id="Animation_7eaf7"]
-resource_name = "show"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.277393, 1.31951),
-"update": 0,
-"values": [Vector2(640, -181), Vector2(640, -18)]
-}
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u6dtf"]
 
 [sub_resource type="Animation" id="Animation_midkl"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("AnimationRoot:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(640, -180)]
+"values": [Vector2(640, -320)]
 }
 
 [sub_resource type="Animation" id="Animation_jpge6"]
@@ -40,14 +26,30 @@ resource_name = "hide"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("AnimationRoot:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.482968, 0.732043),
+"transitions": PackedFloat32Array(3.24901, 0.0457527),
 "update": 0,
-"values": [Vector2(640, -18), Vector2(640, -181)]
+"values": [Vector2(640, -180), Vector2(650, -303)]
+}
+
+[sub_resource type="Animation" id="Animation_7eaf7"]
+resource_name = "show"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationRoot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.203063, 4),
+"update": 0,
+"values": [Vector2(639, -287), Vector2(640, -180)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t74fg"]
@@ -60,31 +62,39 @@ _data = {
 [node name="TopMessage" type="Node2D" node_paths=PackedStringArray("text", "animation")]
 z_index = 200
 script = ExtResource("1_1hh7v")
-text = NodePath("Sprite2D/Message")
+text = NodePath("AnimationRoot/Message")
 animation = NodePath("AnimationPlayer")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(640, -180)
-texture = ExtResource("2_vshg4")
+[node name="AnimationRoot" type="Node2D" parent="."]
+position = Vector2(640, -320)
 metadata/_edit_group_ = true
 
-[node name="Message" type="Label" parent="Sprite2D"]
-self_modulate = Color(1, 1, 1, 0.501961)
-offset_left = -590.0
-offset_top = 92.0
-offset_right = 596.0
-offset_bottom = 147.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_vkxed")
-theme_override_font_sizes/font_size = 40
-text = "THIS IS THE LONGEST TEXT THAT YOU HAVE EVER SEEN"
-horizontal_alignment = 1
+[node name="Sprite2D" type="Sprite2D" parent="AnimationRoot"]
+position = Vector2(-1, -127)
+rotation = 4.71239
+scale = Vector2(1.28917, 1.28917)
+texture = ExtResource("2_erh1c")
+metadata/_edit_group_ = true
 
-[node name="Shadow" type="Sprite2D" parent="Sprite2D"]
+[node name="Shadow" type="Sprite2D" parent="AnimationRoot/Sprite2D"]
 self_modulate = Color(0, 0, 0, 0.490196)
 show_behind_parent = true
-position = Vector2(10, -10)
-texture = ExtResource("2_vshg4")
+position = Vector2(-15, 15)
+texture = ExtResource("2_erh1c")
+
+[node name="Message" type="Label" parent="AnimationRoot"]
+self_modulate = Color(1, 1, 1, 0.823529)
+material = SubResource("CanvasItemMaterial_u6dtf")
+offset_left = -609.0
+offset_top = 195.0
+offset_right = 577.0
+offset_bottom = 250.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_1hatg")
+theme_override_font_sizes/font_size = 40
+text = "Discard 1 Card."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

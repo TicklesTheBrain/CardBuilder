@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=34 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" path="res://cardInterfaceStuff/SelfDoublingCanvasItem.gd" id="19_khykf"]
 [ext_resource type="Script" path="res://ManaShower.gd" id="20_shvvi"]
 [ext_resource type="Script" path="res://DynamicPositionOutline.gd" id="21_pj6uq"]
+[ext_resource type="Script" path="res://ValueTracker.gd" id="22_7os3x"]
 [ext_resource type="Resource" uid="uid://dc1pbwqrsnd4m" path="res://content/test_cards.tres" id="24_wh5ls"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="27_mupmx"]
 
@@ -53,6 +54,11 @@ corner_radius_bottom_left = 15
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nems8"]
 blend_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2nmam"]
+blend_mode = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_013tw"]
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("playAreaPositionController", "enemyPlayAreaPositionController", "messageLabel", "drawCardButton", "endHandButton", "okButton", "player", "enemy")]
 script = ExtResource("1_hbkeb")
@@ -552,7 +558,6 @@ position = Vector2(4, -438)
 script = ExtResource("21_pj6uq")
 outlines = [NodePath("OutlineBigger"), NodePath("OutlineSmaller")]
 positionControllerToFollow = NodePath("../../PlayArea/PlayAreaPositionController")
-metadata/_edit_group_ = true
 
 [node name="OutlineBigger" type="PanelContainer" parent="Outlines/MyPlayed"]
 visible = false
@@ -569,13 +574,29 @@ offset_bottom = 246.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yrk3j")
 
-[node name="Icon" type="Sprite2D" parent="Outlines/MyPlayed"]
+[node name="Mask" type="Sprite2D" parent="Outlines/MyPlayed"]
 material = SubResource("CanvasItemMaterial_nems8")
 position = Vector2(76, 242)
 scale = Vector2(1, 0.4375)
 texture = ExtResource("16_dsl8p")
 
-[node name="Label" type="Label" parent="Outlines/MyPlayed"]
+[node name="Mask2" type="Panel" parent="Outlines/MyPlayed"]
+material = SubResource("CanvasItemMaterial_2nmam")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 200.0
+offset_top = 220.0
+offset_right = 276.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_013tw")
+
+[node name="PlayedText" type="Label" parent="Outlines/MyPlayed"]
 offset_left = 11.0
 offset_top = 217.0
 offset_right = 149.0
@@ -584,6 +605,27 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.533333)
 theme_override_fonts/font = ExtResource("17_ooe0n")
 theme_override_font_sizes/font_size = 30
 text = "PLAYED"
+
+[node name="ValueText" type="Label" parent="Outlines/MyPlayed" node_paths=PackedStringArray("containerToLookupValue", "bustResource", "adjustableMask")]
+offset_left = 151.0
+offset_top = 217.0
+offset_right = 322.0
+offset_bottom = 258.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_ooe0n")
+theme_override_font_sizes/font_size = 30
+text = "22/22"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("22_7os3x")
+containerToLookupValue = NodePath("../../../Logic/Player/PlayAreaManager")
+bustResource = NodePath("../../../Logic/Player/Resources/BustValue")
+prefixString = null
+middleString = "/"
+colorRegular = Color(1, 1, 1, 0.533333)
+colorBusted = Color(1, 0.404754, 0.382368, 0.533333)
+adjustableMask = NodePath("../Mask2")
+extraMaskSpacing = null
 
 [node name="EnemyPlayed" type="CanvasGroup" parent="Outlines" node_paths=PackedStringArray("outlines", "positionControllerToFollow")]
 position = Vector2(878, -438)
@@ -606,7 +648,42 @@ offset_bottom = 246.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yrk3j")
 
-[node name="Icon" type="Sprite2D" parent="Outlines/EnemyPlayed"]
+[node name="Mask2" type="Panel" parent="Outlines/EnemyPlayed"]
+material = SubResource("CanvasItemMaterial_2nmam")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 31.0
+offset_top = 217.0
+offset_right = 107.0
+offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_013tw")
+
+[node name="EnemyValueText" type="Label" parent="Outlines/EnemyPlayed" node_paths=PackedStringArray("containerToLookupValue", "bustResource", "adjustableMask")]
+offset_left = -18.0
+offset_top = 214.0
+offset_right = 153.0
+offset_bottom = 255.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_ooe0n")
+theme_override_font_sizes/font_size = 30
+text = "22/22"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("22_7os3x")
+containerToLookupValue = NodePath("../../../Logic/Enemy/EnemyPlayArea")
+bustResource = NodePath("../../../Logic/Enemy/Resources/BustValueEnemy")
+middleString = "/"
+colorRegular = Color(1, 1, 1, 0.533333)
+colorBusted = Color(1, 0.404754, 0.382368, 0.533333)
+adjustableMask = NodePath("../Mask2")
+
+[node name="Mask" type="Sprite2D" parent="Outlines/EnemyPlayed"]
 material = SubResource("CanvasItemMaterial_nems8")
 position = Vector2(301.5, 242)
 scale = Vector2(0.976563, 0.4375)
