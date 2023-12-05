@@ -52,13 +52,15 @@ theme_override_font_sizes/font_size = 30
 text = "DECK"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-offset_right = 762.0
-offset_bottom = 397.0
+offset_left = 224.0
+offset_top = 75.0
+offset_right = 1025.0
+offset_bottom = 556.0
 texture = ExtResource("4_cyejo")
 region_rect = Rect2(0.301132, 0.255318, 429.099, 429.363)
 patch_margin_left = 120
 patch_margin_top = 121
 patch_margin_right = 122
 patch_margin_bottom = 120
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1

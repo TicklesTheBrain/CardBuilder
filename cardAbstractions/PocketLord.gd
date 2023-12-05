@@ -15,10 +15,10 @@ func _ready():
 func makeNewPocket(pocketText: String, receivingMethod: Callable, expectedCards: int):	
 
 	var newPocket = pocketPacked.instantiate() as PocketDisplay
+	add_child(newPocket)
 	newPocket.setSize(expectedCards)
 	var pocketContainer = newPocket.pocketContainer
 	newPocket.setupText(pocketText)
-	add_child(newPocket)
 
 	newPocket.layer += pocketRefs.keys().size() #new pockets always open on top
 

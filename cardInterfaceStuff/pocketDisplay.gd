@@ -3,7 +3,7 @@ class_name PocketDisplay
 
 @export var animation: AnimationPlayer
 @export var positionController: CardPositionController
-@export var backGroundPanel: Panel
+@export var backGroundPanel: NinePatchRect
 @export var infoLabel: Label
 @export var sizesMinCenterDistance: Array[float] = []
 @export var sizesMaxCardGaps: Array[float] = []
@@ -22,8 +22,9 @@ class_name PocketDisplay
 
 enum PocketSize {SMALL, MEDIUM, BIG, FULL}
 
-signal pocketOpened
-signal pocketClosed
+signal resizeTriggered()
+signal pocketOpened()
+signal pocketClosed()
 
 func setSize(expectedCards: int):
 
@@ -43,6 +44,7 @@ func adjustPanel():
 
 	backGroundPanel.position = topLeftCorner
 	backGroundPanel.size = shapeSize
+	resizeTriggered.emit()
 
 func setupPositionController(container: CardContainer):
 	positionController.setupNewLogicalContainer(container)

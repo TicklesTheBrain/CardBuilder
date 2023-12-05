@@ -28,7 +28,7 @@ var shadowGrow: bool = false:
 @export var backsBlue: Array[Texture2D]
 
 @export_group("Detailed Info References")
-@export var detailedInfoRoot: PanelContainer
+@export var detailedInfoRoot: Control
 @export var valueLabel: Label
 @export var costLabel: Label
 

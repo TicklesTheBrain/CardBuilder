@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://o20e5thwdy3j"]
+[gd_scene load_steps=14 format=3 uid="uid://o20e5thwdy3j"]
 
 [ext_resource type="Script" path="res://cardInterfaceStuff/pocketDisplay.gd" id="1_b68e2"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="2_sxrrm"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="2_sybwb"]
+[ext_resource type="Texture2D" uid="uid://dxgj5eydfva4j" path="res://assets/ninePatchFrame.png" id="4_ro7uo"]
+[ext_resource type="Script" path="res://sizeMatcher.gd" id="5_57r5e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xuy27"]
 size = Vector2(1248, 688)
@@ -15,19 +17,6 @@ size = Vector2(983, 428)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvlis"]
 size = Vector2(575, 290)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2gfwq"]
-bg_color = Color(0.0313726, 0.247059, 0.109804, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-corner_detail = 12
 
 [sub_resource type="Animation" id="Animation_i0qxd"]
 length = 0.001
@@ -87,8 +76,8 @@ layer = 2
 script = ExtResource("1_b68e2")
 animation = NodePath("Pocket/PocketAnimation")
 positionController = NodePath("PocketDynamicPosition")
-backGroundPanel = NodePath("Pocket/Panel")
-infoLabel = NodePath("Pocket/Panel/Label")
+backGroundPanel = NodePath("Pocket/NinePatchRect")
+infoLabel = NodePath("Pocket/NinePatchRect/Label")
 sizesMinCenterDistance = Array[float]([35.0, 35.0, 30.0, 25.0])
 sizesMaxCardGaps = Array[float]([40.0, 40.0, 35.0, 30.0])
 sizesMultipleRows = Array[bool]([false, false, true, true])
@@ -107,22 +96,18 @@ logicalContainer = NodePath("../PocketContainer")
 canvasLayer = NodePath("..")
 
 [node name="ShapeFull" type="CollisionShape2D" parent="PocketDynamicPosition"]
-visible = false
 position = Vector2(643, 360)
 shape = SubResource("RectangleShape2D_xuy27")
 
 [node name="ShapeBig" type="CollisionShape2D" parent="PocketDynamicPosition"]
-visible = false
 position = Vector2(639, 263)
 shape = SubResource("RectangleShape2D_p8l4i")
 
 [node name="ShapeMid" type="CollisionShape2D" parent="PocketDynamicPosition"]
-visible = false
 position = Vector2(646.5, 218)
 shape = SubResource("RectangleShape2D_lydsy")
 
 [node name="ShapeSmall" type="CollisionShape2D" parent="PocketDynamicPosition"]
-visible = false
 position = Vector2(626.5, 171)
 shape = SubResource("RectangleShape2D_hvlis")
 
@@ -130,18 +115,44 @@ shape = SubResource("RectangleShape2D_hvlis")
 position = Vector2(0, -720)
 metadata/_edit_group_ = true
 
-[node name="Panel" type="Panel" parent="Pocket"]
-offset_right = 300.0
-offset_bottom = 600.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_2gfwq")
+[node name="NinePatchRect" type="NinePatchRect" parent="Pocket"]
+offset_right = 242.0
+offset_bottom = 241.0
+texture = ExtResource("4_ro7uo")
+region_rect = Rect2(0.301132, 0.255318, 429.099, 429.363)
+patch_margin_left = 120
+patch_margin_top = 121
+patch_margin_right = 122
+patch_margin_bottom = 120
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
-[node name="Label" type="Label" parent="Pocket/Panel"]
+[node name="Label" type="Label" parent="Pocket/NinePatchRect"]
 layout_mode = 0
 offset_left = 94.0
-offset_top = 12.0
+offset_top = 38.0
 offset_right = 449.0
-offset_bottom = 35.0
+offset_bottom = 61.0
 text = "This is the message that is seen on the pocket"
+
+[node name="Shadow" type="NinePatchRect" parent="Pocket/NinePatchRect" node_paths=PackedStringArray("controlToMatch", "triggerResizeEmitter")]
+self_modulate = Color(0, 0, 0, 0.521569)
+show_behind_parent = true
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 252.0
+offset_bottom = 251.0
+texture = ExtResource("4_ro7uo")
+region_rect = Rect2(0.301132, 0.255318, 429.099, 429.363)
+patch_margin_left = 120
+patch_margin_top = 121
+patch_margin_right = 122
+patch_margin_bottom = 120
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource("5_57r5e")
+controlToMatch = NodePath("..")
+triggerResizeEmitter = NodePath("../../..")
 
 [node name="PocketAnimation" type="AnimationPlayer" parent="Pocket"]
 libraries = {

@@ -228,39 +228,39 @@ handle_input_locally = false
 size = Vector2i(500, 700)
 render_target_update_mode = 4
 script = ExtResource("1_4t387")
-infoSymbolsColumn = NodePath("DebugNestingLevel/InfoSymbolColumn")
-infoColumnLetter = NodePath("DebugNestingLevel/InfoSymbolColumn/InfoColumnLetter")
-infoColumnSymbol = NodePath("DebugNestingLevel/InfoSymbolColumn/InfoColumnSymbol")
-numberLabel = NodePath("DebugNestingLevel/ColoredGroup/NumberLabel")
-cornerSymbol = NodePath("DebugNestingLevel/ColoredGroup/CornerSymbol")
-symbolPositions = NodePath("DebugNestingLevel/SymbolPositions")
-coloredGroup = NodePath("DebugNestingLevel/ColoredGroup")
-doublingMana = NodePath("DebugNestingLevel/DoublingMana")
-doublingShield = NodePath("DebugNestingLevel/DoublingShield")
-doublingSword = NodePath("DebugNestingLevel/DoublingSword")
-cardFace = NodePath("DebugNestingLevel/ColoredGroup/TextureRect")
-cardNameLabel = NodePath("DebugNestingLevel/ColoredGroup/cardName")
+infoSymbolsColumn = NodePath("RegularCard/InfoSymbolColumn")
+infoColumnLetter = NodePath("RegularCard/InfoSymbolColumn/InfoColumnLetter")
+infoColumnSymbol = NodePath("RegularCard/InfoSymbolColumn/InfoColumnSymbol")
+numberLabel = NodePath("RegularCard/ColoredGroup/NumberLabel")
+cornerSymbol = NodePath("RegularCard/ColoredGroup/CornerSymbol")
+symbolPositions = NodePath("RegularCard/SymbolPositions")
+coloredGroup = NodePath("RegularCard/ColoredGroup")
+doublingMana = NodePath("RegularCard/DoublingMana")
+doublingShield = NodePath("RegularCard/DoublingShield")
+doublingSword = NodePath("RegularCard/DoublingSword")
+cardFace = NodePath("RegularCard/ColoredGroup/TextureRect")
+cardNameLabel = NodePath("RegularCard/ColoredGroup/cardName")
 maxColumnItems = 7
 typeProperties = Array[ExtResource("3_rpyhr")]([SubResource("Resource_ve20g"), SubResource("Resource_11f8w"), SubResource("Resource_kggi4"), SubResource("Resource_cqa7h")])
 cardEffectSymbolReference = Array[ExtResource("15_mwoi4")]([SubResource("Resource_si11j"), SubResource("Resource_23cca"), SubResource("Resource_hp68o"), SubResource("Resource_qhiwk"), SubResource("Resource_2yugf"), SubResource("Resource_3q57m"), SubResource("Resource_okoi8"), SubResource("Resource_f2dl7"), SubResource("Resource_qjv0l"), SubResource("Resource_8mg32"), SubResource("Resource_5ru8q"), SubResource("Resource_ge3rs"), SubResource("Resource_85sy8"), SubResource("Resource_rfcp4"), SubResource("Resource_w5ssd"), SubResource("Resource_3stci"), SubResource("Resource_6cg1p"), SubResource("Resource_4kcd4"), SubResource("Resource_u8jst"), SubResource("Resource_7cvb4"), SubResource("Resource_8fe4m"), SubResource("Resource_n4tox"), SubResource("Resource_otds3"), SubResource("Resource_cc12k"), SubResource("Resource_u2qw2"), SubResource("Resource_k7l0o")])
 playConditionSymbol = ExtResource("32_3q8w2")
 defaultSymbol = ExtResource("38_qyqde")
 
-[node name="DebugNestingLevel" type="Node2D" parent="."]
+[node name="RegularCard" type="Node2D" parent="."]
 
-[node name="Background" type="Sprite2D" parent="DebugNestingLevel"]
+[node name="Background" type="Sprite2D" parent="RegularCard"]
 texture = ExtResource("1_jh6uf")
 
-[node name="Subcamera" type="Camera2D" parent="DebugNestingLevel"]
+[node name="Subcamera" type="Camera2D" parent="RegularCard"]
 
-[node name="InfoSymbolColumn" type="VBoxContainer" parent="DebugNestingLevel"]
+[node name="InfoSymbolColumn" type="VBoxContainer" parent="RegularCard"]
 modulate = Color(0, 0, 0, 1)
 offset_left = -244.0
 offset_top = -237.0
 offset_right = -158.0
 offset_bottom = 274.0
 
-[node name="InfoColumnLetter" type="Label" parent="DebugNestingLevel/InfoSymbolColumn"]
+[node name="InfoColumnLetter" type="Label" parent="RegularCard/InfoSymbolColumn"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -268,15 +268,15 @@ theme_override_font_sizes/font_size = 40
 text = "P:"
 horizontal_alignment = 1
 
-[node name="InfoColumnSymbol" type="TextureRect" parent="DebugNestingLevel/InfoSymbolColumn"]
+[node name="InfoColumnSymbol" type="TextureRect" parent="RegularCard/InfoSymbolColumn"]
 visible = false
 layout_mode = 2
 texture = ExtResource("2_rlkwh")
 expand_mode = 4
 
-[node name="ColoredGroup" type="CanvasGroup" parent="DebugNestingLevel"]
+[node name="ColoredGroup" type="CanvasGroup" parent="RegularCard"]
 
-[node name="cardName" type="Label" parent="DebugNestingLevel/ColoredGroup"]
+[node name="cardName" type="Label" parent="RegularCard/ColoredGroup"]
 offset_left = -239.0
 offset_top = 271.0
 offset_right = 239.0
@@ -286,7 +286,7 @@ theme_override_font_sizes/font_size = 35
 text = "BAT KING"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="DebugNestingLevel/ColoredGroup"]
+[node name="TextureRect" type="TextureRect" parent="RegularCard/ColoredGroup"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -302,12 +302,12 @@ texture = ExtResource("2_10xu8")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="CornerSymbol" type="Sprite2D" parent="DebugNestingLevel/ColoredGroup"]
+[node name="CornerSymbol" type="Sprite2D" parent="RegularCard/ColoredGroup"]
 position = Vector2(-134, -299)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("6_dv4bh")
 
-[node name="NumberLabel" type="Label" parent="DebugNestingLevel/ColoredGroup"]
+[node name="NumberLabel" type="Label" parent="RegularCard/ColoredGroup"]
 offset_left = -237.0
 offset_top = -355.0
 offset_right = -176.0
@@ -317,190 +317,190 @@ theme_override_font_sizes/font_size = 75
 text = "6"
 horizontal_alignment = 2
 
-[node name="SymbolPositions" type="Node2D" parent="DebugNestingLevel"]
+[node name="SymbolPositions" type="Node2D" parent="RegularCard"]
 
-[node name="1" type="Node2D" parent="DebugNestingLevel/SymbolPositions"]
+[node name="1" type="Node2D" parent="RegularCard/SymbolPositions"]
 
-[node name="Marker2D" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/1"]
+[node name="Marker2D" type="Marker2D" parent="RegularCard/SymbolPositions/1"]
 
-[node name="2" type="Node2D" parent="DebugNestingLevel/SymbolPositions"]
+[node name="2" type="Node2D" parent="RegularCard/SymbolPositions"]
 
-[node name="Marker2D" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/2"]
+[node name="Marker2D" type="Marker2D" parent="RegularCard/SymbolPositions/2"]
 position = Vector2(0, -200)
 
-[node name="Marker2D2" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/2"]
+[node name="Marker2D2" type="Marker2D" parent="RegularCard/SymbolPositions/2"]
 position = Vector2(0, 200)
 
-[node name="3" type="Node2D" parent="DebugNestingLevel/SymbolPositions"]
+[node name="3" type="Node2D" parent="RegularCard/SymbolPositions"]
 
-[node name="Marker2D" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/3"]
+[node name="Marker2D" type="Marker2D" parent="RegularCard/SymbolPositions/3"]
 position = Vector2(0, -200)
 
-[node name="Marker2D2" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/3"]
+[node name="Marker2D2" type="Marker2D" parent="RegularCard/SymbolPositions/3"]
 position = Vector2(0, 200)
 
-[node name="Marker2D3" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/3"]
+[node name="Marker2D3" type="Marker2D" parent="RegularCard/SymbolPositions/3"]
 
-[node name="4" type="Node2D" parent="DebugNestingLevel/SymbolPositions"]
+[node name="4" type="Node2D" parent="RegularCard/SymbolPositions"]
 
-[node name="Marker2D" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/4"]
+[node name="Marker2D" type="Marker2D" parent="RegularCard/SymbolPositions/4"]
 position = Vector2(-100, -200)
 
-[node name="Marker2D2" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/4"]
+[node name="Marker2D2" type="Marker2D" parent="RegularCard/SymbolPositions/4"]
 position = Vector2(-100, 200)
 
-[node name="Marker2D3" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/4"]
+[node name="Marker2D3" type="Marker2D" parent="RegularCard/SymbolPositions/4"]
 position = Vector2(100, -200)
 
-[node name="Marker2D4" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/4"]
+[node name="Marker2D4" type="Marker2D" parent="RegularCard/SymbolPositions/4"]
 position = Vector2(100, 200)
 
-[node name="5" type="Node2D" parent="DebugNestingLevel/SymbolPositions"]
+[node name="5" type="Node2D" parent="RegularCard/SymbolPositions"]
 
-[node name="Marker2D" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/5"]
+[node name="Marker2D" type="Marker2D" parent="RegularCard/SymbolPositions/5"]
 position = Vector2(-100, -200)
 
-[node name="Marker2D2" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/5"]
+[node name="Marker2D2" type="Marker2D" parent="RegularCard/SymbolPositions/5"]
 position = Vector2(-100, 200)
 
-[node name="Marker2D3" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/5"]
+[node name="Marker2D3" type="Marker2D" parent="RegularCard/SymbolPositions/5"]
 position = Vector2(100, -200)
 
-[node name="Marker2D4" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/5"]
+[node name="Marker2D4" type="Marker2D" parent="RegularCard/SymbolPositions/5"]
 position = Vector2(100, 200)
 
-[node name="Marker2D5" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/5"]
+[node name="Marker2D5" type="Marker2D" parent="RegularCard/SymbolPositions/5"]
 
-[node name="6" type="Node2D" parent="DebugNestingLevel/SymbolPositions"]
+[node name="6" type="Node2D" parent="RegularCard/SymbolPositions"]
 
-[node name="Marker2D" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/6"]
+[node name="Marker2D" type="Marker2D" parent="RegularCard/SymbolPositions/6"]
 position = Vector2(-100, -200)
 
-[node name="Marker2D2" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/6"]
+[node name="Marker2D2" type="Marker2D" parent="RegularCard/SymbolPositions/6"]
 position = Vector2(-100, 200)
 
-[node name="Marker2D3" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/6"]
+[node name="Marker2D3" type="Marker2D" parent="RegularCard/SymbolPositions/6"]
 position = Vector2(100, -200)
 
-[node name="Marker2D4" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/6"]
+[node name="Marker2D4" type="Marker2D" parent="RegularCard/SymbolPositions/6"]
 position = Vector2(100, 200)
 
-[node name="Marker2D5" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/6"]
+[node name="Marker2D5" type="Marker2D" parent="RegularCard/SymbolPositions/6"]
 position = Vector2(-100, 0)
 
-[node name="Marker2D6" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/6"]
+[node name="Marker2D6" type="Marker2D" parent="RegularCard/SymbolPositions/6"]
 position = Vector2(100, 0)
 
-[node name="7" type="Node2D" parent="DebugNestingLevel/SymbolPositions"]
+[node name="7" type="Node2D" parent="RegularCard/SymbolPositions"]
 
-[node name="Marker2D" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/7"]
+[node name="Marker2D" type="Marker2D" parent="RegularCard/SymbolPositions/7"]
 position = Vector2(-100, -200)
 
-[node name="Marker2D2" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/7"]
+[node name="Marker2D2" type="Marker2D" parent="RegularCard/SymbolPositions/7"]
 position = Vector2(-100, 200)
 
-[node name="Marker2D3" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/7"]
+[node name="Marker2D3" type="Marker2D" parent="RegularCard/SymbolPositions/7"]
 position = Vector2(100, -200)
 
-[node name="Marker2D4" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/7"]
+[node name="Marker2D4" type="Marker2D" parent="RegularCard/SymbolPositions/7"]
 position = Vector2(100, 200)
 
-[node name="Marker2D5" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/7"]
+[node name="Marker2D5" type="Marker2D" parent="RegularCard/SymbolPositions/7"]
 position = Vector2(-100, 0)
 
-[node name="Marker2D6" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/7"]
+[node name="Marker2D6" type="Marker2D" parent="RegularCard/SymbolPositions/7"]
 position = Vector2(100, 0)
 
-[node name="Marker2D7" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/7"]
+[node name="Marker2D7" type="Marker2D" parent="RegularCard/SymbolPositions/7"]
 position = Vector2(0, -100)
 
-[node name="8" type="Node2D" parent="DebugNestingLevel/SymbolPositions"]
+[node name="8" type="Node2D" parent="RegularCard/SymbolPositions"]
 
-[node name="Marker2D" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/8"]
+[node name="Marker2D" type="Marker2D" parent="RegularCard/SymbolPositions/8"]
 position = Vector2(-100, -200)
 
-[node name="Marker2D2" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/8"]
+[node name="Marker2D2" type="Marker2D" parent="RegularCard/SymbolPositions/8"]
 position = Vector2(-100, 200)
 
-[node name="Marker2D3" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/8"]
+[node name="Marker2D3" type="Marker2D" parent="RegularCard/SymbolPositions/8"]
 position = Vector2(100, -200)
 
-[node name="Marker2D4" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/8"]
+[node name="Marker2D4" type="Marker2D" parent="RegularCard/SymbolPositions/8"]
 position = Vector2(100, 200)
 
-[node name="Marker2D5" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/8"]
+[node name="Marker2D5" type="Marker2D" parent="RegularCard/SymbolPositions/8"]
 position = Vector2(-100, 0)
 
-[node name="Marker2D6" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/8"]
+[node name="Marker2D6" type="Marker2D" parent="RegularCard/SymbolPositions/8"]
 position = Vector2(100, 0)
 
-[node name="Marker2D7" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/8"]
+[node name="Marker2D7" type="Marker2D" parent="RegularCard/SymbolPositions/8"]
 position = Vector2(0, -100)
 
-[node name="Marker2D8" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/8"]
+[node name="Marker2D8" type="Marker2D" parent="RegularCard/SymbolPositions/8"]
 position = Vector2(0, 100)
 
-[node name="9" type="Node2D" parent="DebugNestingLevel/SymbolPositions"]
+[node name="9" type="Node2D" parent="RegularCard/SymbolPositions"]
 
-[node name="Marker2D" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/9"]
+[node name="Marker2D" type="Marker2D" parent="RegularCard/SymbolPositions/9"]
 position = Vector2(-100, -200)
 
-[node name="Marker2D2" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/9"]
+[node name="Marker2D2" type="Marker2D" parent="RegularCard/SymbolPositions/9"]
 position = Vector2(-100, 200)
 
-[node name="Marker2D3" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/9"]
+[node name="Marker2D3" type="Marker2D" parent="RegularCard/SymbolPositions/9"]
 position = Vector2(100, -200)
 
-[node name="Marker2D4" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/9"]
+[node name="Marker2D4" type="Marker2D" parent="RegularCard/SymbolPositions/9"]
 position = Vector2(100, 200)
 
-[node name="Marker2D5" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/9"]
+[node name="Marker2D5" type="Marker2D" parent="RegularCard/SymbolPositions/9"]
 position = Vector2(-100, -67)
 
-[node name="Marker2D6" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/9"]
+[node name="Marker2D6" type="Marker2D" parent="RegularCard/SymbolPositions/9"]
 position = Vector2(100, -67)
 
-[node name="Marker2D7" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/9"]
+[node name="Marker2D7" type="Marker2D" parent="RegularCard/SymbolPositions/9"]
 position = Vector2(-100, 67)
 
-[node name="Marker2D8" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/9"]
+[node name="Marker2D8" type="Marker2D" parent="RegularCard/SymbolPositions/9"]
 position = Vector2(100, 67)
 
-[node name="Marker2D9" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/9"]
+[node name="Marker2D9" type="Marker2D" parent="RegularCard/SymbolPositions/9"]
 
-[node name="10" type="Node2D" parent="DebugNestingLevel/SymbolPositions"]
+[node name="10" type="Node2D" parent="RegularCard/SymbolPositions"]
 
-[node name="Marker2D" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/10"]
+[node name="Marker2D" type="Marker2D" parent="RegularCard/SymbolPositions/10"]
 position = Vector2(-100, -200)
 
-[node name="Marker2D2" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/10"]
+[node name="Marker2D2" type="Marker2D" parent="RegularCard/SymbolPositions/10"]
 position = Vector2(-100, 200)
 
-[node name="Marker2D3" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/10"]
+[node name="Marker2D3" type="Marker2D" parent="RegularCard/SymbolPositions/10"]
 position = Vector2(100, -200)
 
-[node name="Marker2D4" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/10"]
+[node name="Marker2D4" type="Marker2D" parent="RegularCard/SymbolPositions/10"]
 position = Vector2(100, 200)
 
-[node name="Marker2D5" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/10"]
+[node name="Marker2D5" type="Marker2D" parent="RegularCard/SymbolPositions/10"]
 position = Vector2(-100, -67)
 
-[node name="Marker2D6" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/10"]
+[node name="Marker2D6" type="Marker2D" parent="RegularCard/SymbolPositions/10"]
 position = Vector2(100, -67)
 
-[node name="Marker2D7" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/10"]
+[node name="Marker2D7" type="Marker2D" parent="RegularCard/SymbolPositions/10"]
 position = Vector2(-100, 67)
 
-[node name="Marker2D8" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/10"]
+[node name="Marker2D8" type="Marker2D" parent="RegularCard/SymbolPositions/10"]
 position = Vector2(100, 67)
 
-[node name="Marker2D9" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/10"]
+[node name="Marker2D9" type="Marker2D" parent="RegularCard/SymbolPositions/10"]
 position = Vector2(0, -134)
 
-[node name="Marker2D10" type="Marker2D" parent="DebugNestingLevel/SymbolPositions/10"]
+[node name="Marker2D10" type="Marker2D" parent="RegularCard/SymbolPositions/10"]
 position = Vector2(0, 134)
 
-[node name="DoublingMana" type="Sprite2D" parent="DebugNestingLevel"]
+[node name="DoublingMana" type="Sprite2D" parent="RegularCard"]
 self_modulate = Color(0.160784, 0.290196, 1, 1)
 position = Vector2(210, -306)
 scale = Vector2(0.5, 0.5)
@@ -508,7 +508,7 @@ texture = ExtResource("2_rlkwh")
 script = ExtResource("39_grwtf")
 duplicateOffset = Vector2(-35, 0)
 
-[node name="DoublingShield" type="Sprite2D" parent="DebugNestingLevel"]
+[node name="DoublingShield" type="Sprite2D" parent="RegularCard"]
 self_modulate = Color(0, 0, 0, 1)
 position = Vector2(207, 308)
 scale = Vector2(0.75, 0.75)
@@ -516,7 +516,7 @@ texture = ExtResource("8_om3ep")
 script = ExtResource("39_grwtf")
 duplicateOffset = Vector2(-46, 0)
 
-[node name="DoublingSword" type="Sprite2D" parent="DebugNestingLevel"]
+[node name="DoublingSword" type="Sprite2D" parent="RegularCard"]
 self_modulate = Color(0, 0, 0, 1)
 position = Vector2(-208, 308)
 scale = Vector2(0.75, 0.75)

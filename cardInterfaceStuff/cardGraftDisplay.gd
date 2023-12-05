@@ -3,6 +3,8 @@ class_name CardGraftDisplay
 
 @export var increaseColor: Color
 @export var decreaseColor: Color
+@export var randomTextures: Array[Texture2D] = []
+@export var background: TextureRect
 
 func updateCardDetails(dataToShow: CardData = cardData):
 
@@ -19,6 +21,7 @@ func updateCardImage(_data: CardData = cardData):
 func _ready():
 	super()
 	selectionNode = detailedInfoRoot
+	background.texture = randomTextures.pick_random()
 
 func updateParamField(label: Label, value: int, stringPrefix: String):
 	if value != 0:
