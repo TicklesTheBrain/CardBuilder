@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://comunru60fret"]
+
+[ext_resource type="Script" path="res://lineDrawer.gd" id="1_mh85u"]
+[ext_resource type="Texture2D" uid="uid://hdlvm2tc58y5" path="res://assets/brush.png" id="2_0g3ir"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_re1v2"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape_scale = Vector3(1, 1, 0)
+emission_shape = 1
+emission_sphere_radius = 3.0
+angle_max = 360.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.3
+
+[node name="LineDrawer" type="SubViewport" node_paths=PackedStringArray("emitter")]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+script = ExtResource("1_mh85u")
+emitter = NodePath("GPUParticles2D")
+timeFor100px = 0.2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(918, 452)
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_re1v2")
+texture = ExtResource("2_0g3ir")
+lifetime = 0.05
+preprocess = 0.05
+fixed_fps = 120
+interpolate = false

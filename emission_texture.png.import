@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cilwu14rk48nx"
-path.s3tc="res://.godot/imported/cardDrawSym.png-691bba6993f3b478661a7dc01737265f.s3tc.ctex"
+uid="uid://cga2wxl3vltk3"
+path.s3tc="res://.godot/imported/emission_texture.png-2368f8652d6346c7e1f318edcd97fea3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/cardInfoSymbols/cardDrawSym.png"
-dest_files=["res://.godot/imported/cardDrawSym.png-691bba6993f3b478661a7dc01737265f.s3tc.ctex"]
+source_file="res://emission_texture.png"
+dest_files=["res://.godot/imported/emission_texture.png-2368f8652d6346c7e1f318edcd97fea3.s3tc.ctex"]
 
 [params]
 

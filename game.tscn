@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=41 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://ResourceTracker.gd" id="6_oxs0c"]
 [ext_resource type="Texture2D" uid="uid://doevg7dxoxgka" path="res://assets/pokerChip2.png" id="7_2g44v"]
 [ext_resource type="Resource" uid="uid://b2ru52u3aw843" path="res://content/debug_enemyDeck.tres" id="9_t18bm"]
+[ext_resource type="Texture2D" uid="uid://bvv1olfxm2mlb" path="res://assets/portraits/monster_portrait_13.png" id="11_2iohc"]
+[ext_resource type="Texture2D" uid="uid://7ugd4xfdbxxj" path="res://assets/portraits/character_portrait.png" id="11_smjka"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="12_q8pst"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/pilePositionController.gd" id="14_27y8n"]
 [ext_resource type="Texture2D" uid="uid://cj75g71nh52om" path="res://assets/table_background.png" id="15_2rvab"]
@@ -24,6 +26,54 @@
 [ext_resource type="Script" path="res://ValueTracker.gd" id="22_7os3x"]
 [ext_resource type="Resource" uid="uid://dc1pbwqrsnd4m" path="res://content/test_cards.tres" id="24_wh5ls"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="27_mupmx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t151"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.603922, 0.603922, 0.603922, 0.396078)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmeb8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 0.603922)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jb02b"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.909804)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="Theme" id="Theme_bfpeo"]
+Button/colors/font_color = Color(1, 1, 1, 0.827451)
+Button/colors/font_disabled_color = Color(0.760784, 0.760784, 0.760784, 0.713726)
+Button/fonts/font = ExtResource("17_ooe0n")
+Button/styles/disabled = SubResource("StyleBoxFlat_4t151")
+Button/styles/focus = SubResource("StyleBoxFlat_fmeb8")
+Button/styles/hover = SubResource("StyleBoxFlat_fmeb8")
+Button/styles/normal = SubResource("StyleBoxFlat_fmeb8")
+Button/styles/pressed = SubResource("StyleBoxFlat_jb02b")
+
+[sub_resource type="Shortcut" id="Shortcut_2oqt2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnh12"]
 size = Vector2(398.5, 235.25)
@@ -246,11 +296,61 @@ scale = Vector2(0.828125, 0.73095)
 texture = ExtResource("15_2rvab")
 centered = false
 
-[node name="Poker" type="TextureRect" parent="."]
-offset_left = -12.0
+[node name="CharacterPortrait" type="TextureRect" parent="."]
+offset_left = 48.0
+offset_top = 274.0
+offset_right = 177.0
+offset_bottom = 453.0
+rotation = 0.0174533
+mouse_filter = 2
+texture = ExtResource("11_smjka")
+expand_mode = 3
+stretch_mode = 5
+metadata/_edit_group_ = true
+
+[node name="Shadow" type="TextureRect" parent="CharacterPortrait"]
+self_modulate = Color(0, 0, 0, 0.635294)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 1.5
+offset_top = -1.5
+offset_right = 130.5
+offset_bottom = 177.5
+mouse_filter = 2
+texture = ExtResource("11_smjka")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MonsterPortrait" type="TextureRect" parent="."]
+offset_left = 954.0
 offset_top = 280.0
-offset_right = 131.0
-offset_bottom = 357.0
+offset_right = 1254.0
+offset_bottom = 445.0
+rotation = -0.0174533
+mouse_filter = 2
+texture = ExtResource("11_2iohc")
+expand_mode = 3
+stretch_mode = 5
+metadata/_edit_group_ = true
+
+[node name="Shadow" type="TextureRect" parent="MonsterPortrait"]
+self_modulate = Color(0, 0, 0, 0.65098)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 302.0
+offset_bottom = 163.0
+mouse_filter = 2
+texture = ExtResource("11_2iohc")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Poker" type="TextureRect" parent="."]
+offset_left = -31.0
+offset_top = 274.0
+offset_right = 112.0
+offset_bottom = 351.0
 texture = ExtResource("6_he1b8")
 expand_mode = 3
 stretch_mode = 5
@@ -327,25 +427,29 @@ script = ExtResource("6_oxs0c")
 resourceToTrack = NodePath("../../Logic/Enemy/Resources/enemyHp")
 
 [node name="DrawButton" type="Button" parent="."]
-offset_left = 927.0
-offset_top = 325.0
-offset_right = 1017.0
-offset_bottom = 356.0
+offset_left = 519.0
+offset_top = 417.0
+offset_right = 609.0
+offset_bottom = 448.0
+theme = SubResource("Theme_bfpeo")
 text = "Draw Card"
 
 [node name="EndButton" type="Button" parent="."]
-offset_left = 929.0
-offset_top = 285.0
-offset_right = 1012.0
-offset_bottom = 316.0
+offset_left = 420.0
+offset_top = 416.0
+offset_right = 503.0
+offset_bottom = 447.0
+theme = SubResource("Theme_bfpeo")
 text = "End Hand
 "
 
 [node name="OkBUtton" type="Button" parent="."]
-offset_left = 929.0
-offset_top = 364.0
-offset_right = 1012.0
-offset_bottom = 395.0
+offset_left = 624.0
+offset_top = 418.0
+offset_right = 707.0
+offset_bottom = 449.0
+theme = SubResource("Theme_bfpeo")
+shortcut = SubResource("Shortcut_2oqt2")
 text = "OK
 "
 
@@ -457,10 +561,10 @@ position = Vector2(639, 583.5)
 shape = SubResource("RectangleShape2D_c17rp")
 
 [node name="MessageContent" type="Label" parent="."]
-offset_left = 162.0
-offset_top = 278.0
-offset_right = 296.0
-offset_bottom = 301.0
+offset_left = 192.0
+offset_top = 273.0
+offset_right = 326.0
+offset_bottom = 296.0
 text = "Message Content"
 
 [node name="Outlines" type="Node2D" parent="."]
