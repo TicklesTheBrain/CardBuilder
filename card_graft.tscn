@@ -12,7 +12,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwt7q"]
 size = Vector2(119, 192)
 
-[node name="CardGraft" type="Node2D" node_paths=PackedStringArray("background", "cardShape", "offsetNode", "detailedInfoRoot", "valueLabel", "costLabel", "conditionalTextLabel", "valuesModifiersTextLabel", "costModifiersTextLabel", "attackModifiersTextLabel", "defenceModifiersTextLabel", "onPlayTextLabel", "onLoseTextLabel", "onWinTextLabel", "onBustTextLabel", "endRoundTextLabel", "onDrawTextLabel", "startMatchTextLabel", "attackLabel", "defenceLabel")]
+[node name="CardGraft" type="Node2D" node_paths=PackedStringArray("background", "cardShape", "offsetNode", "detailedInfoRoot", "valueLabel", "costLabel", "fullCardText", "attackLabel", "defenceLabel")]
 script = ExtResource("1_38ait")
 increaseColor = Color(0, 0.490196, 0, 1)
 decreaseColor = Color(0.533333, 0.0980392, 0.231373, 1)
@@ -25,18 +25,7 @@ offsetNode = NodePath("StumpShadow")
 detailedInfoRoot = NodePath("Background")
 valueLabel = NodePath("Background/Margin/Info/ValueType")
 costLabel = NodePath("Background/Margin/Info/Cost")
-conditionalTextLabel = NodePath("Background/Margin/Info/Text aligner/ConditionalText")
-valuesModifiersTextLabel = NodePath("Background/Margin/Info/Text aligner/ValueModifiersText")
-costModifiersTextLabel = NodePath("Background/Margin/Info/Text aligner/CostModifiersText")
-attackModifiersTextLabel = NodePath("Background/Margin/Info/Text aligner/AttackModifiersText")
-defenceModifiersTextLabel = NodePath("Background/Margin/Info/Text aligner/DefenceModifersText")
-onPlayTextLabel = NodePath("Background/Margin/Info/Text aligner/onPlayText")
-onLoseTextLabel = NodePath("Background/Margin/Info/Text aligner/onLoseText")
-onWinTextLabel = NodePath("Background/Margin/Info/Text aligner/onWinText")
-onBustTextLabel = NodePath("Background/Margin/Info/Text aligner/onBustText")
-endRoundTextLabel = NodePath("Background/Margin/Info/Text aligner/endRoundText")
-onDrawTextLabel = NodePath("Background/Margin/Info/Text aligner/onDrawText")
-startMatchTextLabel = NodePath("Background/Margin/Info/Text aligner/startMatchText")
+fullCardText = NodePath("Background/Margin/Info/Text aligner/fullCardText")
 attackLabel = NodePath("Background/Margin/Info/Attack")
 defenceLabel = NodePath("Background/Margin/Info/Defence")
 selectedColor = Color(0, 0, 0.968627, 1)
@@ -93,172 +82,7 @@ text = "Cost: -1"
 [node name="Text aligner" type="VBoxContainer" parent="Background/Margin/Info"]
 layout_mode = 2
 
-[node name="ConditionalText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 0.784314)
-theme_override_constants/line_separation = -5
-theme_override_fonts/normal_font = ExtResource("4_fhejj")
-theme_override_fonts/bold_font = ExtResource("4_fhejj")
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="ValueModifiersText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 0.784314)
-theme_override_constants/line_separation = -5
-theme_override_fonts/normal_font = ExtResource("4_fhejj")
-theme_override_fonts/bold_font = ExtResource("4_fhejj")
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="CostModifiersText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 0.784314)
-theme_override_constants/line_separation = -5
-theme_override_fonts/normal_font = ExtResource("4_fhejj")
-theme_override_fonts/bold_font = ExtResource("4_fhejj")
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="AttackModifiersText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 0.784314)
-theme_override_constants/line_separation = -5
-theme_override_fonts/normal_font = ExtResource("4_fhejj")
-theme_override_fonts/bold_font = ExtResource("4_fhejj")
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="DefenceModifersText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 0.784314)
-theme_override_constants/line_separation = -5
-theme_override_fonts/normal_font = ExtResource("4_fhejj")
-theme_override_fonts/bold_font = ExtResource("4_fhejj")
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="onPlayText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 0.784314)
-theme_override_constants/line_separation = -5
-theme_override_fonts/normal_font = ExtResource("4_fhejj")
-theme_override_fonts/bold_font = ExtResource("4_fhejj")
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="onLoseText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 0.784314)
-theme_override_constants/line_separation = -5
-theme_override_fonts/normal_font = ExtResource("4_fhejj")
-theme_override_fonts/bold_font = ExtResource("4_fhejj")
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="onWinText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 0.784314)
-theme_override_constants/line_separation = -5
-theme_override_fonts/normal_font = ExtResource("4_fhejj")
-theme_override_fonts/bold_font = ExtResource("4_fhejj")
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="onBustText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 0.784314)
-theme_override_constants/line_separation = -5
-theme_override_fonts/normal_font = ExtResource("4_fhejj")
-theme_override_fonts/bold_font = ExtResource("4_fhejj")
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="endRoundText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 0.784314)
-theme_override_constants/line_separation = -5
-theme_override_fonts/normal_font = ExtResource("4_fhejj")
-theme_override_fonts/bold_font = ExtResource("4_fhejj")
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="onDrawText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 0.784314)
-theme_override_constants/line_separation = -5
-theme_override_fonts/normal_font = ExtResource("4_fhejj")
-theme_override_fonts/bold_font = ExtResource("4_fhejj")
-theme_override_font_sizes/normal_font_size = 18
-theme_override_font_sizes/bold_font_size = 18
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="startMatchText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
+[node name="fullCardText" type="RichTextLabel" parent="Background/Margin/Info/Text aligner"]
 visible = false
 layout_mode = 2
 mouse_filter = 1

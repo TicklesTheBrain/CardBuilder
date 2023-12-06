@@ -138,6 +138,7 @@ text = "This is the message that is seen on the pocket"
 [node name="Shadow" type="NinePatchRect" parent="Pocket/NinePatchRect" node_paths=PackedStringArray("controlToMatch", "triggerResizeEmitter")]
 self_modulate = Color(0, 0, 0, 0.521569)
 show_behind_parent = true
+layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 252.0

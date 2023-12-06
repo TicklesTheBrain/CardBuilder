@@ -32,18 +32,7 @@ var shadowGrow: bool = false:
 @export var valueLabel: Label
 @export var costLabel: Label
 
-@export var conditionalTextLabel: RichTextLabel
-@export var valuesModifiersTextLabel: RichTextLabel
-@export var costModifiersTextLabel: RichTextLabel
-@export var attackModifiersTextLabel: RichTextLabel
-@export var defenceModifiersTextLabel: RichTextLabel
-@export var onPlayTextLabel: RichTextLabel
-@export var onLoseTextLabel: RichTextLabel
-@export var onWinTextLabel: RichTextLabel
-@export var onBustTextLabel: RichTextLabel
-@export var endRoundTextLabel: RichTextLabel
-@export var onDrawTextLabel: RichTextLabel
-@export var startMatchTextLabel: RichTextLabel
+@export var fullCardText: RichTextLabel
 
 @export var attackLabel: Label
 @export var defenceLabel: Label
@@ -163,19 +152,32 @@ func updateCardDetails(dataToShow: CardData = cardData):
 func updateAllTextFields(dataToShow: CardData):
 
 	var effectDict = dataToShow.getEffectTextDictionary()
+	var conditionalText = dataToShow.getPlayConditionalText()
+	var paramDict = dataToShow.getParamTextDictionary()
 
-	updateTextField(onPlayTextLabel, effectDict.onPlay, "[b]Play:[/b] ")
-	updateTextField(conditionalTextLabel, dataToShow.getPlayConditionalText())
-	updateTextField(costModifiersTextLabel, dataToShow.cost.getText())
-	updateTextField(valuesModifiersTextLabel, dataToShow.value.getText())
-	updateTextField(attackModifiersTextLabel, dataToShow.attack.getText())
-	updateTextField(defenceModifiersTextLabel, dataToShow.defence.getText())
-	updateTextField(onLoseTextLabel, effectDict.onLose, "[b]Lose:[/b] ")
-	updateTextField(onWinTextLabel, effectDict.onWin, "[b]Win:[/b] ")
-	updateTextField(onBustTextLabel, effectDict.onBust, "[b]Bust:[/b] ")
-	updateTextField(endRoundTextLabel, effectDict.endRound, "[b]End:[/b] ")
-	updateTextField(onDrawTextLabel, effectDict.onDraw, "[b]Draw:[/b] ")
-	updateTextField(startMatchTextLabel, effectDict.startMatch, "[b]Start:[/b] ")
+	var paramText = paramDict.values().reduce(func(acc, st):
+		if st != "":
+			acc = acc + " " + st
+		return acc, "" )
+	var prefixDict = {
+		"onPlay" = "[b]Play:[/b] ",
+		"onLose" = "[b]Lose:[/b] ",
+		"onWin" =  "[b]Win:[/b] ",
+		"onBust" = "[b]Bust:[/b] ",
+		"endRound" = "[b]End:[/b] ",
+		"onDraw" = "[b]Draw:[/b] ",
+		"startMatch" = "[b]Start:[/b] "
+	}
+
+	var effectText = ""
+	for key in effectDict.keys():
+		if effectDict[key] != "":
+			if effectText != "":
+				effectText += "\n"
+			effectText += prefixDict[key] + effectDict[key]
+
+	var allText = conditionalText + ("\n" if conditionalText != "" else "") + paramText + ("\n" if paramText != "" else "") + effectText
+	fullCardText.text = allText
 
 func _process(delta):
 	shadowTimer += delta
@@ -245,14 +247,6 @@ func hideDetailed():
 	if not shouldShowDetailed:
 		detailedInfoRoot.visible = false
 		bringBackFromFront()
-
-func updateTextField(textFieldToFormat: RichTextLabel, newText: String, prefix: String = ""):
-	if newText != "":
-		textFieldToFormat.visible = true
-		textFieldToFormat.text = prefix + newText
-	else:
-		textFieldToFormat.text = ""
-		textFieldToFormat.visible = false
 
 func bringToFront():
 	broughtToFront = true

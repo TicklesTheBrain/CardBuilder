@@ -27,7 +27,7 @@ bg_color = Color(0.992157, 0.992157, 0.992157, 0.803922)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwt7q"]
 size = Vector2(141, 192)
 
-[node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "cardImageRect", "offsetNode", "detailedInfoRoot", "valueLabel", "costLabel", "conditionalTextLabel", "valuesModifiersTextLabel", "costModifiersTextLabel", "attackModifiersTextLabel", "defenceModifiersTextLabel", "onPlayTextLabel", "onLoseTextLabel", "onWinTextLabel", "onBustTextLabel", "endRoundTextLabel", "onDrawTextLabel", "startMatchTextLabel", "attackLabel", "defenceLabel")]
+[node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "cardImageRect", "offsetNode", "detailedInfoRoot", "valueLabel", "costLabel", "fullCardText", "attackLabel", "defenceLabel")]
 script = ExtResource("1_lql06")
 cardShape = NodePath("CardShape")
 cardImageRect = NodePath("CardImageRect")
@@ -40,18 +40,7 @@ backsBlue = Array[Texture2D]([ExtResource("6_pfduv"), ExtResource("7_da838"), Ex
 detailedInfoRoot = NodePath("CardImageRect/Detailed Info")
 valueLabel = NodePath("CardImageRect/Detailed Info/Info/TopMargin/TopInfo/MarginContainer/ValueType")
 costLabel = NodePath("CardImageRect/Detailed Info/Info/TopMargin/TopInfo/MarginContainer2/Cost")
-conditionalTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/ConditionalText")
-valuesModifiersTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/ValueModifiersText")
-costModifiersTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/CostModifiersText")
-attackModifiersTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/AttackModifiersText")
-defenceModifiersTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/DefenceModifersText")
-onPlayTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/onPlayText")
-onLoseTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/onLoseText")
-onWinTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/onWinText")
-onBustTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/onBustText")
-endRoundTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/endRoundText")
-onDrawTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/onDrawText")
-startMatchTextLabel = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/startMatchText")
+fullCardText = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/FullCardText")
 attackLabel = NodePath("CardImageRect/Detailed Info/Info/BottomMargin/Bottom Info/MarginContainer2/Attack")
 defenceLabel = NodePath("CardImageRect/Detailed Info/Info/BottomMargin/Bottom Info/MarginContainer/Defence")
 selectedColor = Color(0.231373, 0.290196, 0.839216, 1)
@@ -150,146 +139,7 @@ theme_override_constants/margin_bottom = -5
 layout_mode = 2
 theme_override_constants/separation = -3
 
-[node name="ConditionalText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = -5
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="ValueModifiersText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = -5
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="CostModifiersText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = -5
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="AttackModifiersText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = -5
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="DefenceModifersText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = -5
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="onPlayText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = -5
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="onLoseText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = -5
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="onWinText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = -5
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="onBustText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = -5
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="endRoundText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = -5
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="onDrawText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
-visible = false
-layout_mode = 2
-mouse_filter = 1
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = -5
-theme_override_font_sizes/normal_font_size = 12
-theme_override_font_sizes/bold_font_size = 12
-bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
-fit_content = true
-autowrap_mode = 2
-
-[node name="startMatchText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
-visible = false
+[node name="FullCardText" type="RichTextLabel" parent="CardImageRect/Detailed Info/Info/MiddleArea/Text aligner"]
 layout_mode = 2
 mouse_filter = 1
 theme_override_colors/default_color = Color(0, 0, 0, 1)

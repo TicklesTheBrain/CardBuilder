@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=171 format=3 uid="uid://dc1pbwqrsnd4m"]
+[gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=172 format=3 uid="uid://dc1pbwqrsnd4m"]
 
 [ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="1_5jvcn"]
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="2_j5dh7"]
@@ -1197,6 +1197,19 @@ modifiers = Array[Resource("res://modifiers/modifier.gd")]([])
 staticText = ""
 capAtZero = false
 
+[sub_resource type="Resource" id="Resource_6jgm8"]
+script = ExtResource("7_uut4y")
+source = 0
+destination = 1
+amountOfCardsToDraw = 1
+effectName = ""
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+symbols = Array[int]([5])
+
 [sub_resource type="Resource" id="Resource_a6akj"]
 script = ExtResource("9_nb25s")
 amountToMatchOrExceed = 10
@@ -1223,7 +1236,7 @@ capAtZero = false
 [sub_resource type="Resource" id="Resource_4nafk"]
 resource_name = "OnlyPlayOn10+"
 script = ExtResource("2_j5dh7")
-amount = 2
+amount = 10
 debug = true
 cardName = ""
 revealed = false
@@ -1234,7 +1247,7 @@ type = SubResource("Resource_1vdjl")
 cost = SubResource("Resource_gavr1")
 attack = SubResource("Resource_433q5")
 defence = SubResource("Resource_phctl")
-onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_6jgm8")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([SubResource("Resource_a6akj")])
 onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
 onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])

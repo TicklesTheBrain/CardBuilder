@@ -123,6 +123,14 @@ func getEffectTextFromBucket(bucketToQuery: Array[CardEffect]):
 		result += effect.getText()
 	return result
 
+func getParamTextDictionary():
+	return {
+		"attack" = attack.getText(),
+		"defence" = defence.getText(),
+		"cost" = cost.getText(),
+		"value" = value.getText()
+	}
+
 func checkPlayConditionals() -> bool:
 	updateContext()
 	context.actingCard = self
