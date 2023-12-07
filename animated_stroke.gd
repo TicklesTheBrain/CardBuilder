@@ -1,40 +1,47 @@
 extends Node2D
 class_name MultilineDrawer
 
-@export var lines: Array[Line2D]
-#@export var lineDrawer: PackedScene
+@export var lines: Array[Node2D]
+@export var lineDrawer: PackedScene
 @export var renderTarget: TextureRect
-@export var drawer: LineDrawer
 
-#var activeDrawer: LineDrawer
+var activeDrawer: LineDrawer
 var activeRenderTarget: TextureRect
-var drawing = true
 
 func _ready():
+
+	await get_tree().create_timer(0.1).timeout
 
 	activeRenderTarget = renderTarget
 
 	for line in lines:
-		#var newDrawer = lineDrawer.instantiate()
-		#add_child(newDrawer)
-		#newDrawer.drawLine(line)
-		drawer.drawLine(line)
+
+		if not line is Path2D and not line is Line2D:
+			continue
+
+		print('starting new line')
+
+		var newDrawer = lineDrawer.instantiate()
+		add_child(newDrawer)
+		await get_tree().create_timer(0.15).timeout
+		activeDrawer = newDrawer
+
+		if line is Path2D:
+			newDrawer.drawPath(line)
+		elif line is Line2D:
+			newDrawer.drawLine(line)
+
+		await activeDrawer.finished
 		
-		#activeDrawer = newDrawer
-		#await activeDrawer.finished
-		await drawer.finished
-		#activeDrawer.queue_free()
+		activeDrawer.queue_free()
 		activeRenderTarget = activeRenderTarget.duplicate()
 		add_child(activeRenderTarget)
-		#activeRenderTarget.texture = null
+		activeRenderTarget.texture = null
 
-	#activeDrawer = null
-	drawing = false
-
+	activeDrawer = null
+	
 func _process(_delta):
-	if drawing:
-		await RenderingServer.frame_post_draw
-		print('assigning new texture')
-		#activeRenderTarget.texture = ImageTexture.create_from_image(drawer.get_texture().get_image())
-		activeRenderTarget.texture = drawer.get_texture()
-
+	await RenderingServer.frame_post_draw
+	if activeDrawer != null:
+		activeRenderTarget.texture = ImageTexture.create_from_image(activeDrawer.get_texture().get_image())
+		

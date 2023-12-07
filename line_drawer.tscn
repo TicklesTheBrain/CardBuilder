@@ -26,12 +26,10 @@ emitter = NodePath("GPUParticles2D")
 timeFor100px = 0.2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(918, 452)
 emitting = false
 amount = 5
 process_material = SubResource("ParticleProcessMaterial_re1v2")
 texture = ExtResource("2_0g3ir")
 lifetime = 0.05
-preprocess = 0.05
+preprocess = 1.0
 fixed_fps = 120
-interpolate = false

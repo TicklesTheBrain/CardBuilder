@@ -29,7 +29,6 @@ TopMessage="*res://top_message.tscn"
 
 [debug]
 
-settings/stdout/print_fps=true
 gdscript/warnings/onready_with_export=1
 
 [display]
@@ -40,4 +39,5 @@ window/stretch/mode="canvas_items"
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

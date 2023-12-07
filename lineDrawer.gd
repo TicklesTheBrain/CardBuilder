@@ -4,6 +4,8 @@ class_name LineDrawer
 @export var emitter: GPUParticles2D
 @export var timeFor100px: float
 
+var activeFollower: PathFollow2D
+
 signal finished()
 
 func drawLine(line: Line2D):
@@ -25,11 +27,33 @@ func moveToPoints(listOfPoints: PackedVector2Array):
 
 	var tween = get_tree().create_tween()
 	tween.tween_property(emitter, "position", nextPoint, travelTime)
+	await tween.finished
 	if listOfPoints.size() > 0:
-		tween.tween_callback(moveToPoints.bind(listOfPoints))
+		moveToPoints(listOfPoints)
 	else:
-		tween.tween_callback(announceFinished)
+		finished.emit()
 
-func announceFinished():
+func drawPath(path: Path2D):
+
+	emitter.emitting = true
+
+	var distance = path.curve.get_baked_length()
+	var travelTime = distance/100*timeFor100px
+
+	var newFollower = PathFollow2D.new()
+	path.add_child(newFollower)
+	activeFollower = newFollower
+
+	var tween = get_tree().create_tween()
+	tween.tween_property(newFollower, "progress_ratio", 1.0, travelTime)
+	await tween.finished
+
+	activeFollower = null
+	newFollower.queue_free()
+	emitter.emitting = false
 	finished.emit()
-	emitter.restart()
+
+func _process(_delta):
+	if activeFollower != null:
+		emitter.position = activeFollower.position
+		
