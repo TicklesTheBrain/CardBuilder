@@ -83,9 +83,13 @@ func getResourceFromEnum(enumOfResource: GameResources) -> GameResource:
 			return bustValue
 	return null
 
-func resetResources():
+func resetResources(newTurnReset: bool = false):
 	for res in gameResources.values():
-		res.reset()
+		if newTurnReset:
+			if res.resetAtNewTurn:
+				res.reset()
+		else:
+			res.reset()
 
 func checkIsBusted():
 	return playArea.getTotalValue() > bustValue.amount

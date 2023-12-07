@@ -19,6 +19,8 @@ signal amountChanged(newAmount: int)
 			amount = value
 		amountChanged.emit(amount)
 
+@export var resetAtNewTurn: bool = true
+
 func reset():
 	amount = baseline + resetAdjust
 	resetAdjust = resetBaseline

@@ -1,42 +1,58 @@
 extends Node2D
 class_name Game
 
-@export var loggerLevel: int = 5
+@export_group("Debug")
+@export var selfStart: bool = false
+@export var selfStartStep: MatchStep
 
+@export_group("Controller References")
 @export var playAreaPositionController: DynamicPositionController
 @export var enemyPlayAreaPositionController: DynamicPositionController
 
-@export var damageDealt: GameResource
-@export var damageSuffered: GameResource
-
-@export var message: String:
-	set (value):
-		message = value
-		messageLabel.text = value
-
+@export_group("UI references")
 @export var messageLabel: Label
-@export var cardDisplayPacked: PackedScene
-@export var cardGraftDisplayPacked: PackedScene
-
 @export var drawCardButton: Button
 @export var endHandButton: Button
 @export var okButton: Button
 
+@export_group("Logic references")
 @export var player: Actor
 @export var enemy: Actor
-
 var activeActor: Actor
 var passiveActor: Actor
+var persistenPlayer: PlayerStuff
 
-func _ready():
-	
-	#TODO: FInish logger
-	Logger.printLevel = loggerLevel
+var message: String:
+	set (value):
+		message = value
+		messageLabel.text = value
+
+signal complete()
+
+func startMatch():
 
 	Events.requestContext.connect(provideContext)
 	Events.startMatch.emit()
-
 	roundLoop()
+
+func _ready():
+	
+	if selfStart:
+		setupMatch(selfStartStep)
+		startMatch()
+
+func setupMatch(structureStep: StructureStep):
+	enemy.deck.templatePackage = structureStep.opponentDeck
+	enemy.hp.baseline = structureStep.opponentHP
+	enemy.bustValue.baseline = structureStep.opponentBustBaseline
+	player.energy.baseline = structureStep.playerEnergyBaseline
+	player.bustValue.baseline = structureStep.playerBustBaseline
+
+func setupPlayer(newPersistentPlayer: PlayerStuff):
+	player.deck.templatePackage = newPersistentPlayer.playerDeckTemplate
+	#TODO: make hp adjustments persist
+	player.hp.baseline = newPersistentPlayer.playerHP
+	persistenPlayer = newPersistentPlayer
 
 func makeContext() -> GameStateContext:
 	var ctxt = GameStateContext.new() as GameStateContext 
@@ -90,6 +106,14 @@ func enemyPlayTopCard():
 func askToShowDetailed(cardDisplay: CardDisplay, addExitDelegate: Callable):
 	cardDisplay.showDetailed()
 	addExitDelegate.call(cardDisplay, cardDisplay.hideDetailed)
+
+func recordPersistentPlayer():
+	if persistenPlayer == null:
+		print ('no persistent player to record')
+		return
+
+	persistenPlayer.playerHP = player.hp.amount
+	#TODO: add other stuff here
 
 func roundLoop():
 	
@@ -228,6 +252,10 @@ func roundLoop():
 
 	elif player.hp.amount <= 0:
 		message = "YOU LOSE :("
+		await okButton.button_down
+		complete.emit()
 
 	elif enemy.hp.amount <= 0:
 		message = "YOU WIN :)"
+		await okButton.button_down
+		complete.emit()

@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=3 uid="uid://dw3fiwvuh6i8b"]
+
+[ext_resource type="Script" path="res://text_scene.gd" id="1_2k2yu"]
+[ext_resource type="Texture2D" uid="uid://csjrrj0jpr55y" path="res://assets/paper_background.png" id="2_jwqfj"]
+[ext_resource type="FontFile" uid="uid://bokge8vr1onw8" path="res://fonts/Rasa-Regular.ttf" id="3_om6l0"]
+[ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="4_8tc8h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t151"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.603922, 0.603922, 0.603922, 0.396078)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmeb8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 0.603922)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jb02b"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.909804)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="Theme" id="Theme_i6vjc"]
+Button/colors/font_color = Color(1, 1, 1, 0.827451)
+Button/colors/font_disabled_color = Color(0.760784, 0.760784, 0.760784, 0.713726)
+Button/fonts/font = ExtResource("4_8tc8h")
+Button/styles/disabled = SubResource("StyleBoxFlat_4t151")
+Button/styles/focus = SubResource("StyleBoxFlat_fmeb8")
+Button/styles/hover = SubResource("StyleBoxFlat_fmeb8")
+Button/styles/normal = SubResource("StyleBoxFlat_fmeb8")
+Button/styles/pressed = SubResource("StyleBoxFlat_jb02b")
+
+[node name="text_scene" type="Node2D" node_paths=PackedStringArray("labelProto", "okButton")]
+script = ExtResource("1_2k2yu")
+labelProto = NodePath("MarginContainer/CenterContainer/VBoxContainer/Label")
+okButton = NodePath("OkBUtton")
+labelAppearTime = 0.5
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1286.0
+offset_bottom = 730.0
+color = Color(0.113725, 0.113725, 0.113725, 1)
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = 1072.0
+offset_top = 712.0
+offset_right = 1867.0
+offset_bottom = 1438.0
+rotation = 3.14159
+texture = ExtResource("2_jwqfj")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 437.0
+offset_top = 21.0
+offset_right = 913.0
+offset_bottom = 679.0
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_om6l0")
+theme_override_font_sizes/font_size = 32
+text = "Hello.
+
+Please take a seat.
+
+The game will start in a moment."
+
+[node name="OkBUtton" type="Button" parent="."]
+offset_left = 965.0
+offset_top = 641.0
+offset_right = 1048.0
+offset_bottom = 672.0
+theme = SubResource("Theme_i6vjc")
+text = "Continue"
+
+[connection signal="pressed" from="OkBUtton" to="." method="announceComplete"]

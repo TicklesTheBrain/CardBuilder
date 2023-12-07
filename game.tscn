@@ -1,10 +1,8 @@
-[gd_scene load_steps=41 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=39 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
 [ext_resource type="Script" path="res://cardAbstractions/GameResource.gd" id="3_c142g"]
-[ext_resource type="PackedScene" uid="uid://dsfqrofqt0xs4" path="res://card_graft.tscn" id="3_ieoty"]
-[ext_resource type="PackedScene" uid="uid://d1lj52mw7mxay" path="res://card.tscn" id="3_kxrxo"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/CardDisplaySink.gd" id="3_lpmun"]
 [ext_resource type="Script" path="res://cardAbstractions/Actor.gd" id="4_8gay1"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/PlayAreaController.gd" id="5_fctuw"]
@@ -15,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://b2ru52u3aw843" path="res://content/debug_enemyDeck.tres" id="9_t18bm"]
 [ext_resource type="Texture2D" uid="uid://bvv1olfxm2mlb" path="res://assets/portraits/monster_portrait_13.png" id="11_2iohc"]
 [ext_resource type="Texture2D" uid="uid://7ugd4xfdbxxj" path="res://assets/portraits/character_portrait.png" id="11_smjka"]
+[ext_resource type="FontFile" uid="uid://fc8k1v45yhjb" path="res://fonts/Rasa-Bold.ttf" id="12_1nuxl"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="12_q8pst"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/pilePositionController.gd" id="14_27y8n"]
 [ext_resource type="Texture2D" uid="uid://cj75g71nh52om" path="res://assets/table_background.png" id="15_2rvab"]
@@ -27,7 +26,7 @@
 [ext_resource type="Resource" uid="uid://dc1pbwqrsnd4m" path="res://content/test_cards.tres" id="24_wh5ls"]
 [ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="27_mupmx"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t151"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgjnw"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 4
 border_width_top = 4
@@ -39,7 +38,7 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmeb8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hat76"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 4
 border_width_top = 4
@@ -51,7 +50,7 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jb02b"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cms0x"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 2
 border_width_top = 2
@@ -67,13 +66,11 @@ corner_radius_bottom_left = 15
 Button/colors/font_color = Color(1, 1, 1, 0.827451)
 Button/colors/font_disabled_color = Color(0.760784, 0.760784, 0.760784, 0.713726)
 Button/fonts/font = ExtResource("17_ooe0n")
-Button/styles/disabled = SubResource("StyleBoxFlat_4t151")
-Button/styles/focus = SubResource("StyleBoxFlat_fmeb8")
-Button/styles/hover = SubResource("StyleBoxFlat_fmeb8")
-Button/styles/normal = SubResource("StyleBoxFlat_fmeb8")
-Button/styles/pressed = SubResource("StyleBoxFlat_jb02b")
-
-[sub_resource type="Shortcut" id="Shortcut_2oqt2"]
+Button/styles/disabled = SubResource("StyleBoxFlat_bgjnw")
+Button/styles/focus = SubResource("StyleBoxFlat_hat76")
+Button/styles/hover = SubResource("StyleBoxFlat_hat76")
+Button/styles/normal = SubResource("StyleBoxFlat_hat76")
+Button/styles/pressed = SubResource("StyleBoxFlat_cms0x")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnh12"]
 size = Vector2(398.5, 235.25)
@@ -115,8 +112,6 @@ script = ExtResource("1_hbkeb")
 playAreaPositionController = NodePath("PlayArea/PlayAreaPositionController")
 enemyPlayAreaPositionController = NodePath("EnemyPlayAreaController")
 messageLabel = NodePath("MessageContent")
-cardDisplayPacked = ExtResource("3_kxrxo")
-cardGraftDisplayPacked = ExtResource("3_ieoty")
 drawCardButton = NodePath("DrawButton")
 endHandButton = NodePath("EndButton")
 okButton = NodePath("OkBUtton")
@@ -148,6 +143,7 @@ deck = NodePath("DeckManager")
 script = ExtResource("3_c142g")
 resourceName = "hp"
 baseline = 25
+resetAtNewTurn = false
 
 [node name="BonusAttack" type="Node" parent="Logic/Player/Resources"]
 script = ExtResource("3_c142g")
@@ -190,6 +186,7 @@ baseline = 21
 
 [node name="DeckManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("3_8edax")
+debug = false
 templatePackage = ExtResource("24_wh5ls")
 feedContainer = NodePath("../DiscardManager")
 disposeContainer = NodePath("../DiscardManager")
@@ -261,6 +258,7 @@ baseline = 21
 script = ExtResource("3_c142g")
 resourceName = "hp"
 baseline = 20
+resetAtNewTurn = false
 
 [node name="EnemyBonusAttack" type="Node" parent="Logic/Enemy/Resources"]
 script = ExtResource("3_c142g")
@@ -370,12 +368,14 @@ stretch_mode = 5
 
 [node name="MyHPLabel" type="Label" parent="Poker" node_paths=PackedStringArray("resourceToTrack")]
 layout_mode = 0
-offset_left = 57.0
-offset_top = 21.0
-offset_right = 97.0
-offset_bottom = 56.0
-theme_override_font_sizes/font_size = 25
+offset_left = 52.0
+offset_top = 19.0
+offset_right = 92.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("12_1nuxl")
+theme_override_font_sizes/font_size = 40
 text = "25"
+horizontal_alignment = 1
 script = ExtResource("6_oxs0c")
 resourceToTrack = NodePath("../../Logic/Player/Resources/hp")
 
@@ -394,7 +394,6 @@ grow_vertical = 2
 texture = ExtResource("7_2g44v")
 expand_mode = 3
 stretch_mode = 5
-metadata/_edit_group_ = true
 
 [node name="Poker3" type="TextureRect" parent="Poker2"]
 self_modulate = Color(0, 0, 0, 0.603922)
@@ -417,12 +416,14 @@ stretch_mode = 5
 
 [node name="EnemyHPLabel" type="Label" parent="Poker2" node_paths=PackedStringArray("resourceToTrack")]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 18.0
-offset_right = 64.0
-offset_bottom = 53.0
-theme_override_font_sizes/font_size = 25
+offset_left = 19.0
+offset_top = 19.0
+offset_right = 59.0
+offset_bottom = 54.0
+theme_override_fonts/font = ExtResource("12_1nuxl")
+theme_override_font_sizes/font_size = 40
 text = "25"
+horizontal_alignment = 1
 script = ExtResource("6_oxs0c")
 resourceToTrack = NodePath("../../Logic/Enemy/Resources/enemyHp")
 
@@ -449,7 +450,8 @@ offset_top = 418.0
 offset_right = 707.0
 offset_bottom = 449.0
 theme = SubResource("Theme_bfpeo")
-shortcut = SubResource("Shortcut_2oqt2")
+shortcut_feedback = false
+shortcut_in_tooltip = false
 text = "OK
 "
 
