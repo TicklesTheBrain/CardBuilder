@@ -6,6 +6,8 @@ signal cardClicked(display: CardDisplay)
 signal cardDragReleased(display: CardDisplay)
 signal cardMouseOver(display: CardDisplay)
 signal cardMouseOverExit(display: CardDisplay)
+signal mapPawnClicked(pawnClicked: MapPawn)
+signal mapPawnDragReleased(pawnReleased: MapPawn)
 
 var selecting = false
 var amount = -1
@@ -23,6 +25,14 @@ func _ready():
 	cardDragReleased.connect(_onCardDragReleased)
 	cardMouseOver.connect(_onCardMouseOver)
 	cardMouseOverExit.connect(_onCardMouseOverExit)
+	mapPawnClicked.connect(_onMapPawnClicked)
+	mapPawnDragReleased.connect(_onMapPawnDragReleased)
+
+func _onMapPawnClicked(mapPawn: MapPawn):
+	mapPawn.startDrag()
+
+func _onMapPawnDragReleased(mapPawn: MapPawn):
+	mapPawn.stopDrag()
 
 func initNewSelection(container: CardContainer, needAmount: int, receivingMethod: Callable):
 	print('init new selection', container)

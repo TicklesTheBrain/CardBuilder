@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://060rnm2tqbqh"]
+
+[ext_resource type="Script" path="res://animated_stroke.gd" id="1_51yjc"]
+[ext_resource type="PackedScene" uid="uid://comunru60fret" path="res://line_drawer.tscn" id="2_fkrwl"]
+
+[node name="MultiLineDrawer" type="Node2D" node_paths=PackedStringArray("lines", "renderTarget")]
+script = ExtResource("1_51yjc")
+lines = [NodePath(""), NodePath("")]
+lineDrawer = ExtResource("2_fkrwl")
+renderTarget = NodePath("View")
+
+[node name="View" type="TextureRect" parent="."]
+offset_right = 1274.0
+offset_bottom = 715.0
+expand_mode = 3
+stretch_mode = 5

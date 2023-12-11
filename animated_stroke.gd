@@ -6,15 +6,24 @@ class_name MultilineDrawer
 @export var renderTarget: TextureRect
 
 var activeDrawer: LineDrawer
-var activeRenderTarget: TextureRect
+var activeRenderTarget: TextureRect:
+	set(newTarget):
+		renders.push_back(newTarget)
+		activeRenderTarget = newTarget
+var renders: Array[TextureRect] = []
 
-func _ready():
+func startDraw():
 
 	await get_tree().create_timer(0.1).timeout
 
-	activeRenderTarget = renderTarget
+	activeRenderTarget = renderTarget.duplicate()
+	add_child(activeRenderTarget)
 
 	for line in lines:
+
+		activeRenderTarget = activeRenderTarget.duplicate()
+		add_child(activeRenderTarget)
+		activeRenderTarget.texture = null
 
 		if not line is Path2D and not line is Line2D:
 			continue
@@ -34,9 +43,6 @@ func _ready():
 		await activeDrawer.finished
 		
 		activeDrawer.queue_free()
-		activeRenderTarget = activeRenderTarget.duplicate()
-		add_child(activeRenderTarget)
-		activeRenderTarget.texture = null
 
 	activeDrawer = null
 	
@@ -45,3 +51,11 @@ func _process(_delta):
 	if activeDrawer != null:
 		activeRenderTarget.texture = ImageTexture.create_from_image(activeDrawer.get_texture().get_image())
 		
+
+func drawStuff(stuffToDraw):
+	renders = []
+	activeRenderTarget = renderTarget.duplicate()
+	add_child(activeRenderTarget)
+
+
+

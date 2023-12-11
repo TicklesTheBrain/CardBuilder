@@ -201,6 +201,7 @@ opponentHP = 5
 opponentBustBaseline = 21
 playerEnergyBaseline = 3
 playerBustBaseline = 21
+opponentPicId = 0
 
 [sub_resource type="Resource" id="Resource_qhdk3"]
 script = ExtResource("2_hj1u8")

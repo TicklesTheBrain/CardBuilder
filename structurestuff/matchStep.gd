@@ -6,3 +6,4 @@ class_name MatchStep
 @export var opponentBustBaseline: int
 @export var playerEnergyBaseline: int
 @export var playerBustBaseline: int
+@export var opponentPicId: int

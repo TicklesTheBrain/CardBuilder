@@ -57,7 +57,6 @@ var graftToShow: CardData
 var cardData: CardData
 var dragged: bool
 var mouseOffset = Vector2()
-var previousPosition = Vector2()
 var inPlayArea = null
 var positionController: CardPositionController
 var selected = false:
@@ -211,8 +210,7 @@ func onRelease():
 	if dragged:
 		InputLord.cardDragReleased.emit(self)
 
-func startDrag():
-	previousPosition = position
+func startDrag():	
 	dragged = true
 	mouseOffset = get_viewport().get_mouse_position() - position
 
