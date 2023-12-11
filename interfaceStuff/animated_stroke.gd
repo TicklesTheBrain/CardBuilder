@@ -51,11 +51,3 @@ func _process(_delta):
 	if activeDrawer != null:
 		activeRenderTarget.texture = ImageTexture.create_from_image(activeDrawer.get_texture().get_image())
 		
-
-func drawStuff(stuffToDraw):
-	renders = []
-	activeRenderTarget = renderTarget.duplicate()
-	add_child(activeRenderTarget)
-
-
-

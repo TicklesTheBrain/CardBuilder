@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://o20e5thwdy3j"]
 
-[ext_resource type="Script" path="res://cardInterfaceStuff/pocketDisplay.gd" id="1_b68e2"]
-[ext_resource type="Script" path="res://cardInterfaceStuff/dynamicPositionController.gd" id="2_sxrrm"]
+[ext_resource type="Script" path="res://interfaceStuff/pocketDisplay.gd" id="1_eflmx"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="2_sybwb"]
+[ext_resource type="Script" path="res://interfaceStuff/dynamicPositionController.gd" id="3_4y2li"]
 [ext_resource type="Texture2D" uid="uid://dxgj5eydfva4j" path="res://assets/ninePatchFrame.png" id="4_ro7uo"]
-[ext_resource type="Script" path="res://sizeMatcher.gd" id="5_57r5e"]
+[ext_resource type="Script" path="res://interfaceStuff/sizeMatcher.gd" id="5_57r5e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xuy27"]
 size = Vector2(1248, 688)
@@ -73,7 +73,7 @@ _data = {
 
 [node name="PocketLayer" type="CanvasLayer" node_paths=PackedStringArray("animation", "positionController", "backGroundPanel", "infoLabel", "pocketContainer")]
 layer = 2
-script = ExtResource("1_b68e2")
+script = ExtResource("1_eflmx")
 animation = NodePath("Pocket/PocketAnimation")
 positionController = NodePath("PocketDynamicPosition")
 backGroundPanel = NodePath("Pocket/NinePatchRect")
@@ -90,7 +90,7 @@ overrideRevealed = true
 addToTopWhenFeeding = false
 
 [node name="PocketDynamicPosition" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer", "canvasLayer")]
-script = ExtResource("2_sxrrm")
+script = ExtResource("3_4y2li")
 cardAreas = [NodePath("ShapeSmall"), NodePath("ShapeMid"), NodePath("ShapeBig"), NodePath("ShapeFull")]
 logicalContainer = NodePath("../PocketContainer")
 canvasLayer = NodePath("..")

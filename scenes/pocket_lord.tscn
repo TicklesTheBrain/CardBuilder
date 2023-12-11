@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bkvi236rp8jiw"]
 
 [ext_resource type="Script" path="res://cardAbstractions/PocketLord.gd" id="1_kmr2p"]
-[ext_resource type="PackedScene" uid="uid://o20e5thwdy3j" path="res://pocket.tscn" id="2_2jlfa"]
+[ext_resource type="PackedScene" uid="uid://o20e5thwdy3j" path="res://scenes/pocket.tscn" id="2_2jlfa"]
 
 [node name="PocketLord" type="Node"]
 script = ExtResource("1_kmr2p")

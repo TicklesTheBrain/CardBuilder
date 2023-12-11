@@ -1,7 +1,7 @@
 [gd_scene load_steps=27 format=3 uid="uid://br1m8pkbiuqnf"]
 
-[ext_resource type="Script" path="res://cardInterfaceStuff/cardNamingLord.gd" id="1_6cdnq"]
-[ext_resource type="Script" path="res://cardInterfaceStuff/cardDisplayProperties.gd" id="2_ddla3"]
+[ext_resource type="Script" path="res://interfaceStuff/cardNamingLord.gd" id="1_6cdnq"]
+[ext_resource type="Script" path="res://interfaceStuff/cardDisplayProperties.gd" id="2_ddla3"]
 [ext_resource type="Texture2D" uid="uid://bcw4n7f5gfeg1" path="res://assets/specialCardFaces/AngryApe.png" id="3_6qiuq"]
 [ext_resource type="Texture2D" uid="uid://gi762hjifjgk" path="res://assets/specialCardFaces/BatKing.png" id="4_00480"]
 [ext_resource type="Texture2D" uid="uid://bs4iu677555a2" path="res://assets/specialCardFaces/BirdLawyer.png" id="5_0kx4q"]

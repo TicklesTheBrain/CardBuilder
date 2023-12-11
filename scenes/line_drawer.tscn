@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://comunru60fret"]
 
-[ext_resource type="Script" path="res://lineDrawer.gd" id="1_mh85u"]
+[ext_resource type="Script" path="res://interfaceStuff/lineDrawer.gd" id="1_mh85u"]
 [ext_resource type="Texture2D" uid="uid://hdlvm2tc58y5" path="res://assets/brush.png" id="2_0g3ir"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_re1v2"]
@@ -11,8 +11,8 @@ emission_shape = 1
 emission_sphere_radius = 3.0
 angle_max = 360.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.25
-scale_max = 0.3
+scale_min = 0.15
+scale_max = 0.2
 
 [node name="LineDrawer" type="SubViewport" node_paths=PackedStringArray("emitter")]
 disable_3d = true
@@ -26,8 +26,9 @@ emitter = NodePath("GPUParticles2D")
 timeFor100px = 0.2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+self_modulate = Color(0, 0, 0, 0.8)
 emitting = false
-amount = 5
+amount = 6
 process_material = SubResource("ParticleProcessMaterial_re1v2")
 texture = ExtResource("2_0g3ir")
 lifetime = 0.05

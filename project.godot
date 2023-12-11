@@ -11,21 +11,21 @@ config_version=5
 [application]
 
 config/name="Card Builder"
-run/main_scene="res://game.tscn"
+run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Events="*res://events.gd"
-TcFactory="*res://tc_factory.gd"
+TcFactory="*res://cardAbstractions/tc_factory.gd"
 InputLord="*res://InputLord.gd"
 Logger="*res://logger.gd"
-PocketLord="*res://pocket_lord.tscn"
-CardDisplayLord="*res://card_display_lord.tscn"
-CardImageMaker="*res://cardImageMaker.tscn"
-CardNamingLord="*res://card_naming_lord.tscn"
-TopMessage="*res://top_message.tscn"
+PocketLord="*res://scenes/pocket_lord.tscn"
+CardDisplayLord="*res://scenes/card_display_lord.tscn"
+CardImageMaker="*res://scenes/cardImageMaker.tscn"
+CardNamingLord="*res://scenes/card_naming_lord.tscn"
+TopMessage="*res://scenes/top_message.tscn"
 
 [debug]
 

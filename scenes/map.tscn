@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://1uvg5mnu5p6a"]
 
 [ext_resource type="Texture2D" uid="uid://cmxughgxdma3o" path="res://assets/folded_paper.jpg" id="1_bufcv"]
-[ext_resource type="Script" path="res://map_scene.gd" id="1_w4d8i"]
+[ext_resource type="Script" path="res://mapStuff/map_scene.gd" id="1_w4d8i"]
 [ext_resource type="Texture2D" uid="uid://cahtf1jqffufe" path="res://assets/portraits/small/character_portrait_small.png" id="2_btead"]
-[ext_resource type="Script" path="res://MapPawn.gd" id="3_knjbm"]
+[ext_resource type="Script" path="res://mapStuff/MapPawn.gd" id="3_knjbm"]
 [ext_resource type="Texture2D" uid="uid://drh26vaqmng8n" path="res://assets/map_objects/POI1.png" id="3_sti20"]
-[ext_resource type="Script" path="res://mapPOI.gd" id="6_1dkrl"]
+[ext_resource type="Script" path="res://mapStuff/mapPOI.gd" id="6_1dkrl"]
 [ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="7_4dq0f"]
-[ext_resource type="PackedScene" uid="uid://060rnm2tqbqh" path="res://multiLineDrawer.tscn" id="8_b7dn0"]
+[ext_resource type="PackedScene" uid="uid://060rnm2tqbqh" path="res://scenes/multiLineDrawer.tscn" id="8_b7dn0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3a74q"]
 radius = 36.0

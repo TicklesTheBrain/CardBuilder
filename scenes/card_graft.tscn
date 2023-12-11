@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://dsfqrofqt0xs4"]
 
-[ext_resource type="Script" path="res://cardInterfaceStuff/cardGraftDisplay.gd" id="1_38ait"]
+[ext_resource type="Script" path="res://interfaceStuff/cardGraftDisplay.gd" id="1_38ait"]
 [ext_resource type="Texture2D" uid="uid://bevdmm7gnq82a" path="res://assets/graftBGs/graftBG5.png" id="2_iqp0e"]
 [ext_resource type="Texture2D" uid="uid://bltstc7cs51ox" path="res://assets/graftBGs/graftBG4.png" id="2_xa78t"]
-[ext_resource type="Script" path="res://cardInterfaceStuff/cardDisplayBody.gd" id="2_xx5aw"]
+[ext_resource type="Script" path="res://interfaceStuff/cardDisplayBody.gd" id="2_xx5aw"]
 [ext_resource type="Texture2D" uid="uid://5nls31hkk66k" path="res://assets/graftBGs/graftBG3.png" id="4_77ith"]
 [ext_resource type="FontFile" uid="uid://dvlkrwbvctr8j" path="res://fonts/Good Vibrations Solid.otf" id="4_fhejj"]
 [ext_resource type="Texture2D" uid="uid://cfjwm5jy0sxa5" path="res://assets/graftBGs/graftBG2.png" id="5_a343i"]

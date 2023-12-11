@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://die8dommtbcyo"]
 
-[ext_resource type="Script" path="res://TopMessage.gd" id="1_1hh7v"]
+[ext_resource type="Script" path="res://interfaceStuff/TopMessage.gd" id="1_1hh7v"]
 [ext_resource type="Texture2D" uid="uid://bcx8tre6d6cnp" path="res://assets/torn_paper.png" id="2_erh1c"]
 [ext_resource type="FontFile" uid="uid://dvlkrwbvctr8j" path="res://fonts/Good Vibrations Solid.otf" id="3_1hatg"]
 
