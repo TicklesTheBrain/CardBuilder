@@ -15,6 +15,8 @@
 script = ExtResource("7_5m8gi")
 listOfStrings = Array[String](["Hello.", "Take a seat.", "The game will begin shortly."])
 buttonWait = true
+isOption = Array[bool]([])
+optionOutcomes = Array[Resource("res://structurestuff/structureStep.gd")]([])
 
 [sub_resource type="Resource" id="Resource_7fusg"]
 script = ExtResource("2_hj1u8")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dw3fiwvuh6i8b"]
+[gd_scene load_steps=10 format=3 uid="uid://dw3fiwvuh6i8b"]
 
 [ext_resource type="Script" path="res://text_scene.gd" id="1_2k2yu"]
 [ext_resource type="Texture2D" uid="uid://csjrrj0jpr55y" path="res://assets/paper_background.png" id="2_jwqfj"]
 [ext_resource type="FontFile" uid="uid://bokge8vr1onw8" path="res://fonts/Rasa-Regular.ttf" id="3_om6l0"]
 [ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="4_8tc8h"]
+[ext_resource type="Script" path="res://scenes/ChoiceTextOption.gd" id="4_ec32d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t151"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -51,11 +52,13 @@ Button/styles/hover = SubResource("StyleBoxFlat_fmeb8")
 Button/styles/normal = SubResource("StyleBoxFlat_fmeb8")
 Button/styles/pressed = SubResource("StyleBoxFlat_jb02b")
 
-[node name="text_scene" type="Node2D" node_paths=PackedStringArray("labelProto", "okButton")]
+[node name="text_scene" type="Node2D" node_paths=PackedStringArray("labelProto", "choiceLabelProto", "okButton", "labelRootContainer")]
 script = ExtResource("1_2k2yu")
-labelProto = NodePath("MarginContainer/CenterContainer/VBoxContainer/Label")
+labelProto = NodePath("MarginContainer/CenterContainer/VBoxContainer/NonChoiceLine")
+choiceLabelProto = NodePath("MarginContainer/CenterContainer/VBoxContainer/ChoiceLabelProto")
 okButton = NodePath("OkBUtton")
 labelAppearTime = 0.5
+labelRootContainer = NodePath("MarginContainer/CenterContainer/VBoxContainer")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1286.0
@@ -86,7 +89,7 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
+[node name="NonChoiceLine" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -98,6 +101,17 @@ Please take a seat.
 
 The game will start in a moment."
 
+[node name="ChoiceLabelProto" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_om6l0")
+theme_override_font_sizes/font_size = 32
+text = "This is a choice"
+script = ExtResource("4_ec32d")
+mouseOverColor = Color(0, 0, 0.917647, 1)
+regularColor = Color(0.337255, 0.337255, 0.337255, 1)
+
 [node name="OkBUtton" type="Button" parent="."]
 offset_left = 965.0
 offset_top = 641.0
@@ -106,4 +120,6 @@ offset_bottom = 672.0
 theme = SubResource("Theme_i6vjc")
 text = "Continue"
 
+[connection signal="mouse_entered" from="MarginContainer/CenterContainer/VBoxContainer/ChoiceLabelProto" to="MarginContainer/CenterContainer/VBoxContainer/ChoiceLabelProto" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/CenterContainer/VBoxContainer/ChoiceLabelProto" to="MarginContainer/CenterContainer/VBoxContainer/ChoiceLabelProto" method="_on_mouse_exited"]
 [connection signal="pressed" from="OkBUtton" to="." method="announceComplete"]

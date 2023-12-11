@@ -1,25 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://1uvg5mnu5p6a"]
+[gd_scene load_steps=7 format=3 uid="uid://1uvg5mnu5p6a"]
 
 [ext_resource type="Texture2D" uid="uid://cmxughgxdma3o" path="res://assets/folded_paper.jpg" id="1_bufcv"]
 [ext_resource type="Script" path="res://mapStuff/map_scene.gd" id="1_w4d8i"]
 [ext_resource type="Texture2D" uid="uid://cahtf1jqffufe" path="res://assets/portraits/small/character_portrait_small.png" id="2_btead"]
 [ext_resource type="Script" path="res://mapStuff/MapPawn.gd" id="3_knjbm"]
-[ext_resource type="Texture2D" uid="uid://drh26vaqmng8n" path="res://assets/map_objects/POI1.png" id="3_sti20"]
-[ext_resource type="Script" path="res://mapStuff/mapPOI.gd" id="6_1dkrl"]
-[ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="7_4dq0f"]
 [ext_resource type="PackedScene" uid="uid://060rnm2tqbqh" path="res://scenes/multiLineDrawer.tscn" id="8_b7dn0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3a74q"]
 radius = 36.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iw8jb"]
-size = Vector2(217, 200)
-
-[node name="Map" type="Node2D" node_paths=PackedStringArray("movablePawn", "drawer", "pois")]
+[node name="Map" type="Node2D" node_paths=PackedStringArray("movablePawn", "drawer", "poiMarkersRoot")]
 script = ExtResource("1_w4d8i")
 movablePawn = NodePath("MovableThing")
 drawer = NodePath("MultiLineDrawer")
-pois = [NodePath("mapPOI")]
+poiMarkersRoot = NodePath("POI_positions")
 
 [node name="BackGround" type="Sprite2D" parent="."]
 position = Vector2(638, 392)
@@ -74,43 +68,19 @@ stretch_mode = 5
 position = Vector2(32, 32)
 shape = SubResource("CircleShape2D_3a74q")
 
-[node name="mapPOI" type="TextureRect" parent="." node_paths=PackedStringArray("collisionArea", "infoLineLabelProto")]
-offset_left = 163.0
-offset_top = 124.0
-offset_right = 367.385
-offset_bottom = 312.0
-mouse_filter = 2
-texture = ExtResource("3_sti20")
-expand_mode = 3
-stretch_mode = 5
-script = ExtResource("6_1dkrl")
-collisionArea = NodePath("poiCollision")
-infoThreshold = 100.0
-infoLines = Array[String](["THis is the closest line", "This is the second line", "This is the farthest line"])
-infoLineLabelProto = NodePath("InfoLines/Lines/SingleLine")
+[node name="POI_positions" type="Node2D" parent="."]
 
-[node name="poiCollision" type="Area2D" parent="mapPOI"]
+[node name="POI position" type="Marker2D" parent="POI_positions"]
+position = Vector2(122, 109)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="mapPOI/poiCollision"]
-position = Vector2(98.5, 90)
-shape = SubResource("RectangleShape2D_iw8jb")
+[node name="POI position2" type="Marker2D" parent="POI_positions"]
+position = Vector2(894, 104)
 
-[node name="InfoLines" type="Node2D" parent="mapPOI"]
-position = Vector2(216, -9)
-metadata/_edit_group_ = true
+[node name="POI position3" type="Marker2D" parent="POI_positions"]
+position = Vector2(115, 528)
 
-[node name="Lines" type="VBoxContainer" parent="mapPOI/InfoLines"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="SingleLine" type="Label" parent="mapPOI/InfoLines/Lines"]
-visible = false
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("7_4dq0f")
-theme_override_font_sizes/font_size = 16
-text = "This is an ominous looking place"
+[node name="POI position4" type="Marker2D" parent="POI_positions"]
+position = Vector2(792, 526)
 
 [connection signal="mouse_entered" from="MovableThing/Collision" to="MovableThing" method="maskMouseEntered"]
 [connection signal="mouse_exited" from="MovableThing/Collision" to="MovableThing" method="maskMouseExited"]
-[connection signal="area_entered" from="mapPOI/poiCollision" to="mapPOI" method="_on_poi_collision_area_entered"]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://o20e5thwdy3j"]
 
-[ext_resource type="Script" path="res://interfaceStuff/pocketDisplay.gd" id="1_eflmx"]
-[ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="2_sybwb"]
-[ext_resource type="Script" path="res://interfaceStuff/dynamicPositionController.gd" id="3_4y2li"]
-[ext_resource type="Texture2D" uid="uid://dxgj5eydfva4j" path="res://assets/ninePatchFrame.png" id="4_ro7uo"]
-[ext_resource type="Script" path="res://interfaceStuff/sizeMatcher.gd" id="5_57r5e"]
+[ext_resource type="Script" path="res://interfaceStuff/pocketDisplay.gd" id="1_w0gel"]
+[ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="2_p3imr"]
+[ext_resource type="Script" path="res://interfaceStuff/dynamicPositionController.gd" id="3_owxxn"]
+[ext_resource type="Texture2D" uid="uid://dxgj5eydfva4j" path="res://assets/ninePatchFrame.png" id="4_pl6kc"]
+[ext_resource type="Script" path="res://interfaceStuff/sizeMatcher.gd" id="5_8p5yw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xuy27"]
 size = Vector2(1248, 688)
@@ -73,7 +73,7 @@ _data = {
 
 [node name="PocketLayer" type="CanvasLayer" node_paths=PackedStringArray("animation", "positionController", "backGroundPanel", "infoLabel", "pocketContainer")]
 layer = 2
-script = ExtResource("1_eflmx")
+script = ExtResource("1_w0gel")
 animation = NodePath("Pocket/PocketAnimation")
 positionController = NodePath("PocketDynamicPosition")
 backGroundPanel = NodePath("Pocket/NinePatchRect")
@@ -85,12 +85,12 @@ sizesRowGaps = Array[float]([10.0, 10.0, 35.0, 25.0])
 pocketContainer = NodePath("PocketContainer")
 
 [node name="PocketContainer" type="Node" parent="."]
-script = ExtResource("2_sybwb")
+script = ExtResource("2_p3imr")
 overrideRevealed = true
 addToTopWhenFeeding = false
 
 [node name="PocketDynamicPosition" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer", "canvasLayer")]
-script = ExtResource("3_4y2li")
+script = ExtResource("3_owxxn")
 cardAreas = [NodePath("ShapeSmall"), NodePath("ShapeMid"), NodePath("ShapeBig"), NodePath("ShapeFull")]
 logicalContainer = NodePath("../PocketContainer")
 canvasLayer = NodePath("..")
@@ -118,7 +118,7 @@ metadata/_edit_group_ = true
 [node name="NinePatchRect" type="NinePatchRect" parent="Pocket"]
 offset_right = 242.0
 offset_bottom = 241.0
-texture = ExtResource("4_ro7uo")
+texture = ExtResource("4_pl6kc")
 region_rect = Rect2(0.301132, 0.255318, 429.099, 429.363)
 patch_margin_left = 120
 patch_margin_top = 121
@@ -143,7 +143,7 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 252.0
 offset_bottom = 251.0
-texture = ExtResource("4_ro7uo")
+texture = ExtResource("4_pl6kc")
 region_rect = Rect2(0.301132, 0.255318, 429.099, 429.363)
 patch_margin_left = 120
 patch_margin_top = 121
@@ -151,7 +151,7 @@ patch_margin_right = 122
 patch_margin_bottom = 120
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-script = ExtResource("5_57r5e")
+script = ExtResource("5_8p5yw")
 controlToMatch = NodePath("..")
 triggerResizeEmitter = NodePath("../../..")
 

@@ -6,25 +6,59 @@ class_name Main
 
 @export var gamePacked: PackedScene
 @export var textScenePacked: PackedScene
+@export var mapScenePacked: PackedScene
+
+var currentStructure: Array[StructureStep] = []
+var activatedStep: StructureStep
 
 func _ready():
-    for step in structure:
+	currentStructure = structure.duplicate()
+	Events.nextStep.connect(receiveActivatedStep)
+	processStructure()
 
-        if step is MatchStep:
+func processStructure():
 
-            var newMatch = gamePacked.instantiate() as Game
-            newMatch.setupMatch(step)
-            newMatch.setupPlayer(player)
-            add_child(newMatch)
-            newMatch.startMatch()
-            await newMatch.complete
-            newMatch.queue_free()
+	if activatedStep != null:
+		var step = activatedStep
+		activatedStep = null
+		await processStep(step)
 
-        elif step is StepText:
+	elif currentStructure.size() > 0:
+		var step = currentStructure.pop_front()
+		await processStep(step)
 
-            var newText = textScenePacked.instantiate() as TextScene
-            newText.setup(step)
-            add_child(newText)
-            newText.showText()
-            await newText.complete
-            newText.queue_free()
+	if activatedStep != null or currentStructure.size() > 0:
+		processStructure()
+
+func receiveActivatedStep(step: StructureStep):
+	activatedStep = step
+
+func processStep(step: StructureStep):
+
+	if step is MatchStep:
+
+		var newMatch = gamePacked.instantiate() as Game
+		newMatch.setupMatch(step)
+		newMatch.setupPlayer(player)
+		add_child(newMatch)
+		newMatch.startMatch()
+		await newMatch.complete
+		newMatch.queue_free()
+
+	elif step is StepText:
+
+		var newText = textScenePacked.instantiate() as TextScene
+		newText.setup(step)
+		add_child(newText)
+		newText.showText()
+		await newText.complete
+		newText.queue_free()
+
+	elif step is MapStep:
+
+		var newMap = mapScenePacked.instantiate() as MapScene
+		newMap.setupMap(step)
+		add_child(newMap)
+		newMap.start()
+		await newMap.complete
+		newMap.queue_free()

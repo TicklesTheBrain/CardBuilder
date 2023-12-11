@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://die8dommtbcyo"]
 
-[ext_resource type="Script" path="res://interfaceStuff/TopMessage.gd" id="1_1hh7v"]
-[ext_resource type="Texture2D" uid="uid://bcx8tre6d6cnp" path="res://assets/torn_paper.png" id="2_erh1c"]
-[ext_resource type="FontFile" uid="uid://dvlkrwbvctr8j" path="res://fonts/Good Vibrations Solid.otf" id="3_1hatg"]
+[ext_resource type="Script" path="res://interfaceStuff/TopMessage.gd" id="1_jm2wi"]
+[ext_resource type="Texture2D" uid="uid://bcx8tre6d6cnp" path="res://assets/torn_paper.png" id="2_mfd2d"]
+[ext_resource type="FontFile" uid="uid://dvlkrwbvctr8j" path="res://fonts/Good Vibrations Solid.otf" id="3_y0yqh"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u6dtf"]
 
@@ -61,7 +61,7 @@ _data = {
 
 [node name="TopMessage" type="Node2D" node_paths=PackedStringArray("text", "animation")]
 z_index = 200
-script = ExtResource("1_1hh7v")
+script = ExtResource("1_jm2wi")
 text = NodePath("AnimationRoot/Message")
 animation = NodePath("AnimationPlayer")
 
@@ -73,14 +73,14 @@ metadata/_edit_group_ = true
 position = Vector2(-1, -127)
 rotation = 4.71239
 scale = Vector2(1.28917, 1.28917)
-texture = ExtResource("2_erh1c")
+texture = ExtResource("2_mfd2d")
 metadata/_edit_group_ = true
 
 [node name="Shadow" type="Sprite2D" parent="AnimationRoot/Sprite2D"]
 self_modulate = Color(0, 0, 0, 0.490196)
 show_behind_parent = true
 position = Vector2(-15, 15)
-texture = ExtResource("2_erh1c")
+texture = ExtResource("2_mfd2d")
 
 [node name="Message" type="Label" parent="AnimationRoot"]
 self_modulate = Color(1, 1, 1, 0.823529)
@@ -90,7 +90,7 @@ offset_top = 195.0
 offset_right = 577.0
 offset_bottom = 250.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_1hatg")
+theme_override_fonts/font = ExtResource("3_y0yqh")
 theme_override_font_sizes/font_size = 40
 text = "Discard 1 Card."
 horizontal_alignment = 1

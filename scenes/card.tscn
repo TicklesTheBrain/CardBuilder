@@ -1,16 +1,16 @@
 [gd_scene load_steps=16 format=3 uid="uid://d1lj52mw7mxay"]
 
-[ext_resource type="Script" path="res://interfaceStuff/cardDisplay.gd" id="1_lql06"]
-[ext_resource type="Script" path="res://interfaceStuff/cardDisplayBody.gd" id="2_b8cjq"]
-[ext_resource type="Texture2D" uid="uid://dubifh6y4x64n" path="res://assets/cardBacks/RedA.png" id="2_fj55x"]
-[ext_resource type="Texture2D" uid="uid://yjm7ihicna6h" path="res://assets/cardFrontBackground.png" id="2_tn07i"]
-[ext_resource type="Texture2D" uid="uid://d3folp8lwgh43" path="res://assets/cardBacks/RedB.png" id="3_trcic"]
-[ext_resource type="Texture2D" uid="uid://dwl1cp7bo0kfv" path="res://assets/cardBacks/RedC.png" id="4_m25as"]
-[ext_resource type="Texture2D" uid="uid://qdvhbpitgkht" path="res://assets/cardBacks/RedD.png" id="5_1je0t"]
-[ext_resource type="Texture2D" uid="uid://54woxe8d5xmh" path="res://assets/cardBacks/BlueA.png" id="6_pfduv"]
-[ext_resource type="Texture2D" uid="uid://b3h7ea8cdt5be" path="res://assets/cardBacks/BlueB.png" id="7_da838"]
-[ext_resource type="Texture2D" uid="uid://bla3ernwtj6x" path="res://assets/cardBacks/BlueC.png" id="8_uifly"]
-[ext_resource type="Texture2D" uid="uid://8xme0g568yvc" path="res://assets/cardBacks/BlueD.png" id="9_yf1aw"]
+[ext_resource type="Script" path="res://interfaceStuff/cardDisplay.gd" id="1_y50h6"]
+[ext_resource type="Texture2D" uid="uid://dubifh6y4x64n" path="res://assets/cardBacks/RedA.png" id="2_tun0c"]
+[ext_resource type="Texture2D" uid="uid://d3folp8lwgh43" path="res://assets/cardBacks/RedB.png" id="3_8rldm"]
+[ext_resource type="Texture2D" uid="uid://dwl1cp7bo0kfv" path="res://assets/cardBacks/RedC.png" id="4_fwbsk"]
+[ext_resource type="Texture2D" uid="uid://qdvhbpitgkht" path="res://assets/cardBacks/RedD.png" id="5_xjduq"]
+[ext_resource type="Texture2D" uid="uid://54woxe8d5xmh" path="res://assets/cardBacks/BlueA.png" id="6_ethuo"]
+[ext_resource type="Texture2D" uid="uid://b3h7ea8cdt5be" path="res://assets/cardBacks/BlueB.png" id="7_8jna1"]
+[ext_resource type="Texture2D" uid="uid://bla3ernwtj6x" path="res://assets/cardBacks/BlueC.png" id="8_jo8c6"]
+[ext_resource type="Texture2D" uid="uid://8xme0g568yvc" path="res://assets/cardBacks/BlueD.png" id="9_v0j7p"]
+[ext_resource type="Texture2D" uid="uid://yjm7ihicna6h" path="res://assets/cardFrontBackground.png" id="10_ccyml"]
+[ext_resource type="Script" path="res://interfaceStuff/cardDisplayBody.gd" id="11_d34wg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ff4vj"]
 bg_color = Color(0, 0, 0, 0.482353)
@@ -28,15 +28,15 @@ bg_color = Color(0.992157, 0.992157, 0.992157, 0.803922)
 size = Vector2(141, 192)
 
 [node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "cardImageRect", "offsetNode", "detailedInfoRoot", "valueLabel", "costLabel", "fullCardText", "attackLabel", "defenceLabel")]
-script = ExtResource("1_lql06")
+script = ExtResource("1_y50h6")
 cardShape = NodePath("CardShape")
 cardImageRect = NodePath("CardImageRect")
 maxShadowOffset = Vector2(20, 20)
 shadowOffsetGrowTime = 0.3
 shadowOffsetShrinkTime = 1.0
 offsetNode = NodePath("ShadowOffset")
-backsRed = Array[Texture2D]([ExtResource("2_fj55x"), ExtResource("3_trcic"), ExtResource("4_m25as"), ExtResource("5_1je0t")])
-backsBlue = Array[Texture2D]([ExtResource("6_pfduv"), ExtResource("7_da838"), ExtResource("8_uifly"), ExtResource("9_yf1aw")])
+backsRed = Array[Texture2D]([ExtResource("2_tun0c"), ExtResource("3_8rldm"), ExtResource("4_fwbsk"), ExtResource("5_xjduq")])
+backsBlue = Array[Texture2D]([ExtResource("6_ethuo"), ExtResource("7_8jna1"), ExtResource("8_jo8c6"), ExtResource("9_v0j7p")])
 detailedInfoRoot = NodePath("CardImageRect/Detailed Info")
 valueLabel = NodePath("CardImageRect/Detailed Info/Info/TopMargin/TopInfo/MarginContainer/ValueType")
 costLabel = NodePath("CardImageRect/Detailed Info/Info/TopMargin/TopInfo/MarginContainer2/Cost")
@@ -74,9 +74,9 @@ offset_right = 70.5
 offset_bottom = 95.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_tn07i")
+texture = ExtResource("10_ccyml")
 expand_mode = 3
-script = ExtResource("2_b8cjq")
+script = ExtResource("11_d34wg")
 
 [node name="Detailed Info" type="PanelContainer" parent="CardImageRect"]
 visible = false

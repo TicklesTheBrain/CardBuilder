@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuc4k85k1p8r6"]
+
+[ext_resource type="Texture2D" uid="uid://drh26vaqmng8n" path="res://assets/map_objects/POI1.png" id="1_y3plt"]
+[ext_resource type="Script" path="res://mapStuff/mapPOI.gd" id="2_xw1r6"]
+[ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="3_76ppl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iw8jb"]
+size = Vector2(217, 200)
+
+[node name="mapPOI" type="TextureRect" node_paths=PackedStringArray("infoLineLabelProto")]
+offset_right = 204.385
+offset_bottom = 188.0
+mouse_filter = 2
+texture = ExtResource("1_y3plt")
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("2_xw1r6")
+infoThreshold = 100.0
+infoLines = Array[String](["THis is the closest line", "This is the second line", "This is the farthest line"])
+infoLineLabelProto = NodePath("InfoLines/Lines/SingleLine")
+
+[node name="poiCollision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="poiCollision"]
+position = Vector2(98.5, 90)
+shape = SubResource("RectangleShape2D_iw8jb")
+
+[node name="InfoLines" type="Node2D" parent="."]
+position = Vector2(216, -9)
+metadata/_edit_group_ = true
+
+[node name="Lines" type="VBoxContainer" parent="InfoLines"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SingleLine" type="Label" parent="InfoLines/Lines"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_76ppl")
+theme_override_font_sizes/font_size = 16
+text = "This is an ominous looking place"
+
+[connection signal="area_entered" from="poiCollision" to="." method="_on_poi_collision_area_entered"]
