@@ -62,7 +62,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ff4vj")
 
-[node name="CardImageRect" type="TextureRect" parent="."]
+[node name="CardImageRect" type="TextureRect" parent="." groups=["cdc"]]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

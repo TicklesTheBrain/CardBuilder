@@ -12,6 +12,10 @@ signal itemClicked(item: ItemDisplay)
 signal itemMouseOver(item: ItemDisplay)
 signal itemMouseOverExit(item: ItemDisplay)
 
+
+var mouseMonitoringGroups = ["cdc", "id", "bt"]
+var mouseMonitorDictionary = {}
+
 var selecting = false
 var amount = -1
 var subjectContainer: CardContainer
@@ -36,6 +40,24 @@ func _ready():
 	itemClicked.connect(_onItemClicked)
 	itemMouseOver.connect(_onItemMouseOver)
 	itemMouseOverExit.connect(_onItemMouseOverExit)
+
+
+func disableOtherMouseMonitoring(exceptionNode):
+	for groupname in mouseMonitoringGroups:
+		for node in get_tree().get_nodes_in_group(groupname):
+			if node == exceptionNode:
+				continue
+
+			if node is Control:
+				mouseMonitorDictionary[node] = node.mouse_filter
+				node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+func reenableMouseMonitoring():
+	for node in mouseMonitorDictionary.keys():
+		node.mouse_filter = mouseMonitorDictionary[node]
+
+	mouseMonitorDictionary = {}
+
 
 func _onMapPawnClicked(mapPawn: MapPawn):
 	mapPawn.startDrag()
@@ -100,10 +122,12 @@ func _onCardClicked(display: CardDisplay):
 	if checkCanDrag(display.cardData):
 		display.get_parent().move_child(display, -1)
 		display.startDrag()
+		disableOtherMouseMonitoring(display.cardImageRect) #TODO: would be nicer to get this control cleaner
 		#mouseOvers = false
 
 func _onCardDragReleased(display: CardDisplay):
 	display.endDrag()
+	reenableMouseMonitoring()
 	#mouseOvers = true
 
 func _onCardMouseOver(display: CardDisplay):

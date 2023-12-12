@@ -66,7 +66,7 @@ itemTexture = ExtResource("27_ou647")
 [sub_resource type="Resource" id="Resource_h2ow0"]
 script = ExtResource("8_dso67")
 playerDeckTemplate = ExtResource("24_wh5ls")
-items = Array[ExtResource("5_5y1g2")]([SubResource("Resource_kdyld")])
+items = Array[ExtResource("5_5y1g2")]([SubResource("Resource_kdyld"), SubResource("Resource_kdyld"), SubResource("Resource_kdyld"), SubResource("Resource_kdyld"), SubResource("Resource_kdyld")])
 playerHP = 25
 playerPicId = 0
 
@@ -478,7 +478,7 @@ horizontal_alignment = 1
 script = ExtResource("6_oxs0c")
 resourceToTrack = NodePath("../../Logic/Enemy/Resources/enemyHp")
 
-[node name="DrawButton" type="Button" parent="."]
+[node name="DrawButton" type="Button" parent="." groups=["bt"]]
 offset_left = 519.0
 offset_top = 417.0
 offset_right = 609.0
@@ -486,7 +486,7 @@ offset_bottom = 448.0
 theme = SubResource("Theme_bfpeo")
 text = "Draw Card"
 
-[node name="EndButton" type="Button" parent="."]
+[node name="EndButton" type="Button" parent="." groups=["bt"]]
 offset_left = 420.0
 offset_top = 416.0
 offset_right = 503.0
@@ -495,7 +495,7 @@ theme = SubResource("Theme_bfpeo")
 text = "End Hand
 "
 
-[node name="OkBUtton" type="Button" parent="."]
+[node name="OkBUtton" type="Button" parent="." groups=["bt"]]
 offset_left = 624.0
 offset_top = 418.0
 offset_right = 707.0
@@ -902,4 +902,4 @@ logicalItemContainer = NodePath("../Logic/Player/ItemContainer")
 [connection signal="area_entered" from="PlayArea" to="PlayArea" method="_on_area_entered"]
 [connection signal="area_exited" from="PlayArea" to="PlayArea" method="_on_area_exited"]
 [connection signal="child_entered_tree" from="ItemContainer" to="ItemContainer" method="_child_update"]
-[connection signal="child_exiting_tree" from="ItemContainer" to="ItemContainer" method="_child_update"]
+[connection signal="child_exiting_tree" from="ItemContainer" to="ItemContainer" method="_child_update" binds= [-1]]
