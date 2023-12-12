@@ -7,9 +7,12 @@ class_name StepText
 @export var optionOutcomes: Array[StructureStep] = []
 
 func checkIsOption(idx: int):
-    if isOption.size()-1 >= idx:
+    #print('check is option')
+    if isOption.size() <= idx:
+        #print('false one')
         return false
     else:
+        #print(isOption[idx])
         return isOption[idx]
 
 func getOutcome(optionChosen: int) -> StructureStep:

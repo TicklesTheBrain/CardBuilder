@@ -253,27 +253,6 @@ texture = ExtResource("1_jh6uf")
 
 [node name="Subcamera" type="Camera2D" parent="RegularCard"]
 
-[node name="InfoSymbolColumn" type="VBoxContainer" parent="RegularCard"]
-modulate = Color(0, 0, 0, 1)
-offset_left = -244.0
-offset_top = -237.0
-offset_right = -158.0
-offset_bottom = 274.0
-
-[node name="InfoColumnLetter" type="Label" parent="RegularCard/InfoSymbolColumn"]
-visible = false
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
-text = "P:"
-horizontal_alignment = 1
-
-[node name="InfoColumnSymbol" type="TextureRect" parent="RegularCard/InfoSymbolColumn"]
-visible = false
-layout_mode = 2
-texture = ExtResource("2_rlkwh")
-expand_mode = 4
-
 [node name="ColoredGroup" type="CanvasGroup" parent="RegularCard"]
 
 [node name="cardName" type="Label" parent="RegularCard/ColoredGroup"]
@@ -316,6 +295,27 @@ theme_override_fonts/font = ExtResource("3_87qla")
 theme_override_font_sizes/font_size = 75
 text = "6"
 horizontal_alignment = 2
+
+[node name="InfoSymbolColumn" type="VBoxContainer" parent="RegularCard"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -244.0
+offset_top = -237.0
+offset_right = -158.0
+offset_bottom = 274.0
+
+[node name="InfoColumnLetter" type="Label" parent="RegularCard/InfoSymbolColumn"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "P:"
+horizontal_alignment = 1
+
+[node name="InfoColumnSymbol" type="TextureRect" parent="RegularCard/InfoSymbolColumn"]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_rlkwh")
+expand_mode = 4
 
 [node name="SymbolPositions" type="Node2D" parent="RegularCard"]
 

@@ -19,7 +19,7 @@ func showAmount(newAmount: int):
 	var doublerVisible = 0 if doublingCutOut.visible else 1
 	var difference = newAmount - (cutOuts.size() + rootDoublerInt)
 
-	print('show amount ', newAmount, ' difference ', difference, 'current double ', cutOuts.size())
+	#print('show amount ', newAmount, ' difference ', difference, 'current double ', cutOuts.size())
 	
 	if difference == 0:
 		return

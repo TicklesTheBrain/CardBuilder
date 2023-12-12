@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=52 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" path="res://interfaceStuff/DynamicPositionOutline.gd" id="22_g8olx"]
 [ext_resource type="Resource" uid="uid://dc1pbwqrsnd4m" path="res://content/test_cards.tres" id="24_wh5ls"]
 [ext_resource type="Script" path="res://ItemDisplayController.gd" id="26_85p36"]
+[ext_resource type="FontFile" uid="uid://bokge8vr1onw8" path="res://fonts/Rasa-Regular.ttf" id="26_wmk7t"]
 [ext_resource type="PackedScene" uid="uid://kna3wka5eglg" path="res://item_display.tscn" id="27_6v012"]
 [ext_resource type="Texture2D" uid="uid://da3mc7dtg3lup" path="res://assets/items/medal.png" id="27_ou647"]
 
@@ -618,7 +619,10 @@ offset_left = 192.0
 offset_top = 273.0
 offset_right = 326.0
 offset_bottom = 296.0
+theme_override_fonts/font = ExtResource("26_wmk7t")
+theme_override_font_sizes/font_size = 20
 text = "Message Content"
+vertical_alignment = 1
 
 [node name="Outlines" type="Node2D" parent="."]
 position = Vector2(11, 458)

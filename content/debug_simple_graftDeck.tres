@@ -38,7 +38,7 @@ amountOfCardsToDraw = 1
 effectName = ""
 staticText = ""
 conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
-followUpEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+followUpEffects = Array[Resource("res://gameEffects/gameEffect.gd")]([])
 includeFollowUpText = false
 subjectActor = 0
 
@@ -66,14 +66,14 @@ type = SubResource("Resource_4q0oj")
 cost = SubResource("Resource_lsr0e")
 attack = SubResource("Resource_sis6c")
 defence = SubResource("Resource_sgyva")
-onPlayEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([SubResource("Resource_e08e7")])
+onPlayEffects = Array[Resource("res://gameEffects/gameEffect.gd")]([SubResource("Resource_e08e7")])
 playConditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
-onLoseEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
-onWinEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
-onBustEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
-endRoundEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
-drawEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
-startMatchEffects = Array[Resource("res://cardEffects/cardEffect.gd")]([])
+onLoseEffects = Array[Resource("res://gameEffects/gameEffect.gd")]([])
+onWinEffects = Array[Resource("res://gameEffects/gameEffect.gd")]([])
+onBustEffects = Array[Resource("res://gameEffects/gameEffect.gd")]([])
+endRoundEffects = Array[Resource("res://gameEffects/gameEffect.gd")]([])
+drawEffects = Array[Resource("res://gameEffects/gameEffect.gd")]([])
+startMatchEffects = Array[Resource("res://gameEffects/gameEffect.gd")]([])
 
 [resource]
 script = ExtResource("4_rnuba")

@@ -9,7 +9,7 @@ func _child_update(_node: Node, childCountModify: int = 0):
     var childCount = get_children().size() + childCountModify
     var columnCount = floor(childCount / columnLength) + (1 if childCount % columnLength > 0 else 0)
     columns = max(columnCount,1)
-    print('child update triggered, childcount ', childCount, ' column length ', columnLength, ' columns ', columns, ' columncount', columnCount )
+    #print('child update triggered, childcount ', childCount, ' column length ', columnLength, ' columns ', columns, ' columncount', columnCount )
 
 func _ready():
     logicalItemContainer.itemAdded.connect(newItemDisplay)

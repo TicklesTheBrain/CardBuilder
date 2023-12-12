@@ -17,11 +17,11 @@ func onClick():
     InputLord.itemClicked.emit(self)
 
 func onMouseEnterItem():
-    print('item mouse enter')
+    #print('item mouse enter')
     InputLord.itemMouseOver.emit(self)
 
 func onMouseLeaveItem():
-    print('item mouse leave')
+    #print('item mouse leave')
     InputLord.itemMouseOverExit.emit(self)
 
 func showInfo():

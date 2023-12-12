@@ -104,13 +104,13 @@ The game will start in a moment."
 [node name="ChoiceLabelProto" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 1
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.25098, 0.25098, 0.25098, 1)
 theme_override_fonts/font = ExtResource("3_om6l0")
 theme_override_font_sizes/font_size = 32
 text = "This is a choice"
 script = ExtResource("4_ec32d")
 mouseOverColor = Color(0, 0, 0.917647, 1)
-regularColor = Color(0.337255, 0.337255, 0.337255, 1)
+regularColor = Color(0.25098, 0.25098, 0.25098, 1)
 
 [node name="OkBUtton" type="Button" parent="."]
 offset_left = 965.0

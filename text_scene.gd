@@ -49,7 +49,7 @@ func showText():
 	
 	if showButton:
 		okButton.visible = true
-	else:
+	elif not myStep.isOption.any(func(c): return c):
 		announceComplete()
 
 func announceComplete():
@@ -58,3 +58,4 @@ func announceComplete():
 func processTextOptionClicked(label: Label):
 	var optionNumber = labelRootContainer.get_children().find(label)
 	Events.nextStep.emit(myStep.getOutcome(optionNumber))
+	announceComplete()
