@@ -1,5 +1,5 @@
 extends Resource
-class_name CardEffect
+class_name GameEffect
 
 #Maybe move this to CardData?
 enum triggerType {NONE, PLAY, DISCARD, END_ROUND, DRAW, START_MATCH, WIN, LOSE, BUST}
@@ -7,7 +7,7 @@ enum triggerType {NONE, PLAY, DISCARD, END_ROUND, DRAW, START_MATCH, WIN, LOSE, 
 @export var effectName: String
 @export var staticText: String
 @export var conditionals: Array[Conditional] = []
-@export var followUpEffects: Array[CardEffect] = []
+@export var followUpEffects: Array[GameEffect] = []
 @export var includeFollowUpText: bool = false
 @export var subjectActor: GameStateContext.ActorType
 @export var symbols: Array[EffectDisplayProperties.SymbolFlags]
@@ -47,10 +47,10 @@ func getText() -> String:
 func getTextSpecific() -> String:
 	return "this was a not overriden generic getText, something wrong?"
 
-func mergeEffect(newEffect: CardEffect):
+func mergeEffect(newEffect: GameEffect):
 	CardData.mergeConditionalsBuckets(conditionals, newEffect.conditionals)
 	mergeEffectSepecific(newEffect)
 	CardData.mergeEffectsBuckets(followUpEffects, newEffect.followUpEffects)
 
-func mergeEffectSepecific(_newEffect: CardEffect):
+func mergeEffectSepecific(_newEffect: GameEffect):
 	return "if this is not overriden, the merging will have no effect"

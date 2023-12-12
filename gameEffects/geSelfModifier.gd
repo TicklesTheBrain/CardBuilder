@@ -1,4 +1,4 @@
-extends CardEffect
+extends GameEffect
 class_name SelfModifier
 
 @export var modifier: ParamModifier
@@ -17,5 +17,5 @@ func triggerSpecific(ctxt: GameStateContext):
 		CardParam.ParamType.VALUE:
 			ctxt.actingCard.value.addModifier(newMod)
 
-func mergeEffectSpecific(newEffect: CardEffect):
+func mergeEffectSpecific(newEffect: GameEffect):
 	modifier.mergeModifier(newEffect.modifier)

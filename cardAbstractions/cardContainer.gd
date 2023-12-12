@@ -5,7 +5,7 @@ class_name CardContainer
 @export var cards: Array[CardData] = []
 @export var feedContainer: CardContainer # Container which is reshuffled if container is empty on drawCard function
 @export var disposeContainer: CardContainer # Container to which things are disposed to on disposeCards call
-@export var addTriggerType: CardEffect.triggerType
+@export var addTriggerType: GameEffect.triggerType
 @export var modifiers: Array[Modifier]
 @export var overrideRevealed: bool = false
 @export var overrideRevealedState: bool = true
@@ -37,7 +37,7 @@ func getFreeSpace():
 	else:
 		return maxCards - cards.size()
 
-func triggerAll(triggerType: CardEffect.triggerType):
+func triggerAll(triggerType: GameEffect.triggerType):
 	for card in cards:
 		await card.triggerEffect(triggerType)
 

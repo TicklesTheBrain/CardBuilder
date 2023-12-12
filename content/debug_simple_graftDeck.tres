@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardTemplatePackage" load_steps=13 format=3 uid="uid://c4nt0nc0bnkvy"]
 
 [ext_resource type="Script" path="res://cardAbstractions/cardParam.gd" id="1_ut3cu"]
-[ext_resource type="Script" path="res://cardEffects/ceDraw.gd" id="2_7j6k5"]
+[ext_resource type="Script" path="res://gameEffects/geDraw.gd" id="2_7j6k5"]
 [ext_resource type="Script" path="res://cardAbstractions/emptyCardData.gd" id="3_2rx2g"]
 [ext_resource type="Script" path="res://cardAbstractions/cardType.gd" id="4_cihnm"]
 [ext_resource type="Script" path="res://cardAbstractions/cardTemplatePackage.gd" id="4_rnuba"]

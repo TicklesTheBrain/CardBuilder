@@ -1,4 +1,4 @@
-extends CardEffect
+extends GameEffect
 class_name DestroySelf
 
 @export var destroyPermanent: bool = false

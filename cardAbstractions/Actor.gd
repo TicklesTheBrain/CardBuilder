@@ -49,7 +49,7 @@ func _ready():
 	deck.shuffle()
 
 func triggerStartMatch():
-	deck.triggerAll(CardEffect.triggerType.START_MATCH)
+	deck.triggerAll(GameEffect.triggerType.START_MATCH)
 
 func getContainerFromPurpose(purpose: ContainerPurposes) -> CardContainer:
 	match purpose:

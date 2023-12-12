@@ -15,14 +15,14 @@ class_name CardData
 @export var attack: CardParam
 @export var defence: CardParam
 
-@export var onPlayEffects: Array[CardEffect] = []
+@export var onPlayEffects: Array[GameEffect] = []
 @export var playConditionals: Array[Conditional] = []
-@export var onLoseEffects: Array[CardEffect] = []
-@export var onWinEffects: Array[CardEffect] = []
-@export var onBustEffects: Array[CardEffect] = []
-@export var endRoundEffects: Array[CardEffect] = []
-@export var drawEffects: Array[CardEffect] = []
-@export var startMatchEffects: Array[CardEffect] = []
+@export var onLoseEffects: Array[GameEffect] = []
+@export var onWinEffects: Array[GameEffect] = []
+@export var onBustEffects: Array[GameEffect] = []
+@export var endRoundEffects: Array[GameEffect] = []
+@export var drawEffects: Array[GameEffect] = []
+@export var startMatchEffects: Array[GameEffect] = []
 @export var templateCard: EmptyCardData
 
 signal announceDestroy()
@@ -74,28 +74,28 @@ func receiveContext(ctxt: GameStateContext):
 func updateContext():
 	Events.requestContext.emit(self)
 
-func triggerEffectBucket(bucketToTrigger: Array[CardEffect]):
+func triggerEffectBucket(bucketToTrigger: Array[GameEffect]):
 	for eff in bucketToTrigger:
 		updateContext()
 		context.actingCard = self
 		await eff.trigger(context)
 
-func triggerEffect(typeToTrigger: CardEffect.triggerType):
+func triggerEffect(typeToTrigger: GameEffect.triggerType):
 	
 	match typeToTrigger:
-		CardEffect.triggerType.PLAY:
+		GameEffect.triggerType.PLAY:
 			await triggerEffectBucket(onPlayEffects)
-		CardEffect.triggerType.LOSE:
+		GameEffect.triggerType.LOSE:
 			await triggerEffectBucket(onLoseEffects)
-		CardEffect.triggerType.WIN:
+		GameEffect.triggerType.WIN:
 			await triggerEffectBucket(onWinEffects)
-		CardEffect.triggerType.BUST:
+		GameEffect.triggerType.BUST:
 			await triggerEffectBucket(onBustEffects)
-		CardEffect.triggerType.END_ROUND:
+		GameEffect.triggerType.END_ROUND:
 			await triggerEffectBucket(endRoundEffects)
-		CardEffect.triggerType.DRAW:
+		GameEffect.triggerType.DRAW:
 			await triggerEffectBucket(drawEffects)
-		CardEffect.triggerType.START_MATCH:
+		GameEffect.triggerType.START_MATCH:
 			await triggerEffectBucket(startMatchEffects)
 
 func getEffectTextDictionary():
@@ -115,7 +115,7 @@ func getPlayConditionalText():
 		result += con.getText()
 	return result
 
-func getEffectTextFromBucket(bucketToQuery: Array[CardEffect]):
+func getEffectTextFromBucket(bucketToQuery: Array[GameEffect]):
 	var result = ''
 	for effect in bucketToQuery:	
 		if result != '':
@@ -190,7 +190,7 @@ func addCardGraft(newGraft: CardData):
 
 	return self
 
-static func mergeEffectsBuckets(ownBucket: Array[CardEffect], graftBucket: Array[CardEffect]):
+static func mergeEffectsBuckets(ownBucket: Array[GameEffect], graftBucket: Array[GameEffect]):
 	var effectsToAppend = []
 	for ef in graftBucket:
 		var sameNameEffects = ownBucket.filter(func(e): return ef.effectName and ef.effectName == e.effectName)
@@ -199,7 +199,7 @@ static func mergeEffectsBuckets(ownBucket: Array[CardEffect], graftBucket: Array
 				sne.mergeEffect(ef)
 		else:
 			effectsToAppend.push_back(ef)
-	effectsToAppend = effectsToAppend.map(func(e): return e.duplicate(true)) as Array[CardEffect]
+	effectsToAppend = effectsToAppend.map(func(e): return e.duplicate(true)) as Array[GameEffect]
 	ownBucket.append_array(effectsToAppend)
 
 static func mergeConditionalsBuckets(bucketToGraft: Array[Conditional], donorBucket: Array[Conditional]):

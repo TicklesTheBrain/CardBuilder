@@ -1,4 +1,4 @@
-extends CardEffect
+extends GameEffect
 class_name AddCards
 
 @export var containerToAdd: Actor.ContainerPurposes
@@ -21,7 +21,7 @@ func triggerSpecific(ctxt: GameStateContext):
         var deck = actor.getContainerFromPurpose(Actor.ContainerPurposes.DECK)
         deck.addNewTemplateCards(cardsToAdd.cards)
 
-func mergeEffectSpecific(newEffect: CardEffect):
+func mergeEffectSpecific(newEffect: GameEffect):
     print("merging added cards")
     cardsToAdd.cards.append_array(newEffect.cardsToAdd.cards)
 

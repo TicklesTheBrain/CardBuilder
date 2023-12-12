@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://cvslanpxg36q1"]
+[gd_scene load_steps=95 format=3 uid="uid://cvslanpxg36q1"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_o1hxs"]
 [ext_resource type="PackedScene" uid="uid://r545i10no8or" path="res://scenes/game.tscn" id="2_4iy5f"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://cardAbstractions/cardType.gd" id="4_o2g3p"]
 [ext_resource type="Script" path="res://structurestuff/StepText.gd" id="7_5m8gi"]
 [ext_resource type="Script" path="res://structurestuff/matchStep.gd" id="7_6n3d3"]
+[ext_resource type="PackedScene" uid="uid://1uvg5mnu5p6a" path="res://scenes/map.tscn" id="11_vjgs4"]
 
 [sub_resource type="Resource" id="Resource_arc3k"]
 script = ExtResource("7_5m8gi")
@@ -802,3 +803,4 @@ structure = Array[Resource("res://structurestuff/structureStep.gd")]([SubResourc
 player = SubResource("Resource_sb14n")
 gamePacked = ExtResource("2_4iy5f")
 textScenePacked = ExtResource("3_y6o38")
+mapScenePacked = ExtResource("11_vjgs4")

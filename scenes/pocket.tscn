@@ -86,7 +86,12 @@ pocketContainer = NodePath("PocketContainer")
 
 [node name="PocketContainer" type="Node" parent="."]
 script = ExtResource("2_p3imr")
+maxCards = null
+cards = null
+addTriggerType = null
+modifiers = null
 overrideRevealed = true
+overrideRevealedState = null
 addToTopWhenFeeding = false
 
 [node name="PocketDynamicPosition" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer", "canvasLayer")]

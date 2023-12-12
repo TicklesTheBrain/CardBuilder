@@ -1,4 +1,4 @@
-extends CardEffect
+extends GameEffect
 class_name ResourceModify
 
 @export var modifiedResource: Actor.GameResources
@@ -16,7 +16,7 @@ func triggerSpecific(ctxt: GameStateContext):
 func getTextSpecific():
 	return "Get {num} energy.".format({"num": amountToModify})
 
-func mergeEffectSepecific(newEffect: CardEffect):
+func mergeEffectSepecific(newEffect: GameEffect):
 	assert(modifiedResource == newEffect.modifiedResource and resourcePropety == newEffect.resourcePropety)
 	amountToModify += newEffect.amountToModify
 	#TODO: should think about modifying to zero and effect no longer being needed. Maybe just text modification? Like overriding inherited getText()

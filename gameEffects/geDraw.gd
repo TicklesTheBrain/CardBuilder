@@ -1,4 +1,4 @@
-extends CardEffect
+extends GameEffect
 class_name DrawCards
 
 @export var source: Actor.ContainerPurposes = Actor.ContainerPurposes.DECK
@@ -24,7 +24,7 @@ func triggerSpecific(ctxt: GameStateContext):
 func getTextSpecific() -> String:
 	return "Draw {num} card".format({"num": amountOfCardsToDraw})
 
-func mergeEffectSepecific(newEffect: CardEffect):
+func mergeEffectSepecific(newEffect: GameEffect):
 	assert(source == newEffect.source and destination == newEffect.destination)
 	amountOfCardsToDraw += newEffect.amountOfCardsToDraw
 	

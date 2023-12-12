@@ -42,6 +42,7 @@ func _ready():
 		startMatch()
 
 func setupMatch(structureStep: StructureStep):
+	
 	enemy.deck.templatePackage = structureStep.opponentDeck
 	enemy.hp.baseline = structureStep.opponentHP
 	enemy.bustValue.baseline = structureStep.opponentBustBaseline
@@ -49,12 +50,13 @@ func setupMatch(structureStep: StructureStep):
 	player.bustValue.baseline = structureStep.playerBustBaseline
 
 func setupPlayer(newPersistentPlayer: PlayerStuff):
+	
 	player.deck.templatePackage = newPersistentPlayer.playerDeckTemplate
-	#TODO: make hp adjustments persist
 	player.hp.baseline = newPersistentPlayer.playerHP
 	persistenPlayer = newPersistentPlayer
 
 func makeContext() -> GameStateContext:
+	
 	var ctxt = GameStateContext.new() as GameStateContext 
 	ctxt.player = player
 	ctxt.enemy = enemy
@@ -207,10 +209,10 @@ func roundLoop():
 		await okButton.button_down
 
 		#trigger resolution effects
-		await winner.playArea.triggerAll(CardEffect.triggerType.WIN)
-		await loser.playArea.triggerAll(CardEffect.triggerType.LOSE)
+		await winner.playArea.triggerAll(GameEffect.triggerType.WIN)
+		await loser.playArea.triggerAll(GameEffect.triggerType.LOSE)
 		if bust:
-			await loser.playArea.triggerAll(CardEffect.triggerType.BUST)
+			await loser.playArea.triggerAll(GameEffect.triggerType.BUST)
 		
 		#Determine attack and defence
 		var damageCount = winner.playArea.getTotalAttack()		
@@ -235,8 +237,8 @@ func roundLoop():
 
 	await okButton.button_down
 
-	await player.playArea.triggerAll(CardEffect.triggerType.END_ROUND)
-	await enemy.playArea.triggerAll(CardEffect.triggerType.END_ROUND)
+	await player.playArea.triggerAll(GameEffect.triggerType.END_ROUND)
+	await enemy.playArea.triggerAll(GameEffect.triggerType.END_ROUND)
 
 	enemy.playArea.disposeAll()
 	player.playArea.disposeAll()

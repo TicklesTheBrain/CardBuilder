@@ -1,4 +1,4 @@
 extends Resource
 class_name StructureStep
 
-@export var postStepReward: CardEffect
+@export var postStepReward: GameEffect

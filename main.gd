@@ -10,6 +10,7 @@ class_name Main
 
 var currentStructure: Array[StructureStep] = []
 var activatedStep: StructureStep
+var activeScene
 
 func _ready():
 	currentStructure = structure.duplicate()
@@ -29,36 +30,51 @@ func processStructure():
 
 	if activatedStep != null or currentStructure.size() > 0:
 		processStructure()
+	else:
+		print("game closing")
+		get_tree().quit()
 
 func receiveActivatedStep(step: StructureStep):
 	activatedStep = step
 
 func processStep(step: StructureStep):
 
+	if activeScene != null:
+		Transition.showTransition()
+		await Transition.done
+		activeScene.queue_free()
+
 	if step is MatchStep:
 
-		var newMatch = gamePacked.instantiate() as Game
-		newMatch.setupMatch(step)
-		newMatch.setupPlayer(player)
-		add_child(newMatch)
-		newMatch.startMatch()
-		await newMatch.complete
-		newMatch.queue_free()
+		activeScene = gamePacked.instantiate() as Game
+		activeScene.setupMatch(step)
+		activeScene.setupPlayer(player)
+		add_child(activeScene)
+		activeScene.startMatch()
 
 	elif step is StepText:
 
-		var newText = textScenePacked.instantiate() as TextScene
-		newText.setup(step)
-		add_child(newText)
-		newText.showText()
-		await newText.complete
-		newText.queue_free()
+		activeScene = textScenePacked.instantiate() as TextScene
+		activeScene.setup(step)
+		add_child(activeScene)
+		activeScene.showText()
 
 	elif step is MapStep:
 
-		var newMap = mapScenePacked.instantiate() as MapScene
-		newMap.setupMap(step)
-		add_child(newMap)
-		newMap.start()
-		await newMap.complete
-		newMap.queue_free()
+		activeScene = mapScenePacked.instantiate() as MapScene
+		activeScene.setupMap(activeScene)
+		add_child(activeScene)
+		activeScene.start()
+
+	if Transition.active:
+		Transition.hideTransition()
+
+	await activeScene.complete
+
+	if step.postStepReward != null:
+		#TODO: Context should pass player deck correctly here
+		#var newContext = GameStateContext.new()
+
+		step.postStepReward.trigger(GameStateContext.new())
+
+	

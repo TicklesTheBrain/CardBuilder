@@ -5,3 +5,6 @@ class_name PlayerStuff
 @export var items = []
 @export var playerHP: int
 @export var playerPicId: int
+
+func addNewTemplateCards(newCards: Array[EmptyCardData]):
+	playerDeckTemplate.cards.append_array(newCards)

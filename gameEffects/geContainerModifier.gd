@@ -1,4 +1,4 @@
-extends CardEffect
+extends GameEffect
 class_name AddModifier
 
 @export var containersToApply: Array[Actor.ContainerPurposes] = []
@@ -18,6 +18,6 @@ func triggerSpecific(ctxt: GameStateContext):
 			newMod.addTC(newTC)
 		actor.getContainerFromPurpose(purpose).addModifier(newMod)
 
-func mergeEffectSpecific(newEffect: CardEffect):
+func mergeEffectSpecific(newEffect: GameEffect):
 	assert(containersToApply.hash() == newEffect.containersToApply.hash())
 	modifier.mergeModifier(newEffect.modifier)

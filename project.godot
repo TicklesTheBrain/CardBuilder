@@ -26,6 +26,7 @@ CardDisplayLord="*res://scenes/card_display_lord.tscn"
 CardImageMaker="*res://scenes/cardImageMaker.tscn"
 CardNamingLord="*res://scenes/card_naming_lord.tscn"
 TopMessage="*res://scenes/top_message.tscn"
+Transition="*res://transition.tscn"
 
 [debug]
 

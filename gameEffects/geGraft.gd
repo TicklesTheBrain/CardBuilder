@@ -1,4 +1,4 @@
-extends CardEffect
+extends GameEffect
 class_name GraftCard
 
 @export var graftCardPackage: CardTemplatePackage

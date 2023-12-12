@@ -1,4 +1,4 @@
-extends CardEffect
+extends GameEffect
 class_name DiscardSelf
 
 @export var discardDesitnation: Actor.ContainerPurposes = Actor.ContainerPurposes.DISCARD
@@ -12,5 +12,5 @@ func triggerSpecific(ctxt: GameStateContext):
 func getTextSpecific() -> String:
 	return "Immediately discard itself"
 
-func mergeEffectSepecific(_newEffect: CardEffect):
+func mergeEffectSepecific(_newEffect: GameEffect):
 	print("merging this does nothing", effectName)
