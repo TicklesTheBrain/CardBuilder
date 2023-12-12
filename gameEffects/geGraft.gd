@@ -51,7 +51,7 @@ func triggerSpecific(ctxt: GameStateContext):
 		InputLord.cardSelectionRequested.emit(grafOptionsPocket, 1, receiveCardOptionSelection)
 
 		InputLord.mouseOvers = true
-		InputLord.addMouseOverDelegate(grafOptionsPocket, askToShowGraft.bind(selectedGraft))
+		InputLord.addCardMouseOverDelegate(grafOptionsPocket, askToShowGraft.bind(selectedGraft))
 
 		await cardSelectionDone
 
@@ -63,7 +63,7 @@ func triggerSpecific(ctxt: GameStateContext):
 		for graft in unchosenGrafts:
 			graft.announceDestroy.emit()
 
-		InputLord.removeMouseOverDelegate(grafOptionsPocket)
+		InputLord.removeCardMouseOverDelegate(grafOptionsPocket)
 
 		PocketLord.requestClosePocket.emit(graftChoicePocket)
 		PocketLord.requestClosePocket.emit(grafOptionsPocket)

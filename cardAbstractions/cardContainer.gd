@@ -11,7 +11,6 @@ class_name CardContainer
 @export var overrideRevealedState: bool = true
 @export var addToTopWhenFeeding: bool = true
 
-
 var ownerActor: Actor
 var originMarker: Marker2D #TODO: THIS IS UGLY, need to fix this somehow
 

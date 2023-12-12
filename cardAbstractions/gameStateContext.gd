@@ -7,6 +7,7 @@ var player: Actor
 var enemy: Actor
 var activeActor: Actor
 var passiveActor: Actor
+
 var persistentPlayer: PlayerStuff
 
 var actingCard: CardData

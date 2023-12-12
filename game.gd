@@ -4,6 +4,7 @@ class_name Game
 @export_group("Debug")
 @export var selfStart: bool = false
 @export var selfStartStep: MatchStep
+@export var selfStartPlayer: PlayerStuff
 
 @export_group("Controller References")
 @export var playAreaPositionController: DynamicPositionController
@@ -20,7 +21,7 @@ class_name Game
 @export var enemy: Actor
 var activeActor: Actor
 var passiveActor: Actor
-var persistenPlayer: PlayerStuff
+var persistentPlayer: PlayerStuff
 
 var message: String:
 	set (value):
@@ -39,6 +40,7 @@ func _ready():
 	
 	if selfStart:
 		setupMatch(selfStartStep)
+		setupPlayer(selfStartPlayer)
 		startMatch()
 
 func setupMatch(structureStep: StructureStep):
@@ -50,10 +52,10 @@ func setupMatch(structureStep: StructureStep):
 	player.bustValue.baseline = structureStep.playerBustBaseline
 
 func setupPlayer(newPersistentPlayer: PlayerStuff):
-	
+	player.items.setupPersistentArray(newPersistentPlayer.items)
 	player.deck.templatePackage = newPersistentPlayer.playerDeckTemplate
 	player.hp.baseline = newPersistentPlayer.playerHP
-	persistenPlayer = newPersistentPlayer
+	persistentPlayer = newPersistentPlayer
 
 func makeContext() -> GameStateContext:
 	
@@ -62,10 +64,11 @@ func makeContext() -> GameStateContext:
 	ctxt.enemy = enemy
 	ctxt.activeActor = activeActor
 	ctxt.passiveActor = passiveActor
+	ctxt.persistentPlayer = persistentPlayer
 	return ctxt
 
-func provideContext(requestingObject):		
-	requestingObject.receiveContext(makeContext())
+func provideContext(receivingContextCallable: Callable):		
+	receivingContextCallable.call(makeContext())
 
 func drawFromDeckToHand():			
 	var topCard = player.deck.drawCard()
@@ -105,16 +108,20 @@ func enemyPlayTopCard():
 	var card = enemy.deck.drawCard()
 	enemy.playArea.addCard(card)
 
-func askToShowDetailed(cardDisplay: CardDisplay, addExitDelegate: Callable):
+func askToShowCardDetails(cardDisplay: CardDisplay, addExitDelegate: Callable):
 	cardDisplay.showDetailed()
 	addExitDelegate.call(cardDisplay, cardDisplay.hideDetailed)
 
+func askToShowItemDetails(itemDisplay: ItemDisplay, addExitDelegate: Callable):
+	itemDisplay.showInfo()
+	addExitDelegate.call(itemDisplay, itemDisplay.hideInfo)
+
 func recordPersistentPlayer():
-	if persistenPlayer == null:
+	if persistentPlayer == null:
 		print ('no persistent player to record')
 		return
 
-	persistenPlayer.playerHP = player.hp.amount
+	persistentPlayer.playerHP = player.hp.amount
 	#TODO: add other stuff here
 
 func roundLoop():
@@ -123,8 +130,10 @@ func roundLoop():
 	message = 'New round started'
 
 	InputLord.addDragContainers(player.hand)
-	InputLord.addMouseOverDelegate(player.hand, askToShowDetailed)
-	InputLord.addMouseOverDelegate(player.playArea, askToShowDetailed)
+	InputLord.addCardMouseOverDelegate(player.hand, askToShowCardDetails)
+	InputLord.addCardMouseOverDelegate(player.playArea, askToShowCardDetails)
+	InputLord.addItemMouseOverDelegate(player.items, askToShowItemDetails)
+	InputLord.itemsClickable = true
 	player.resetResources()
 	playAreaPositionController.resetCardArea()
 	enemyPlayAreaPositionController.resetCardArea()

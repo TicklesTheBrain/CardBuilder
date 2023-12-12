@@ -72,9 +72,8 @@ func processStep(step: StructureStep):
 	await activeScene.complete
 
 	if step.postStepReward != null:
-		#TODO: Context should pass player deck correctly here
-		#var newContext = GameStateContext.new()
-
-		step.postStepReward.trigger(GameStateContext.new())
+		var newContext = GameStateContext.new()
+		newContext.persistentPlayer = player
+		step.postStepReward.trigger(newContext)
 
 	

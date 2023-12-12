@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://csjrrj0jpr55y" path="res://assets/paper_background.png" id="2_jwqfj"]
 [ext_resource type="FontFile" uid="uid://bokge8vr1onw8" path="res://fonts/Rasa-Regular.ttf" id="3_om6l0"]
 [ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="4_8tc8h"]
-[ext_resource type="Script" path="res://scenes/ChoiceTextOption.gd" id="4_ec32d"]
+[ext_resource type="Script" path="res://ChoiceTextOption.gd" id="4_ec32d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t151"]
 bg_color = Color(0.6, 0.6, 0.6, 0)

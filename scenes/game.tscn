@@ -1,13 +1,18 @@
-[gd_scene load_steps=39 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=51 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
 [ext_resource type="Script" path="res://cardAbstractions/GameResource.gd" id="3_c142g"]
+[ext_resource type="Script" path="res://structurestuff/matchStep.gd" id="3_uyj67"]
 [ext_resource type="Script" path="res://cardAbstractions/Actor.gd" id="4_8gay1"]
+[ext_resource type="Script" path="res://itemAbstractions/item.gd" id="5_5y1g2"]
 [ext_resource type="Texture2D" uid="uid://b6x1kuw8ji1aa" path="res://assets/manaCoin.png" id="5_wfs64"]
+[ext_resource type="Script" path="res://gameEffects/geResourceModify.gd" id="6_1nitj"]
 [ext_resource type="Texture2D" uid="uid://blxhpf1kfx2ym" path="res://assets/pokerChip.png" id="6_he1b8"]
 [ext_resource type="Script" path="res://interfaceStuff/ResourceTracker.gd" id="6_oxs0c"]
 [ext_resource type="Texture2D" uid="uid://doevg7dxoxgka" path="res://assets/pokerChip2.png" id="7_2g44v"]
+[ext_resource type="Script" path="res://itemAbstractions/itemContainer.gd" id="7_ka6nq"]
+[ext_resource type="Script" path="res://structurestuff/playerStuff.gd" id="8_dso67"]
 [ext_resource type="Resource" uid="uid://b2ru52u3aw843" path="res://content/debug_enemyDeck.tres" id="9_t18bm"]
 [ext_resource type="Texture2D" uid="uid://bvv1olfxm2mlb" path="res://assets/portraits/monster_portrait_13.png" id="11_2iohc"]
 [ext_resource type="Texture2D" uid="uid://7ugd4xfdbxxj" path="res://assets/portraits/character_portrait.png" id="11_smjka"]
@@ -25,6 +30,45 @@
 [ext_resource type="Script" path="res://interfaceStuff/ValueTracker.gd" id="22_7os3x"]
 [ext_resource type="Script" path="res://interfaceStuff/DynamicPositionOutline.gd" id="22_g8olx"]
 [ext_resource type="Resource" uid="uid://dc1pbwqrsnd4m" path="res://content/test_cards.tres" id="24_wh5ls"]
+[ext_resource type="Script" path="res://ItemDisplayController.gd" id="26_85p36"]
+[ext_resource type="PackedScene" uid="uid://kna3wka5eglg" path="res://item_display.tscn" id="27_6v012"]
+[ext_resource type="Texture2D" uid="uid://da3mc7dtg3lup" path="res://assets/items/medal.png" id="27_ou647"]
+
+[sub_resource type="Resource" id="Resource_smt6a"]
+script = ExtResource("3_uyj67")
+opponentDeck = ExtResource("9_t18bm")
+opponentHP = 15
+opponentBustBaseline = 21
+playerEnergyBaseline = 3
+playerBustBaseline = 21
+opponentPicId = 0
+
+[sub_resource type="Resource" id="Resource_glwm2"]
+script = ExtResource("6_1nitj")
+modifiedResource = 6
+resourcePropety = 3
+amountToModify = 10
+effectName = ""
+staticText = ""
+conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
+followUpEffects = Array[Resource("res://gameEffects/gameEffect.gd")]([])
+includeFollowUpText = false
+subjectActor = 0
+symbols = Array[int]([])
+
+[sub_resource type="Resource" id="Resource_kdyld"]
+script = ExtResource("5_5y1g2")
+useEffects = Array[Resource("res://gameEffects/gameEffect.gd")]([SubResource("Resource_glwm2")])
+value = 15
+itemName = ""
+itemTexture = ExtResource("27_ou647")
+
+[sub_resource type="Resource" id="Resource_h2ow0"]
+script = ExtResource("8_dso67")
+playerDeckTemplate = ExtResource("24_wh5ls")
+items = Array[ExtResource("5_5y1g2")]([SubResource("Resource_kdyld")])
+playerHP = 25
+playerPicId = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgjnw"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -109,7 +153,9 @@ blend_mode = 2
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("playAreaPositionController", "enemyPlayAreaPositionController", "messageLabel", "drawCardButton", "endHandButton", "okButton", "player", "enemy")]
 script = ExtResource("1_hbkeb")
-selfStart = null
+selfStart = true
+selfStartStep = SubResource("Resource_smt6a")
+selfStartPlayer = SubResource("Resource_h2ow0")
 playAreaPositionController = NodePath("PlayArea/PlayAreaPositionController")
 enemyPlayAreaPositionController = NodePath("EnemyPlayAreaController")
 messageLabel = NodePath("MessageContent")
@@ -123,9 +169,8 @@ metadata/_edit_vertical_guides_ = [1268.0, 11.0]
 
 [node name="Logic" type="Node" parent="."]
 
-[node name="Player" type="Node" parent="Logic" node_paths=PackedStringArray("energy", "cardsPerTurn", "bonusAttack", "bonusDefence", "multiplierAttack", "multiplierDefence", "hp", "bustValue", "hand", "discard", "playArea", "deck")]
+[node name="Player" type="Node" parent="Logic" node_paths=PackedStringArray("energy", "cardsPerTurn", "bonusAttack", "bonusDefence", "multiplierAttack", "multiplierDefence", "hp", "bustValue", "hand", "discard", "playArea", "deck", "items")]
 script = ExtResource("4_8gay1")
-actorName = null
 energy = NodePath("Resources/Energy")
 cardsPerTurn = NodePath("Resources/StartTurnCardDraw")
 bonusAttack = NodePath("Resources/BonusAttack")
@@ -138,6 +183,7 @@ hand = NodePath("HandManager")
 discard = NodePath("DiscardManager")
 playArea = NodePath("PlayAreaManager")
 deck = NodePath("DeckManager")
+items = NodePath("ItemContainer")
 
 [node name="Resources" type="Node" parent="Logic/Player"]
 
@@ -197,40 +243,26 @@ overrideRevealedState = false
 
 [node name="HandManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("12_q8pst")
-maxCards = null
-cards = null
 feedContainer = NodePath("../DiscardManager")
 disposeContainer = NodePath("../DiscardManager")
 addTriggerType = 4
-modifiers = null
 overrideRevealed = true
-overrideRevealedState = null
-addToTopWhenFeeding = null
 
 [node name="PlayAreaManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("disposeContainer")]
 script = ExtResource("12_q8pst")
 maxCards = 6
-cards = null
 disposeContainer = NodePath("../DiscardManager")
 addTriggerType = 1
-modifiers = null
 overrideRevealed = true
-overrideRevealedState = null
-addToTopWhenFeeding = null
 
 [node name="DiscardManager" type="Node" parent="Logic/Player"]
 script = ExtResource("12_q8pst")
-maxCards = null
-cards = null
-addTriggerType = null
-modifiers = null
-overrideRevealed = null
-overrideRevealedState = null
-addToTopWhenFeeding = null
+
+[node name="ItemContainer" type="Node" parent="Logic/Player"]
+script = ExtResource("7_ka6nq")
 
 [node name="Enemy" type="Node" parent="Logic" node_paths=PackedStringArray("cardsPerTurn", "bonusAttack", "bonusDefence", "multiplierAttack", "multiplierDefence", "hp", "bustValue", "hand", "discard", "playArea", "deck")]
 script = ExtResource("4_8gay1")
-actorName = null
 cardsPerTurn = NodePath("Resources/EnemyStartTurnCardDraw")
 bonusAttack = NodePath("Resources/EnemyBonusAttack")
 bonusDefence = NodePath("Resources/EnemyBonusDefence")
@@ -246,33 +278,17 @@ deck = NodePath("EnemyDeck")
 [node name="EnemyHand" type="Node" parent="Logic/Enemy"]
 script = ExtResource("12_q8pst")
 maxCards = 0
-cards = null
-addTriggerType = null
-modifiers = null
 overrideRevealed = true
-overrideRevealedState = null
-addToTopWhenFeeding = null
 
 [node name="EnemyPlayArea" type="Node" parent="Logic/Enemy" node_paths=PackedStringArray("disposeContainer")]
 script = ExtResource("12_q8pst")
 maxCards = 6
-cards = null
 disposeContainer = NodePath("../EnemyDiscard")
 addTriggerType = 1
-modifiers = null
 overrideRevealed = true
-overrideRevealedState = null
-addToTopWhenFeeding = null
 
 [node name="EnemyDiscard" type="Node" parent="Logic/Enemy"]
 script = ExtResource("12_q8pst")
-maxCards = null
-cards = null
-addTriggerType = null
-modifiers = null
-overrideRevealed = null
-overrideRevealedState = null
-addToTopWhenFeeding = null
 
 [node name="EnemyDeck" type="Node" parent="Logic/Enemy" node_paths=PackedStringArray("feedContainer")]
 script = ExtResource("3_8edax")
@@ -870,6 +886,20 @@ texture = ExtResource("5_wfs64")
 expand_mode = 3
 stretch_mode = 5
 
+[node name="ItemContainer" type="GridContainer" parent="." node_paths=PackedStringArray("logicalItemContainer")]
+offset_left = 219.0
+offset_top = 301.0
+offset_right = 939.0
+offset_bottom = 591.0
+mouse_filter = 2
+columns = 3
+script = ExtResource("26_85p36")
+columnLength = 2
+itemDisplayPacked = ExtResource("27_6v012")
+logicalItemContainer = NodePath("../Logic/Player/ItemContainer")
+
 [connection signal="button_down" from="DrawButton" to="." method="drawFromDeckToHand"]
 [connection signal="area_entered" from="PlayArea" to="PlayArea" method="_on_area_entered"]
 [connection signal="area_exited" from="PlayArea" to="PlayArea" method="_on_area_exited"]
+[connection signal="child_entered_tree" from="ItemContainer" to="ItemContainer" method="_child_update"]
+[connection signal="child_exiting_tree" from="ItemContainer" to="ItemContainer" method="_child_update"]

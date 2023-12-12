@@ -1,6 +1,6 @@
 extends Node
 
-signal requestContext(requestingObject)
+signal requestContext(receiveContext: Callable)
 signal cardAdded(to: CardContainer, card: CardData)
 signal startMatch()
 signal playerTurnStart()

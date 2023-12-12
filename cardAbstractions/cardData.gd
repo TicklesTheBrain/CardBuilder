@@ -72,7 +72,7 @@ func receiveContext(ctxt: GameStateContext):
 	context = ctxt
 
 func updateContext():
-	Events.requestContext.emit(self)
+	Events.requestContext.emit(receiveContext)
 
 func triggerEffectBucket(bucketToTrigger: Array[GameEffect]):
 	for eff in bucketToTrigger:
@@ -100,13 +100,13 @@ func triggerEffect(typeToTrigger: GameEffect.triggerType):
 
 func getEffectTextDictionary():
 	return {
-		"onPlay" = getEffectTextFromBucket(onPlayEffects),
-		"onLose" = getEffectTextFromBucket(onLoseEffects),
-		"onWin" = getEffectTextFromBucket(onWinEffects),
-		"onBust" = getEffectTextFromBucket(onBustEffects),
-		"endRound" = getEffectTextFromBucket(endRoundEffects),
-		"onDraw" = getEffectTextFromBucket(drawEffects),
-		"startMatch" = getEffectTextFromBucket(startMatchEffects)
+		"onPlay" = CardData.getEffectTextFromBucket(onPlayEffects),
+		"onLose" = CardData.getEffectTextFromBucket(onLoseEffects),
+		"onWin" = CardData.getEffectTextFromBucket(onWinEffects),
+		"onBust" = CardData.getEffectTextFromBucket(onBustEffects),
+		"endRound" = CardData.getEffectTextFromBucket(endRoundEffects),
+		"onDraw" = CardData.getEffectTextFromBucket(drawEffects),
+		"startMatch" = CardData.getEffectTextFromBucket(startMatchEffects)
 	}
 
 func getPlayConditionalText():
@@ -115,7 +115,7 @@ func getPlayConditionalText():
 		result += con.getText()
 	return result
 
-func getEffectTextFromBucket(bucketToQuery: Array[GameEffect]):
+static func getEffectTextFromBucket(bucketToQuery: Array[GameEffect]):
 	var result = ''
 	for effect in bucketToQuery:	
 		if result != '':

@@ -8,6 +8,9 @@ signal cardMouseOver(display: CardDisplay)
 signal cardMouseOverExit(display: CardDisplay)
 signal mapPawnClicked(pawnClicked: MapPawn)
 signal mapPawnDragReleased(pawnReleased: MapPawn)
+signal itemClicked(item: ItemDisplay)
+signal itemMouseOver(item: ItemDisplay)
+signal itemMouseOverExit(item: ItemDisplay)
 
 var selecting = false
 var amount = -1
@@ -15,9 +18,12 @@ var subjectContainer: CardContainer
 var selected: Array[CardData] = []
 var dragging: bool = true
 var dragContainers: Array[CardContainer] = []
-var mouseOverDelegates: Dictionary
-var mouseOverExitDelegates: Dictionary
+var cardMouseOverDelegates: Dictionary
+var cardMouseOverExitDelegates: Dictionary
+var itemMouseOverDelegates: Dictionary
+var itemMouseOverExitDelegates: Dictionary
 var mouseOvers: bool = true
+var itemsClickable: bool = true
 
 func _ready():
 	cardSelectionRequested.connect(initNewSelection)
@@ -27,6 +33,9 @@ func _ready():
 	cardMouseOverExit.connect(_onCardMouseOverExit)
 	mapPawnClicked.connect(_onMapPawnClicked)
 	mapPawnDragReleased.connect(_onMapPawnDragReleased)
+	itemClicked.connect(_onItemClicked)
+	itemMouseOver.connect(_onItemMouseOver)
+	itemMouseOverExit.connect(_onItemMouseOverExit)
 
 func _onMapPawnClicked(mapPawn: MapPawn):
 	mapPawn.startDrag()
@@ -91,9 +100,11 @@ func _onCardClicked(display: CardDisplay):
 	if checkCanDrag(display.cardData):
 		display.get_parent().move_child(display, -1)
 		display.startDrag()
+		#mouseOvers = false
 
 func _onCardDragReleased(display: CardDisplay):
 	display.endDrag()
+	#mouseOvers = true
 
 func _onCardMouseOver(display: CardDisplay):
 	#print('card mouse entered', display)
@@ -101,20 +112,48 @@ func _onCardMouseOver(display: CardDisplay):
 	if not mouseOvers:
 		return
 	
-	if mouseOverDelegates.has(display.cardData.container):
-		mouseOverDelegates[display.cardData.container].call(display)
+	if cardMouseOverDelegates.has(display.cardData.container):
+		cardMouseOverDelegates[display.cardData.container].call(display)
 
 func _onCardMouseOverExit(display: CardDisplay):
 	#print('card mouse left', display)
-	if mouseOverExitDelegates.has(display):
-		mouseOverExitDelegates[display].call()
-		mouseOverExitDelegates.erase(display) #NOT SURE IF THIS IS NEEDED
+	if cardMouseOverExitDelegates.has(display):
+		cardMouseOverExitDelegates[display].call()
+		cardMouseOverExitDelegates.erase(display) #NOT SURE IF THIS IS NEEDED
 
-func addMouseOverDelegate(cont: CardContainer, delegate: Callable):
-	mouseOverDelegates[cont] = delegate.bind(addMouseOverExitDelegate)
+func addCardMouseOverDelegate(cont: CardContainer, delegate: Callable):
+	cardMouseOverDelegates[cont] = delegate.bind(addCardMouseOverExitDelegate)
 
-func addMouseOverExitDelegate(card: CardDisplay, delegate: Callable):
-	mouseOverExitDelegates[card] = delegate
+func addCardMouseOverExitDelegate(card: CardDisplay, delegate: Callable):
+	cardMouseOverExitDelegates[card] = delegate
 
-func removeMouseOverDelegate(cont: CardContainer):
-	mouseOverDelegates.erase(cont)
+func removeCardMouseOverDelegate(cont: CardContainer):
+	cardMouseOverDelegates.erase(cont)
+
+func _onItemMouseOver(display: ItemDisplay):
+	#print('card mouse entered', display)
+
+	if not mouseOvers:
+		return
+	
+	if itemMouseOverDelegates.has(display.item.container):
+		itemMouseOverDelegates[display.item.container].call(display)
+
+func _onItemMouseOverExit(display: ItemDisplay):
+	#print('card mouse left', display)
+	if itemMouseOverExitDelegates.has(display):
+		itemMouseOverExitDelegates[display].call()
+		itemMouseOverExitDelegates.erase(display) #NOT SURE IF THIS IS NEEDED
+
+func addItemMouseOverDelegate(cont: ItemContainer, delegate: Callable):
+	itemMouseOverDelegates[cont] = delegate.bind(addItemMouseOverExitDelegate)
+
+func addItemMouseOverExitDelegate(card: ItemDisplay, delegate: Callable):
+	itemMouseOverExitDelegates[card] = delegate
+
+func removeItemMouseOverDelegate(cont: ItemContainer):
+	itemMouseOverDelegates.erase(cont)
+
+func _onItemClicked(display: ItemDisplay):
+	if itemsClickable:
+		display.item.use()
