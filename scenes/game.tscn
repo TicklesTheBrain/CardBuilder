@@ -1172,6 +1172,7 @@ rightSide = NodePath("Right")
 shieldsDelay = 0.3
 
 [node name="Left" type="Node2D" parent="DamageResolutionAnimation" node_paths=PackedStringArray("containerToQuery", "animation", "valueLabel", "iconSprite")]
+visible = false
 position = Vector2(0, 18)
 script = ExtResource("37_6bpek")
 containerToQuery = NodePath("../../Logic/Player/PlayAreaManager")
@@ -1217,6 +1218,7 @@ libraries = {
 }
 
 [node name="Right" type="Node2D" parent="DamageResolutionAnimation" node_paths=PackedStringArray("containerToQuery", "animation", "valueLabel", "iconSprite")]
+visible = false
 position = Vector2(246, 17.3333)
 script = ExtResource("37_6bpek")
 containerToQuery = NodePath("../../Logic/Enemy/EnemyPlayArea")

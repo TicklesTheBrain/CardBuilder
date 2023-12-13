@@ -189,31 +189,38 @@ func roundLoop():
 	var loser: Actor
 	var bust: bool
 
-	var setPlayerWinner = func ():
-		winner = player
-		loser = enemy
-		damageResolution.setRightParam(CardParam.ParamType.DEFENCE)
-		damageResolution.setLeftParam(CardParam.ParamType.ATTACK)
+	var adjustDamageResolution = func (playerWin: bool):
+		if playerWin:
+			damageResolution.setRightParam(CardParam.ParamType.DEFENCE)
+			damageResolution.setLeftParam(CardParam.ParamType.ATTACK)
+		else:
+			damageResolution.setRightParam(CardParam.ParamType.ATTACK)
+			damageResolution.setLeftParam(CardParam.ParamType.DEFENCE)
 
-	var setEnemyWinner = func ():
-		winner = enemy
-		loser = player
-		damageResolution.setRightParam(CardParam.ParamType.ATTACK)
-		damageResolution.setLeftParam(CardParam.ParamType.DEFENCE)
-
-		#Determine winner/loser
+	#Determine winner/loser
 	playerValue = player.playArea.getTotalValue() #Update this in case when some enemy effects might alter player value
 	var enemyValue = enemy.playArea.getTotalValue()
 	if player.checkIsBusted():
-		setEnemyWinner.call()
+		winner = enemy
+		loser = player
+		adjustDamageResolution.call(false)		
 		bust = true
+
 	elif enemy.checkIsBusted():
-		setPlayerWinner.call()
+		winner = player
+		loser = enemy
+		adjustDamageResolution.call(true)		
 		bust = true
+
 	elif enemyValue> playerValue:
-		setEnemyWinner.call()
+		winner = enemy
+		loser = player
+		adjustDamageResolution.call(false)
+		
 	elif enemyValue < playerValue:
-		setPlayerWinner.call()
+		winner = player
+		loser = enemy
+		adjustDamageResolution.call(true)
 
 	if winner != null:
 		

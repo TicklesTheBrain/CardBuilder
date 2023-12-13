@@ -20,7 +20,7 @@ var defenceComplete = false:
         set(new):
             if new and attackComplete:
                 attackAndShieldBothComplete.emit()
-                defenceComplete = new
+            defenceComplete = new
 
 signal shieldGo
 signal done
@@ -50,16 +50,19 @@ func start():
         markAttackComplete()
 
     if anyDefenceAvailable:
-        if attackComplete:
-            sideWithDefence.start()
-        else:
+        if not attackComplete:
+            startShieldDelayTimer()
             await shieldGo
-            sideWithDefence.start()
+        sideWithDefence.start()
+        await sideWithDefence.done
+        defenceComplete = true
     else:
         defenceComplete = true
 
     if not (attackComplete and defenceComplete):
+        print('awaiting attack and shiled to both complete')
         await attackAndShieldBothComplete
+        print('awaiting done')
     
     if not anyAttackAvailable:
        pass
