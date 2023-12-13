@@ -19,7 +19,7 @@ func newItemDisplay(item: Item):
     var newDisplay = itemDisplayPacked.instantiate() as ItemDisplay
     newDisplay.setup(item)
     add_child(newDisplay)
-    newDisplay.add_to_group("id")
+   
 
 func removeItemDisplay(item: Item):
     for i in get_children():

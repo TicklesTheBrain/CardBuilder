@@ -1,0 +1,119 @@
+[gd_scene load_steps=9 format=3 uid="uid://dmpkbrdd3kl3c"]
+
+[ext_resource type="Script" path="res://scenes/itemPocket.gd" id="1_ijviq"]
+[ext_resource type="Script" path="res://itemAbstractions/itemContainer.gd" id="2_65qee"]
+[ext_resource type="Texture2D" uid="uid://dxgj5eydfva4j" path="res://assets/ninePatchFrame.png" id="4_5fgo7"]
+[ext_resource type="Script" path="res://interfaceStuff/sizeMatcher.gd" id="5_2xopf"]
+
+[sub_resource type="Animation" id="Animation_i0qxd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -720)]
+}
+
+[sub_resource type="Animation" id="Animation_j2xvq"]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.517632, 0.267943),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -720)]
+}
+
+[sub_resource type="Animation" id="Animation_q5f7u"]
+resource_name = "show"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(0.25, 4.43828),
+"update": 0,
+"values": [Vector2(0, -720), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_emsn4"]
+_data = {
+"RESET": SubResource("Animation_i0qxd"),
+"hide": SubResource("Animation_j2xvq"),
+"show": SubResource("Animation_q5f7u")
+}
+
+[node name="PocketLayer" type="CanvasLayer" node_paths=PackedStringArray("animation", "backGroundPanel", "infoLabel", "pocketContainer")]
+layer = 2
+script = ExtResource("1_ijviq")
+animation = NodePath("Pocket/PocketAnimation")
+backGroundPanel = NodePath("Pocket/NinePatchRect")
+infoLabel = NodePath("Pocket/NinePatchRect/Label")
+pocketContainer = NodePath("PocketContainer")
+
+[node name="PocketContainer" type="Node" parent="."]
+script = ExtResource("2_65qee")
+
+[node name="Pocket" type="Node2D" parent="."]
+position = Vector2(0, -720)
+metadata/_edit_group_ = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Pocket"]
+offset_right = 242.0
+offset_bottom = 241.0
+texture = ExtResource("4_5fgo7")
+region_rect = Rect2(0.301132, 0.255318, 429.099, 429.363)
+patch_margin_left = 120
+patch_margin_top = 121
+patch_margin_right = 122
+patch_margin_bottom = 120
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Label" type="Label" parent="Pocket/NinePatchRect"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 38.0
+offset_right = 449.0
+offset_bottom = 61.0
+text = "This is the message that is seen on the pocket"
+
+[node name="Shadow" type="NinePatchRect" parent="Pocket/NinePatchRect" node_paths=PackedStringArray("controlToMatch", "triggerResizeEmitter")]
+self_modulate = Color(0, 0, 0, 0.521569)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 252.0
+offset_bottom = 251.0
+texture = ExtResource("4_5fgo7")
+region_rect = Rect2(0.301132, 0.255318, 429.099, 429.363)
+patch_margin_left = 120
+patch_margin_top = 121
+patch_margin_right = 122
+patch_margin_bottom = 120
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource("5_2xopf")
+controlToMatch = NodePath("..")
+triggerResizeEmitter = NodePath("../../..")
+
+[node name="PocketAnimation" type="AnimationPlayer" parent="Pocket"]
+libraries = {
+"": SubResource("AnimationLibrary_emsn4")
+}

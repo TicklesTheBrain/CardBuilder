@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkvi236rp8jiw"]
+[gd_scene load_steps=4 format=3 uid="uid://bkvi236rp8jiw"]
 
 [ext_resource type="Script" path="res://cardAbstractions/PocketLord.gd" id="1_kmr2p"]
-[ext_resource type="PackedScene" uid="uid://o20e5thwdy3j" path="res://scenes/pocket.tscn" id="2_2jlfa"]
+[ext_resource type="PackedScene" uid="uid://o20e5thwdy3j" path="res://scenes/cardPocket.tscn" id="2_2jlfa"]
+[ext_resource type="PackedScene" uid="uid://dmpkbrdd3kl3c" path="res://scenes/itemPocket.tscn" id="3_j4bpc"]
 
 [node name="PocketLord" type="Node"]
 script = ExtResource("1_kmr2p")
-pocketPacked = ExtResource("2_2jlfa")
+cardPocketPacked = ExtResource("2_2jlfa")
+itemPocketPacked = ExtResource("3_j4bpc")

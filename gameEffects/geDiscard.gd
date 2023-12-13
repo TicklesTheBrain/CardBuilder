@@ -3,6 +3,7 @@ class_name DiscardCards
 
 @export var amountOfCardsToDiscard: int = 1
 @export var discardFrom: Actor.ContainerPurposes
+@export var askToConfirm: bool = true
 
 var selectedCards: Array[CardData] = []
 signal cardSelectionDone
@@ -20,7 +21,7 @@ func triggerSpecific(ctxt: GameStateContext):
 		var clampedAmount = min(cont.getNoOfCards(), amountOfCardsToDiscard)
 		if clampedAmount > 0:
 			Events.newTopMessageRequested.emit("Choose {num} cards to discard".format({"num": clampedAmount}))
-			InputLord.cardSelectionRequested.emit(actor.hand, clampedAmount, receiveSelection)
+			InputLord.cardSelectionRequested.emit(actor.hand, clampedAmount, receiveSelection, askToConfirm)
 			await cardSelectionDone
 			Events.hideTopMessages.emit()
 			for card in selectedCards:

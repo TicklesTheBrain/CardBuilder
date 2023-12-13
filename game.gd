@@ -148,7 +148,7 @@ func roundLoop():
 
 	drawCardButton.disabled = false
 	endHandButton.disabled = false
-	okButton.disabled = true
+	Events.confirmButtonDisable.emit()
 
 	await endHandButton.button_down
 
@@ -173,11 +173,11 @@ func roundLoop():
 	while (enemySingleStep(playerValue)):
 		await get_tree().create_timer(0.75).timeout
 
-	okButton.disabled = false
+	Events.confirmButtonEnable.emit()
 
 	message = "Enemy Finished playing"
 
-	await okButton.button_down
+	await Events.confirmButtonPressed
 	
 	##ROUND RESOLUTION
 	var winner: Actor
@@ -215,7 +215,7 @@ func roundLoop():
 
 		message = valueString.format({"playerValue" = playerValue, "enemyValue" = enemyValue, "whoBusted" = whoBustedString})
 
-		await okButton.button_down
+		await Events.confirmButtonPressed
 
 		#trigger resolution effects
 		await winner.playArea.triggerAll(GameEffect.triggerType.WIN)
@@ -244,7 +244,7 @@ func roundLoop():
 	else:
 		message = "It's a draw {playerValue} vs. {enemyValue}, no damage dealt".format({"playerValue" = playerValue, "enemyValue" = enemyValue})
 
-	await okButton.button_down
+	await Events.confirmButtonPressed
 
 	await player.playArea.triggerAll(GameEffect.triggerType.END_ROUND)
 	await enemy.playArea.triggerAll(GameEffect.triggerType.END_ROUND)
@@ -253,20 +253,20 @@ func roundLoop():
 	player.playArea.disposeAll()
 	player.deck.shuffle()
 
-	okButton.disabled = false
+	Events.confirmButtonEnable.emit()
 
 	#See if another round is needed
 	if player.hp.amount > 0 and enemy.hp.amount > 0:
 		message = "Ready for another round?"
-		await okButton.button_down
+		await Events.confirmButtonPressed
 		roundLoop()
 
 	elif player.hp.amount <= 0:
 		message = "YOU LOSE :("
-		await okButton.button_down
+		await Events.confirmButtonPressed
 		complete.emit()
 
 	elif enemy.hp.amount <= 0:
 		message = "YOU WIN :)"
-		await okButton.button_down
+		await Events.confirmButtonPressed
 		complete.emit()

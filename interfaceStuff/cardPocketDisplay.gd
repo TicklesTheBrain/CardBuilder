@@ -1,10 +1,11 @@
 extends CanvasLayer
-class_name PocketDisplay
+class_name CardPocketDisplay
 
 @export var animation: AnimationPlayer
 @export var positionController: CardPositionController
 @export var backGroundPanel: NinePatchRect
 @export var infoLabel: Label
+@export var okButton: ConfirmationButton
 @export var sizesMinCenterDistance: Array[float] = []
 @export var sizesMaxCardGaps: Array[float] = []
 @export var sizesMultipleRows: Array[bool] = []
@@ -24,7 +25,7 @@ enum PocketSize {SMALL, MEDIUM, BIG, FULL}
 
 signal resizeTriggered()
 signal pocketOpened()
-signal pocketClosed()
+signal cardPocketClosed()
 
 func setSize(expectedCards: int):
 
@@ -60,5 +61,5 @@ func showPocket():
 func hidePocket():
 	animation.play("hide")
 	await animation.animation_finished
-	pocketClosed.emit()
+	cardPocketClosed.emit()
 	queue_free()

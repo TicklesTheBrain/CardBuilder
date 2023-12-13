@@ -12,7 +12,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="ItemDisplay" type="TextureRect" node_paths=PackedStringArray("scoreLabel", "textLabel", "infoRoot")]
+[node name="ItemDisplay" type="TextureRect" node_paths=PackedStringArray("scoreLabel", "textLabel", "infoRoot") groups=["id"]]
 custom_minimum_size = Vector2(75, 75)
 offset_right = 75.0
 offset_bottom = 75.0

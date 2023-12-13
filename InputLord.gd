@@ -15,6 +15,7 @@ signal itemMouseOverExit(item: ItemDisplay)
 
 var mouseMonitoringGroups = ["cdc", "id", "bt"]
 var mouseMonitorDictionary = {}
+var selectionConfirmation: bool = false
 
 var selecting = false
 var amount = -1
@@ -58,39 +59,57 @@ func reenableMouseMonitoring():
 
 	mouseMonitorDictionary = {}
 
-
 func _onMapPawnClicked(mapPawn: MapPawn):
 	mapPawn.startDrag()
 
 func _onMapPawnDragReleased(mapPawn: MapPawn):
 	mapPawn.stopDrag()
 
-func initNewSelection(container: CardContainer, needAmount: int, receivingMethod: Callable):
+func initNewSelection(container: CardContainer, needAmount: int, receivingMethod: Callable, confirmationRequired: bool = false):
 	print('init new selection', container)
 	selecting = true
+	selectionConfirmation = confirmationRequired
 	selected = []
 	subjectContainer = container
 	amount = min(container.getAll().size(), needAmount)
 	setupEndSelection(receivingMethod)
 	if amount <= 0:
 		cardSelectionComplete.emit()
+		return
+	
+	if confirmationRequired:
+		await Events.confirmButtonPressed
 	
 func addToSelection(card: CardData):
+
 	if selecting:
 		selected.append(card)
 
 	if selected.size() >= amount:
-		cardSelectionComplete.emit()
+		if not selectionConfirmation:
+			cardSelectionComplete.emit()
+		else:
+			Events.confirmButtonEnable.emit()
+
 
 func setupEndSelection(receivingMethod: Callable):
-	await cardSelectionComplete
+
+	if selectionConfirmation:
+		await Events.confirmButtonPressed
+	else:
+		await cardSelectionComplete
+
 	selecting = false
+	for display in CardDisplayLord.getAllCardDisplays():
+		display.unselect()
 	print('end selection triggered')
 	receivingMethod.call(selected)
 
 func removeFromSelection(card: CardData):
 	if selected.has(card):
 		selected.erase(card)
+	if selected.size() < amount:
+		Events.confirmButtonDisable.emit()
 
 func addDragContainers(cont: CardContainer):
 	dragContainers.push_back(cont)
@@ -113,7 +132,7 @@ func _onCardClicked(display: CardDisplay):
 			removeFromSelection(display.cardData)
 			display.unselect()
 			return
-		elif display.cardData.container == subjectContainer:
+		elif display.cardData.container == subjectContainer and selected.size() < amount:
 			display.select()
 			addToSelection(display.cardData)
 			return

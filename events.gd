@@ -10,3 +10,7 @@ signal newTopMessageRequested(messageText: String)
 signal hideTopMessages()
 signal textChoiceClicked(textLabel: Label)
 signal nextStep(step: StructureStep)
+
+signal confirmButtonEnable()
+signal confirmButtonDisable()
+signal confirmButtonPressed

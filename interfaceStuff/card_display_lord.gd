@@ -26,8 +26,7 @@ func spawnNewCardDisplay(card: CardData):
 	if card.prevContainer != null and card.prevContainer.originMarker !=null :
 		newCardDisplay.position = card.prevContainer.originMarker.position
 	else:
-		newCardDisplay.position = defaultCardOrigin.position
-	newCardDisplay.add_to_group("cd")
+		newCardDisplay.position = defaultCardOrigin.position	
 
 func reparentCardDisplay(cd: CardDisplay):
 
@@ -41,6 +40,9 @@ func getCardDisplay(card: CardData):
 		return null
 	else:
 		return matchingCD[0]
+
+func getAllCardDisplays():
+	return get_tree().get_nodes_in_group("cd")
 
 func checkCardDisplayExists(card: CardData):
 	return getCardDisplay(card) != null	

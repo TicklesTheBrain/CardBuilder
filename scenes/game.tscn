@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=53 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -28,6 +28,7 @@
 [ext_resource type="Script" path="res://interfaceStuff/ManaShower.gd" id="20_shvvi"]
 [ext_resource type="Script" path="res://interfaceStuff/SelfDoublingCanvasItem.gd" id="21_xno12"]
 [ext_resource type="Script" path="res://interfaceStuff/ValueTracker.gd" id="22_7os3x"]
+[ext_resource type="Script" path="res://scenes/confirmation.gd" id="22_g1n41"]
 [ext_resource type="Script" path="res://interfaceStuff/DynamicPositionOutline.gd" id="22_g8olx"]
 [ext_resource type="Resource" uid="uid://dc1pbwqrsnd4m" path="res://content/test_cards.tres" id="24_wh5ls"]
 [ext_resource type="Script" path="res://ItemDisplayController.gd" id="26_85p36"]
@@ -235,7 +236,6 @@ baseline = 21
 
 [node name="DeckManager" type="Node" parent="Logic/Player" node_paths=PackedStringArray("feedContainer", "disposeContainer")]
 script = ExtResource("3_8edax")
-debug = false
 templatePackage = ExtResource("24_wh5ls")
 feedContainer = NodePath("../DiscardManager")
 disposeContainer = NodePath("../DiscardManager")
@@ -479,36 +479,36 @@ horizontal_alignment = 1
 script = ExtResource("6_oxs0c")
 resourceToTrack = NodePath("../../Logic/Enemy/Resources/enemyHp")
 
-[node name="DrawButton" type="Button" parent="." groups=["bt"]]
-offset_left = 519.0
-offset_top = 417.0
-offset_right = 609.0
-offset_bottom = 448.0
-theme = SubResource("Theme_bfpeo")
-text = "Draw Card"
-
 [node name="EndButton" type="Button" parent="." groups=["bt"]]
-offset_left = 420.0
-offset_top = 416.0
-offset_right = 503.0
-offset_bottom = 447.0
+offset_left = 875.0
+offset_top = 282.0
+offset_right = 965.0
+offset_bottom = 315.0
 theme = SubResource("Theme_bfpeo")
-text = "End Hand
+text = "End Turn
 "
 
+[node name="DrawButton" type="Button" parent="." groups=["bt"]]
+offset_left = 873.0
+offset_top = 319.0
+offset_right = 965.0
+offset_bottom = 352.0
+theme = SubResource("Theme_bfpeo")
+text = "Draw"
+
 [node name="OkBUtton" type="Button" parent="." groups=["bt"]]
-offset_left = 624.0
-offset_top = 418.0
-offset_right = 707.0
-offset_bottom = 449.0
+offset_left = 876.0
+offset_top = 413.0
+offset_right = 967.0
+offset_bottom = 444.0
 theme = SubResource("Theme_bfpeo")
 shortcut_feedback = false
 shortcut_in_tooltip = false
 text = "OK
 "
+script = ExtResource("22_g1n41")
 
 [node name="PlayArea" type="Area2D" parent="."]
-visible = false
 script = ExtResource("16_5eugt")
 
 [node name="PlayAreaPositionController" type="Node2D" parent="PlayArea" node_paths=PackedStringArray("cardAreas", "logicalContainer")]
@@ -534,11 +534,11 @@ maxCardGap = 25.0
 logicalContainer = NodePath("../Logic/Enemy/EnemyPlayArea")
 
 [node name="EnemyPlayAreaFull" type="CollisionShape2D" parent="EnemyPlayAreaController"]
-position = Vector2(761, 144)
+position = Vector2(761, 136)
 shape = SubResource("RectangleShape2D_2v7eo")
 
 [node name="EnemyPlayAreaSmall" type="CollisionShape2D" parent="EnemyPlayAreaController"]
-position = Vector2(987.5, 140)
+position = Vector2(987.5, 132)
 shape = SubResource("RectangleShape2D_7o7mm")
 
 [node name="EnemyDiscardController" type="Node2D" parent="." node_paths=PackedStringArray("positionMarker", "logicalContainer")]
@@ -715,7 +715,7 @@ text = "HAND"
 metadata/_edit_lock_ = true
 
 [node name="MyPlayed" type="CanvasGroup" parent="Outlines" node_paths=PackedStringArray("outlines", "positionControllerToFollow")]
-position = Vector2(4, -438)
+position = Vector2(4, -446)
 script = ExtResource("22_g8olx")
 outlines = [NodePath("OutlineBigger"), NodePath("OutlineSmaller")]
 positionControllerToFollow = NodePath("../../PlayArea/PlayAreaPositionController")
@@ -789,7 +789,7 @@ adjustableMask = NodePath("../Mask2")
 extraMaskSpacing = null
 
 [node name="EnemyPlayed" type="CanvasGroup" parent="Outlines" node_paths=PackedStringArray("outlines", "positionControllerToFollow")]
-position = Vector2(878, -438)
+position = Vector2(878, -446)
 script = ExtResource("22_g8olx")
 outlines = [NodePath("EnemySmallerOutline"), NodePath("EnemyBiggerOutline")]
 positionControllerToFollow = NodePath("../../EnemyPlayAreaController")
@@ -894,13 +894,14 @@ stretch_mode = 5
 offset_left = 219.0
 offset_top = 301.0
 offset_right = 939.0
-offset_bottom = 591.0
+offset_bottom = 452.0
 mouse_filter = 2
 columns = 3
 script = ExtResource("26_85p36")
 columnLength = 2
 itemDisplayPacked = ExtResource("27_6v012")
 logicalItemContainer = NodePath("../Logic/Player/ItemContainer")
+metadata/_edit_lock_ = true
 
 [connection signal="button_down" from="DrawButton" to="." method="drawFromDeckToHand"]
 [connection signal="area_entered" from="PlayArea" to="PlayArea" method="_on_area_entered"]

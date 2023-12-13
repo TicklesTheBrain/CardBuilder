@@ -362,8 +362,9 @@ capAtZero = false
 
 [sub_resource type="Resource" id="Resource_ol227"]
 script = ExtResource("10_r3imk")
-amountOfCardsToDiscard = 1
+amountOfCardsToDiscard = 2
 discardFrom = 1
+askToConfirm = true
 effectName = ""
 staticText = ""
 conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -387,7 +388,7 @@ capAtZero = false
 [sub_resource type="Resource" id="Resource_p1bhp"]
 resource_name = "Discard 2"
 script = ExtResource("2_j5dh7")
-amount = 2
+amount = 10
 debug = true
 cardName = ""
 revealed = false
@@ -1295,6 +1296,7 @@ subjectActor = 0
 script = ExtResource("10_r3imk")
 amountOfCardsToDiscard = 1
 discardFrom = 1
+askToConfirm = true
 effectName = ""
 staticText = ""
 conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])
@@ -1379,6 +1381,7 @@ capAtZero = false
 script = ExtResource("10_r3imk")
 amountOfCardsToDiscard = -1
 discardFrom = 1
+askToConfirm = true
 effectName = ""
 staticText = ""
 conditionals = Array[Resource("res://conditionals/conditionals.gd")]([])

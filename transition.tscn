@@ -104,7 +104,7 @@ _data = {
 }
 
 [node name="Transition" type="CanvasLayer" node_paths=PackedStringArray("animation")]
-layer = 5
+layer = 10
 script = ExtResource("1_h1wgp")
 animation = NodePath("AnimationPlayer")
 

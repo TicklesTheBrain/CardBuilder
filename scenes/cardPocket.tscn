@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://o20e5thwdy3j"]
+[gd_scene load_steps=21 format=3 uid="uid://o20e5thwdy3j"]
 
-[ext_resource type="Script" path="res://interfaceStuff/pocketDisplay.gd" id="1_w0gel"]
+[ext_resource type="Script" path="res://interfaceStuff/cardPocketDisplay.gd" id="1_w0gel"]
 [ext_resource type="Script" path="res://cardAbstractions/cardContainer.gd" id="2_p3imr"]
 [ext_resource type="Script" path="res://interfaceStuff/dynamicPositionController.gd" id="3_owxxn"]
 [ext_resource type="Texture2D" uid="uid://dxgj5eydfva4j" path="res://assets/ninePatchFrame.png" id="4_pl6kc"]
 [ext_resource type="Script" path="res://interfaceStuff/sizeMatcher.gd" id="5_8p5yw"]
+[ext_resource type="FontFile" uid="uid://bokge8vr1onw8" path="res://fonts/Rasa-Regular.ttf" id="5_t48tl"]
+[ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="6_3lffv"]
+[ext_resource type="Script" path="res://scenes/confirmation.gd" id="8_eup67"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xuy27"]
 size = Vector2(1248, 688)
@@ -17,6 +20,52 @@ size = Vector2(983, 428)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvlis"]
 size = Vector2(575, 290)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t151"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.603922, 0.603922, 0.603922, 0.396078)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fmeb8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 0.603922)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jb02b"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.909804)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="Theme" id="Theme_5lfuj"]
+Button/colors/font_color = Color(1, 1, 1, 0.827451)
+Button/colors/font_disabled_color = Color(0.760784, 0.760784, 0.760784, 0.713726)
+Button/fonts/font = ExtResource("6_3lffv")
+Button/styles/disabled = SubResource("StyleBoxFlat_4t151")
+Button/styles/focus = SubResource("StyleBoxFlat_fmeb8")
+Button/styles/hover = SubResource("StyleBoxFlat_fmeb8")
+Button/styles/normal = SubResource("StyleBoxFlat_fmeb8")
+Button/styles/pressed = SubResource("StyleBoxFlat_jb02b")
 
 [sub_resource type="Animation" id="Animation_i0qxd"]
 length = 0.001
@@ -71,13 +120,14 @@ _data = {
 "show": SubResource("Animation_q5f7u")
 }
 
-[node name="PocketLayer" type="CanvasLayer" node_paths=PackedStringArray("animation", "positionController", "backGroundPanel", "infoLabel", "pocketContainer")]
+[node name="PocketLayer" type="CanvasLayer" node_paths=PackedStringArray("animation", "positionController", "backGroundPanel", "infoLabel", "okButton", "pocketContainer")]
 layer = 2
 script = ExtResource("1_w0gel")
 animation = NodePath("Pocket/PocketAnimation")
 positionController = NodePath("PocketDynamicPosition")
 backGroundPanel = NodePath("Pocket/NinePatchRect")
 infoLabel = NodePath("Pocket/NinePatchRect/Label")
+okButton = NodePath("Pocket/NinePatchRect/OkBUtton")
 sizesMinCenterDistance = Array[float]([35.0, 35.0, 30.0, 25.0])
 sizesMaxCardGaps = Array[float]([40.0, 40.0, 35.0, 30.0])
 sizesMultipleRows = Array[bool]([false, false, true, true])
@@ -121,8 +171,8 @@ position = Vector2(0, -720)
 metadata/_edit_group_ = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Pocket"]
-offset_right = 242.0
-offset_bottom = 241.0
+offset_right = 589.0
+offset_bottom = 492.0
 texture = ExtResource("4_pl6kc")
 region_rect = Rect2(0.301132, 0.255318, 429.099, 429.363)
 patch_margin_left = 120
@@ -133,12 +183,19 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="Label" type="Label" parent="Pocket/NinePatchRect"]
-layout_mode = 0
-offset_left = 94.0
-offset_top = 38.0
-offset_right = 449.0
-offset_bottom = 61.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -174.0
+offset_top = 41.0
+offset_right = 184.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("5_t48tl")
+theme_override_font_sizes/font_size = 20
 text = "This is the message that is seen on the pocket"
+horizontal_alignment = 1
 
 [node name="Shadow" type="NinePatchRect" parent="Pocket/NinePatchRect" node_paths=PackedStringArray("controlToMatch", "triggerResizeEmitter")]
 self_modulate = Color(0, 0, 0, 0.521569)
@@ -159,6 +216,23 @@ axis_stretch_vertical = 1
 script = ExtResource("5_8p5yw")
 controlToMatch = NodePath("..")
 triggerResizeEmitter = NodePath("../../..")
+
+[node name="OkBUtton" type="Button" parent="Pocket/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -83.0
+offset_right = 46.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_5lfuj")
+text = "OK"
+script = ExtResource("8_eup67")
 
 [node name="PocketAnimation" type="AnimationPlayer" parent="Pocket"]
 libraries = {

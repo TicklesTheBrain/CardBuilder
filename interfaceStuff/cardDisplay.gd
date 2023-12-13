@@ -175,7 +175,7 @@ func updateAllTextFields(dataToShow: CardData):
 				effectText += "\n"
 			effectText += prefixDict[key] + effectDict[key]
 
-	var allText = conditionalText + ("\n" if conditionalText != "" else "") + paramText + ("\n" if paramText != "" else "") + effectText
+	var allText = conditionalText + ("\n" if conditionalText != "" else "") + paramText + ("\n" if paramText != "" else "") + effectText + " "
 	fullCardText.text = allText
 
 func _process(delta):

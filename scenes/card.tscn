@@ -27,7 +27,7 @@ bg_color = Color(0.992157, 0.992157, 0.992157, 0.803922)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nwt7q"]
 size = Vector2(141, 192)
 
-[node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "cardImageRect", "offsetNode", "detailedInfoRoot", "valueLabel", "costLabel", "fullCardText", "attackLabel", "defenceLabel")]
+[node name="Card" type="Node2D" node_paths=PackedStringArray("cardShape", "cardImageRect", "offsetNode", "detailedInfoRoot", "valueLabel", "costLabel", "fullCardText", "attackLabel", "defenceLabel") groups=["cd"]]
 script = ExtResource("1_y50h6")
 cardShape = NodePath("CardShape")
 cardImageRect = NodePath("CardImageRect")
@@ -43,7 +43,7 @@ costLabel = NodePath("CardImageRect/Detailed Info/Info/TopMargin/TopInfo/MarginC
 fullCardText = NodePath("CardImageRect/Detailed Info/Info/MiddleArea/Text aligner/FullCardText")
 attackLabel = NodePath("CardImageRect/Detailed Info/Info/BottomMargin/Bottom Info/MarginContainer2/Attack")
 defenceLabel = NodePath("CardImageRect/Detailed Info/Info/BottomMargin/Bottom Info/MarginContainer/Defence")
-selectedColor = Color(0.231373, 0.290196, 0.839216, 1)
+selectedColor = Color(0.27451, 0.686275, 1, 0.733333)
 
 [node name="ShadowOffset" type="Node2D" parent="."]
 
@@ -147,7 +147,7 @@ theme_override_constants/line_separation = -5
 theme_override_font_sizes/normal_font_size = 12
 theme_override_font_sizes/bold_font_size = 12
 bbcode_enabled = true
-text = "Can't be played if value is 10 or lower."
+text = "Can't be played if value is 10 or lower.Something something something"
 fit_content = true
 autowrap_mode = 2
 
