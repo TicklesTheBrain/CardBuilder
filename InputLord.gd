@@ -90,9 +90,6 @@ func initNewSelection(container: CardContainer, needAmount: int, receivingMethod
 		cardSelectionComplete.emit()
 		return
 	
-	if confirmationRequired:
-		await Events.confirmButtonPressed
-	
 func addToSelection(card: CardData):
 
 	if selecting:
@@ -109,6 +106,7 @@ func setupEndSelection(receivingMethod: Callable):
 
 	if selectionConfirmation:
 		await Events.confirmButtonPressed
+		Events.confirmButtonDisable.emit()
 	else:
 		await cardSelectionComplete
 

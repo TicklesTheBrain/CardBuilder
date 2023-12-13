@@ -17,6 +17,7 @@ class_name Game
 @export var okButton: Button
 @export var deckPeaker: Peaker
 @export var discardPeaker: Peaker
+@export var damageShower: ResolutionParamAnimator
 
 @export_group("Logic references")
 @export var player: Actor
@@ -243,6 +244,10 @@ func roundLoop():
 			winnerString = "They have {attackAmount} attack, you defend with {shieldAmount} defence. Total  of {dealtDamage} is dealt. You're now at {newHP}"
 
 		message = winnerString.format({"attackAmount" = damage, "shieldAmount" = shields, "dealtDamage" =  dealtDamage, "newHP" =  loser.hp.amount})
+
+		damageShower.visible = true
+		damageShower.start()
+		await damageShower.done
 
 
 	else:

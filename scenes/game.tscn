@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://r545i10no8or"]
+[gd_scene load_steps=57 format=3 uid="uid://r545i10no8or"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_hbkeb"]
 [ext_resource type="Script" path="res://cardAbstractions/deckManager.gd" id="3_8edax"]
@@ -36,6 +36,9 @@
 [ext_resource type="FontFile" uid="uid://bokge8vr1onw8" path="res://fonts/Rasa-Regular.ttf" id="26_wmk7t"]
 [ext_resource type="PackedScene" uid="uid://kna3wka5eglg" path="res://item_display.tscn" id="27_6v012"]
 [ext_resource type="Texture2D" uid="uid://da3mc7dtg3lup" path="res://assets/items/medal.png" id="27_ou647"]
+[ext_resource type="Script" path="res://scenes/DamageShower.gd" id="37_6bpek"]
+[ext_resource type="Texture2D" uid="uid://cnbiypdfd60l5" path="res://assets/marble1.png" id="38_gknv8"]
+[ext_resource type="Texture2D" uid="uid://bhetmn6uguvvr" path="res://assets/cardParamSymbols/sword.png" id="39_i2gir"]
 
 [sub_resource type="Resource" id="Resource_smt6a"]
 script = ExtResource("3_uyj67")
@@ -154,7 +157,7 @@ blend_mode = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_013tw"]
 
-[node name="game" type="Node2D" node_paths=PackedStringArray("playAreaPositionController", "enemyPlayAreaPositionController", "messageLabel", "drawCardButton", "endHandButton", "okButton", "deckPeaker", "discardPeaker", "player", "enemy")]
+[node name="game" type="Node2D" node_paths=PackedStringArray("playAreaPositionController", "enemyPlayAreaPositionController", "messageLabel", "drawCardButton", "endHandButton", "okButton", "deckPeaker", "discardPeaker", "damageShower", "player", "enemy")]
 script = ExtResource("1_hbkeb")
 selfStart = true
 selfStartStep = SubResource("Resource_smt6a")
@@ -167,6 +170,7 @@ endHandButton = NodePath("EndButton")
 okButton = NodePath("OkBUtton")
 deckPeaker = NodePath("DeckPeaker")
 discardPeaker = NodePath("DiscardPeaker")
+damageShower = NodePath("DamageResolutionAnimation/DamageShower")
 player = NodePath("Logic/Player")
 enemy = NodePath("Logic/Enemy")
 metadata/_edit_horizontal_guides_ = [271.0, 712.0]
@@ -934,6 +938,43 @@ columnLength = 2
 itemDisplayPacked = ExtResource("27_6v012")
 logicalItemContainer = NodePath("../Logic/Player/ItemContainer")
 metadata/_edit_lock_ = true
+
+[node name="DamageResolutionAnimation" type="Node2D" parent="."]
+position = Vector2(399, 333)
+scale = Vector2(1.5, 1.5)
+
+[node name="DamageShower" type="Node2D" parent="DamageResolutionAnimation" node_paths=PackedStringArray("containerToQuery", "valueLabel")]
+visible = false
+script = ExtResource("37_6bpek")
+containerToQuery = NodePath("../../Logic/Player/PlayAreaManager")
+cardNudgeDownwardVector = Vector2(0, 40)
+maxScale = 1.5
+valueAtMaxScale = 10
+startScale = 0.5
+valueLabel = NodePath("Label")
+singleCardAnimationTime = 0.3
+
+[node name="Marble1" type="Sprite2D" parent="DamageResolutionAnimation/DamageShower"]
+texture = ExtResource("38_gknv8")
+
+[node name="Sword" type="Sprite2D" parent="DamageResolutionAnimation/DamageShower"]
+self_modulate = Color(0.290196, 0.290196, 0.290196, 0.603922)
+position = Vector2(5, 17)
+texture = ExtResource("39_i2gir")
+
+[node name="Label" type="Label" parent="DamageResolutionAnimation/DamageShower"]
+offset_left = -34.0
+offset_top = -58.6667
+offset_right = 37.0
+offset_bottom = 22.3333
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("12_1nuxl")
+theme_override_font_sizes/font_size = 80
+text = "25"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="button_down" from="DrawButton" to="." method="drawFromDeckToHand"]
 [connection signal="area_entered" from="PlayArea" to="PlayArea" method="_on_area_entered"]
