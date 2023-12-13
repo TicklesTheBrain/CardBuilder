@@ -16,6 +16,7 @@ class_name Game
 @export var endHandButton: Button
 @export var okButton: Button
 @export var deckPeaker: Peaker
+@export var discardPeaker: Peaker
 
 @export_group("Logic references")
 @export var player: Actor
@@ -36,6 +37,7 @@ func startMatch():
 	Events.requestContext.connect(provideContext)
 	Events.startMatch.emit()
 	InputLord.enablePeaker(deckPeaker)
+	InputLord.enablePeaker(discardPeaker)
 	roundLoop()
 
 func _ready():

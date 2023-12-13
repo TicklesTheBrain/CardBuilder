@@ -154,7 +154,7 @@ blend_mode = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_013tw"]
 
-[node name="game" type="Node2D" node_paths=PackedStringArray("playAreaPositionController", "enemyPlayAreaPositionController", "messageLabel", "drawCardButton", "endHandButton", "okButton", "deckPeaker", "player", "enemy")]
+[node name="game" type="Node2D" node_paths=PackedStringArray("playAreaPositionController", "enemyPlayAreaPositionController", "messageLabel", "drawCardButton", "endHandButton", "okButton", "deckPeaker", "discardPeaker", "player", "enemy")]
 script = ExtResource("1_hbkeb")
 selfStart = true
 selfStartStep = SubResource("Resource_smt6a")
@@ -166,6 +166,7 @@ drawCardButton = NodePath("DrawButton")
 endHandButton = NodePath("EndButton")
 okButton = NodePath("OkBUtton")
 deckPeaker = NodePath("DeckPeaker")
+discardPeaker = NodePath("DiscardPeaker")
 player = NodePath("Logic/Player")
 enemy = NodePath("Logic/Enemy")
 metadata/_edit_horizontal_guides_ = [271.0, 712.0]
@@ -352,12 +353,28 @@ offset_bottom = 677.0
 mouse_filter = 1
 script = ExtResource("14_5t2uj")
 logicalContainerToPeak = NodePath("../Logic/Player/DeckManager")
+sort = null
+hideActual = null
+
+[node name="DiscardPeaker" type="Control" parent="." node_paths=PackedStringArray("logicalContainerToPeak") groups=["pk"]]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1115.0
+offset_top = 474.0
+offset_right = 1243.0
+offset_bottom = 677.0
+mouse_filter = 1
+script = ExtResource("14_5t2uj")
+logicalContainerToPeak = NodePath("../Logic/Player/DiscardManager")
+sort = false
+hideActual = true
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -100
 scale = Vector2(0.828125, 0.73095)
 texture = ExtResource("15_2rvab")
 centered = false
+metadata/_edit_lock_ = true
 
 [node name="CharacterPortrait" type="TextureRect" parent="."]
 offset_left = 48.0
@@ -639,6 +656,8 @@ vertical_alignment = 1
 
 [node name="Outlines" type="Node2D" parent="."]
 position = Vector2(11, 458)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="DeckOutline" type="CanvasGroup" parent="Outlines"]
 metadata/_edit_group_ = true
@@ -797,7 +816,7 @@ bustResource = NodePath("../../../Logic/Player/Resources/BustValue")
 prefixString = null
 middleString = "/"
 colorRegular = Color(1, 1, 1, 0.533333)
-colorBusted = Color(1, 0.404754, 0.382368, 0.533333)
+colorBusted = Color(1, 0.168627, 0.235294, 0.65098)
 adjustableMask = NodePath("../Mask2")
 extraMaskSpacing = null
 
@@ -854,7 +873,7 @@ containerToLookupValue = NodePath("../../../Logic/Enemy/EnemyPlayArea")
 bustResource = NodePath("../../../Logic/Enemy/Resources/BustValueEnemy")
 middleString = "/"
 colorRegular = Color(1, 1, 1, 0.533333)
-colorBusted = Color(1, 0.404754, 0.382368, 0.533333)
+colorBusted = Color(1, 0.168627, 0.235294, 0.65098)
 adjustableMask = NodePath("../Mask2")
 
 [node name="Mask" type="Sprite2D" parent="Outlines/EnemyPlayed"]
