@@ -17,7 +17,7 @@ class_name Game
 @export var okButton: Button
 @export var deckPeaker: Peaker
 @export var discardPeaker: Peaker
-@export var damageShower: ResolutionParamAnimator
+@export var damageResolution: DamageResolutionAnimation
 
 @export_group("Logic references")
 @export var player: Actor
@@ -189,25 +189,33 @@ func roundLoop():
 	var loser: Actor
 	var bust: bool
 
+	var setPlayerWinner = func ():
+		winner = player
+		loser = enemy
+		damageResolution.setRightParam(CardParam.ParamType.DEFENCE)
+		damageResolution.setLeftParam(CardParam.ParamType.ATTACK)
+
+	var setEnemyWinner = func ():
+		winner = enemy
+		loser = player
+		damageResolution.setRightParam(CardParam.ParamType.ATTACK)
+		damageResolution.setLeftParam(CardParam.ParamType.DEFENCE)
+
 		#Determine winner/loser
 	playerValue = player.playArea.getTotalValue() #Update this in case when some enemy effects might alter player value
 	var enemyValue = enemy.playArea.getTotalValue()
 	if player.checkIsBusted():
-		winner = enemy
-		loser = player
+		setEnemyWinner.call()
 		bust = true
 	elif enemy.checkIsBusted():
-		winner = player
-		loser = enemy
+		setPlayerWinner.call()
 		bust = true
 	elif enemyValue> playerValue:
-		winner = enemy
-		loser = player
+		setEnemyWinner.call()
 	elif enemyValue < playerValue:
-		winner = player
-		loser = enemy
+		setPlayerWinner.call()
 
-	if winner:
+	if winner != null:
 		
 		#Show info about the values
 		var valueString = "You win, {playerValue} vs. {enemyValue}. {whoBusted}"
@@ -236,6 +244,9 @@ func roundLoop():
 
 		var dealtDamage = max(0, damage - shields)
 
+		damageResolution.start()
+		await damageResolution.done
+
 		loser.hp.amount -= dealtDamage
 
 		#Display a message about the outcome
@@ -244,11 +255,6 @@ func roundLoop():
 			winnerString = "They have {attackAmount} attack, you defend with {shieldAmount} defence. Total  of {dealtDamage} is dealt. You're now at {newHP}"
 
 		message = winnerString.format({"attackAmount" = damage, "shieldAmount" = shields, "dealtDamage" =  dealtDamage, "newHP" =  loser.hp.amount})
-
-		damageShower.visible = true
-		damageShower.start()
-		await damageShower.done
-
 
 	else:
 		message = "It's a draw {playerValue} vs. {enemyValue}, no damage dealt".format({"playerValue" = playerValue, "enemyValue" = enemyValue})
