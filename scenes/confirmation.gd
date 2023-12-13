@@ -1,6 +1,7 @@
 extends Button
 class_name ConfirmationButton
 
+
 func _ready():
     pressed.connect(announceConfirmPressed)
     Events.confirmButtonDisable.connect(buttonDisable)

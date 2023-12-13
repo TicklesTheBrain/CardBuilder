@@ -46,7 +46,7 @@ func scuttleCardsSpecific():
 				c+=1
 			cardsInRows.push_back(newRow)
 
-	var centerPos = relevantShape.position
+	var centerPos = relevantShape.global_position
 	var totalHeight = (cardsInRows.size()-1)*(cardHeight+rowGap)+cardHeight
 	var firstRowCenter = centerPos-Vector2(0,totalHeight/2-cardHeight/2)
 	var r = 0

@@ -3,7 +3,7 @@ class_name CardPositionController
 
 @export var cardMoveTime: float = 0.5
 @export var logicalContainer: CardContainer
-@export var canvasLayer: CanvasLayer
+@export var reparentNode: Node2D
 @export var canCreateNewDisplays: bool  = true
 @export var resetRotation: bool = true
 @export var resetRotationTo: float = 0
@@ -30,9 +30,9 @@ func addCardData(cardData: CardData):
 	
 	var cardDisplay = CardDisplayLord.getCardDisplay(cardData)
 	addCardDisplay(cardDisplay)
-	if canvasLayer:		
+	if reparentNode != null:		
 		cardDisplay.get_parent().remove_child(cardDisplay)
-		canvasLayer.add_child(cardDisplay)
+		reparentNode.add_child(cardDisplay)
 
 func removeCardData(cardData: CardData):	
 	
@@ -41,7 +41,7 @@ func removeCardData(cardData: CardData):
 	
 	var cardDisplay = CardDisplayLord.getCardDisplay(cardData)
 	removeCardDisplay(cardDisplay) #TODO: this is kinda ugly
-	if canvasLayer:
+	if reparentNode:
 		CardDisplayLord.orphanedCardDisplay.emit(cardDisplay)
 
 func addCardDisplay(newCard: CardDisplay):

@@ -11,12 +11,14 @@ signal mapPawnDragReleased(pawnReleased: MapPawn)
 signal itemClicked(item: ItemDisplay)
 signal itemMouseOver(item: ItemDisplay)
 signal itemMouseOverExit(item: ItemDisplay)
+signal peakerClicked(peaker: Peaker)
 
-
-var mouseMonitoringGroups = ["cdc", "id", "bt"]
+var mouseMonitoringGroups = ["cdc", "id", "bt", "pk"]
 var mouseMonitorDictionary = {}
 var selectionConfirmation: bool = false
 
+var peakingEnabled: bool = true
+var peakersEnabled = []
 var selecting = false
 var amount = -1
 var subjectContainer: CardContainer
@@ -41,7 +43,14 @@ func _ready():
 	itemClicked.connect(_onItemClicked)
 	itemMouseOver.connect(_onItemMouseOver)
 	itemMouseOverExit.connect(_onItemMouseOverExit)
+	peakerClicked.connect(_onPeakerClicked)
 
+func enablePeaker(newPeaker: Peaker):
+	if not peakersEnabled.has(newPeaker):
+		peakersEnabled.push_back(newPeaker)
+
+func disablePeaker(peakerToDisable: Peaker):
+	peakersEnabled.erase(peakerToDisable)
 
 func disableOtherMouseMonitoring(exceptionNode):
 	for groupname in mouseMonitoringGroups:
@@ -58,6 +67,10 @@ func reenableMouseMonitoring():
 		node.mouse_filter = mouseMonitorDictionary[node]
 
 	mouseMonitorDictionary = {}
+
+func _onPeakerClicked(peaker: Peaker):
+	if peakingEnabled and peakersEnabled.has(peaker):
+		peaker.showPeak()
 
 func _onMapPawnClicked(mapPawn: MapPawn):
 	mapPawn.startDrag()

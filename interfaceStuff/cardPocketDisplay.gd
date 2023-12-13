@@ -3,7 +3,7 @@ class_name CardPocketDisplay
 
 @export var animation: AnimationPlayer
 @export var positionController: CardPositionController
-@export var backGroundPanel: NinePatchRect
+@export var containerForBackground: MarginContainer
 @export var infoLabel: Label
 @export var okButton: ConfirmationButton
 @export var sizesMinCenterDistance: Array[float] = []
@@ -43,8 +43,8 @@ func adjustPanel():
 	var shapeSize = positionController.relevantShape.shape.size
 	var topLeftCorner = shapeCenter - shapeSize/2
 
-	backGroundPanel.position = topLeftCorner
-	backGroundPanel.size = shapeSize
+	containerForBackground.position = topLeftCorner
+	containerForBackground.size = shapeSize
 	resizeTriggered.emit()
 
 func setupPositionController(container: CardContainer):

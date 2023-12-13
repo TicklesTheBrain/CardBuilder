@@ -9,18 +9,6 @@
 [ext_resource type="FontFile" uid="uid://d3orine1p7k7d" path="res://fonts/OLDSH___.TTF" id="6_3lffv"]
 [ext_resource type="Script" path="res://scenes/confirmation.gd" id="8_eup67"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuy27"]
-size = Vector2(1248, 688)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8l4i"]
-size = Vector2(1224, 468)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lydsy"]
-size = Vector2(983, 428)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvlis"]
-size = Vector2(575, 290)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t151"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 4
@@ -120,14 +108,26 @@ _data = {
 "show": SubResource("Animation_q5f7u")
 }
 
-[node name="PocketLayer" type="CanvasLayer" node_paths=PackedStringArray("animation", "positionController", "backGroundPanel", "infoLabel", "okButton", "pocketContainer")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuy27"]
+size = Vector2(1198, 552)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8l4i"]
+size = Vector2(1198, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lydsy"]
+size = Vector2(983, 414)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvlis"]
+size = Vector2(575, 219)
+
+[node name="PocketLayer" type="CanvasLayer" node_paths=PackedStringArray("animation", "positionController", "containerForBackground", "infoLabel", "okButton", "pocketContainer")]
 layer = 2
 script = ExtResource("1_w0gel")
 animation = NodePath("Pocket/PocketAnimation")
-positionController = NodePath("PocketDynamicPosition")
-backGroundPanel = NodePath("Pocket/NinePatchRect")
-infoLabel = NodePath("Pocket/NinePatchRect/Label")
-okButton = NodePath("Pocket/NinePatchRect/OkBUtton")
+positionController = NodePath("Pocket/PocketDynamicPosition")
+containerForBackground = NodePath("Pocket/MarginContainer")
+infoLabel = NodePath("Pocket/MarginContainer/NinePatchRect/Label")
+okButton = NodePath("Pocket/MarginContainer/NinePatchRect/OkBUtton")
 sizesMinCenterDistance = Array[float]([35.0, 35.0, 30.0, 25.0])
 sizesMaxCardGaps = Array[float]([40.0, 40.0, 35.0, 30.0])
 sizesMultipleRows = Array[bool]([false, false, true, true])
@@ -144,35 +144,20 @@ overrideRevealed = true
 overrideRevealedState = null
 addToTopWhenFeeding = false
 
-[node name="PocketDynamicPosition" type="Node2D" parent="." node_paths=PackedStringArray("cardAreas", "logicalContainer", "canvasLayer")]
-script = ExtResource("3_owxxn")
-cardAreas = [NodePath("ShapeSmall"), NodePath("ShapeMid"), NodePath("ShapeBig"), NodePath("ShapeFull")]
-logicalContainer = NodePath("../PocketContainer")
-canvasLayer = NodePath("..")
-
-[node name="ShapeFull" type="CollisionShape2D" parent="PocketDynamicPosition"]
-position = Vector2(643, 360)
-shape = SubResource("RectangleShape2D_xuy27")
-
-[node name="ShapeBig" type="CollisionShape2D" parent="PocketDynamicPosition"]
-position = Vector2(639, 263)
-shape = SubResource("RectangleShape2D_p8l4i")
-
-[node name="ShapeMid" type="CollisionShape2D" parent="PocketDynamicPosition"]
-position = Vector2(646.5, 218)
-shape = SubResource("RectangleShape2D_lydsy")
-
-[node name="ShapeSmall" type="CollisionShape2D" parent="PocketDynamicPosition"]
-position = Vector2(626.5, 171)
-shape = SubResource("RectangleShape2D_hvlis")
-
 [node name="Pocket" type="Node2D" parent="."]
 position = Vector2(0, -720)
 metadata/_edit_group_ = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Pocket"]
-offset_right = 589.0
-offset_bottom = 492.0
+[node name="MarginContainer" type="MarginContainer" parent="Pocket"]
+offset_right = 942.0
+offset_bottom = 616.0
+theme_override_constants/margin_left = -35
+theme_override_constants/margin_top = -60
+theme_override_constants/margin_right = -35
+theme_override_constants/margin_bottom = -90
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Pocket/MarginContainer"]
+layout_mode = 2
 texture = ExtResource("4_pl6kc")
 region_rect = Rect2(0.301132, 0.255318, 429.099, 429.363)
 patch_margin_left = 120
@@ -182,7 +167,7 @@ patch_margin_bottom = 120
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="Label" type="Label" parent="Pocket/NinePatchRect"]
+[node name="Label" type="Label" parent="Pocket/MarginContainer/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -197,7 +182,7 @@ theme_override_font_sizes/font_size = 20
 text = "This is the message that is seen on the pocket"
 horizontal_alignment = 1
 
-[node name="Shadow" type="NinePatchRect" parent="Pocket/NinePatchRect" node_paths=PackedStringArray("controlToMatch", "triggerResizeEmitter")]
+[node name="Shadow" type="NinePatchRect" parent="Pocket/MarginContainer/NinePatchRect" node_paths=PackedStringArray("controlToMatch", "triggerResizeEmitter")]
 self_modulate = Color(0, 0, 0, 0.521569)
 show_behind_parent = true
 layout_mode = 0
@@ -215,9 +200,9 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 script = ExtResource("5_8p5yw")
 controlToMatch = NodePath("..")
-triggerResizeEmitter = NodePath("../../..")
+triggerResizeEmitter = NodePath("../../../..")
 
-[node name="OkBUtton" type="Button" parent="Pocket/NinePatchRect"]
+[node name="OkBUtton" type="Button" parent="Pocket/MarginContainer/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -234,7 +219,32 @@ theme = SubResource("Theme_5lfuj")
 text = "OK"
 script = ExtResource("8_eup67")
 
+[node name="CardParent" type="Node2D" parent="Pocket"]
+position = Vector2(0, 720)
+
 [node name="PocketAnimation" type="AnimationPlayer" parent="Pocket"]
 libraries = {
 "": SubResource("AnimationLibrary_emsn4")
 }
+
+[node name="PocketDynamicPosition" type="Node2D" parent="Pocket" node_paths=PackedStringArray("cardAreas", "logicalContainer", "reparentNode")]
+script = ExtResource("3_owxxn")
+cardAreas = [NodePath("ShapeSmall"), NodePath("ShapeMid"), NodePath("ShapeBig"), NodePath("ShapeFull")]
+logicalContainer = NodePath("../../PocketContainer")
+reparentNode = NodePath("../CardParent")
+
+[node name="ShapeFull" type="CollisionShape2D" parent="Pocket/PocketDynamicPosition"]
+position = Vector2(638, 344)
+shape = SubResource("RectangleShape2D_xuy27")
+
+[node name="ShapeBig" type="CollisionShape2D" parent="Pocket/PocketDynamicPosition"]
+position = Vector2(636, 342)
+shape = SubResource("RectangleShape2D_p8l4i")
+
+[node name="ShapeMid" type="CollisionShape2D" parent="Pocket/PocketDynamicPosition"]
+position = Vector2(649, 347)
+shape = SubResource("RectangleShape2D_lydsy")
+
+[node name="ShapeSmall" type="CollisionShape2D" parent="Pocket/PocketDynamicPosition"]
+position = Vector2(637, 280)
+shape = SubResource("RectangleShape2D_hvlis")
